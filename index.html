@@ -949,6 +949,36 @@ body.admin .pfadm{display:block}
 .aded select{display:block;width:100%;margin-top:5px;padding:8px 9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-family:var(--sans);font-size:13.5px;letter-spacing:0;text-transform:none}
 .aded .bomact{grid-column:1/-1;margin:0}
 @media (max-width:760px){.aded{grid-template-columns:1fr 1fr}}
+/* ===== R23b: history + leader panel ===== */
+#hsp{position:fixed;right:14px;top:calc(var(--hh) + 14px);bottom:14px;z-index:46;width:min(440px,calc(100vw - 28px));display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 40px -12px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateX(16px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+#hsp.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+#hsp .cmh{position:static;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--carbon);color:#fff;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;border:0}
+#hsp .cmh b{color:var(--carbon-id)}
+#hsl{flex:1;overflow-y:auto;padding:10px 14px}
+#hsl .act{border:0}
+.act.hist li>span{display:block;line-height:1.6}
+.act.hist small small{color:var(--muted)}
+.hbtn{border:0;background:none;color:var(--accent);font:600 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:2px 0;text-decoration:underline;text-underline-offset:3px}
+body:not(.approved) .hbtn{display:none}
+.lseg{display:inline-flex;border:1px solid var(--line);margin-left:auto}
+.lseg button{border:0;border-left:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:12px;font-weight:600;padding:5px 9px;cursor:pointer}
+.lseg button:first-child{border-left:0}
+.lseg button.on[data-ls=ok]{background:var(--ok);color:#04252a}.lseg button.on[data-ls=miss]{background:var(--miss);color:#1b1300}.lseg button.on[data-ls=bad]{background:var(--bad);color:#fff}
+.tk.ld{grid-template-columns:minmax(0,1fr) 270px}
+.ldc{gap:6px!important;text-align:left!important}
+.ldc label{display:flex;flex-direction:column;gap:3px;font:600 10.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.ldc select,.ldc input{padding:6px 8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-family:var(--sans);font-size:13px;letter-spacing:0;text-transform:none}
+.ldc .bomx{width:auto;height:auto;padding:5px 8px;font-size:12px}
+table.lsum tr[data-lu]{cursor:pointer}
+table.lsum tr[data-lu]:hover td{background:var(--accent-soft)}
+table.lsum tr.on td{background:var(--accent-soft);box-shadow:inset 0 -1px 0 var(--brand)}
+table.lsum td{padding:9px 10px}
+table.lsum td.late{color:var(--bad);font-weight:700}
+.ldform{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ldform h3{grid-column:1/-1;margin:0!important}
+.ldform select{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none}
+.ldform label[hidden]{display:none}
+@media (max-width:760px){.tk.ld{grid-template-columns:1fr}.ldform{grid-template-columns:1fr 1fr}.lseg{margin-left:0}}
 </style>
 </head>
 <body class="m-both">
@@ -1314,8 +1344,10 @@ body.admin .pfadm{display:block}
     <h2>Bildirimler</h2><div id="tm-nt"></div>
     <h2>Görevlerim</h2><div id="tm-my"></div>
     <h2>Teslim takvimi</h2><div id="tm-dl"></div>
+    <div id="tm-leadw" hidden><h2>Ekibimin görevleri</h2><div id="tm-lead"></div></div>
     <h2>Açık görevler</h2><div id="tm-as"></div>
     <h2>Son hareketler</h2><div id="tm-act"></div>
+    <h2>Değişiklik geçmişi</h2><div id="tm-hist"></div>
     <h2>Takım yapısı</h2><div id="tm-org"></div>
     <h2>Takım listesi</h2><div id="tm-ros"></div>
   </div>
@@ -1336,7 +1368,7 @@ body.admin .pfadm{display:block}
 </div>
 </div>
 <div id="bmp" role="dialog" aria-label="Yer imleri"><header><span>Yer imleri</span><button id="bm-clear">Tümünü temizle</button></header><div id="bml"></div></div>
-<div id="cmp" role="dialog" aria-label="Takım yorumları"><header class="cmh"><span>Takım yorumları · <b></b></span><button type="button" class="cmclose" aria-label="Kapat">×</button></header><p class="cmr"></p><div id="cml"></div><form id="cmf"><textarea name="t" rows="2" maxlength="2000" placeholder="Yorum, FSG’ye sorulan soru ya da takım kararı…" aria-label="Yorum"></textarea><button type="submit" class="btn pdf">Gönder</button></form></div><div id="lb"><img alt=""></div>
+<div id="cmp" role="dialog" aria-label="Takım yorumları"><header class="cmh"><span>Takım yorumları · <b></b></span><button type="button" class="cmclose" aria-label="Kapat">×</button></header><p class="cmr"></p><div id="cml"></div><form id="cmf"><textarea name="t" rows="2" maxlength="2000" placeholder="Yorum, FSG’ye sorulan soru ya da takım kararı…" aria-label="Yorum"></textarea><button type="submit" class="btn pdf">Gönder</button></form></div><div id="hsp" role="dialog" aria-label="Değişiklik geçmişi"><header class="cmh"><span>Geçmiş · <b></b></span><button type="button" class="cmclose" aria-label="Kapat">×</button></header><p class="cmr"></p><div id="hsl"></div></div><div id="lb"><img alt=""></div>
 <section id="contact" aria-label="ITÜ Racing">
   <div class="ct-in">
     <div class="ct-left">
@@ -2562,6 +2594,7 @@ function tDiff(kind,f){
   new Set([...Object.keys(cur),...Object.keys(last)]).forEach(k=>{
     if(JSON.stringify(cur[k])===JSON.stringify(last[k]))return;
     const [d,key]=tDoc(kind,k),o=by[d]||(by[d]={[f]:{},[wk]:{}});
+    if(f==='s')hLog(kind,k,'s',last[k],cur[k]);else nLog(kind,k,last[k]);
     o[f][key]=(cur[k]!==undefined&&cur[k]!=='')?cur[k]:F.DEL();o[wk][key]={u:uid,a:F.TS()};
   });
   L[f]=clone(cur);
@@ -2625,7 +2658,7 @@ function tDecor(html,kind,key){
   if(w||wn||(a&&a.u)){
     const dd=a&&a.d?daysTo(a.d):null;
     x+='<div class="ckw">'+(w?'<span><i>'+esc(uinit(w.u))+'</i>'+esc(uname(w.u))+' · '+ago(w.a)+'</span>':'')+(wn&&(!w||wn.u!==w.u||Math.abs((wn.a||0)-(w.a||0))>60000)?'<span class="wn">Not: '+esc(uname(wn.u))+' · '+ago(wn.a)+'</span>':'')
-      +(a&&a.u?'<span class="wa'+(dd!==null&&dd<0?' late':'')+'">Sorumlu: <b>'+esc(uname(a.u))+'</b>'+(a.d?' · '+fdate(a.d)+' ('+dleft(dd)+')':'')+'</span>':'')+'</div>';
+      +(a&&a.u?'<span class="wa'+(dd!==null&&dd<0?' late':'')+'">Sorumlu: <b>'+esc(uname(a.u))+'</b>'+(a.d?' · '+fdate(a.d)+' ('+dleft(dd)+')':'')+'</span>':'')+'<button type="button" class="hbtn" data-hist="'+esc(key)+'" data-hk="'+kind+'">Geçmiş</button></div>';
   }
   x+='<div class="ckas" data-ak="'+esc(key)+'" data-kind="'+kind+'"><label>Sorumlu<select data-edit data-as="u">'+uOpts(a&&a.u)+'</select></label><label>Son tarih<input type="date" data-edit data-as="d" value="'+esc(a&&a.d||'')+'"></label></div>';
   return html.slice(0,-6)+x+'</div>';
@@ -2635,6 +2668,7 @@ const _pRow=pRow;pRow=function(b,id){return tDecor(_pRow(b,id),'p',b+'|'+id)};
 function asChange(e){
   const t=e.target;if(!t.matches||!t.matches('.ckas [data-as]')||!tOn())return;
   const box=t.closest('.ckas'),kind=box.dataset.kind,[d,k2]=tDoc(kind,box.dataset.ak),u=box.querySelector('[data-as=u]').value,dt=box.querySelector('[data-as=d]').value,F=MEM.fba;
+  hLog(kind,box.dataset.ak,'as',asText(TAS[kind][box.dataset.ak]),asText(u?{u:u,d:dt}:null));
   F.fs.set(d,{as:{[k2]:u?{u:u,d:dt||'',by:MEM.uid(),a:F.TS()}:F.DEL()}},true).catch(tErr);
 }
 ckList.addEventListener('change',asChange);pbList.addEventListener('change',asChange);
@@ -2953,6 +2987,137 @@ const _moveInd=moveInd;moveInd=function(i){_moveInd(i);const t=document.querySel
 MEM.hooks.push(()=>{teamSync();cmInject();if(curView()==='prof')admRender();if(curView()==='team')renderTeam();tBadge()});
 if(!MEM.on){document.body.classList.add('mem-off')}
 pmRender();bomRender();ordRender();
+
+// ===== R23: change history + team-leader panel =====
+const SLBL=s=>s?(ST[s]||s):'Bakılmadı';
+function asText(a){return a&&a.u?uname(a.u)+(a.d?' · '+fdate(a.d):''):''}
+function hLog(kind,key,f,from,to){
+  if(!tOn())return;from=from==null?'':from;to=to==null?'':to;if(from===to)return;
+  const F=MEM.fba,i=kind==='p'?key.indexOf('|'):-1;
+  F.fs.add('history',{kind:kind,key:key,id:kind==='p'?key.slice(i+1):key,b:kind==='p'?key.slice(0,i):'',f:f,from:String(from).slice(0,300),to:String(to).slice(0,300),u:MEM.uid(),nm:uname(MEM.uid()),a:F.TS()}).catch(()=>{});
+  TEAM.histAt=0;
+}
+TEAM.nq={};
+function nLog(kind,k,prev){const id=kind+':'+k;if(!TEAM.nq[id])TEAM.nq[id]={from:prev||''};clearTimeout(TEAM.nq[id].t);
+  TEAM.nq[id].t=setTimeout(()=>{const cur=(kind==='c'?CHN:PN)[k]||'';hLog(kind,k,'n',TEAM.nq[id].from,cur);delete TEAM.nq[id]},5000)}
+addEventListener('pagehide',()=>{for(const id in TEAM.nq){const q=TEAM.nq[id],i=id.indexOf(':'),kind=id.slice(0,i),k=id.slice(i+1);clearTimeout(q.t);hLog(kind,k,'n',q.from,(kind==='c'?CHN:PN)[k]||'')}TEAM.nq={}});
+function hDesc(h){
+  if(h.f==='s')return '<span class="tkst" data-s="'+esc(SKEY(h.from))+'">'+esc(SLBL(h.from))+'</span> → <span class="tkst" data-s="'+esc(SKEY(h.to))+'">'+esc(SLBL(h.to))+'</span>';
+  if(h.f==='n')return h.to?'Not: “'+esc(h.to.slice(0,140))+(h.to.length>140?'…':'')+'”':'Notu sildi';
+  if(h.f==='as')return h.to?'Sorumlu: <b>'+esc(h.to)+'</b>'+(h.from?' <small>(önce: '+esc(h.from)+')</small>':''):'Görevi kaldırdı'+(h.from?' <small>('+esc(h.from)+')</small>':'');
+  return '';
+}
+const SKEY=s=>['ok','miss','bad'].includes(s)?s:'';
+function hItem(h,showItem){
+  return '<li><i>'+esc(uinit(h.u)||'?')+'</i><span><b>'+esc(TEAM.users[h.u]?uname(h.u):(h.nm||'Eski üye'))+'</b> '
+   +(showItem?(h.b?'<button type="button" class="tkb" data-board="'+esc(h.b)+'">'+esc(h.b)+'</button> ':'')+refA(h.id)+' · ':'')+hDesc(h)+'</span><small>'+ago(h.a)+'</small></li>';
+}
+// per-item history panel
+const hsp=document.getElementById('hsp'),hsl=document.getElementById('hsl');
+async function hOpen(key,kind){
+  if(!tOn())return;const i=kind==='p'?key.indexOf('|'):-1,id=kind==='p'?key.slice(i+1):key;
+  hsp.querySelector('.cmh b').textContent=(kind==='p'?key.slice(0,i)+' · ':'')+id;hsp.querySelector('.cmr').textContent=rtext(id).slice(0,180);
+  hsp.classList.add('open');hsl.innerHTML='<p class="pmempty">Yükleniyor…</p>';
+  try{const L=(await MEM.fba.fs.where('history','key',key)).map(x=>x.data).sort((a,b)=>(b.a||0)-(a.a||0));
+    hsl.innerHTML=L.length?'<ul class="act hist">'+L.map(h=>hItem(h,false)).join('')+'</ul>':'<p class="pmempty">Bu madde için kayıtlı değişiklik yok. (Geçmiş kaydı bu sürümle başladı.)</p>'}
+  catch(err){hsl.innerHTML='<p class="pmempty">Geçmiş okunamadı: '+esc(memErr(err))+'</p>'}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-hist]');if(b){e.preventDefault();e.stopPropagation();hOpen(b.dataset.hist,b.dataset.hk);return}
+  if(hsp.classList.contains('open')&&!e.target.closest('#hsp'))hsp.classList.remove('open');
+},true);
+hsp.querySelector('.cmclose').onclick=()=>hsp.classList.remove('open');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hsp.classList.remove('open')});
+// team-wide history (Takım tab)
+async function histRender(force){
+  const el=tmEl('tm-hist');if(!el||!tOn())return;
+  if(!force&&TEAM.hist&&Date.now()-TEAM.histAt<20000){histPaint();return}
+  TEAM.histAt=Date.now();
+  try{TEAM.hist=(await MEM.fba.fs.recent('history','a',60)).map(x=>x.data)}catch(err){el.innerHTML='<p class="pmempty">Geçmiş okunamadı: '+esc(memErr(err))+'</p>';return}
+  histPaint();
+}
+function histPaint(){
+  const el=tmEl('tm-hist'),f=TEAM.hf||'',L=(TEAM.hist||[]).filter(h=>!f||h.u===f);
+  const who=[...new Set((TEAM.hist||[]).map(h=>h.u))];
+  el.innerHTML='<div class="bomact"><label class="tmf">Kişi<select id="hs-f"><option value="">Herkes</option>'+who.map(u=>'<option value="'+esc(u)+'"'+(u===f?' selected':'')+'>'+esc(uname(u))+'</option>').join('')+'</select></label><button type="button" class="btn" id="hs-r">Yenile</button><span class="pmmsg">Son '+L.length+' değişiklik</span></div>'
+   +(L.length?'<ul class="act hist">'+L.map(h=>hItem(h,true)).join('')+'</ul>':'<p class="pmempty">Henüz kayıtlı değişiklik yok. Checklist ve PCB’de yapılan işaret, not ve görev değişiklikleri burada listelenir.</p>');
+}
+// ---------- team-leader panel ----------
+const LEAD_B={'el-elektrik':['Elektrik'],'el-elektronik':['Elektronik'],'el-kontrol':['Kontrol-Yazılım'],'el-aero':['Aerodinamik'],'el-td':['Taşıt Dinamiği'],'el-pt':['Powertrain'],'el-sasi':['Şasi ve Kompozit'],'el-org':['Finans-Organizasyon'],
+  'dl-eek':['Elektrik','Elektronik','Kontrol-Yazılım'],'dl-mek':['Aerodinamik','Taşıt Dinamiği','Powertrain','Şasi ve Kompozit'],'dl-fin':['Finans-Organizasyon']};
+function leadScope(){
+  const u=(MEM.udoc||{}).unvan;
+  if(u==='kaptan')return {all:true,label:'Takım Kaptanı · tüm takım'};
+  if(LEAD_B[u])return {b:LEAD_B[u],label:UNVAN[u]+' · '+LEAD_B[u].join(', ')};
+  if(MEM.admin)return {all:true,label:'Yönetici · tüm takım'};
+  return null;
+}
+const inScope=(sc,uid)=>{const u=TEAM.users[uid];if(!sc||!u||!(u.status==='approved'||u.role==='admin'))return false;return sc.all||sc.b.includes(u.birim)};
+TEAM.lf={u:'',st:'open'};
+function leadMembers(sc){return Object.keys(TEAM.users).filter(id=>inScope(sc,id)).sort((a,b)=>uname(a).localeCompare(uname(b),'tr'))}
+function leadRender(){
+  const w=document.getElementById('tm-leadw'),el=tmEl('tm-lead');const sc=tOn()?leadScope():null;w.hidden=!sc;if(!sc)return;
+  if(focusIn(el)){TEAM.pend=true;return}
+  const mem=leadMembers(sc),all=tTasks().filter(t=>mem.includes(t.u)),f=TEAM.lf;
+  const late=t=>t.s!=='ok'&&t.d&&daysTo(t.d)<0;
+  const L=all.filter(t=>(!f.u||t.u===f.u)&&(f.st==='all'||(f.st==='open'&&t.s!=='ok')||(f.st==='done'&&t.s==='ok')||(f.st==='late'&&late(t)))).sort((a,b)=>((a.s==='ok')-(b.s==='ok'))||(a.d||'9').localeCompare(b.d||'9'));
+  const opts=sel=>'<option value="">— Atanmadı</option>'+mem.map(id=>'<option value="'+esc(id)+'"'+(id===sel?' selected':'')+'>'+esc(uname(id))+'</option>').join('')+(sel&&!mem.includes(sel)?'<option value="'+esc(sel)+'" selected>'+esc(uname(sel))+'</option>':'');
+  el.innerHTML='<p class="src">'+esc(sc.label)+' · '+mem.length+' üye</p>'
+   +'<div class="bomw"><table class="bom lsum"><thead><tr><th>Üye</th><th>Ekip</th><th class="n">Açık</th><th class="n">Geciken</th><th class="n">Tamamlanan</th></tr></thead><tbody>'
+   +(mem.length?mem.map(id=>{const T=all.filter(t=>t.u===id),u=TEAM.users[id];return '<tr data-lu="'+esc(id)+'" class="'+(f.u===id?'on':'')+'"><td><b>'+esc(uname(id))+'</b>'+(unvanOf(id)?'<small class="unv">'+esc(unvanOf(id))+'</small>':'')+'</td><td>'+esc([u.birim,u.ekip].filter(Boolean).join(' · '))+'</td><td class="n">'+T.filter(t=>t.s!=='ok').length+'</td><td class="n'+(T.some(late)?' late':'')+'">'+T.filter(late).length+'</td><td class="n">'+T.filter(t=>t.s==='ok').length+'</td></tr>'}).join(''):'<tr class="bomempty"><td colspan="5">Bu kapsamda onaylı üye yok. Üyelerin birimi profilde doğru seçilmiş olmalı.</td></tr>')+'</tbody></table></div>'
+   +'<div class="bomact"><label class="tmf">Kişi<select id="ld-u"><option value="">Hepsi</option>'+mem.map(id=>'<option value="'+esc(id)+'"'+(id===f.u?' selected':'')+'>'+esc(uname(id))+'</option>').join('')+'</select></label><label class="tmf">Durum<select id="ld-st">'+[['open','Açık'],['late','Geciken'],['done','Tamamlanan'],['all','Tümü']].map(([v,l])=>'<option value="'+v+'"'+(v===f.st?' selected':'')+'>'+l+'</option>').join('')+'</select></label><span class="pmmsg">'+L.length+' görev</span></div>'
+   +(L.length?L.map(t=>'<div class="tk ld" data-s="'+t.s+'" data-key="'+esc(t.key)+'" data-kind="'+t.kind+'"><div class="tkm">'+(t.kind==='p'?'<button type="button" class="tkb" data-board="'+esc(t.b)+'">'+esc(t.b)+'</button>':'<span class="tkb c">Checklist</span>')+refA(t.id)
+       +'<span class="seg lseg">'+['ok','miss','bad'].map(x=>'<button type="button" data-edit data-ls="'+x+'" class="'+(t.s===x?'on':'')+'">'+ST[x]+'</button>').join('')+'</span><button type="button" class="hbtn" data-hist="'+esc(t.key)+'" data-hk="'+t.kind+'">Geçmiş</button></div>'
+       +'<div class="tkt">'+esc(rtext(t.id).slice(0,150))+(t.note?'<div class="tkn">Not: '+esc(t.note.slice(0,180))+'</div>':'')+'</div>'
+       +'<div class="tkd ldc"><label>Sorumlu<select data-edit data-la="u">'+opts(t.u)+'</select></label><label>Son tarih<input type="date" data-edit data-la="d" value="'+esc(t.d||'')+'"></label>'+(late(t)?'<span class="late">'+dleft(daysTo(t.d))+'</span>':'')+'<button type="button" class="btn bomx" data-edit data-la="rm" title="Görevi kaldır">Görevi kaldır</button><small>Atayan: '+esc(uname(t.by))+'</small></div></div>').join('')
+     :'<p class="pmempty">Bu filtrede görev yok.</p>')
+   +'<form class="dlform ldform" id="ld-form"><h3>Yeni görev ata</h3>'
+   +'<label>Kaynak<select name="src" data-edit><option value="c">Checklist (kural maddesi)</option><option value="p">PCB kartı</option></select></label>'
+   +'<label class="ldb" hidden>Kart<select name="b" data-edit>'+BOARDS.map(b=>'<option>'+esc(b[0])+'</option>').join('')+'</select></label>'
+   +'<label>Madde no<input name="rid" data-edit list="ld-ids" placeholder="örn. EV 4.3.6" autocomplete="off"></label>'
+   +'<label>Kişi<select name="u" data-edit>'+opts('')+'</select></label>'
+   +'<label>Son tarih<input name="d" type="date" data-edit></label>'
+   +'<label>Durum<select name="s" data-edit><option value="miss">Eksik</option><option value="bad">Sorun var</option></select></label>'
+   +'<label class="w">Not (isteğe bağlı)<input name="n" maxlength="300" data-edit placeholder="Ne yapılması gerekiyor?"></label>'
+   +'<div class="bomact"><button type="submit" class="btn pdf" data-edit>Görevi ata</button><span class="pmmsg" id="ld-msg">'+esc(TEAM.ldMsg||'')+'</span></div></form>';
+  if(!document.getElementById('ld-ids')){const dl=document.createElement('datalist');dl.id='ld-ids';dl.innerHTML=Object.keys(K2C).map(k=>'<option value="'+esc(k)+'">').join('');document.body.appendChild(dl)}
+}
+function tSetItem(kind,key,patch){
+  const [doc,k2]=tDoc(kind,key),F=MEM.fba,uid=MEM.uid(),o={};
+  if('s' in patch){hLog(kind,key,'s',(kind==='c'?CHK:PC)[key]||'',patch.s||'');o.s={[k2]:patch.s||F.DEL()};o.w={[k2]:{u:uid,a:F.TS()}}}
+  if('n' in patch){hLog(kind,key,'n',(kind==='c'?CHN:PN)[key]||'',patch.n||'');o.n={[k2]:patch.n||F.DEL()};o.wn={[k2]:{u:uid,a:F.TS()}}}
+  if('as' in patch){hLog(kind,key,'as',asText(TAS[kind][key]),asText(patch.as));o.as={[k2]:patch.as?{u:patch.as.u,d:patch.as.d||'',by:uid,a:F.TS()}:F.DEL()}}
+  return F.fs.set(doc,o,true).catch(tErr);
+}
+const ldEl=tmEl('tm-lead');
+ldEl.addEventListener('click',e=>{
+  const t=e.target,lu=t.closest('tr[data-lu]');if(lu){TEAM.lf.u=TEAM.lf.u===lu.dataset.lu?'':lu.dataset.lu;leadRender();return}
+  const row=t.closest('.tk.ld');if(!row||!tOn())return;const kind=row.dataset.kind,key=row.dataset.key;
+  const s=t.closest('[data-ls]');if(s){const cur=(kind==='c'?CHK:PC)[key]||'';tSetItem(kind,key,{s:cur===s.dataset.ls?'':s.dataset.ls});return}
+  const rm=t.closest('[data-la=rm]');if(rm){if(!rm.classList.contains('arm')){rm.classList.add('arm');rm.textContent='Emin misin?';setTimeout(()=>{rm.classList.remove('arm');rm.textContent='Görevi kaldır'},3000);return}tSetItem(kind,key,{as:null});return}
+});
+ldEl.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='ld-u'){TEAM.lf.u=t.value;leadRender();return}
+  if(t.id==='ld-st'){TEAM.lf.st=t.value;leadRender();return}
+  if(t.name==='src'){t.form.querySelector('.ldb').hidden=t.value!=='p';return}
+  const la=t.closest('[data-la]');if(!la||!tOn())return;const row=t.closest('.tk.ld'),kind=row.dataset.kind,key=row.dataset.key;
+  const u=row.querySelector('[data-la=u]').value,d=row.querySelector('[data-la=d]').value;
+  tSetItem(kind,key,{as:u?{u:u,d:d}:null});
+});
+ldEl.addEventListener('submit',e=>{
+  if(e.target.id!=='ld-form')return;e.preventDefault();if(!tOn())return;
+  const f=e.target,msg=document.getElementById('ld-msg'),kind=f.src.value,id=f.rid.value.trim().toUpperCase().replace(/\s+/g,' ');
+  if(!K2C[id]){msg.textContent='“'+(f.rid.value||'')+'” geçerli bir kural maddesi değil (örn. EV 4.3.6).';return}
+  if(!f.u.value){msg.textContent='Görevi kime atayacağını seç.';return}
+  const key=kind==='p'?f.b.value+'|'+id:id,curN=(kind==='c'?CHN:PN)[key]||'',n=f.n.value.trim();
+  const patch={s:f.s.value,as:{u:f.u.value,d:f.d.value}};if(n)patch.n=curN?curN+'\n'+n:n;
+  const who=uname(f.u.value);tSetItem(kind,key,patch).then(()=>{TEAM.ldMsg=(kind==='p'?f.b.value+' · ':'')+id+' → '+who+' atandı.';const m=document.getElementById('ld-msg');if(m)m.textContent=TEAM.ldMsg;f.rid.value='';f.n.value='';clearTimeout(TEAM.ldT);TEAM.ldT=setTimeout(()=>{TEAM.ldMsg=''},6000)});
+});
+document.getElementById('tm-hist').addEventListener('click',e=>{if(e.target.closest('#hs-r'))histRender(true)});
+document.getElementById('tm-hist').addEventListener('change',e=>{if(e.target.id==='hs-f'){TEAM.hf=e.target.value;histPaint()}});
+document.getElementById('tm-leadw').addEventListener('focusout',()=>setTimeout(()=>{if(TEAM.pend&&!focusIn(ldEl)){TEAM.pend=false;tRender()}},60));
+const _renderTeam=renderTeam;renderTeam=function(){_renderTeam();if(tOn()){leadRender();histRender(false)}else{const w=document.getElementById('tm-leadw');if(w)w.hidden=true}};
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script>
 <script type="module" src="fb.js"></script>
