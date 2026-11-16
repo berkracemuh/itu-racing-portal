@@ -979,6 +979,10 @@ table.lsum td.late{color:var(--bad);font-weight:700}
 .ldform select{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none}
 .ldform label[hidden]{display:none}
 @media (max-width:760px){.tk.ld{grid-template-columns:1fr}.ldform{grid-template-columns:1fr 1fr}.lseg{margin-left:0}}
+
+.pushbox{margin-top:12px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--brand);font-size:.9em;line-height:1.55}
+.pushbox .bomact{margin-top:8px}
+#push-msg:empty{display:none}#push-msg{margin-top:6px;color:var(--bad)}
 </style>
 </head>
 <body class="m-both">
@@ -2689,7 +2693,7 @@ function tNotes(){
 }
 function tBadge(){const n=tNotes().filter(x=>x.fresh||x.late).length,b=document.getElementById('tm-badge');if(b){b.textContent=n||'';b.classList.toggle('on',n>0)}}
 function tNotify(){
-  if(!tOn()||!('Notification' in window)||Notification.permission!=='granted')return;
+  if(!tOn()||!('Notification' in window)||Notification.permission!=='granted'||lsGet('fsg-pushtok',null))return;
   const me=MEM.uid();let mx=TEAM.notified;
   tTasks().forEach(t=>{if(t.u===me&&t.by!==me&&t.a>TEAM.notified){mx=Math.max(mx,t.a);const body=(t.kind==='c'?t.id:t.b+' · '+t.id)+' · '+rtext(t.id).slice(0,90);
     const opt={body:body,icon:'icons/icon-192.png',tag:'as-'+t.key};
@@ -3118,6 +3122,52 @@ document.getElementById('tm-hist').addEventListener('click',e=>{if(e.target.clos
 document.getElementById('tm-hist').addEventListener('change',e=>{if(e.target.id==='hs-f'){TEAM.hf=e.target.value;histPaint()}});
 document.getElementById('tm-leadw').addEventListener('focusout',()=>setTimeout(()=>{if(TEAM.pend&&!focusIn(ldEl)){TEAM.pend=false;tRender()}},60));
 const _renderTeam=renderTeam;renderTeam=function(){_renderTeam();if(tOn()){leadRender();histRender(false)}else{const w=document.getElementById('tm-leadw');if(w)w.hidden=true}};
+
+// ===== R24: background push (FCM) =====
+const PUSH={busy:false,sup:null};
+async function pushSupported(){if(PUSH.sup===null){PUSH.sup=!!(MEM.fba&&MEM.fba.push&&await MEM.fba.push.supported())}return PUSH.sup}
+const pushTok=()=>lsGet('fsg-pushtok',null);
+async function pushSave(tok){const F=MEM.fba;await F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[tok]:{a:F.TS(),ua:navigator.userAgent.slice(0,120)}}},true);lsSet('fsg-pushtok',tok)}
+async function pushEnable(){
+  if(PUSH.busy||!tOn())return;PUSH.busy=true;const m=document.getElementById('push-msg');if(m)m.textContent='Bildirim izni isteniyor…';
+  try{
+    if(!await pushSupported())throw new Error('Bu tarayıcı arka plan bildirimlerini desteklemiyor.');
+    const perm=await Notification.requestPermission();
+    if(perm!=='granted')throw new Error(perm==='denied'?'Bildirim izni reddedildi. Tarayıcı ya da telefon ayarlarından bu site için bildirimlere izin ver.':'Bildirim izni verilmedi.');
+    const tok=await MEM.fba.push.token();if(!tok)throw new Error('Cihaz kaydı alınamadı.');
+    await pushSave(tok);
+  }catch(err){PUSH.err=memErr(err)}
+  PUSH.busy=false;ntRender();
+}
+async function pushDisable(){
+  const tok=pushTok(),F=MEM.fba;if(!tok||!F)return;
+  try{await F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[tok]:F.DEL()}},true)}catch(e){}
+  try{await F.push.remove()}catch(e){}
+  try{localStorage.removeItem('fsg-pushtok')}catch(e){}ntRender();
+}
+async function pushRefresh(){ // keep this device's token current
+  if(!tOn()||!pushTok()||!('Notification' in window)||Notification.permission!=='granted')return;
+  try{if(!await pushSupported())return;const tok=await MEM.fba.push.token();const old=pushTok();
+    if(tok&&tok!==old){const F=MEM.fba;await F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[old]:F.DEL()}},true).catch(()=>{});await pushSave(tok)}
+    else if(tok&&!TEAM.pushChecked)await pushSave(tok);
+    TEAM.pushChecked=true;
+  }catch(e){}
+}
+const _ntRender=ntRender;ntRender=function(){
+  _ntRender();const el=tmEl('tm-nt');if(!el)return;
+  const p=el.querySelector('#nt-perm');if(p)p.remove();el.querySelectorAll('.bomact .pmmsg').forEach(s=>s.textContent='');
+  const tok=pushTok(),perm=('Notification' in window)?Notification.permission:'unsupported';
+  let h;
+  if(tok&&perm==='granted')h='<b>Bu cihazda bildirimler açık.</b> Uygulama kapalıyken de bildirim gelir: sana görev atandığında, görevinin son günü yaklaştığında, teslim tarihlerine 7, 3, 1 gün kala ve son gün'+(MEM.admin?', yeni üyelik başvurusu geldiğinde':'')+'. Bildirimler en fazla 15–20 dakika gecikmeyle gelir.<div class="bomact"><button type="button" class="btn" id="push-off">Bu cihazda kapat</button></div>';
+  else if(perm==='denied')h='Bu cihazda bildirim izni engellenmiş. Tarayıcı ya da telefon ayarlarından bu site için bildirimlere izin verip sayfayı yenile.';
+  else if(perm==='unsupported'||PUSH.sup===false)h='Bu tarayıcı arka plan bildirimlerini desteklemiyor. iPhone’da önce uygulamayı Safari’den ana ekrana ekle ve oradan aç (iOS 16.4 ve sonrası).';
+  else h='Uygulama kapalıyken de telefonuna bildirim gelsin: görev atamaları, yaklaşan son tarihler ve teslimler.<div class="bomact"><button type="button" class="btn pdf" id="push-on">Bu cihazda bildirimleri aç</button></div>';
+  el.insertAdjacentHTML('beforeend','<div class="pushbox">'+h+'<div class="pmmsg" id="push-msg">'+esc(PUSH.err||'')+'</div></div>');
+  PUSH.err='';
+};
+tmEl('tm-nt').addEventListener('click',e=>{if(e.target.closest('#push-on'))pushEnable();else if(e.target.closest('#push-off'))pushDisable()});
+window.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#pf-out')&&pushTok()){const F=MEM.fba,tok=pushTok();if(F&&MEM.user){F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[tok]:F.DEL()}},true).catch(()=>{});F.push.remove().catch(()=>{})}try{localStorage.removeItem('fsg-pushtok')}catch(x){}}},true);
+MEM.hooks.push(()=>{if(tOn())pushRefresh()});
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script>
 <script type="module" src="fb.js"></script>
