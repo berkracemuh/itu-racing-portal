@@ -943,6 +943,12 @@ body.admin .pfadm{display:block}
 .rlr span{font-weight:600;font-size:.92em}
 .rlr select{min-width:240px;max-width:60%;padding:7px 9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:13.5px}
 @media (max-width:820px){.orgd{grid-template-columns:1fr}.rlr{flex-direction:column;align-items:stretch}.rlr select{max-width:none;min-width:0}}
+.adl>li{flex-wrap:wrap}
+.aded{flex:1 0 100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 12px;margin-top:10px;padding:12px;background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--brand);animation:ckIn .25s both}
+.aded label{display:block;font:600 10.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.aded select{display:block;width:100%;margin-top:5px;padding:8px 9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-family:var(--sans);font-size:13.5px;letter-spacing:0;text-transform:none}
+.aded .bomact{grid-column:1/-1;margin:0}
+@media (max-width:760px){.aded{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body class="m-both">
@@ -2830,6 +2836,23 @@ function rolesHTML(){
 }
 const _pfPaint=pfPaint;pfPaint=function(){_pfPaint();let r=document.getElementById('pf-role');if(!r){r=document.createElement('div');r.id='pf-role';r.className='pfrole';document.getElementById('pf-unit').after(r)}const u=MEM.udoc&&MEM.udoc.unvan;r.textContent=u&&UNVAN[u]?UNVAN[u]:'';r.hidden=!r.textContent};
 // ---------- admin panel (profile) ----------
+const BGR=[['Elektrik-Elektronik-Kontrol Yazılım',['Elektrik','Elektronik','Kontrol-Yazılım']],['Mekanik',['Aerodinamik','Taşıt Dinamiği','Powertrain','Şasi ve Kompozit']],['Finans-Organizasyon',['Finans-Organizasyon']]];
+function admEditor(id,u,me){
+  const opt=(v,l,cur)=>'<option value="'+esc(v)+'"'+(v===(cur||'')?' selected':'')+'>'+esc(l)+'</option>';
+  const un=Object.keys(UNVAN).map(k=>{const h=holders(k).filter(x=>x!==id);return opt(k,UNVAN[k]+(h.length?' (şu an: '+h.map(uname).join(', ')+')':''),u.unvan)}).join('');
+  return '<div class="aded"><label>Ekip<select name="ekip">'+opt('','Seçilmedi',u.ekip)+opt('Ana ekip','Ana ekip',u.ekip)+opt('Destek ekip','Destek ekip',u.ekip)+'</select></label>'
+   +'<label>Birim<select name="birim">'+opt('','Seçilmedi',u.birim)+BGR.map(([g,bs])=>'<optgroup label="'+esc(g)+'">'+bs.map(b=>opt(b,b,u.birim)).join('')+'</optgroup>').join('')+'</select></label>'
+   +'<label>Unvan<select name="unvan">'+opt('','Unvan yok',u.unvan)+un+'</select></label>'
+   +'<label>Yetki<select name="role"'+(id===me?' disabled title="Kendi yetkini değiştiremezsin"':'')+'>'+opt('member','Üye',u.role||'member')+opt('admin','Yönetici',u.role||'member')+'</select></label>'
+   +'<div class="bomact"><button type="button" class="btn pdf" data-admin data-act="esave">Kaydet</button><button type="button" class="btn" data-act="ecancel">Vazgeç</button><span class="pmmsg">Unvanı başkasında olan birini seçersen o kişinin unvanı boşa çıkar.</span></div></div>';
+}
+function admSave(id,box){
+  const F=MEM.fba,u=TEAM.users[id]||{},me=MEM.uid(),g=n=>box.querySelector('[name='+n+']').value;
+  const P={ekip:g('ekip'),birim:g('birim')},nu=g('unvan');
+  if(nu!==(u.unvan||'')){if(nu){holders(nu).filter(x=>x!==id).forEach(x=>F.fs.set('users/'+x,{unvan:F.DEL()},true).catch(tErr));P.unvan=nu}else P.unvan=F.DEL()}
+  if(id!==me){const r=g('role');if(r!==(u.role||'member')){P.role=r;if(r==='admin')P.status='approved'}}
+  F.fs.set('users/'+id,P,true).then(()=>{TEAM.admEdit=null;admRender()}).catch(tErr);
+}
 function admRender(){
   const el=document.getElementById('pf-adm');if(!el)return;
   if(!MEM.admin||!tOn()){el.innerHTML='';return}
@@ -2842,7 +2865,8 @@ function admRender(){
      +(tab==='pending'?'<button class="btn pdf" data-admin data-act="approve">Onayla</button><button class="btn" data-admin data-act="reject">Reddet</button>':'')
      +(tab==='approved'&&id!==me?(u.role==='admin'?'<button class="btn" data-admin data-act="rmadmin">Yöneticilikten al</button>':'<button class="btn" data-admin data-act="mkadmin">Yönetici yap</button><button class="btn" data-admin data-act="unapprove">Onayı geri al</button>'):'')
      +(tab==='rejected'?'<button class="btn pdf" data-admin data-act="approve">Onayla</button><button class="btn bomx" data-admin data-act="del" title="Kaydı sil">Kaydı sil</button>':'')
-     +'</div></li>').join('')+'</ul>':'<p class="pmempty">'+({pending:'Onay bekleyen başvuru yok.',approved:'Onaylı üye yok.',rejected:'Reddedilen başvuru yok.'}[tab])+'</p>')
+     +(tab!=='rejected'&&TEAM.admEdit!==id?'<button class="btn" data-admin data-act="edit">Düzenle</button>':'')
+     +'</div>'+(TEAM.admEdit===id?admEditor(id,u,me):'')+'</li>').join('')+'</ul>':'<p class="pmempty">'+({pending:'Onay bekleyen başvuru yok.',approved:'Onaylı üye yok.',rejected:'Reddedilen başvuru yok.'}[tab])+'</p>')
    +'<p class="src">Onaylanan üyeler ortak checklist ve PCB listesini düzenleyebilir, görev alabilir, yorum yazabilir. Yönetici yaptığın kişi de üye onaylayabilir ve takvimi düzenleyebilir.</p>';
   L.forEach(([id])=>{if(TEAM.em[id])return;TEAM.em[id]='…';MEM.fba.fs.get('users/'+id+'/private/info').then(d=>{TEAM.em[id]=(d&&d.email)||'e-posta yok'}).catch(()=>{TEAM.em[id]='e-posta okunamadı'}).then(()=>{const s=el.querySelector('[data-em="'+id+'"]');if(s)s.textContent=TEAM.em[id]})});
 }
@@ -2850,6 +2874,9 @@ const pfAdm=document.getElementById('pf-adm');
 pfAdm.addEventListener('click',e=>{
   const at=e.target.closest('[data-at]');if(at){TEAM.admTab=at.dataset.at;admRender();return}
   const b=e.target.closest('[data-act]');if(!b||!tOn()||!MEM.admin)return;
+  if(b.dataset.act==='edit'){TEAM.admEdit=b.closest('[data-uid]').dataset.uid;admRender();return}
+  if(b.dataset.act==='ecancel'){TEAM.admEdit=null;admRender();return}
+  if(b.dataset.act==='esave'){admSave(b.closest('[data-uid]').dataset.uid,b.closest('.aded'));return}
   const id=b.closest('[data-uid]').dataset.uid,F=MEM.fba,me=MEM.uid(),act=b.dataset.act;
   const P={approve:{status:'approved',approvedBy:me,approvedAt:F.TS()},reject:{status:'rejected'},unapprove:{status:'pending'},mkadmin:{role:'admin',status:'approved'},rmadmin:{role:'member'}}[act];
   if(act==='del'){if(!b.classList.contains('arm')){b.classList.add('arm');b.textContent='Emin misin?';setTimeout(()=>{b.classList.remove('arm');b.textContent='Kaydı sil'},3000);return}F.fs.del('users/'+id).catch(tErr);return}
