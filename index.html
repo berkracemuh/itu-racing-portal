@@ -629,6 +629,58 @@ body.view-pcb #view-pcb{display:block;animation:viewIn .32s cubic-bezier(.2,.7,.
   .veh .pic.ph.fit img{inset:auto;left:0;top:50%;height:auto;transform:translateY(-50%);-webkit-mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(180deg,transparent,#000 16%,#000 84%,transparent)}
   .veh .pic.ph.fit:hover img{transform:translateY(-50%) scale(1.03)}
 }
+/* ===== R20: profile ===== */
+.pf-btn{flex:0 0 auto;width:36px;height:34px;display:grid;place-items:center;padding:0;border:1px solid #2a333c;background:#12171c;color:#c9d2d9;cursor:pointer;overflow:hidden;transition:border-color .15s,color .15s,background .15s}
+.pf-btn:hover{border-color:var(--carbon-id);color:#fff}
+.pf-btn.on{border-color:var(--carbon-id);box-shadow:inset 0 -2px 0 var(--carbon-id)}
+.pf-btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;display:block}
+.pf-btn img{width:100%;height:100%;object-fit:cover;display:block}
+.pf-btn .pfi{font:700 12.5px/1 var(--mono);letter-spacing:.02em;color:var(--carbon-id)}
+.pf-ico{display:grid;place-items:center}
+#view-prof{display:none;min-height:calc(100vh - var(--hh) - 80px)}
+body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
+#view-prof .vin{max-width:1060px;margin:0 auto;padding:30px 28px 90px}
+#view-prof h1{margin:0 0 10px;font-size:2.2em;line-height:1.1;letter-spacing:-.02em;font-weight:650}
+#view-prof .lead{margin:0 0 26px;color:var(--muted);max-width:66ch}
+.pfgrid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;align-items:start}
+.pfcard{background:var(--panel);border:1px solid var(--line);padding:22px 22px 20px;position:relative}
+.pfcard h3{margin:0 0 16px;font-size:1.05em;font-weight:700;padding-left:12px;border-left:4px solid var(--brand);line-height:1.3}
+.pfme{grid-row:span 2;text-align:center;border-top:3px solid var(--brand)}
+.pfav{width:168px;height:168px;margin:6px auto 16px;background:var(--carbon);display:grid;place-items:center;overflow:hidden;outline:1px solid var(--line);outline-offset:4px}
+.pfav img{width:100%;height:100%;object-fit:cover;display:block}
+.pfav .pfi{font:700 54px/1 var(--mono);color:var(--carbon-id);letter-spacing:.02em}
+.pfav svg{width:84px;height:84px;fill:none;stroke:#5d6a74;stroke-width:1.5;stroke-linecap:round}
+.pfname{font-size:1.3em;font-weight:700;line-height:1.25;word-break:break-word}
+.pfname.empty{color:var(--muted);font-weight:600}
+.pfunit{font:600 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-top:6px}
+.pfbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 0}
+.pfme .src{margin:12px 0 0;font-size:.78em;color:var(--muted);line-height:1.5}
+.pfup{position:relative;overflow:hidden}
+.pfup input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.btn.pdf{background:var(--ink);color:var(--bg);border:1px solid var(--ink)}
+.btn.pdf:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled:hover{background:var(--panel)}
+.pfform label{display:block;font:600 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.pfform label .opt{text-transform:none;letter-spacing:0;font-weight:500}
+.pfform input,.pfform select{display:block;width:100%;margin-top:6px;padding:10px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-family:var(--sans,inherit);font-size:15px;letter-spacing:0;text-transform:none;border-radius:0}
+.pfform input:focus,.pfform select:focus{outline:0;border-color:var(--accent);background:var(--panel)}
+.pfform input:disabled{color:var(--muted);cursor:not-allowed}
+.pfrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pfact{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
+.pfform.dirty .btn.pdf{background:var(--accent);border-color:var(--accent);color:#fff}
+.pfmsg{font-size:.84em;font-weight:600}
+.pfmsg.ok{color:var(--ok,#1a9c5b)}.pfmsg.err{color:var(--bad,#d0403f)}.pfmsg.warn{color:var(--miss,#c98a00)}
+.pfstat{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--line);margin-bottom:14px;font-size:.92em}
+.pfstat span:last-child{color:var(--muted);margin-left:auto;font-size:.9em}
+.pfdot{width:9px;height:9px;background:var(--muted);flex:0 0 auto}
+.pfacc p{margin:0 0 8px;font-size:.92em}
+.pfacc ul{margin:0 0 4px;padding-left:20px;font-size:.9em;color:var(--muted);line-height:1.6}
+.pfacc .pfbtns{justify-content:flex-start}
+.pfdanger{margin-top:16px;color:var(--bad,#d0403f);border-color:var(--line)}
+.pfdanger.arm{background:var(--bad,#d0403f);color:#fff;border-color:var(--bad,#d0403f)}
+@media (max-width:800px){.pfgrid{grid-template-columns:minmax(0,1fr)}.pfme{grid-row:auto}#view-prof .vin{padding:20px 14px 90px}.pfrow{grid-template-columns:1fr;gap:0}}
+@media print{#view-prof{display:none!important}}
 </style>
 </head>
 <body class="m-both">
@@ -677,7 +729,7 @@ body.view-pcb #view-pcb{display:block;animation:viewIn .32s cubic-bezier(.2,.7,.
     <button class="tab" data-v="ev" role="tab" aria-selected="false">EV Araçlarımız</button>
     <button class="tab" data-v="check" role="tab" aria-selected="false">Checklist</button><button class="tab" data-v="pcb" role="tab" aria-selected="false">PCB Kontrol</button><button class="tab" data-v="baba" role="tab" aria-selected="false">Baba</button>
   </div>
-  <div class="hr-right"><button id="fbtn" class="fbtn rules-only" aria-label="Filtrele" title="Bölüme / yer imine göre filtrele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg></button><input id="q" class="rules-only" type="search" placeholder="Ara: kelime veya madde no" autocomplete="off" aria-label="Ara"><span id="count" class="rules-only"></span><button class="theme-btn" role="switch" aria-label="Koyu temaya geç" title="Koyu temaya geç"><span class="ti sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><span class="ti moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button></div>
+  <div class="hr-right"><button id="fbtn" class="fbtn rules-only" aria-label="Filtrele" title="Bölüme / yer imine göre filtrele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg></button><input id="q" class="rules-only" type="search" placeholder="Ara: kelime veya madde no" autocomplete="off" aria-label="Ara"><span id="count" class="rules-only"></span><button class="theme-btn" role="switch" aria-label="Koyu temaya geç" title="Koyu temaya geç"><span class="ti sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><span class="ti moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button><button id="pf-btn" class="pf-btn" aria-label="Profil" title="Profil"><span class="pf-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.5 20.5c.9-3.9 3.9-6 7.5-6s6.6 2.1 7.5 6"/></svg></span></button></div>
 </div>
 
 </header>
@@ -901,6 +953,53 @@ body.view-pcb #view-pcb{display:block;animation:viewIn .32s cubic-bezier(.2,.7,.
   <div class="ckctl"><div class="seg" id="pb-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><button class="btn pdf" id="pb-pdf">Bu kartı PDF indir</button><button class="btn pdf" id="pb-pdf-all">Tüm kartlar PDF</button><button class="btn" id="pb-reset">Kartı sıfırla</button></div>
   <div class="ckmsg" id="pb-msg"></div>
   <div id="pb-list"></div>
+  </div>
+</section>
+<section id="view-prof">
+  <div class="vin">
+  <div class="kick">İTÜ Racing · Hesap</div>
+  <h1>Profil</h1>
+  <p class="lead">Adını, birimini ve profil fotoğrafını buradan yönet. Üyelik sistemi açılana kadar bu bilgiler yalnızca bu cihazda saklanır; üye olduğunda hesabına taşınır.</p>
+  <div class="pfgrid">
+    <div class="pfcard pfme">
+      <div class="pfav" id="pf-av" aria-label="Profil fotoğrafı"></div>
+      <div class="pfname" id="pf-name"></div>
+      <div class="pfunit" id="pf-unit"></div>
+      <div class="pfbtns">
+        <label class="btn pdf pfup">Fotoğraf yükle<input type="file" id="pf-file" accept="image/*"></label>
+        <button class="btn" id="pf-rm" type="button">Fotoğrafı kaldır</button>
+      </div>
+      <p class="src">JPG, PNG veya WEBP. Fotoğrafın ortası kare olarak kırpılır ve 256×256 piksele küçültülür.</p>
+    </div>
+    <form class="pfcard pfform" id="pf-form" autocomplete="on">
+      <h3>Kişisel bilgiler</h3>
+      <div class="pfrow">
+        <label>Ad<input name="ad" type="text" maxlength="40" autocomplete="given-name" placeholder="Adın"></label>
+        <label>Soyad<input name="soyad" type="text" maxlength="40" autocomplete="family-name" placeholder="Soyadın"></label>
+      </div>
+      <label>Birim <span class="opt">(isteğe bağlı)</span><select name="birim">
+        <option value="">Seçilmedi</option><option>Elektrik-Elektronik</option><option>Güç Aktarma</option><option>Mekanik / Şasi</option><option>Süspansiyon / Dinamik</option><option>Aerodinamik</option><option>Yazılım</option><option>Otonom (Driverless)</option><option>Organizasyon / Sponsorluk</option><option>Diğer</option>
+      </select></label>
+      <label>E-posta<input type="email" disabled placeholder="Üyelik açılınca hesabından gelecek"></label>
+      <div class="pfact">
+        <button type="submit" class="btn pdf">Kaydet</button>
+        <button type="button" class="btn" id="pf-undo">Değişiklikleri geri al</button>
+        <span class="pfmsg" id="pf-msg" role="status"></span>
+      </div>
+    </form>
+    <div class="pfcard pfacc">
+      <h3>Hesap</h3>
+      <div class="pfstat"><span class="pfdot"></span><b>Misafir</b><span>Giriş yapılmadı</span></div>
+      <p>Üyelik sistemi yakında açılacak. Üye olunca:</p>
+      <ul>
+        <li>Checklist ve PCB Kontrol işaretlemeleri ile notlar hesabına kaydedilir.</li>
+        <li>Yer imlerin hesabına kaydedilir.</li>
+        <li>Telefon ve bilgisayar arasında her şey eşitlenir.</li>
+      </ul>
+      <div class="pfbtns"><button class="btn" type="button" disabled>Giriş yap</button><button class="btn" type="button" disabled>Kayıt ol</button></div>
+      <button class="btn pfdanger" id="pf-clear" type="button">Profil bilgilerini bu cihazdan sil</button>
+    </div>
+  </div>
   </div>
 </section>
 <section id="view-baba">
@@ -1194,18 +1293,20 @@ function renderPin(k){
 }
 const tabBtns=Array.from(document.querySelectorAll('.tab'));
 let rulesY=0;
-const VHASH={rules:'#',car:'#arac-bilgileri',ev:'#ev-araclarimiz',check:'#checklist',pcb:'#pcb',baba:'#baba'};
-function curView(){const c=document.body.classList;return c.contains('view-car')?'car':c.contains('view-ev')?'ev':c.contains('view-check')?'check':c.contains('view-pcb')?'pcb':c.contains('view-baba')?'baba':'rules'}
+const VHASH={rules:'#',car:'#arac-bilgileri',ev:'#ev-araclarimiz',check:'#checklist',pcb:'#pcb',prof:'#profil',baba:'#baba'};
+function curView(){const c=document.body.classList;return c.contains('view-car')?'car':c.contains('view-ev')?'ev':c.contains('view-check')?'check':c.contains('view-pcb')?'pcb':c.contains('view-prof')?'prof':c.contains('view-baba')?'baba':'rules'}
 function showView(v,o){
   o=o||{};
   const was=curView(),c=document.body.classList;
   if(was==='rules'&&v!=='rules') rulesY=window.scrollY;
-  c.remove('view-car','view-ev','view-baba','view-check','view-pcb','v-alt');
+  c.remove('view-car','view-ev','view-baba','view-check','view-pcb','view-prof','v-alt');
   if(v!=='rules'){c.add('v-alt','view-'+v)}
   tabBtns.forEach(t=>{const on=t.dataset.v===v;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false')});
   setHH();cancelGlide();moveInd();
   if(v==='check')renderCheck(true);
   if(v==='pcb')renderPCB(true);
+  if(v==='prof')pfOpen();
+  document.getElementById('pf-btn').classList.toggle('on',v==='prof');
   if(v!==was) window.scrollTo(0,v==='rules'?(o.restore===false?0:rulesY):0);
   if(!o.keepHash){try{history.replaceState(null,'',VHASH[v])}catch(e){}}
   setTimeout(()=>{if(v==='rules')spy();jumpBtns()},0);
@@ -1213,7 +1314,7 @@ function showView(v,o){
 tabBtns.forEach(t=>t.onclick=()=>showView(t.dataset.v));
 const tabInd=document.querySelector('.tab-ind');
 function moveInd(instant){
-  const on=document.querySelector('.tab.on');if(!on||!tabInd)return;
+  const on=document.querySelector('.tab.on');if(!tabInd)return;if(!on){tabInd.style.width='0px';return}
   if(instant){tabInd.style.transition='none'}
   tabInd.style.width=on.offsetWidth+'px';tabInd.style.transform='translateX('+on.offsetLeft+'px)';
   if(instant){void tabInd.offsetWidth;tabInd.style.transition=''}
@@ -1278,7 +1379,7 @@ function spy(){
 }
 window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(spy)}},{passive:true});
 // initial hash
-function fromHash(){const h=location.hash.slice(1);if(h==='arac-bilgileri'||h==='baba'||h==='ev-araclarimiz'||h==='checklist'||h==='pcb'){showView(h==='baba'?'baba':h==='ev-araclarimiz'?'ev':h==='checklist'?'check':h==='pcb'?'pcb':'car',{keepHash:true});return}if(!h||h==='top')return;if(h==='abbr'){go('abbr',false);return}const k=Object.keys(byId).find(k=>slug(k)===h);if(k)go(k,true)}
+function fromHash(){const h=location.hash.slice(1);if(h==='arac-bilgileri'||h==='baba'||h==='ev-araclarimiz'||h==='checklist'||h==='pcb'||h==='profil'){showView(h==='baba'?'baba':h==='ev-araclarimiz'?'ev':h==='checklist'?'check':h==='pcb'?'pcb':h==='profil'?'prof':'car',{keepHash:true});return}if(!h||h==='top')return;if(h==='abbr'){go('abbr',false);return}const k=Object.keys(byId).find(k=>slug(k)===h);if(k)go(k,true)}
 window.addEventListener('hashchange',fromHash);
 
 // ===== bookmarks =====
@@ -1823,6 +1924,66 @@ async function pbPdf(all,btn){
 }
 document.getElementById('pb-pdf').onclick=function(){pbPdf(false,this)};
 document.getElementById('pb-pdf-all').onclick=function(){pbPdf(true,this)};
+
+// ===== R20: profile =====
+let PF={};try{PF=JSON.parse(localStorage.getItem('fsg-prof')||'{}')||{}}catch(e){PF={}}
+function savePF(){try{localStorage.setItem('fsg-prof',JSON.stringify(PF));return true}catch(e){return false}}
+const pfBtn=document.getElementById('pf-btn'),pfAv=document.getElementById('pf-av'),pfForm=document.getElementById('pf-form'),pfMsg=document.getElementById('pf-msg');
+const PF_SVG=pfBtn.querySelector('.pf-ico').innerHTML;
+function pfInit(){const a=(PF.ad||'').trim(),b=(PF.soyad||'').trim();return ((a[0]||'')+(b[0]||'')).toLocaleUpperCase('tr')}
+function pfFull(){return [(PF.ad||'').trim(),(PF.soyad||'').trim()].filter(Boolean).join(' ')}
+function pfFace(el,big){
+  if(PF.photo){el.innerHTML='<img alt="" src="'+PF.photo+'">';return}
+  const i=pfInit();el.innerHTML=i?'<span class="pfi">'+esc(i)+'</span>':'<span class="pf-ico">'+PF_SVG+'</span>';
+}
+function pfPaint(){
+  pfFace(pfBtn,false);
+  pfBtn.classList.toggle('has',!!(PF.photo||pfInit()));
+  const n=pfFull();pfBtn.title=n?'Profil · '+n:'Profil';pfBtn.setAttribute('aria-label',pfBtn.title);
+  pfFace(pfAv,true);
+  document.getElementById('pf-name').textContent=n||'İsimsiz kullanıcı';
+  document.getElementById('pf-name').classList.toggle('empty',!n);
+  document.getElementById('pf-unit').textContent=PF.birim||'Birim seçilmedi';
+  document.getElementById('pf-rm').disabled=!PF.photo;
+}
+function pfFill(){pfForm.ad.value=PF.ad||'';pfForm.soyad.value=PF.soyad||'';pfForm.birim.value=PF.birim||'';pfDirty(false)}
+function pfDirty(d){pfForm.classList.toggle('dirty',d);if(d){pfMsg.textContent='Kaydedilmemiş değişiklik var';pfMsg.className='pfmsg warn'}}
+function pfNote(t,ok){pfMsg.textContent=t;pfMsg.className='pfmsg '+(ok?'ok':'err');clearTimeout(pfNote.t);pfNote.t=setTimeout(()=>{if(!pfForm.classList.contains('dirty'))pfMsg.textContent=''},3500)}
+function pfOpen(){pfFill();pfPaint()}
+pfBtn.onclick=()=>showView('prof');
+pfForm.addEventListener('input',()=>pfDirty(pfForm.ad.value!==(PF.ad||'')||pfForm.soyad.value!==(PF.soyad||'')||pfForm.birim.value!==(PF.birim||'')));
+pfForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const ad=pfForm.ad.value.replace(/\s+/g,' ').trim(),so=pfForm.soyad.value.replace(/\s+/g,' ').trim();
+  if(!ad){pfNote('Ad boş bırakılamaz.',false);pfForm.ad.focus();return}
+  PF.ad=ad;PF.soyad=so;PF.birim=pfForm.birim.value;
+  const ok=savePF();pfFill();pfPaint();pfNote(ok?'Kaydedildi.':'Kaydedilemedi: tarayıcı depolaması kapalı.',ok);
+});
+document.getElementById('pf-undo').onclick=()=>{pfFill();pfNote('Değişiklikler geri alındı.',true)};
+document.getElementById('pf-file').onchange=async function(){
+  const f=this.files&&this.files[0];this.value='';if(!f)return;
+  if(!/^image\//.test(f.type)){pfNote('Lütfen bir resim dosyası seç.',false);return}
+  try{
+    const url=URL.createObjectURL(f);
+    const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('Resim açılamadı'));i.src=url});
+    const S=256,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');
+    const m=Math.min(im.naturalWidth,im.naturalHeight);
+    g.fillStyle='#fff';g.fillRect(0,0,S,S);g.imageSmoothingQuality='high';
+    g.drawImage(im,(im.naturalWidth-m)/2,(im.naturalHeight-m)/2,m,m,0,0,S,S);
+    URL.revokeObjectURL(url);
+    const prev=PF.photo;PF.photo=c.toDataURL('image/jpeg',.86);
+    if(!savePF()){PF.photo=prev;pfNote('Fotoğraf kaydedilemedi: tarayıcı depolaması kapalı ya da dolu.',false);return}
+    pfPaint();pfNote('Fotoğraf güncellendi.',true);
+  }catch(err){pfNote('Fotoğraf işlenemedi: '+(err&&err.message||err),false)}
+};
+document.getElementById('pf-rm').onclick=()=>{delete PF.photo;savePF();pfPaint();pfNote('Fotoğraf kaldırıldı.',true)};
+const pfClr=document.getElementById('pf-clear');
+pfClr.onclick=()=>{
+  if(!pfClr.classList.contains('arm')){pfClr.classList.add('arm');pfClr.textContent='Emin misin? Tekrar bas';clearTimeout(pfClr.t);pfClr.t=setTimeout(()=>{pfClr.classList.remove('arm');pfClr.textContent='Profil bilgilerini bu cihazdan sil'},4000);return}
+  clearTimeout(pfClr.t);pfClr.classList.remove('arm');pfClr.textContent='Profil bilgilerini bu cihazdan sil';
+  PF={};try{localStorage.removeItem('fsg-prof')}catch(e){}pfFill();pfPaint();pfNote('Profil bilgileri silindi.',true);
+};
+pfPaint();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script>
 <script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
