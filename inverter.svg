@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 330">
+<defs>
+<linearGradient id="gt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfe5ea"/><stop offset=".5" stop-color="#b9c3cc"/><stop offset="1" stop-color="#97a3ae"/></linearGradient>
+<linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa6b1"/><stop offset=".5" stop-color="#7e8a96"/><stop offset="1" stop-color="#5d6873"/></linearGradient>
+<linearGradient id="gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6c7782"/><stop offset="1" stop-color="#8a95a0"/></linearGradient>
+<linearGradient id="lid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2d3238"/><stop offset="1" stop-color="#14171b"/></linearGradient>
+<linearGradient id="org" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".55" stop-color="#f08a1c"/><stop offset="1" stop-color="#b95f0a"/></linearGradient>
+<linearGradient id="brass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e3a8"/><stop offset=".5" stop-color="#c9a94a"/><stop offset="1" stop-color="#8a6f26"/></linearGradient>
+<radialGradient id="sh" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<filter id="bl"><feGaussianBlur stdDeviation="1.2"/></filter>
+</defs>
+<ellipse cx="240" cy="296" rx="185" ry="24" fill="url(#sh)"/>
+<polygon points="200.0,292.0 118.9,245.2 118.9,129.5 200.0,176.3" fill="url(#gl)" />
+<polygon points="200.0,292.0 359.7,199.8 359.7,84.1 200.0,176.3" fill="url(#gr)" />
+<polygon points="200.0,176.3 359.7,84.1 278.7,37.3 118.9,129.5" fill="url(#gt)" />
+<polygon points="200.0,292.0 118.9,245.2 118.9,129.5 200.0,176.3" fill="none" stroke="#2a3138" stroke-opacity=".55" stroke-width="1"/>
+<polygon points="200.0,292.0 359.7,199.8 359.7,84.1 200.0,176.3" fill="none" stroke="#2a3138" stroke-opacity=".55" stroke-width="1"/>
+<polygon points="200.0,176.3 359.7,84.1 278.7,37.3 118.9,129.5" fill="none" stroke="#2a3138" stroke-opacity=".55" stroke-width="1"/>
+<line x1="206.2" y1="276.8" x2="353.5" y2="191.8" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="278.4" x2="353.5" y2="193.4" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="265.3" x2="353.5" y2="180.2" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="266.9" x2="353.5" y2="181.8" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="253.7" x2="353.5" y2="168.7" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="255.3" x2="353.5" y2="170.3" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="242.1" x2="353.5" y2="157.1" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="243.7" x2="353.5" y2="158.7" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="230.6" x2="353.5" y2="145.5" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="232.2" x2="353.5" y2="147.1" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="219.0" x2="353.5" y2="134.0" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="220.6" x2="353.5" y2="135.6" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="207.4" x2="353.5" y2="122.4" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="209.0" x2="353.5" y2="124.0" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<line x1="206.2" y1="195.9" x2="353.5" y2="110.8" stroke="#4d5761" stroke-opacity=".6" stroke-width="1.6"/>
+<line x1="206.2" y1="197.5" x2="353.5" y2="112.4" stroke="#c4ccd4" stroke-opacity=".35" stroke-width="1"/>
+<polygon points="200.0,168.5 347.3,83.5 278.7,43.9 131.4,128.9" fill="url(#lid)" stroke="#0b0d10" stroke-width="1"/>
+<polygon points="200.0,161.2 263.2,124.7 207.1,92.3 143.9,128.8" fill="#1d2227" stroke="#3a424b" stroke-width="1"/>
+<polygon points="271.5,119.9 334.8,83.4 278.7,51.0 215.4,87.5" fill="#1d2227" stroke="#3a424b" stroke-width="1"/>
+<ellipse cx="200.0" cy="163.1" rx="3.4" ry="2" fill="#aab3bc" stroke="#444" stroke-width=".6"/>
+<ellipse cx="338.9" cy="82.9" rx="3.4" ry="2" fill="#aab3bc" stroke="#444" stroke-width=".6"/>
+<ellipse cx="139.7" cy="128.3" rx="3.4" ry="2" fill="#aab3bc" stroke="#444" stroke-width=".6"/>
+<ellipse cx="278.7" cy="48.1" rx="3.4" ry="2" fill="#aab3bc" stroke="#444" stroke-width=".6"/>
+<ellipse cx="269.5" cy="123.0" rx="3.4" ry="2" fill="#aab3bc" stroke="#444" stroke-width=".6"/>
+<ellipse cx="209.2" cy="88.2" rx="3.4" ry="2" fill="#aab3bc" stroke="#444" stroke-width=".6"/>
+<g transform="matrix(1.0392 -0.6000 1.0392 0.6000 118.94 128.32)"><text x="18" y="44" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="17" fill="#e8edf2" letter-spacing="1">F-SiC</text><text x="18" y="56" font-family="Arial,sans-serif" font-weight="700" font-size="6.5" fill="#9fb0bf" letter-spacing="1.4">SILICON CARBIDE INVERTER</text><rect x="131.7" y="12.0" width="6" height="6" rx="1" fill="#f08a1c"/></g>
+<ellipse cx="174.3" cy="207.2" rx="12" ry="14" fill="#1a1d21" stroke="#0d0f12"/>
+<ellipse cx="171.3" cy="207.2" rx="8" ry="10" fill="url(#org)" stroke="#8a4a08" stroke-width=".8"/>
+<ellipse cx="168.3" cy="204.2" rx="3" ry="4" fill="#fff" fill-opacity=".35"/>
+<ellipse cx="138.6" cy="186.6" rx="12" ry="14" fill="#1a1d21" stroke="#0d0f12"/>
+<ellipse cx="135.6" cy="186.6" rx="8" ry="10" fill="url(#org)" stroke="#8a4a08" stroke-width=".8"/>
+<ellipse cx="132.6" cy="183.6" rx="3" ry="4" fill="#fff" fill-opacity=".35"/>
+<polygon points="175.7,264.1 143.3,245.4 143.3,224.5 175.7,243.3" fill="#15181c" stroke="#05070a"/>
+<circle cx="170.8" cy="250.9" r="1.6" fill="#c9a94a"/>
+<circle cx="166.8" cy="248.5" r="1.6" fill="#c9a94a"/>
+<circle cx="162.7" cy="246.2" r="1.6" fill="#c9a94a"/>
+<circle cx="158.7" cy="243.8" r="1.6" fill="#c9a94a"/>
+<circle cx="154.6" cy="241.5" r="1.6" fill="#c9a94a"/>
+<circle cx="150.6" cy="239.2" r="1.6" fill="#c9a94a"/>
+<ellipse cx="233.6" cy="192.0" rx="10" ry="6" fill="#222a31" stroke="#0b0e11"/>
+<polygon points="223.6,186.0 237.6,179.0 237.6,197.0 223.6,197.0" fill="url(#brass)" stroke="#6e5a1a" stroke-width=".8"/>
+<ellipse cx="0.0" cy="0.0" rx="3.2" ry="7" fill="#12161a" transform="translate(237.6,188.0) rotate(-20)"/>
+<ellipse cx="342.2" cy="129.3" rx="10" ry="6" fill="#222a31" stroke="#0b0e11"/>
+<polygon points="332.2,123.3 346.2,116.3 346.2,134.3 332.2,134.3" fill="url(#brass)" stroke="#6e5a1a" stroke-width=".8"/>
+<ellipse cx="0.0" cy="0.0" rx="3.2" ry="7" fill="#12161a" transform="translate(346.2,125.3) rotate(-20)"/>
+<line x1="200.0" y1="176.3" x2="359.7" y2="84.1" stroke="#fff" stroke-opacity=".7" stroke-width="1.6"/>
+<line x1="200.0" y1="234.2" x2="359.7" y2="141.9" stroke="#2a3138" stroke-width="2.4" stroke-opacity=".8"/>
+</svg>
