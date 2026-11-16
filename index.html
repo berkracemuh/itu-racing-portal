@@ -11,6 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="ITU Racing">
+<script>window.FSG_MEMBER=1</script>
 
 <title>ITU RACING Kural ve Bilgi Portalı by Berk Ay</title>
 <script>
@@ -681,6 +682,33 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
 .pfdanger.arm{background:var(--bad,#d0403f);color:#fff;border-color:var(--bad,#d0403f)}
 @media (max-width:800px){.pfgrid{grid-template-columns:minmax(0,1fr)}.pfme{grid-row:auto}#view-prof .vin{padding:20px 14px 90px}.pfrow{grid-template-columns:1fr;gap:0}}
 @media print{#view-prof{display:none!important}}
+/* ===== R21: membership ===== */
+.pfauth{display:none}
+body.mem-on.guest .pfauth{display:block}
+body.mem-on.guest .pfme,body.mem-on.guest #pf-form,body.mem-on.guest #pf-acc{display:none}
+body.mem-on.guest .pfgrid{grid-template-columns:minmax(0,520px);justify-content:start}
+.pfauth{border-top:3px solid var(--brand)}
+.pftabs{display:flex;margin:-22px -22px 20px;border-bottom:1px solid var(--line)}
+.pftabs button{flex:1;border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:15px 10px 13px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s,background .15s}
+.pftabs button:hover{color:var(--ink);background:var(--accent-soft)}
+.pftabs button.on{color:var(--ink);border-bottom-color:var(--brand)}
+.pfaf{animation:viewIn .25s ease}
+.pfaf.busy{opacity:.6}
+.pflink{border:0;background:none;color:var(--accent);font:inherit;font-size:.86em;font-weight:600;cursor:pointer;padding:6px 4px;text-decoration:underline;text-underline-offset:3px}
+.pfsub{margin:0 0 14px;font-size:.9em;color:var(--muted);line-height:1.55}
+.pfnote{margin:16px 0 0;padding-top:14px;border-top:1px dashed var(--line);font-size:.84em;color:var(--muted);line-height:1.55}
+#pf-amsg{display:block;margin-top:4px}
+#pf-amsg:empty{display:none}
+.pfdot.ok{background:var(--ok)}
+#pf-acc .pfbtns{margin:4px 0 14px}
+.memban{display:none;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin:0 0 14px;padding:11px 14px;background:var(--accent-soft);border:1px solid var(--line);border-left:4px solid var(--brand);font-size:.9em;font-weight:600}
+body.mem-on.guest .memban{display:flex}
+body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,body.mem-on.guest #pb-gs button,body.mem-on.guest #ck-reset,body.mem-on.guest #pb-reset,body.mem-on.guest .bm[data-bm]{opacity:.5}
+#memtoast{position:fixed;left:12px;right:12px;margin:0 auto;width:fit-content;bottom:22px;z-index:60;display:flex;align-items:center;gap:12px;max-width:min(560px,calc(100vw - 24px));padding:11px 12px 11px 16px;background:var(--carbon);color:#fff;border-left:4px solid var(--carbon-id);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:.9em;font-weight:600;transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+#memtoast.on{opacity:1;transform:none;pointer-events:auto}
+@media (max-width:600px){#memtoast{bottom:76px}}
+#memtoast .btn.pdf{background:var(--carbon-id);border-color:var(--carbon-id);color:#04252a;flex:0 0 auto}
+@media print{#memtoast,.memban{display:none!important}}
 </style>
 </head>
 <body class="m-both">
@@ -733,7 +761,7 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
 </div>
 
 </header>
-<div id="fpanel" role="dialog" aria-label="Filtre"></div><div id="tip" role="tooltip"></div>
+<div id="fpanel" role="dialog" aria-label="Filtre"></div><div id="memtoast" role="status"><span></span><button type="button" class="btn pdf" data-goprof>Giriş yap</button></div><div id="tip" role="tooltip"></div>
 <div id="wm" aria-hidden="true"><img src="wm.svg" alt=""></div>
 <div class="wrap" id="top">
 <nav id="nav"></nav>
@@ -922,7 +950,7 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
   <div class="ckch" id="ck-chips"></div>
   <div class="cksum" id="ck-sum"></div>
   <div class="ckctl"><div class="seg" id="ck-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><input type="text" id="ck-q" placeholder="Bu bölümde ara…" autocomplete="off" aria-label="Checklist içinde ara"><button class="btn" id="ck-en">İngilizce göster</button><button class="btn" id="ck-rep-b">Raporu kopyala</button><button class="btn pdf" id="ck-pdf">PDF indir</button><button class="btn" id="ck-reset">Bölümü sıfırla</button></div>
-  <div class="ckmsg" id="ck-msg"></div>
+  <div class="memban"><span>Görüntüleme modundasın. İşaretleme, not alma ve yer imi üyelere özeldir.</span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="ck-msg"></div>
   <textarea id="ck-rep" readonly aria-label="Rapor"></textarea>
   <div id="ck-list"></div>
   </div>
@@ -951,7 +979,7 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
   <div class="pgs" id="pb-gs"></div>
   <div class="cksum" id="pb-sum2"></div>
   <div class="ckctl"><div class="seg" id="pb-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><button class="btn pdf" id="pb-pdf">Bu kartı PDF indir</button><button class="btn pdf" id="pb-pdf-all">Tüm kartlar PDF</button><button class="btn" id="pb-reset">Kartı sıfırla</button></div>
-  <div class="ckmsg" id="pb-msg"></div>
+  <div class="memban"><span>Görüntüleme modundasın. İşaretleme, not alma ve yer imi üyelere özeldir.</span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="pb-msg"></div>
   <div id="pb-list"></div>
   </div>
 </section>
@@ -959,8 +987,29 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
   <div class="vin">
   <div class="kick">İTÜ Racing · Hesap</div>
   <h1>Profil</h1>
-  <p class="lead">Adını, birimini ve profil fotoğrafını buradan yönet. Üyelik sistemi açılana kadar bu bilgiler yalnızca bu cihazda saklanır; üye olduğunda hesabına taşınır.</p>
+  <p class="lead" id="pf-lead">Adını, birimini ve profil fotoğrafını buradan yönet. Bu sürümde bilgiler yalnızca bu cihazda saklanır; hesapla eşitleme uygulama sürümünde çalışır.</p>
   <div class="pfgrid">
+    <div class="pfcard pfauth" id="pf-auth">
+      <div class="pftabs" role="tablist"><button type="button" data-t="in" class="on">Giriş yap</button><button type="button" data-t="up">Kayıt ol</button></div>
+      <form class="pfform pfaf" id="pf-in" novalidate>
+        <label>E-posta<input name="email" type="email" autocomplete="email" inputmode="email" placeholder="ornek@hotmail.com"></label>
+        <label>Şifre<input name="pw" type="password" autocomplete="current-password"></label>
+        <div class="pfact"><button type="submit" class="btn pdf">Giriş yap</button><button type="button" class="pflink" data-t="fg">Şifremi unuttum</button></div>
+      </form>
+      <form class="pfform pfaf" id="pf-up" novalidate hidden>
+        <div class="pfrow"><label>Ad<input name="ad" type="text" maxlength="40" autocomplete="given-name"></label><label>Soyad<input name="soyad" type="text" maxlength="40" autocomplete="family-name"></label></div>
+        <label>E-posta<input name="email" type="email" autocomplete="email" inputmode="email" placeholder="Gmail, Hotmail, Outlook, okul maili…"></label>
+        <div class="pfrow"><label>Şifre <span class="opt">(en az 6 karakter)</span><input name="pw" type="password" autocomplete="new-password"></label><label>Şifre tekrar<input name="pw2" type="password" autocomplete="new-password"></label></div>
+        <div class="pfact"><button type="submit" class="btn pdf">Kayıt ol</button></div>
+      </form>
+      <form class="pfform pfaf" id="pf-fg" novalidate hidden>
+        <p class="pfsub">E-posta adresini yaz; şifreni yenilemen için bir bağlantı gönderelim.</p>
+        <label>E-posta<input name="email" type="email" autocomplete="email" inputmode="email"></label>
+        <div class="pfact"><button type="submit" class="btn pdf">Bağlantı gönder</button><button type="button" class="pflink" data-t="in">Girişe dön</button></div>
+      </form>
+      <div class="pfmsg" id="pf-amsg" role="status"></div>
+      <p class="pfnote">Üye olmadan her şeyi görüntüleyebilirsin. Checklist ve PCB Kontrol işaretlemeleri, notlar ve yer imleri üyelere özeldir ve hesabına kaydedilir.</p>
+    </div>
     <div class="pfcard pfme">
       <div class="pfav" id="pf-av" aria-label="Profil fotoğrafı"></div>
       <div class="pfname" id="pf-name"></div>
@@ -980,17 +1029,17 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
       <label>Birim <span class="opt">(isteğe bağlı)</span><select name="birim">
         <option value="">Seçilmedi</option><option>Elektrik</option><option>Elektronik</option><option>Kontrol-Yazılım</option><option>Aerodinamik</option><option>Taşıt Dinamiği</option><option>Powertrain</option><option>Şasi ve Kompozit</option><option>Finans-Organizasyon</option>
       </select></label>
-      <label>E-posta<input type="email" disabled placeholder="Üyelik açılınca hesabından gelecek"></label>
+      <label>E-posta<input type="email" id="pf-email" disabled placeholder="Üyelik açılınca hesabından gelecek"></label>
       <div class="pfact">
         <button type="submit" class="btn pdf">Kaydet</button>
         <button type="button" class="btn" id="pf-undo">Değişiklikleri geri al</button>
         <span class="pfmsg" id="pf-msg" role="status"></span>
       </div>
     </form>
-    <div class="pfcard pfacc">
+    <div class="pfcard pfacc" id="pf-acc">
       <h3>Hesap</h3>
       <div class="pfstat"><span class="pfdot"></span><b>Misafir</b><span>Giriş yapılmadı</span></div>
-      <p>Üyelik sistemi yakında açılacak. Üye olunca:</p>
+      <p>Üyelik, sitenin uygulama sürümünde açık: <a href="https://berkracemuh.github.io/itu-racing-portal/#profil" target="_blank" rel="noopener noreferrer">berkracemuh.github.io/itu-racing-portal</a>. Orada üye olunca:</p>
       <ul>
         <li>Checklist ve PCB Kontrol işaretlemeleri ile notlar hesabına kaydedilir.</li>
         <li>Yer imlerin hesabına kaydedilir.</li>
@@ -1984,8 +2033,135 @@ pfClr.onclick=()=>{
   PF={};try{localStorage.removeItem('fsg-prof')}catch(e){}pfFill();pfPaint();pfNote('Profil bilgileri silindi.',true);
 };
 pfPaint();
+
+// ===== R21: membership (active only in the member build: window.FSG_MEMBER) =====
+const MEM={on:!!window.FSG_MEMBER,mode:window.FSG_MEMBER?'pending':'off',user:null,fba:null,unsub:[],q:{},qt:0,applying:false,stateReady:false};
+const SYNC={'fsg-chk':'chk','fsg-chn':'chn','fsg-pcbc':'pcbc','fsg-pcbn':'pcbn','fsg-pcbg':'pcbg','fsg-bm':'bm','fsg-pcbsel':'pcbsel'};
+const SYNCF=Object.values(SYNC);
+function memLocal(){const o={};for(const k in SYNC){let v=null;try{v=JSON.parse(localStorage.getItem(k)||'null')}catch(e){}if(v!==null)o[SYNC[k]]=v}return o}
+function memBody(){const c=document.body.classList;c.toggle('mem-on',MEM.on);c.toggle('guest',MEM.on&&MEM.mode!=='member');c.toggle('member',MEM.mode==='member')}
+const memToast=document.getElementById('memtoast');
+function memTip(t){memToast.firstElementChild.textContent=t;memToast.classList.add('on');clearTimeout(memTip.t);memTip.t=setTimeout(()=>memToast.classList.remove('on'),3800)}
+document.addEventListener('click',e=>{if(e.target.closest('[data-goprof]')){memToast.classList.remove('on');showView('prof')}});
+function memBlocked(){
+  if(!MEM.on||MEM.mode==='member')return false;
+  memTip(MEM.mode==='pending'?'Hesap bilgisi yükleniyor, birazdan tekrar dene.':MEM.mode==='down'?'Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.':'Bu özellik üyelere özel. İşaretlemek ve kaydetmek için giriş yap.');
+  return true;
+}
+const MEM_SEL='#ck-list .cks button,#pb-list .cks button,#pb-gs button,#ck-reset,#pb-reset,.bm[data-bm],#bm-clear,#bml [data-rm]';
+window.addEventListener('click',e=>{if(e.target.closest(MEM_SEL)&&memBlocked()){e.preventDefault();e.stopImmediatePropagation()}},true);
+window.addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('#ck-list textarea,#pb-list textarea')&&memBlocked())t.blur()},true);
+// push local changes to the account
+const _lsSet=Storage.prototype.setItem;
+Storage.prototype.setItem=function(k,v){_lsSet.call(this,k,v);if(this===localStorage&&SYNC[k]&&MEM.mode==='member'&&MEM.stateReady&&!MEM.applying){try{MEM.q[SYNC[k]]=JSON.parse(v)}catch(e){}clearTimeout(MEM.qt);MEM.qt=setTimeout(memFlush,1200)}};
+function memFlush(){
+  clearTimeout(MEM.qt);const part=MEM.q;MEM.q={};
+  if(!Object.keys(part).length||!MEM.user||!MEM.fba)return;
+  MEM.fba.updateState(MEM.user.uid,part).catch(err=>{memTip('Değişiklik hesaba kaydedilemedi: '+memErr(err))});
+}
+addEventListener('pagehide',memFlush);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')memFlush()});
+function memApply(st){
+  MEM.applying=true;
+  try{
+    if('chk' in st){CHK=st.chk||{};saveCHK()}
+    if('chn' in st){CHN=st.chn||{};saveCHN()}
+    if('pcbc' in st){PC=st.pcbc||{};lsSet('fsg-pcbc',PC)}
+    if('pcbn' in st){PN=st.pcbn||{};lsSet('fsg-pcbn',PN)}
+    if('pcbg' in st){PCBG=st.pcbg||{};lsSet('fsg-pcbg',PCBG)}
+    if('pcbsel' in st&&st.pcbsel&&BOARDS.some(b=>b[0]===st.pcbsel)){pSel=st.pcbsel;lsSet('fsg-pcbsel',pSel)}
+    if('bm' in st){bmSet.clear();(st.bm||[]).forEach(k=>{if(byId[k])bmSet.add(k)});saveBM();paintBMcount();document.querySelectorAll('#list .bm[data-bm]').forEach(b=>b.classList.toggle('on',bmSet.has(b.dataset.bm)));if(bmp.classList.contains('open'))renderBM()}
+  }finally{MEM.applying=false}
+  const v=curView();if(v==='check')renderCheck(false);else if(v==='pcb')renderPCB(false);
+}
+function memWipe(){const z={};SYNCF.forEach(f=>z[f]=f==='bm'?[]:f==='pcbsel'?null:{});memApply(z);for(const k in SYNC){try{localStorage.removeItem(k)}catch(e){}}PF={};try{localStorage.removeItem('fsg-prof')}catch(e){}}
+function memErr(err){
+  const c=(err&&err.code)||'',M={
+  'auth/invalid-email':'E-posta adresi geçersiz.','auth/missing-email':'E-posta adresini yaz.','auth/missing-password':'Şifreni yaz.',
+  'auth/invalid-credential':'E-posta veya şifre hatalı.','auth/wrong-password':'E-posta veya şifre hatalı.','auth/user-not-found':'Bu e-postayla kayıtlı hesap yok.',
+  'auth/email-already-in-use':'Bu e-postayla zaten bir hesap var. Giriş yapmayı dene.','auth/weak-password':'Şifre en az 6 karakter olmalı.',
+  'auth/too-many-requests':'Çok fazla deneme yapıldı. Biraz bekleyip tekrar dene.','auth/network-request-failed':'İnternet bağlantısı yok ya da sunucuya ulaşılamadı.',
+  'auth/user-disabled':'Bu hesap devre dışı bırakılmış.','auth/operation-not-allowed':'E-posta ile giriş Firebase ayarlarında açık değil.',
+  'auth/unauthorized-domain':'Bu site adresi Firebase’de yetkili değil (Authorized domains).','permission-denied':'Erişim reddedildi (veritabanı kuralları).','unavailable':'Sunucuya şu an ulaşılamıyor.'};
+  return M[c]||((err&&err.message)||String(err)).replace(/^Firebase:\s*/,'');
+}
+// --- profile + auth UI
+const pfAuth=document.getElementById('pf-auth'),pfAcc=document.getElementById('pf-acc'),pfAMsg=document.getElementById('pf-amsg');
+function aMsg(t,ok){pfAMsg.textContent=t||'';pfAMsg.className='pfmsg '+(t?(ok?'ok':'err'):'')}
+function aTab(t){['in','up','fg'].forEach(x=>document.getElementById('pf-'+x).hidden=x!==t);pfAuth.querySelectorAll('.pftabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t||(t==='fg'&&b.dataset.t==='in')));aMsg('')}
+pfAuth.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){e.preventDefault();aTab(b.dataset.t);const f=document.getElementById('pf-'+b.dataset.t);const i=f&&f.querySelector('input');if(i&&matchMedia('(pointer:fine)').matches)i.focus()}});
+function busy(f,on){f.querySelectorAll('button,input').forEach(x=>x.disabled=on);f.classList.toggle('busy',on)}
+async function aRun(f,fn,okText){if(!MEM.fba){aMsg(MEM.mode==='down'?'Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.':'Üyelik servisi yükleniyor, biraz bekle.',false);return}busy(f,true);aMsg('');try{await fn();if(okText)aMsg(okText,true)}catch(err){aMsg(memErr(err),false)}busy(f,false)}
+document.getElementById('pf-in').addEventListener('submit',function(e){e.preventDefault();const f=this,em=f.email.value.trim(),pw=f.pw.value;
+  if(!em||!pw){aMsg('E-posta ve şifreyi yaz.',false);return}
+  aRun(f,()=>MEM.fba.signIn(em,pw).then(()=>{f.reset()}))});
+document.getElementById('pf-up').addEventListener('submit',function(e){e.preventDefault();const f=this,ad=f.ad.value.replace(/\s+/g,' ').trim(),so=f.soyad.value.replace(/\s+/g,' ').trim(),em=f.email.value.trim(),pw=f.pw.value;
+  if(!ad){aMsg('Adını yaz.',false);return}if(!em){aMsg('E-posta adresini yaz.',false);return}
+  if(pw.length<6){aMsg('Şifre en az 6 karakter olmalı.',false);return}if(pw!==f.pw2.value){aMsg('Şifreler aynı değil.',false);return}
+  MEM.justSigned=true;aRun(f,()=>MEM.fba.signUp(em,pw,{ad:ad,soyad:so}).then(()=>{f.reset()})).then(()=>{MEM.justSigned=false})});
+document.getElementById('pf-fg').addEventListener('submit',function(e){e.preventDefault();const f=this,em=f.email.value.trim();
+  if(!em){aMsg('E-posta adresini yaz.',false);return}
+  aRun(f,()=>MEM.fba.reset(em),'Şifre yenileme bağlantısı gönderildi. Gelen kutunu (ve gereksiz/spam klasörünü) kontrol et.')});
+function accPaint(){
+  if(!MEM.on)return;
+  const lead=document.getElementById('pf-lead');
+  if(MEM.mode!=='member'){lead.textContent='Hesabınla giriş yap ya da birkaç saniyede üye ol. Profilin, işaretlerin, notların ve yer imlerin tüm cihazlarında eşitlenir.';return}
+  lead.textContent='Adını, birimini ve profil fotoğrafını buradan yönet. Bilgilerin hesabına kaydedilir ve tüm cihazlarında görünür.';
+  const u=MEM.user;document.getElementById('pf-email').value=u.email||'';
+  pfAcc.innerHTML='<h3>Hesap</h3><div class="pfstat"><span class="pfdot ok"></span><b>Üye</b><span>'+esc(u.email||'')+'</span></div>'
+    +(u.verified?'<p class="pfsub">E-posta adresin doğrulandı.</p>':'<p class="pfsub">E-posta adresin henüz doğrulanmadı. Gelen kutundaki (ya da spam klasöründeki) bağlantıya tıkla.</p><div class="pfbtns"><button class="btn" type="button" id="pf-vsend">Doğrulama e-postasını tekrar gönder</button><button class="btn" type="button" id="pf-vchk">Doğruladım, kontrol et</button></div>')
+    +'<ul><li>Checklist ve PCB Kontrol işaretlerin ile notların hesabına kaydediliyor.</li><li>Yer imlerin hesabına kaydediliyor.</li><li>İnternet yokken yaptığın değişiklikler bağlantı gelince gönderilir.</li></ul>'
+    +'<div class="pfmsg" id="pf-accmsg"></div><button class="btn pfdanger" id="pf-out" type="button">Çıkış yap</button>';
+  const am=t=>{const m=document.getElementById('pf-accmsg');m.textContent=t;m.className='pfmsg ok'};
+  const vs=document.getElementById('pf-vsend');if(vs)vs.onclick=()=>MEM.fba.verify().then(()=>am('Doğrulama e-postası gönderildi.')).catch(err=>am(memErr(err)));
+  const vc=document.getElementById('pf-vchk');if(vc)vc.onclick=()=>MEM.fba.refresh().then(nu=>{if(nu){MEM.user=nu;accPaint();if(!nu.verified)am('Henüz doğrulanmamış görünüyor.')}}).catch(err=>am(memErr(err)));
+  document.getElementById('pf-out').onclick=()=>{memFlush();MEM.fba.signOut().catch(err=>am(memErr(err)))};
+}
+// account-backed profile save
+const _pfSave=savePF;
+savePF=function(){const ok=_pfSave();if(MEM.mode==='member'&&MEM.user&&MEM.fba){const p={ad:PF.ad||'',soyad:PF.soyad||'',birim:PF.birim||''};if(PF.photo)p.photo=PF.photo;MEM.fba.saveProfile(MEM.user.uid,p).catch(err=>pfNote('Hesaba kaydedilemedi: '+memErr(err),false))}return ok};
+function memSignedIn(u){
+  MEM.unsub.forEach(f=>{try{f()}catch(e){}});MEM.unsub=[];
+  MEM.user=u;MEM.mode='member';MEM.stateReady=false;memBody();aMsg('');
+  MEM.unsub.push(MEM.fba.watchProfile(u.uid,(d,fromCache,err)=>{
+    if(err)return;
+    if(d){PF={ad:d.ad||'',soyad:d.soyad||'',birim:d.birim||''};if(d.photo)PF.photo=d.photo;_pfSave();if(!pfForm.classList.contains('dirty'))pfFill();pfPaint()}
+  }));
+  MEM.unsub.push(MEM.fba.watchState(u.uid,(d,pending,fromCache,err)=>{
+    if(err){memTip('Hesap verileri okunamadı: '+memErr(err));return}
+    if(!d){
+      if(fromCache)return;
+      const loc=memLocal();SYNCF.forEach(f=>{if(!(f in loc))loc[f]=f==='bm'?[]:f==='pcbsel'?'HV Mainboard':{}});
+      MEM.fba.createState(u.uid,loc).then(()=>{MEM.stateReady=true}).catch(err=>memTip('Hesap verisi oluşturulamadı: '+memErr(err)));
+      return;
+    }
+    if(pending)return;
+    const loc=memLocal(),ch={};
+    SYNCF.forEach(f=>{if(f in MEM.q)return;const rv=d[f]===undefined?null:d[f];if(JSON.stringify(rv)!==JSON.stringify(loc[f]===undefined?null:loc[f]))ch[f]=rv});
+    if(Object.keys(ch).length)memApply(ch);
+    MEM.stateReady=true;
+  }));
+  accPaint();if(curView()==='prof'){pfFill();pfPaint()}
+}
+function memSignedOut(){
+  const was=MEM.mode==='member';
+  MEM.unsub.forEach(f=>{try{f()}catch(e){}});MEM.unsub=[];clearTimeout(MEM.qt);MEM.q={};
+  MEM.user=null;MEM.mode='guest';MEM.stateReady=false;
+  if(was)memWipe();
+  memBody();accPaint();pfFill();pfPaint();aTab('in');
+}
+function memStart(){
+  if(MEM.fba||!window.FBA)return;MEM.fba=window.FBA;
+  MEM.fba.onAuth(u=>{if(u)memSignedIn(u);else memSignedOut()});
+}
+if(MEM.on){
+  document.querySelectorAll('#view-check .lead,#view-pcb .lead').forEach(l=>{l.innerHTML=l.innerHTML.replace('İşaretlerin bu tarayıcıda saklanır','Üye olarak giriş yaptığında işaretlerin hesabına kaydedilir ve cihazların arasında eşitlenir').replace('İşaretlerin ve notların bu tarayıcıda saklanır.','Üye olarak giriş yaptığında işaretlerin ve notların hesabına kaydedilir ve cihazların arasında eşitlenir.')});
+  memBody();accPaint();
+  addEventListener('fba-ready',memStart);memStart();
+  setTimeout(()=>{if(MEM.mode==='pending'&&!MEM.fba){MEM.mode='down';memBody()}},12000);
+}
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script>
+<script type="module" src="fb.js"></script>
 <script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body>
 </html>
