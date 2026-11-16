@@ -337,7 +337,7 @@ table.kv td{line-height:1.55}
 .res p{margin:0;padding:9px 14px;font-size:.82em;line-height:1.55;color:var(--muted);border-top:1px solid var(--line)}
 .res p a{color:var(--accent)}
 @media (max-width:760px){.veh{grid-template-columns:1fr}.veh .pic{min-height:0;aspect-ratio:4/3;border-right:0;border-bottom:1px solid var(--line)}.tl{padding-left:26px}.tl::before{left:5px}.veh::before{left:-25px;width:9px;height:9px}.veh .body{padding:16px 16px 18px}#view-ev h1{font-size:1.9em}}
-@media (max-width:1499px){.tab{padding:0 8px;font-size:11px;letter-spacing:.03em}.hrow{gap:10px}.tabs{margin-left:4px}#q{min-width:96px}}
+@media (max-width:1830px){.tab{padding:0 8px;font-size:11px;letter-spacing:.03em}.hrow{gap:10px}.tabs{margin-left:4px}#q{min-width:96px}}
 @media (max-width:1239px){.brand>span{display:none}}
 @media (max-width:900px){
   nav{position:fixed;left:0;top:var(--hh);bottom:0;height:auto;z-index:30;width:88vw;max-width:350px;transform:translateX(-102%);transition:transform .2s;box-shadow:4px 0 18px rgba(0,0,0,.3)}
@@ -370,7 +370,7 @@ table.kv td{line-height:1.55}
   #fab{right:10px;bottom:10px}
   #view-car .vin,#view-ev .vin{padding-left:16px;padding-right:16px}
 }
-@media (max-width:1180px){
+@media (max-width:1370px){
   .hrow{gap:0 8px;padding:0 10px;flex-wrap:wrap}
   .hrow>*{align-self:center}
   .brand{order:1;padding:6px 0}
@@ -684,14 +684,15 @@ body.view-prof #view-prof{display:block;animation:viewIn .32s cubic-bezier(.2,.7
 @media print{#view-prof{display:none!important}}
 /* ===== R21: membership ===== */
 .pfauth{display:none}
-body.mem-on.guest .pfauth{display:block}
-body.mem-on.guest .pfme,body.mem-on.guest #pf-form,body.mem-on.guest #pf-acc{display:none}
-body.mem-on.guest .pfgrid{grid-template-columns:minmax(0,520px);justify-content:start}
+body.mem-on:not(.signed) .pfauth{display:block}
+body.mem-on:not(.signed) .pfme,body.mem-on:not(.signed) #pf-form,body.mem-on:not(.signed) #pf-acc{display:none}
+body.mem-on:not(.signed) .pfgrid{grid-template-columns:minmax(0,520px);justify-content:start}
 .pfauth{border-top:3px solid var(--brand)}
 .pftabs{display:flex;margin:-22px -22px 20px;border-bottom:1px solid var(--line)}
 .pftabs button{flex:1;border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:15px 10px 13px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s,background .15s}
 .pftabs button:hover{color:var(--ink);background:var(--accent-soft)}
 .pftabs button.on{color:var(--ink);border-bottom-color:var(--brand)}
+.pftabs button small{font:600 11px var(--mono);color:var(--accent);margin-left:4px}
 .pfaf{animation:viewIn .25s ease}
 .pfaf.busy{opacity:.6}
 .pflink{border:0;background:none;color:var(--accent);font:inherit;font-size:.86em;font-weight:600;cursor:pointer;padding:6px 4px;text-decoration:underline;text-underline-offset:3px}
@@ -699,16 +700,214 @@ body.mem-on.guest .pfgrid{grid-template-columns:minmax(0,520px);justify-content:
 .pfnote{margin:16px 0 0;padding-top:14px;border-top:1px dashed var(--line);font-size:.84em;color:var(--muted);line-height:1.55}
 #pf-amsg{display:block;margin-top:4px}
 #pf-amsg:empty{display:none}
-.pfdot.ok{background:var(--ok)}
+.pfdot.ok{background:var(--ok)}.pfdot.wait{background:var(--miss)}.pfdot.bad{background:var(--bad)}
 #pf-acc .pfbtns{margin:4px 0 14px}
 .memban{display:none;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin:0 0 14px;padding:11px 14px;background:var(--accent-soft);border:1px solid var(--line);border-left:4px solid var(--brand);font-size:.9em;font-weight:600}
 body.mem-on.guest .memban{display:flex}
-body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,body.mem-on.guest #pb-gs button,body.mem-on.guest #ck-reset,body.mem-on.guest #pb-reset,body.mem-on.guest .bm[data-bm]{opacity:.5}
+body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,body.mem-on.guest #pb-gs button,body.mem-on.guest .bm[data-bm],body.mem-on.guest [data-edit],body:not(.admin).mem-on [data-admin]{opacity:.5}
 #memtoast{position:fixed;left:12px;right:12px;margin:0 auto;width:fit-content;bottom:22px;z-index:60;display:flex;align-items:center;gap:12px;max-width:min(560px,calc(100vw - 24px));padding:11px 12px 11px 16px;background:var(--carbon);color:#fff;border-left:4px solid var(--carbon-id);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:.9em;font-weight:600;transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
 #memtoast.on{opacity:1;transform:none;pointer-events:auto}
-@media (max-width:600px){#memtoast{bottom:76px}}
 #memtoast .btn.pdf{background:var(--carbon-id);border-color:var(--carbon-id);color:#04252a;flex:0 0 auto}
+@media (max-width:600px){#memtoast{bottom:76px}}
 @media print{#memtoast,.memban{display:none!important}}
+/* ===== R22: team ===== */
+.tbadge{display:none;margin-left:6px;min-width:17px;height:17px;padding:0 4px;background:var(--bad);color:#fff;font:700 10px/17px var(--mono);text-align:center;letter-spacing:0}
+.tbadge.on{display:inline-block}
+#view-team{display:none;min-height:calc(100vh - var(--hh) - 80px)}
+body.view-team #view-team{display:block;animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
+#view-team .vin{max-width:1060px;margin:0 auto;padding:30px 28px 90px}
+#view-team h1{margin:0 0 10px;font-size:2.2em;line-height:1.1;letter-spacing:-.02em;font-weight:650}
+#view-team .lead{margin:0 0 22px;color:var(--muted);max-width:66ch}
+#view-team h2{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-size:1.35em;font-weight:700;padding:0 0 .45em;border-bottom:2px solid var(--ink)}
+#view-team h2::before{content:"";width:10px;height:1em;background:var(--brand);flex:0 0 auto}
+#view-team h3{margin:18px 0 10px;font-size:1.02em;font-weight:700}
+.tm-priv{display:none}body.approved .tm-priv{display:block}
+.tm-off{display:none;margin:0 0 6px;padding:12px 14px;background:var(--accent-soft);border:1px solid var(--line);border-left:4px solid var(--brand);font-size:.92em}
+body:not(.mem-on) .tm-off{display:block}
+.cdw{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:4px 0 6px}
+.cd{background:var(--carbon);color:#fff;padding:16px 18px 14px;border-left:4px solid var(--carbon-id);display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:0 8px}
+.cd b{font:700 2.4em/1 var(--mono);color:var(--carbon-id)}
+.cd span{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#93a0aa}
+.cd em{grid-column:1/-1;font-style:normal;font-weight:700;margin-top:10px;line-height:1.3}
+.cd small{grid-column:1/-1;color:#93a0aa;font-size:.82em;margin-top:2px}
+.cd.near{border-left-color:var(--miss)}.cd.near b{color:var(--miss)}
+.cd.empty{display:block;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--line)}
+.cd.empty em{display:block;margin:0}.cd.empty small{display:block;color:var(--muted)}
+.ntl{list-style:none;margin:0;padding:0;border:1px solid var(--line);background:var(--panel)}
+.ntl li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line2);font-size:.92em}
+.ntl li:first-child{border-top:0}
+.ntl li.fresh{background:var(--accent-soft);font-weight:600}
+.ntl li.late{box-shadow:inset 3px 0 0 var(--bad)}
+.ntk{font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;background:var(--ink);color:var(--bg)}
+.ntk[data-k=dl]{background:var(--miss);color:#1b1300}.ntk[data-k=adm]{background:var(--accent);color:#fff}
+.pmempty{margin:0;padding:14px 16px;background:var(--panel);border:1px dashed var(--line);color:var(--muted);font-size:.9em}
+.pmmsg{font-size:.84em;color:var(--muted);font-weight:600}
+.bomact{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+.tk{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:6px 18px;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);margin-top:-1px}
+.tk[data-s=ok]{border-left-color:var(--ok);opacity:.72}.tk[data-s=miss]{border-left-color:var(--miss)}.tk[data-s=bad]{border-left-color:var(--bad)}
+.tkm{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tkb{border:1px solid var(--line);background:var(--bg);color:var(--ink);font:600 11px var(--mono);padding:3px 7px;cursor:pointer}
+.tkb.c{cursor:default;color:var(--muted)}
+button.tkb:hover{border-color:var(--accent);color:var(--accent)}
+.tkst{font:700 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);color:var(--muted)}
+.tkst[data-s=ok]{border-color:var(--ok);color:var(--ok)}.tkst[data-s=miss]{border-color:var(--miss);color:var(--miss)}.tkst[data-s=bad]{border-color:var(--bad);color:var(--bad)}
+.tkt{font-size:.9em;line-height:1.5;min-width:0}
+.tkn{margin-top:4px;color:var(--muted);font-size:.92em}
+.tkd{display:flex;flex-direction:column;gap:2px;font-size:.86em;text-align:right}
+.tkd .late,.late{color:var(--bad);font-weight:700}.near{color:var(--miss);font-weight:700}
+.tkd small{color:var(--muted)}
+.tmf{display:flex;align-items:center;gap:8px;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tmf select{padding:7px 10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:13px;letter-spacing:0;text-transform:none}
+.bomw{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table.bom{width:100%;border-collapse:collapse;font-size:.88em}
+table.bom th{background:var(--carbon);color:#cfd8de;text-align:left;font:600 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:9px 10px;white-space:nowrap}
+table.bom td{border-top:1px solid var(--line2);padding:4px 6px;vertical-align:middle}
+table.bom td.n,table.bom th.n{text-align:right}
+table.bom input,table.bom select{width:100%;min-width:70px;padding:6px 7px;border:1px solid transparent;background:transparent;color:var(--ink);font:inherit;font-size:13.5px}
+table.bom input[data-f=qty]{min-width:56px;text-align:right}
+table.bom input:hover,table.bom select:hover{border-color:var(--line)}
+table.bom input:focus,table.bom select:focus{outline:0;border-color:var(--accent);background:var(--bg)}
+table.bom tr[data-o=geldi] td:first-child{box-shadow:inset 3px 0 0 var(--ok)}
+table.bom tr[data-o=takildi]{opacity:.65}table.bom tr[data-o=takildi] td:first-child{box-shadow:inset 3px 0 0 var(--muted)}
+table.bom tr[data-o=siparis] td:first-child{box-shadow:inset 3px 0 0 var(--miss)}
+table.bom tr[data-o=gerekli] td:first-child{box-shadow:inset 3px 0 0 var(--bad)}
+table.bom tr.bomempty td{padding:16px 12px;color:var(--muted);text-align:center}
+table.bom.ord td,table.bom.dlt td{padding:9px 10px}
+table.bom.dlt tr.done{opacity:.6}
+.bomx{border:1px solid var(--line);background:transparent;color:var(--bad);font-size:16px;line-height:1;width:30px;height:30px;cursor:pointer}
+.bomx.arm,.btn.arm{background:var(--bad);color:#fff;border-color:var(--bad)}
+.bomsum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 10px;font-size:.9em}
+.bomsum span{color:var(--muted)}
+.ost{font:700 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border:1px solid currentColor}
+.ost[data-o=gerekli]{color:var(--bad)}.ost[data-o=siparis]{color:var(--miss)}.ost[data-o=geldi]{color:var(--ok)}.ost[data-o=takildi]{color:var(--muted)}
+.bomsum .ost{color:inherit}.bomsum .ost[data-o=gerekli]{color:var(--bad)}.bomsum .ost[data-o=siparis]{color:var(--miss)}.bomsum .ost[data-o=geldi]{color:var(--ok)}
+.bompaste{margin-top:12px;padding:14px;background:var(--panel);border:1px solid var(--line)}
+.bompaste textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:13px/1.45 var(--mono)}
+.ordg{margin:0 0 16px}
+.ordh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 12px;background:var(--accent-soft);border:1px solid var(--line);border-bottom:0;border-left:4px solid var(--brand)}
+.ordh span{color:var(--muted);font-size:.86em}
+.dlform{display:grid;grid-template-columns:2fr 1fr 110px 1fr;gap:10px 12px;margin-top:14px;padding:16px;background:var(--panel);border:1px solid var(--line)}
+.dlform label{display:block;font:600 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.dlform label.w{grid-column:1/-1}
+.dlform input{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;letter-spacing:0;text-transform:none}
+.dlform .bomact{grid-column:1/-1;margin:0}
+.dla{white-space:nowrap}.dla .btn{padding:5px 8px;font-size:11.5px;margin:2px}
+.dim{color:var(--muted)}
+.act{list-style:none;margin:0;padding:0;border:1px solid var(--line);background:var(--panel)}
+.act li{display:flex;align-items:center;gap:10px;padding:9px 14px;border-top:1px solid var(--line2);font-size:.9em}
+.act li:first-child{border-top:0}
+.act li>span{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.act small{color:var(--muted);white-space:nowrap}
+.act i,.ros i,.adl>li>i,.cmm i,.ckw i{display:inline-grid;place-items:center;flex:0 0 auto;width:26px;height:26px;background:var(--carbon);color:var(--carbon-id);font:700 10.5px var(--mono);font-style:normal}
+.ros{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.rosg{background:var(--panel);border:1px solid var(--line);padding:12px 14px}
+#view-team .rosg h3{margin:0 0 8px;font-size:.95em;display:flex;justify-content:space-between}
+.rosg h3 small{font:600 11px var(--mono);color:var(--accent)}
+.rosg ul{list-style:none;margin:0;padding:0}
+.rosg li{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:.9em;border-top:1px solid var(--line2)}
+.rosg li:first-of-type{border-top:0}
+.rosg li span{flex:1;min-width:0}
+.ek{font:700 9.5px var(--mono);font-style:normal;letter-spacing:.05em;text-transform:uppercase;padding:2px 5px;border:1px solid var(--accent);color:var(--accent);white-space:nowrap}
+.ek[data-e=d]{border-color:var(--miss);color:var(--miss)}
+.adm{font:700 9.5px var(--mono);font-style:normal;letter-spacing:.05em;text-transform:uppercase;padding:2px 5px;background:var(--ink);color:var(--bg)}
+/* checklist row additions */
+.ck .ckw{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8em;color:var(--muted)}
+.ck .ckw span{display:inline-flex;align-items:center;gap:6px}
+.ck .ckw i{width:20px;height:20px;font-size:9px}
+.ck .ckw .wa b{color:var(--ink)}.ck .ckw .wa.late{color:var(--bad)}
+.ck .ckas{grid-column:2/-1;display:none;flex-wrap:wrap;gap:8px 14px;align-items:end}
+.ck[data-s=miss] .ckas,.ck[data-s=bad] .ckas{display:flex;animation:ckIn .3s both}
+body:not(.approved) .ck .ckas{display:none!important}
+.ckas label{display:flex;flex-direction:column;gap:4px;font:600 10.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.ckas select,.ckas input{padding:6px 8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:13px;letter-spacing:0;text-transform:none;min-width:170px}
+@media (max-width:760px){.ck .ckw,.ck .ckas{grid-column:1}.tk{grid-template-columns:1fr}.tkd{text-align:left}.dlform{grid-template-columns:1fr 1fr}.dlform label:first-of-type{grid-column:1/-1}#view-team .vin{padding:20px 14px 90px}}
+/* PCB meta */
+.pmeta{margin:12px 0 18px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--brand)}
+.pmhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;margin:0 0 12px}
+.pmhead span{color:var(--muted);font-size:.84em}
+.pmrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pmeta label{display:block;font:600 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.pmeta input,.pmeta select{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;letter-spacing:0;text-transform:none}
+.pmlinks{margin-top:14px}
+.pml{display:block;font:600 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.pmlinks ul{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.pmlinks li{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--bg)}
+.pmlinks li a{padding:6px 10px;color:var(--accent);font-weight:600;font-size:.9em;text-decoration:none}
+.pmlinks li a:hover{text-decoration:underline}
+.pmlinks li button{border:0;border-left:1px solid var(--line);background:transparent;color:var(--muted);width:30px;align-self:stretch;cursor:pointer;font-size:15px}
+.pmlinks li button:hover{color:var(--bad)}
+.pmadd{display:grid;grid-template-columns:1fr 1.6fr auto;gap:8px;margin-top:8px}
+.pmadd input{margin:0}
+.pmeta .pmempty{padding:10px 12px}
+.pst{font:700 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pst[data-st=tasarim]{color:var(--ink);border-color:var(--ink)}.pst[data-st=uretim]{color:var(--miss);border-color:var(--miss)}.pst[data-st=test]{color:var(--accent);border-color:var(--accent)}.pst[data-st=arac]{background:var(--ok);border-color:var(--ok);color:#04252a}
+.prev{display:block;font:600 10.5px var(--mono);color:var(--muted);margin-top:3px}
+@media (max-width:700px){.pmrow,.pmadd{grid-template-columns:1fr}}
+/* comments */
+.cm{display:none;position:relative;border:0;background:transparent;color:var(--muted);cursor:pointer;padding:2px;margin-left:2px;vertical-align:middle}
+body.approved .cm{display:inline-flex}
+.cm svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.cm.has{color:var(--accent)}.cm.has svg{fill:var(--accent-soft)}
+.cm .cmc{font:700 9.5px var(--mono);margin-left:2px}
+.cm:hover{color:var(--accent)}
+#cmp{position:fixed;right:14px;top:calc(var(--hh) + 14px);bottom:14px;z-index:45;width:min(420px,calc(100vw - 28px));display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 40px -12px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateX(16px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+#cmp.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+#cmp .cmh{position:static;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--carbon);color:#fff;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;border:0}
+#cmp .cmh b{color:var(--carbon-id)}
+.cmclose{border:0;background:transparent;color:#cfd8de;font-size:20px;line-height:1;cursor:pointer}
+.cmr{margin:0;padding:10px 14px;font-size:.84em;color:var(--muted);border-bottom:1px solid var(--line);line-height:1.5}
+#cml{flex:1;overflow-y:auto;padding:10px 14px}
+.cmi{padding:10px 0;border-top:1px solid var(--line2)}
+.cmi:first-child{border-top:0}
+.cmm{display:flex;align-items:center;gap:8px;font-size:.86em}
+.cmm i{width:22px;height:22px;font-size:9.5px}
+.cmm small{color:var(--muted);margin-right:auto}
+.cmx{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:16px}
+.cmx.arm{color:var(--bad)}
+.cmi p{margin:6px 0 0 30px;font-size:.92em;line-height:1.55;white-space:normal;word-break:break-word}
+#cmf{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+#cmf textarea{flex:1;resize:vertical;min-height:42px;padding:9px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
+#cmf .btn{align-self:flex-end}
+/* admin */
+.pfadm{display:none;grid-column:1/-1}
+body.admin .pfadm{display:block}
+.pfadm .pftabs.adt{margin:0 0 12px;border:1px solid var(--line)}
+.adl{list-style:none;margin:0;padding:0;border:1px solid var(--line)}
+.adl>li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line2)}
+.adl>li:first-child{border-top:0}
+.adl>li>i{width:34px;height:34px;font-size:12px}
+.adm-i{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:.88em}
+.adm-i b{font-size:1.05em}
+.adm-i span,.adm-i small{color:var(--muted)}
+.adm-i .em{font-family:var(--mono);font-size:.92em;word-break:break-all}
+.adm-a{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+@media (max-width:640px){.adl>li{flex-wrap:wrap}.adm-a{width:100%;justify-content:flex-start}}
+/* quiz */
+.qzstart{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--brand)}
+.qzstart>div{flex:1 1 360px}.qzstart p{margin:0 0 6px}.qzstart .src{margin:0;font-size:.86em;color:var(--muted)}
+.qz{padding:20px 22px;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--brand)}
+.qzp{position:relative;display:flex;justify-content:space-between;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.qzp i{position:absolute;left:0;bottom:-1px;height:2px;background:var(--brand);transition:width .3s}
+#view-team .qz h3{margin:0 0 14px;font-size:1.15em;line-height:1.4}
+.qzo{display:grid;gap:8px}
+.qzo button{text-align:left;padding:12px 14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:.95em;cursor:pointer;transition:border-color .15s,background .15s}
+.qzo button:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.qzo button:disabled{cursor:default}
+.qzo button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,transparent);font-weight:700}
+.qzo button.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
+.qzx{margin-top:14px;padding:12px 14px;background:var(--accent-soft);border-left:3px solid var(--brand);font-size:.92em;line-height:1.55}
+.qzx b.ok{color:var(--ok)}.qzx b.bad{color:var(--bad)}
+.qzend .qzscore{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.qzscore b{font:700 3.2em/1 var(--mono);color:var(--accent)}.qzscore span{font:600 1.2em var(--mono);color:var(--muted)}
+.qzw{margin:0;padding-left:20px;font-size:.9em;line-height:1.55}.qzw li{margin:0 0 10px}.qzw span{color:var(--muted)}
+.qzlb{margin:0;padding:0;list-style:none;counter-reset:q;border:1px solid var(--line);background:var(--panel)}
+.qzlb li{counter-increment:q;display:flex;align-items:center;gap:10px;padding:9px 14px;border-top:1px solid var(--line2);font-size:.92em}
+.qzlb li:first-child{border-top:0}
+.qzlb li::before{content:counter(q);font:700 12px var(--mono);color:var(--accent);width:18px}
+.qzlb li span{flex:1}.qzlb small{color:var(--muted)}
+@media print{#view-team,#cmp{display:none!important}}
+
+@media (max-width:760px){.tabs{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;white-space:nowrap;padding:12px 12px;line-height:1.2}}
 </style>
 </head>
 <body class="m-both">
@@ -755,13 +954,13 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
     <span class="tab-ind" aria-hidden="true"></span><button class="tab on" data-v="rules" role="tab" aria-selected="true">Kurallar</button>
     <button class="tab" data-v="car" role="tab" aria-selected="false">Araç ve Takım Hakkında</button>
     <button class="tab" data-v="ev" role="tab" aria-selected="false">EV Araçlarımız</button>
-    <button class="tab" data-v="check" role="tab" aria-selected="false">Checklist</button><button class="tab" data-v="pcb" role="tab" aria-selected="false">PCB Kontrol</button><button class="tab" data-v="baba" role="tab" aria-selected="false">Baba</button>
+    <button class="tab" data-v="check" role="tab" aria-selected="false">Checklist</button><button class="tab" data-v="pcb" role="tab" aria-selected="false">PCB Kontrol</button><button class="tab" data-v="team" role="tab" aria-selected="false">Takım<span class="tbadge" id="tm-badge"></span></button><button class="tab" data-v="baba" role="tab" aria-selected="false">Baba</button>
   </div>
   <div class="hr-right"><button id="fbtn" class="fbtn rules-only" aria-label="Filtrele" title="Bölüme / yer imine göre filtrele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg></button><input id="q" class="rules-only" type="search" placeholder="Ara: kelime veya madde no" autocomplete="off" aria-label="Ara"><span id="count" class="rules-only"></span><button class="theme-btn" role="switch" aria-label="Koyu temaya geç" title="Koyu temaya geç"><span class="ti sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><span class="ti moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button><button id="pf-btn" class="pf-btn" aria-label="Profil" title="Profil"><span class="pf-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.5 20.5c.9-3.9 3.9-6 7.5-6s6.6 2.1 7.5 6"/></svg></span></button></div>
 </div>
 
 </header>
-<div id="fpanel" role="dialog" aria-label="Filtre"></div><div id="memtoast" role="status"><span></span><button type="button" class="btn pdf" data-goprof>Giriş yap</button></div><div id="tip" role="tooltip"></div>
+<div id="fpanel" role="dialog" aria-label="Filtre"></div><div id="memtoast" role="status"><span></span><button type="button" class="btn pdf" data-goprof>Profil</button></div><div id="tip" role="tooltip"></div>
 <div id="wm" aria-hidden="true"><img src="wm.svg" alt=""></div>
 <div class="wrap" id="top">
 <nav id="nav"></nav>
@@ -950,7 +1149,7 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
   <div class="ckch" id="ck-chips"></div>
   <div class="cksum" id="ck-sum"></div>
   <div class="ckctl"><div class="seg" id="ck-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><input type="text" id="ck-q" placeholder="Bu bölümde ara…" autocomplete="off" aria-label="Checklist içinde ara"><button class="btn" id="ck-en">İngilizce göster</button><button class="btn" id="ck-rep-b">Raporu kopyala</button><button class="btn pdf" id="ck-pdf">PDF indir</button><button class="btn" id="ck-reset">Bölümü sıfırla</button></div>
-  <div class="memban"><span>Görüntüleme modundasın. İşaretleme, not alma ve yer imi üyelere özeldir.</span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="ck-msg"></div>
+  <div class="memban"><span class="mbt"></span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="ck-msg"></div>
   <textarea id="ck-rep" readonly aria-label="Rapor"></textarea>
   <div id="ck-list"></div>
   </div>
@@ -975,12 +1174,18 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
       <div class="out"></div>
       <table class="tbl3" id="tbl3"><thead><tr><th>Gerilim (DC)</th><th>Hava (clearance)</th><th>Yüzey (creepage)</th><th>Kaplamalı yüzey</th></tr></thead><tbody><tr data-m="50"><td>0 – 50 V</td><td>1,0 mm</td><td>4 mm</td><td>1,0 mm</td></tr><tr data-m="150"><td>50 – 150 V</td><td>1,0 mm</td><td>5 mm</td><td>1,0 mm</td></tr><tr data-m="300"><td>150 – 300 V</td><td>1,5 mm</td><td>10 mm</td><td>2,0 mm</td></tr><tr data-m="600"><td>300 – 600 V</td><td>3,0 mm</td><td>20 mm</td><td>4,0 mm</td></tr></tbody></table></div></div>
   <h2 id="pb-list-top">Kart kontrol listesi</h2>
-  <div class="pbsel"><select id="pb-sel" aria-label="Kart seç"></select><span class="dim" id="pb-dim"></span></div>
+  <div class="pbsel"><select id="pb-sel" aria-label="Kart seç"></select><span class="dim" id="pb-dim"></span></div><div class="pmeta" id="pb-meta"></div>
   <div class="pgs" id="pb-gs"></div>
   <div class="cksum" id="pb-sum2"></div>
   <div class="ckctl"><div class="seg" id="pb-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><button class="btn pdf" id="pb-pdf">Bu kartı PDF indir</button><button class="btn pdf" id="pb-pdf-all">Tüm kartlar PDF</button><button class="btn" id="pb-reset">Kartı sıfırla</button></div>
-  <div class="memban"><span>Görüntüleme modundasın. İşaretleme, not alma ve yer imi üyelere özeldir.</span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="pb-msg"></div>
+  <div class="memban"><span class="mbt"></span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="pb-msg"></div>
   <div id="pb-list"></div>
+  <h2>Malzeme listesi (BOM)</h2>
+  <p class="src">Seçili kartın parça listesi, tedarikçisi (sponsorlar dahil) ve sipariş durumu. Değişiklikler kendiliğinden kaydedilir.</p>
+  <div id="pb-bom"></div>
+  <h2>Sipariş özeti</h2>
+  <p class="src">Tüm kartlarda “Gerekli” ya da “Sipariş verildi” durumundaki parçalar, tedarikçiye göre gruplanmış.</p>
+  <div id="pb-ord"></div>
   </div>
 </section>
 <section id="view-prof">
@@ -998,9 +1203,11 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
       </form>
       <form class="pfform pfaf" id="pf-up" novalidate hidden>
         <div class="pfrow"><label>Ad<input name="ad" type="text" maxlength="40" autocomplete="given-name"></label><label>Soyad<input name="soyad" type="text" maxlength="40" autocomplete="family-name"></label></div>
+        <div class="pfrow"><label>Birim<select name="birim"><option value="">Seç…</option><option>Elektrik</option><option>Elektronik</option><option>Kontrol-Yazılım</option><option>Aerodinamik</option><option>Taşıt Dinamiği</option><option>Powertrain</option><option>Şasi ve Kompozit</option><option>Finans-Organizasyon</option></select></label><label>Ekip<select name="ekip"><option value="">Seç…</option><option>Ana ekip</option><option>Destek ekip</option></select></label></div>
         <label>E-posta<input name="email" type="email" autocomplete="email" inputmode="email" placeholder="Gmail, Hotmail, Outlook, okul maili…"></label>
         <div class="pfrow"><label>Şifre <span class="opt">(en az 6 karakter)</span><input name="pw" type="password" autocomplete="new-password"></label><label>Şifre tekrar<input name="pw2" type="password" autocomplete="new-password"></label></div>
         <div class="pfact"><button type="submit" class="btn pdf">Kayıt ol</button></div>
+        <p class="pfsub">Kayıttan sonra hesabın yönetici onayına düşer. Onaylanınca işaretleme ve not alma açılır.</p>
       </form>
       <form class="pfform pfaf" id="pf-fg" novalidate hidden>
         <p class="pfsub">E-posta adresini yaz; şifreni yenilemen için bir bağlantı gönderelim.</p>
@@ -1008,7 +1215,7 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
         <div class="pfact"><button type="submit" class="btn pdf">Bağlantı gönder</button><button type="button" class="pflink" data-t="in">Girişe dön</button></div>
       </form>
       <div class="pfmsg" id="pf-amsg" role="status"></div>
-      <p class="pfnote">Üye olmadan her şeyi görüntüleyebilirsin. Checklist ve PCB Kontrol işaretlemeleri, notlar ve yer imleri üyelere özeldir ve hesabına kaydedilir.</p>
+      <p class="pfnote">Üye olmadan kuralları, araç sayfalarını ve kural sınavını kullanabilirsin. Ortak checklist, PCB kontrolü, görevler, yorumlar ve takvim onaylı takım üyelerine açıktır.</p>
     </div>
     <div class="pfcard pfme">
       <div class="pfav" id="pf-av" aria-label="Profil fotoğrafı"></div>
@@ -1029,6 +1236,7 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
       <label>Birim <span class="opt">(isteğe bağlı)</span><select name="birim">
         <option value="">Seçilmedi</option><option>Elektrik</option><option>Elektronik</option><option>Kontrol-Yazılım</option><option>Aerodinamik</option><option>Taşıt Dinamiği</option><option>Powertrain</option><option>Şasi ve Kompozit</option><option>Finans-Organizasyon</option>
       </select></label>
+      <label>Ekip <span class="opt">(isteğe bağlı)</span><select name="ekip"><option value="">Seçilmedi</option><option>Ana ekip</option><option>Destek ekip</option></select></label>
       <label>E-posta<input type="email" id="pf-email" disabled placeholder="Üyelik açılınca hesabından gelecek"></label>
       <div class="pfact">
         <button type="submit" class="btn pdf">Kaydet</button>
@@ -1039,7 +1247,7 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
     <div class="pfcard pfacc" id="pf-acc">
       <h3>Hesap</h3>
       <div class="pfstat"><span class="pfdot"></span><b>Misafir</b><span>Giriş yapılmadı</span></div>
-      <p>Üyelik, sitenin uygulama sürümünde açık: <a href="https://berkracemuh.github.io/itu-racing-portal/#profil" target="_blank" rel="noopener noreferrer">berkracemuh.github.io/itu-racing-portal</a>. Orada üye olunca:</p>
+      <p>Üyelik ve takım özellikleri sitenin uygulama sürümünde açık: <a href="https://berkracemuh.github.io/itu-racing-portal/#profil" target="_blank" rel="noopener noreferrer">berkracemuh.github.io/itu-racing-portal</a>. Orada üye olunca:</p>
       <ul>
         <li>Checklist ve PCB Kontrol işaretlemeleri ile notlar hesabına kaydedilir.</li>
         <li>Yer imlerin hesabına kaydedilir.</li>
@@ -1048,7 +1256,27 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
       <div class="pfbtns"><button class="btn" type="button" disabled>Giriş yap</button><button class="btn" type="button" disabled>Kayıt ol</button></div>
       <button class="btn pfdanger" id="pf-clear" type="button">Profil bilgilerini bu cihazdan sil</button>
     </div>
+    <div class="pfcard pfadm" id="pf-adm"></div>
   </div>
+  </div>
+</section>
+<section id="view-team">
+  <div class="vin">
+  <div class="kick">İTÜ Racing · Takım</div>
+  <h1>Takım</h1>
+  <p class="lead">Teslim takvimi, görevler, bildirimler, takım listesi ve kural sınavı tek yerde.</p>
+  <div class="memban"><span class="mbt"></span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div>
+  <div class="tm-off">Görevler, teslim takvimi, bildirimler ve kural yorumları sitenin uygulama sürümünde onaylı takım üyelerine açık: <a href="https://berkracemuh.github.io/itu-racing-portal/#takim" target="_blank" rel="noopener noreferrer">berkracemuh.github.io/itu-racing-portal</a>. Kural sınavını burada da çözebilirsin.</div>
+  <div class="tm-priv">
+    <div class="cdw" id="tm-cd"></div>
+    <h2>Bildirimler</h2><div id="tm-nt"></div>
+    <h2>Görevlerim</h2><div id="tm-my"></div>
+    <h2>Teslim takvimi</h2><div id="tm-dl"></div>
+    <h2>Açık görevler</h2><div id="tm-as"></div>
+    <h2>Son hareketler</h2><div id="tm-act"></div>
+    <h2>Takım listesi</h2><div id="tm-ros"></div>
+  </div>
+  <h2>Kural sınavı</h2><div id="tm-quiz"></div>
   </div>
 </section>
 <section id="view-baba">
@@ -1065,7 +1293,7 @@ body.mem-on.guest #ck-list .cks button,body.mem-on.guest #pb-list .cks button,bo
 </div>
 </div>
 <div id="bmp" role="dialog" aria-label="Yer imleri"><header><span>Yer imleri</span><button id="bm-clear">Tümünü temizle</button></header><div id="bml"></div></div>
-<div id="lb"><img alt=""></div>
+<div id="cmp" role="dialog" aria-label="Takım yorumları"><header class="cmh"><span>Takım yorumları · <b></b></span><button type="button" class="cmclose" aria-label="Kapat">×</button></header><p class="cmr"></p><div id="cml"></div><form id="cmf"><textarea name="t" rows="2" maxlength="2000" placeholder="Yorum, FSG’ye sorulan soru ya da takım kararı…" aria-label="Yorum"></textarea><button type="submit" class="btn pdf">Gönder</button></form></div><div id="lb"><img alt=""></div>
 <section id="contact" aria-label="ITÜ Racing">
   <div class="ct-in">
     <div class="ct-left">
@@ -1342,19 +1570,20 @@ function renderPin(k){
 }
 const tabBtns=Array.from(document.querySelectorAll('.tab'));
 let rulesY=0;
-const VHASH={rules:'#',car:'#arac-bilgileri',ev:'#ev-araclarimiz',check:'#checklist',pcb:'#pcb',prof:'#profil',baba:'#baba'};
-function curView(){const c=document.body.classList;return c.contains('view-car')?'car':c.contains('view-ev')?'ev':c.contains('view-check')?'check':c.contains('view-pcb')?'pcb':c.contains('view-prof')?'prof':c.contains('view-baba')?'baba':'rules'}
+const VHASH={rules:'#',car:'#arac-bilgileri',ev:'#ev-araclarimiz',check:'#checklist',pcb:'#pcb',prof:'#profil',team:'#takim',baba:'#baba'};
+function curView(){const c=document.body.classList;return c.contains('view-car')?'car':c.contains('view-ev')?'ev':c.contains('view-check')?'check':c.contains('view-pcb')?'pcb':c.contains('view-prof')?'prof':c.contains('view-team')?'team':c.contains('view-baba')?'baba':'rules'}
 function showView(v,o){
   o=o||{};
   const was=curView(),c=document.body.classList;
   if(was==='rules'&&v!=='rules') rulesY=window.scrollY;
-  c.remove('view-car','view-ev','view-baba','view-check','view-pcb','view-prof','v-alt');
+  c.remove('view-car','view-ev','view-baba','view-check','view-pcb','view-prof','view-team','v-alt');
   if(v!=='rules'){c.add('v-alt','view-'+v)}
   tabBtns.forEach(t=>{const on=t.dataset.v===v;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false')});
   setHH();cancelGlide();moveInd();
   if(v==='check')renderCheck(true);
   if(v==='pcb')renderPCB(true);
   if(v==='prof')pfOpen();
+  if(v==='team')renderTeam();
   document.getElementById('pf-btn').classList.toggle('on',v==='prof');
   if(v!==was) window.scrollTo(0,v==='rules'?(o.restore===false?0:rulesY):0);
   if(!o.keepHash){try{history.replaceState(null,'',VHASH[v])}catch(e){}}
@@ -1428,7 +1657,7 @@ function spy(){
 }
 window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(spy)}},{passive:true});
 // initial hash
-function fromHash(){const h=location.hash.slice(1);if(h==='arac-bilgileri'||h==='baba'||h==='ev-araclarimiz'||h==='checklist'||h==='pcb'||h==='profil'){showView(h==='baba'?'baba':h==='ev-araclarimiz'?'ev':h==='checklist'?'check':h==='pcb'?'pcb':h==='profil'?'prof':'car',{keepHash:true});return}if(!h||h==='top')return;if(h==='abbr'){go('abbr',false);return}const k=Object.keys(byId).find(k=>slug(k)===h);if(k)go(k,true)}
+function fromHash(){const h=location.hash.slice(1);if(h==='arac-bilgileri'||h==='baba'||h==='ev-araclarimiz'||h==='checklist'||h==='pcb'||h==='profil'||h==='takim'){showView(h==='baba'?'baba':h==='ev-araclarimiz'?'ev':h==='checklist'?'check':h==='pcb'?'pcb':h==='profil'?'prof':h==='takim'?'team':'car',{keepHash:true});return}if(!h||h==='top')return;if(h==='abbr'){go('abbr',false);return}const k=Object.keys(byId).find(k=>slug(k)===h);if(k)go(k,true)}
 window.addEventListener('hashchange',fromHash);
 
 // ===== bookmarks =====
@@ -1992,20 +2221,20 @@ function pfPaint(){
   pfFace(pfAv,true);
   document.getElementById('pf-name').textContent=n||'İsimsiz kullanıcı';
   document.getElementById('pf-name').classList.toggle('empty',!n);
-  document.getElementById('pf-unit').textContent=PF.birim||'Birim seçilmedi';
+  document.getElementById('pf-unit').textContent=[PF.birim,PF.ekip].filter(Boolean).join(' · ')||'Birim seçilmedi';
   document.getElementById('pf-rm').disabled=!PF.photo;
 }
-function pfFill(){pfForm.ad.value=PF.ad||'';pfForm.soyad.value=PF.soyad||'';pfForm.birim.value=PF.birim||'';pfDirty(false)}
+function pfFill(){pfForm.ad.value=PF.ad||'';pfForm.soyad.value=PF.soyad||'';pfForm.birim.value=PF.birim||'';pfForm.ekip.value=PF.ekip||'';pfDirty(false)}
 function pfDirty(d){pfForm.classList.toggle('dirty',d);if(d){pfMsg.textContent='Kaydedilmemiş değişiklik var';pfMsg.className='pfmsg warn'}}
 function pfNote(t,ok){pfMsg.textContent=t;pfMsg.className='pfmsg '+(ok?'ok':'err');clearTimeout(pfNote.t);pfNote.t=setTimeout(()=>{if(!pfForm.classList.contains('dirty'))pfMsg.textContent=''},3500)}
 function pfOpen(){pfFill();pfPaint()}
 pfBtn.onclick=()=>showView('prof');
-pfForm.addEventListener('input',()=>pfDirty(pfForm.ad.value!==(PF.ad||'')||pfForm.soyad.value!==(PF.soyad||'')||pfForm.birim.value!==(PF.birim||'')));
+pfForm.addEventListener('input',()=>pfDirty(pfForm.ad.value!==(PF.ad||'')||pfForm.soyad.value!==(PF.soyad||'')||pfForm.birim.value!==(PF.birim||'')||pfForm.ekip.value!==(PF.ekip||'')));
 pfForm.addEventListener('submit',e=>{
   e.preventDefault();
   const ad=pfForm.ad.value.replace(/\s+/g,' ').trim(),so=pfForm.soyad.value.replace(/\s+/g,' ').trim();
   if(!ad){pfNote('Ad boş bırakılamaz.',false);pfForm.ad.focus();return}
-  PF.ad=ad;PF.soyad=so;PF.birim=pfForm.birim.value;
+  PF.ad=ad;PF.soyad=so;PF.birim=pfForm.birim.value;PF.ekip=pfForm.ekip.value;
   const ok=savePF();pfFill();pfPaint();pfNote(ok?'Kaydedildi.':'Kaydedilemedi: tarayıcı depolaması kapalı.',ok);
 });
 document.getElementById('pf-undo').onclick=()=>{pfFill();pfNote('Değişiklikler geri alındı.',true)};
@@ -2034,46 +2263,66 @@ pfClr.onclick=()=>{
 };
 pfPaint();
 
-// ===== R21: membership (active only in the member build: window.FSG_MEMBER) =====
-const MEM={on:!!window.FSG_MEMBER,mode:window.FSG_MEMBER?'pending':'off',user:null,fba:null,unsub:[],q:{},qt:0,applying:false,stateReady:false};
-const SYNC={'fsg-chk':'chk','fsg-chn':'chn','fsg-pcbc':'pcbc','fsg-pcbn':'pcbn','fsg-pcbg':'pcbg','fsg-bm':'bm','fsg-pcbsel':'pcbsel'};
+// ===== R21: membership core (active only in the member build: window.FSG_MEMBER) =====
+const MEM={on:!!window.FSG_MEMBER,phase:window.FSG_MEMBER?'pending':'off',user:null,status:null,admin:false,udoc:null,info:null,fba:null,unsub:[],q:{},qt:0,applying:false,stateReady:false,hooks:[],signup:null};
+MEM.signed=()=>!!MEM.user;
+MEM.can=()=>!MEM.on||(!!MEM.user&&(MEM.admin||MEM.status==='approved'));
+MEM.uid=()=>MEM.user&&MEM.user.uid;
+const SYNC={'fsg-bm':'bm','fsg-pcbsel':'pcbsel'};
 const SYNCF=Object.values(SYNC);
 function memLocal(){const o={};for(const k in SYNC){let v=null;try{v=JSON.parse(localStorage.getItem(k)||'null')}catch(e){}if(v!==null)o[SYNC[k]]=v}return o}
-function memBody(){const c=document.body.classList;c.toggle('mem-on',MEM.on);c.toggle('guest',MEM.on&&MEM.mode!=='member');c.toggle('member',MEM.mode==='member')}
-const memToast=document.getElementById('memtoast');
-function memTip(t){memToast.firstElementChild.textContent=t;memToast.classList.add('on');clearTimeout(memTip.t);memTip.t=setTimeout(()=>memToast.classList.remove('on'),3800)}
-document.addEventListener('click',e=>{if(e.target.closest('[data-goprof]')){memToast.classList.remove('on');showView('prof')}});
-function memBlocked(){
-  if(!MEM.on||MEM.mode==='member')return false;
-  memTip(MEM.mode==='pending'?'Hesap bilgisi yükleniyor, birazdan tekrar dene.':MEM.mode==='down'?'Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.':'Bu özellik üyelere özel. İşaretlemek ve kaydetmek için giriş yap.');
-  return true;
+function memBanText(){
+  if(MEM.phase==='pending')return 'Hesap bilgisi yükleniyor…';
+  if(MEM.phase==='down')return 'Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.';
+  if(!MEM.user)return 'Görüntüleme modundasın. İşaretleme, not alma ve görev atama onaylı takım üyelerine özeldir.';
+  if(MEM.status==='rejected')return 'Üyelik başvurun onaylanmadı. Bir hata olduğunu düşünüyorsan yöneticiyle iletişime geç.';
+  return 'Üyeliğin yönetici onayı bekliyor. Onaylanınca işaretleme, not alma ve takım özellikleri açılır.';
 }
-const MEM_SEL='#ck-list .cks button,#pb-list .cks button,#pb-gs button,#ck-reset,#pb-reset,.bm[data-bm],#bm-clear,#bml [data-rm]';
-window.addEventListener('click',e=>{if(e.target.closest(MEM_SEL)&&memBlocked()){e.preventDefault();e.stopImmediatePropagation()}},true);
-window.addEventListener('focusin',e=>{const t=e.target;if(t.matches&&t.matches('#ck-list textarea,#pb-list textarea')&&memBlocked())t.blur()},true);
-// push local changes to the account
+function memBody(){
+  const c=document.body.classList,can=MEM.can();
+  c.toggle('mem-on',MEM.on);c.toggle('signed',MEM.signed());c.toggle('approved',MEM.on&&can);c.toggle('admin',MEM.admin);c.toggle('guest',MEM.on&&!can);
+  const t=memBanText();document.querySelectorAll('.memban .mbt').forEach(x=>x.textContent=t);
+  document.querySelectorAll('.memban [data-goprof]').forEach(b=>b.textContent=MEM.user?'Profil':'Giriş yap / Kayıt ol');
+}
+function memEmit(){memBody();accPaint();MEM.hooks.forEach(f=>{try{f()}catch(e){console.error(e)}})}
+const memToast=document.getElementById('memtoast');
+function memTip(t,btn){memToast.firstElementChild.textContent=t;memToast.lastElementChild.style.display=btn===false?'none':'';memToast.lastElementChild.textContent=MEM.user?'Profil':'Giriş yap';memToast.classList.add('on');clearTimeout(memTip.t);memTip.t=setTimeout(()=>memToast.classList.remove('on'),4200)}
+document.addEventListener('click',e=>{if(e.target.closest('[data-goprof]')){memToast.classList.remove('on');showView('prof')}});
+function memBlocked(kind){
+  if(!MEM.on)return false;
+  if(MEM.phase==='pending'){memTip('Hesap bilgisi yükleniyor, birazdan tekrar dene.',false);return true}
+  if(MEM.phase==='down'){memTip('Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.',false);return true}
+  if(!MEM.user){memTip(kind==='personal'?'Yer imleri üyelere özel. Kaydetmek için giriş yap.':'Bu özellik onaylı takım üyelerine özel. Giriş yap ya da üye ol.');return true}
+  if(kind==='personal')return false;
+  if(kind==='admin'&&!MEM.admin){memTip('Bu işlemi yalnızca yönetici yapabilir.',false);return true}
+  if(!MEM.can()){memTip(MEM.status==='rejected'?'Üyelik başvurun onaylanmadı.':'Üyeliğin yönetici onayı bekliyor. Onaylanınca düzenleyebilirsin.');return true}
+  return false;
+}
+const EDIT_SEL='#ck-list .cks button,#pb-list .cks button,#pb-gs button,[data-edit]',PERS_SEL='.bm[data-bm],#bm-clear,#bml [data-rm]',ADMIN_SEL='[data-admin]';
+function memGate(t){if(!t.closest)return null;if(t.closest(ADMIN_SEL))return 'admin';if(t.closest(EDIT_SEL))return 'edit';if(t.closest(PERS_SEL))return 'personal';return null}
+window.addEventListener('click',e=>{const k=memGate(e.target);if(k&&memBlocked(k)){e.preventDefault();e.stopImmediatePropagation()}},true);
+window.addEventListener('pointerdown',e=>{const t=e.target;if(t.matches&&t.matches('select[data-edit],input[data-edit]')&&MEM.on&&!MEM.can()){e.preventDefault()}},true);
+window.addEventListener('focusin',e=>{const t=e.target;if(!t.matches)return;if(t.matches('#ck-list textarea,#pb-list textarea,[data-edit]')&&memBlocked('edit'))t.blur()},true);
+// ---- personal state (bookmarks, selected board) -> users/{uid}/private/state
 const _lsSet=Storage.prototype.setItem;
-Storage.prototype.setItem=function(k,v){_lsSet.call(this,k,v);if(this===localStorage&&SYNC[k]&&MEM.mode==='member'&&MEM.stateReady&&!MEM.applying){try{MEM.q[SYNC[k]]=JSON.parse(v)}catch(e){}clearTimeout(MEM.qt);MEM.qt=setTimeout(memFlush,1200)}};
+Storage.prototype.setItem=function(k,v){_lsSet.call(this,k,v);if(this===localStorage&&SYNC[k]&&MEM.user&&MEM.stateReady&&!MEM.applying){try{MEM.q[SYNC[k]]=JSON.parse(v)}catch(e){}clearTimeout(MEM.qt);MEM.qt=setTimeout(memFlush,1200)}};
 function memFlush(){
   clearTimeout(MEM.qt);const part=MEM.q;MEM.q={};
   if(!Object.keys(part).length||!MEM.user||!MEM.fba)return;
-  MEM.fba.updateState(MEM.user.uid,part).catch(err=>{memTip('Değişiklik hesaba kaydedilemedi: '+memErr(err))});
+  part.updatedAt=MEM.fba.TS();
+  MEM.fba.fs.set('users/'+MEM.uid()+'/private/state',part,true).catch(err=>memTip('Değişiklik hesaba kaydedilemedi: '+memErr(err),false));
 }
 addEventListener('pagehide',memFlush);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')memFlush()});
 function memApply(st){
   MEM.applying=true;
   try{
-    if('chk' in st){CHK=st.chk||{};saveCHK()}
-    if('chn' in st){CHN=st.chn||{};saveCHN()}
-    if('pcbc' in st){PC=st.pcbc||{};lsSet('fsg-pcbc',PC)}
-    if('pcbn' in st){PN=st.pcbn||{};lsSet('fsg-pcbn',PN)}
-    if('pcbg' in st){PCBG=st.pcbg||{};lsSet('fsg-pcbg',PCBG)}
     if('pcbsel' in st&&st.pcbsel&&BOARDS.some(b=>b[0]===st.pcbsel)){pSel=st.pcbsel;lsSet('fsg-pcbsel',pSel)}
     if('bm' in st){bmSet.clear();(st.bm||[]).forEach(k=>{if(byId[k])bmSet.add(k)});saveBM();paintBMcount();document.querySelectorAll('#list .bm[data-bm]').forEach(b=>b.classList.toggle('on',bmSet.has(b.dataset.bm)));if(bmp.classList.contains('open'))renderBM()}
   }finally{MEM.applying=false}
-  const v=curView();if(v==='check')renderCheck(false);else if(v==='pcb')renderPCB(false);
+  if(curView()==='pcb')renderPCB(false);
 }
-function memWipe(){const z={};SYNCF.forEach(f=>z[f]=f==='bm'?[]:f==='pcbsel'?null:{});memApply(z);for(const k in SYNC){try{localStorage.removeItem(k)}catch(e){}}PF={};try{localStorage.removeItem('fsg-prof')}catch(e){}}
+const MEM_WIPE=['fsg-chk','fsg-chn','fsg-pcbc','fsg-pcbn','fsg-pcbg','fsg-bm','fsg-pcbsel','fsg-prof','fsg-pmeta','fsg-seen'];
+function memWipe(){memApply({bm:[]});MEM_WIPE.forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});PF={}}
 function memErr(err){
   const c=(err&&err.code)||'',M={
   'auth/invalid-email':'E-posta adresi geçersiz.','auth/missing-email':'E-posta adresini yaz.','auth/missing-password':'Şifreni yaz.',
@@ -2081,84 +2330,536 @@ function memErr(err){
   'auth/email-already-in-use':'Bu e-postayla zaten bir hesap var. Giriş yapmayı dene.','auth/weak-password':'Şifre en az 6 karakter olmalı.',
   'auth/too-many-requests':'Çok fazla deneme yapıldı. Biraz bekleyip tekrar dene.','auth/network-request-failed':'İnternet bağlantısı yok ya da sunucuya ulaşılamadı.',
   'auth/user-disabled':'Bu hesap devre dışı bırakılmış.','auth/operation-not-allowed':'E-posta ile giriş Firebase ayarlarında açık değil.',
-  'auth/unauthorized-domain':'Bu site adresi Firebase’de yetkili değil (Authorized domains).','permission-denied':'Erişim reddedildi (veritabanı kuralları).','unavailable':'Sunucuya şu an ulaşılamıyor.'};
+  'auth/unauthorized-domain':'Bu site adresi Firebase’de yetkili değil (Authorized domains).','permission-denied':'Yetkin yok (veritabanı kuralları).','unavailable':'Sunucuya şu an ulaşılamıyor.'};
   return M[c]||((err&&err.message)||String(err)).replace(/^Firebase:\s*/,'');
 }
-// --- profile + auth UI
+// ---- auth UI
 const pfAuth=document.getElementById('pf-auth'),pfAcc=document.getElementById('pf-acc'),pfAMsg=document.getElementById('pf-amsg');
 function aMsg(t,ok){pfAMsg.textContent=t||'';pfAMsg.className='pfmsg '+(t?(ok?'ok':'err'):'')}
 function aTab(t){['in','up','fg'].forEach(x=>document.getElementById('pf-'+x).hidden=x!==t);pfAuth.querySelectorAll('.pftabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t||(t==='fg'&&b.dataset.t==='in')));aMsg('')}
-pfAuth.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){e.preventDefault();aTab(b.dataset.t);const f=document.getElementById('pf-'+b.dataset.t);const i=f&&f.querySelector('input');if(i&&matchMedia('(pointer:fine)').matches)i.focus()}});
-function busy(f,on){f.querySelectorAll('button,input').forEach(x=>x.disabled=on);f.classList.toggle('busy',on)}
-async function aRun(f,fn,okText){if(!MEM.fba){aMsg(MEM.mode==='down'?'Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.':'Üyelik servisi yükleniyor, biraz bekle.',false);return}busy(f,true);aMsg('');try{await fn();if(okText)aMsg(okText,true)}catch(err){aMsg(memErr(err),false)}busy(f,false)}
+pfAuth.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){e.preventDefault();aTab(b.dataset.t)}});
+function busy(f,on){f.querySelectorAll('button,input,select').forEach(x=>x.disabled=on);f.classList.toggle('busy',on)}
+async function aRun(f,fn,okText){if(!MEM.fba){aMsg(MEM.phase==='down'?'Üyelik servisine ulaşılamadı. İnternet bağlantını kontrol et.':'Üyelik servisi yükleniyor, biraz bekle.',false);return false}busy(f,true);aMsg('');let ok=true;try{await fn();if(okText)aMsg(okText,true)}catch(err){ok=false;aMsg(memErr(err),false)}busy(f,false);return ok}
 document.getElementById('pf-in').addEventListener('submit',function(e){e.preventDefault();const f=this,em=f.email.value.trim(),pw=f.pw.value;
   if(!em||!pw){aMsg('E-posta ve şifreyi yaz.',false);return}
   aRun(f,()=>MEM.fba.signIn(em,pw).then(()=>{f.reset()}))});
 document.getElementById('pf-up').addEventListener('submit',function(e){e.preventDefault();const f=this,ad=f.ad.value.replace(/\s+/g,' ').trim(),so=f.soyad.value.replace(/\s+/g,' ').trim(),em=f.email.value.trim(),pw=f.pw.value;
-  if(!ad){aMsg('Adını yaz.',false);return}if(!em){aMsg('E-posta adresini yaz.',false);return}
+  if(!ad||!so){aMsg('Adını ve soyadını yaz.',false);return}
+  if(!f.birim.value||!f.ekip.value){aMsg('Birimini ve ekibini seç.',false);return}
+  if(!em){aMsg('E-posta adresini yaz.',false);return}
   if(pw.length<6){aMsg('Şifre en az 6 karakter olmalı.',false);return}if(pw!==f.pw2.value){aMsg('Şifreler aynı değil.',false);return}
-  MEM.justSigned=true;aRun(f,()=>MEM.fba.signUp(em,pw,{ad:ad,soyad:so}).then(()=>{f.reset()})).then(()=>{MEM.justSigned=false})});
+  MEM.signup={ad:ad,soyad:so,birim:f.birim.value,ekip:f.ekip.value,email:em};
+  aRun(f,()=>MEM.fba.signUp(em,pw).then(()=>{f.reset()})).then(ok=>{if(!ok)MEM.signup=null})});
 document.getElementById('pf-fg').addEventListener('submit',function(e){e.preventDefault();const f=this,em=f.email.value.trim();
   if(!em){aMsg('E-posta adresini yaz.',false);return}
   aRun(f,()=>MEM.fba.reset(em),'Şifre yenileme bağlantısı gönderildi. Gelen kutunu (ve gereksiz/spam klasörünü) kontrol et.')});
+const ST_LBL={approved:'Onaylı üye',pending:'Onay bekliyor',rejected:'Onaylanmadı'};
 function accPaint(){
   if(!MEM.on)return;
   const lead=document.getElementById('pf-lead');
-  if(MEM.mode!=='member'){lead.textContent='Hesabınla giriş yap ya da birkaç saniyede üye ol. Profilin, işaretlerin, notların ve yer imlerin tüm cihazlarında eşitlenir.';return}
-  lead.textContent='Adını, birimini ve profil fotoğrafını buradan yönet. Bilgilerin hesabına kaydedilir ve tüm cihazlarında görünür.';
-  const u=MEM.user;document.getElementById('pf-email').value=u.email||'';
-  pfAcc.innerHTML='<h3>Hesap</h3><div class="pfstat"><span class="pfdot ok"></span><b>Üye</b><span>'+esc(u.email||'')+'</span></div>'
-    +(u.verified?'<p class="pfsub">E-posta adresin doğrulandı.</p>':'<p class="pfsub">E-posta adresin henüz doğrulanmadı. Gelen kutundaki (ya da spam klasöründeki) bağlantıya tıkla.</p><div class="pfbtns"><button class="btn" type="button" id="pf-vsend">Doğrulama e-postasını tekrar gönder</button><button class="btn" type="button" id="pf-vchk">Doğruladım, kontrol et</button></div>')
-    +'<ul><li>Checklist ve PCB Kontrol işaretlerin ile notların hesabına kaydediliyor.</li><li>Yer imlerin hesabına kaydediliyor.</li><li>İnternet yokken yaptığın değişiklikler bağlantı gelince gönderilir.</li></ul>'
+  if(!MEM.user){lead.textContent='Hesabınla giriş yap ya da birkaç saniyede üye ol. Profilin, yer imlerin ve takım çalışman tüm cihazlarında eşitlenir.';return}
+  lead.textContent='Adını, birimini, ekibini ve profil fotoğrafını buradan yönet. Bilgilerin hesabına kaydedilir ve tüm cihazlarında görünür.';
+  const u=MEM.user,stt=MEM.admin?'admin':(MEM.status||'pending');document.getElementById('pf-email').value=u.email||'';
+  const dot=stt==='rejected'?'bad':(stt==='pending'?'wait':'ok');
+  pfAcc.innerHTML='<h3>Hesap</h3><div class="pfstat"><span class="pfdot '+dot+'"></span><b>'+(MEM.admin?'Yönetici':ST_LBL[stt]||'Üye')+'</b><span>'+esc(u.email||'')+'</span></div>'
+    +(stt==='pending'?'<p class="pfsub">Hesabın oluşturuldu ve yönetici onayına gönderildi. Onaylanınca bu sayfa kendiliğinden güncellenir.</p>':'')
+    +(stt==='rejected'?'<p class="pfsub">Üyelik başvurun onaylanmadı. Bir hata olduğunu düşünüyorsan yöneticiyle iletişime geç.</p>':'')
+    +(u.verified?'':'<p class="pfsub">E-posta adresin henüz doğrulanmadı. Gelen kutundaki (ya da spam klasöründeki) bağlantıya tıkla.</p><div class="pfbtns"><button class="btn" type="button" id="pf-vsend">Doğrulama e-postasını tekrar gönder</button><button class="btn" type="button" id="pf-vchk">Doğruladım, kontrol et</button></div>')
     +'<div class="pfmsg" id="pf-accmsg"></div><button class="btn pfdanger" id="pf-out" type="button">Çıkış yap</button>';
   const am=t=>{const m=document.getElementById('pf-accmsg');m.textContent=t;m.className='pfmsg ok'};
   const vs=document.getElementById('pf-vsend');if(vs)vs.onclick=()=>MEM.fba.verify().then(()=>am('Doğrulama e-postası gönderildi.')).catch(err=>am(memErr(err)));
   const vc=document.getElementById('pf-vchk');if(vc)vc.onclick=()=>MEM.fba.refresh().then(nu=>{if(nu){MEM.user=nu;accPaint();if(!nu.verified)am('Henüz doğrulanmamış görünüyor.')}}).catch(err=>am(memErr(err)));
   document.getElementById('pf-out').onclick=()=>{memFlush();MEM.fba.signOut().catch(err=>am(memErr(err)))};
 }
-// account-backed profile save
+// ---- account-backed profile
 const _pfSave=savePF;
-savePF=function(){const ok=_pfSave();if(MEM.mode==='member'&&MEM.user&&MEM.fba){const p={ad:PF.ad||'',soyad:PF.soyad||'',birim:PF.birim||''};if(PF.photo)p.photo=PF.photo;MEM.fba.saveProfile(MEM.user.uid,p).catch(err=>pfNote('Hesaba kaydedilemedi: '+memErr(err),false))}return ok};
-function memSignedIn(u){
+savePF=function(){const ok=_pfSave();if(MEM.user&&MEM.fba){const F=MEM.fba,uid=MEM.uid();
+  F.fs.set('users/'+uid,{ad:PF.ad||'',soyad:PF.soyad||'',birim:PF.birim||'',ekip:PF.ekip||'',updatedAt:F.TS()},true).catch(err=>pfNote('Hesaba kaydedilemedi: '+memErr(err),false));
+  F.fs.set('users/'+uid+'/private/info',{email:MEM.user.email||'',photo:PF.photo||F.DEL()},true).catch(()=>{});
+}return ok};
+function memProfileFromDocs(){
+  const d=MEM.udoc||{},i=MEM.info||{};
+  PF={ad:d.ad||'',soyad:d.soyad||'',birim:d.birim||'',ekip:d.ekip||''};if(i.photo)PF.photo=i.photo;
+  _pfSave();if(!pfForm.classList.contains('dirty'))pfFill();pfPaint();
+}
+async function memSignedIn(u){
   MEM.unsub.forEach(f=>{try{f()}catch(e){}});MEM.unsub=[];
-  MEM.user=u;MEM.mode='member';MEM.stateReady=false;memBody();aMsg('');
-  MEM.unsub.push(MEM.fba.watchProfile(u.uid,(d,fromCache,err)=>{
+  const F=MEM.fba,uid=u.uid;
+  MEM.user=u;MEM.phase='ready';MEM.stateReady=false;MEM.udoc=null;MEM.info=null;MEM.status=null;
+  try{await F.fs.get('admin/probe');MEM.admin=true}catch(e){MEM.admin=false}
+  if(!MEM.user||MEM.user.uid!==uid)return;
+  memEmit();aMsg('');
+  let created=false;
+  MEM.unsub.push(F.fs.watchDoc('users/'+uid,(d,meta,err)=>{
     if(err)return;
-    if(d){PF={ad:d.ad||'',soyad:d.soyad||'',birim:d.birim||''};if(d.photo)PF.photo=d.photo;_pfSave();if(!pfForm.classList.contains('dirty'))pfFill();pfPaint()}
-  }));
-  MEM.unsub.push(MEM.fba.watchState(u.uid,(d,pending,fromCache,err)=>{
-    if(err){memTip('Hesap verileri okunamadı: '+memErr(err));return}
     if(!d){
-      if(fromCache)return;
-      const loc=memLocal();SYNCF.forEach(f=>{if(!(f in loc))loc[f]=f==='bm'?[]:f==='pcbsel'?'HV Mainboard':{}});
-      MEM.fba.createState(u.uid,loc).then(()=>{MEM.stateReady=true}).catch(err=>memTip('Hesap verisi oluşturulamadı: '+memErr(err)));
+      if(meta.fromCache||created)return;created=true;
+      const sg=MEM.signup||{},base={ad:sg.ad||PF.ad||'',soyad:sg.soyad||PF.soyad||'',birim:sg.birim||PF.birim||'',ekip:sg.ekip||PF.ekip||'',
+        status:MEM.admin?'approved':'pending',role:MEM.admin?'admin':'member',createdAt:F.TS(),updatedAt:F.TS()};
+      F.fs.set('users/'+uid,base,false).catch(err=>memTip('Profil oluşturulamadı: '+memErr(err),false));
+      F.fs.set('users/'+uid+'/private/info',{email:u.email||''},true).catch(()=>{});
+      MEM.signup=null;return;
+    }
+    MEM.udoc=d;
+    if(d.email!==undefined||d.photo!==undefined){const mv={email:u.email||''};if(d.photo)mv.photo=d.photo;F.fs.set('users/'+uid+'/private/info',mv,true).then(()=>F.fs.set('users/'+uid,{email:F.DEL(),photo:F.DEL()},true)).catch(()=>{})}
+    if(MEM.admin&&(d.status!=='approved'||d.role!=='admin'))F.fs.set('users/'+uid,{status:'approved',role:'admin'},true).catch(()=>{});
+    const ns=MEM.admin?'approved':(d.status||'pending');
+    const changed=ns!==MEM.status;MEM.status=ns;
+    memProfileFromDocs();
+    if(changed)memEmit();
+  }));
+  MEM.unsub.push(F.fs.watchDoc('users/'+uid+'/private/info',(d,meta,err)=>{if(err)return;MEM.info=d||{};if(MEM.udoc)memProfileFromDocs()}));
+  MEM.unsub.push(F.fs.watchDoc('users/'+uid+'/private/state',(d,meta,err)=>{
+    if(err){memTip('Hesap verileri okunamadı: '+memErr(err),false);return}
+    if(!d){
+      if(meta.fromCache)return;
+      const loc=memLocal();if(!('bm' in loc))loc.bm=[];if(!('pcbsel' in loc))loc.pcbsel='HV Mainboard';loc.updatedAt=F.TS();
+      F.fs.set('users/'+uid+'/private/state',loc,false).then(()=>{MEM.stateReady=true}).catch(err=>memTip('Hesap verisi oluşturulamadı: '+memErr(err),false));
       return;
     }
-    if(pending)return;
+    if(meta.pending)return;
     const loc=memLocal(),ch={};
     SYNCF.forEach(f=>{if(f in MEM.q)return;const rv=d[f]===undefined?null:d[f];if(JSON.stringify(rv)!==JSON.stringify(loc[f]===undefined?null:loc[f]))ch[f]=rv});
     if(Object.keys(ch).length)memApply(ch);
     MEM.stateReady=true;
   }));
-  accPaint();if(curView()==='prof'){pfFill();pfPaint()}
 }
 function memSignedOut(){
-  const was=MEM.mode==='member';
+  const was=!!MEM.user;
   MEM.unsub.forEach(f=>{try{f()}catch(e){}});MEM.unsub=[];clearTimeout(MEM.qt);MEM.q={};
-  MEM.user=null;MEM.mode='guest';MEM.stateReady=false;
+  MEM.user=null;MEM.phase='ready';MEM.stateReady=false;MEM.status=null;MEM.admin=false;MEM.udoc=null;MEM.info=null;
   if(was)memWipe();
-  memBody();accPaint();pfFill();pfPaint();aTab('in');
+  memEmit();pfFill();pfPaint();aTab('in');
 }
 function memStart(){
   if(MEM.fba||!window.FBA)return;MEM.fba=window.FBA;
   MEM.fba.onAuth(u=>{if(u)memSignedIn(u);else memSignedOut()});
 }
 if(MEM.on){
-  document.querySelectorAll('#view-check .lead,#view-pcb .lead').forEach(l=>{l.innerHTML=l.innerHTML.replace('İşaretlerin bu tarayıcıda saklanır','Üye olarak giriş yaptığında işaretlerin hesabına kaydedilir ve cihazların arasında eşitlenir').replace('İşaretlerin ve notların bu tarayıcıda saklanır.','Üye olarak giriş yaptığında işaretlerin ve notların hesabına kaydedilir ve cihazların arasında eşitlenir.')});
+  document.querySelectorAll('#view-check .lead,#view-pcb .lead').forEach(l=>{l.innerHTML=l.innerHTML.replace('İşaretlerin bu tarayıcıda saklanır','İşaretler takımın ortak listesine kaydedilir; kimin neyi ne zaman işaretlediği görünür').replace('İşaretlerin ve notların bu tarayıcıda saklanır.','İşaretler ve notlar takımın ortak listesine kaydedilir.')});
   memBody();accPaint();
   addEventListener('fba-ready',memStart);memStart();
-  setTimeout(()=>{if(MEM.mode==='pending'&&!MEM.fba){MEM.mode='down';memBody()}},12000);
+  setTimeout(()=>{if(MEM.phase==='pending'&&!MEM.fba){MEM.phase='down';memEmit()}},12000);
 }
+
+// ===== R22: rules quiz bank (each answer is taken from the cited FSG 2027 rule) =====
+const QZ=[
+{q:'Araçta herhangi iki elektrik bağlantısı arasında izin verilen azami gerilim nedir?',o:['400 V DC','600 V DC','800 V DC','1000 V DC'],c:1,r:'EV 4.1.1',x:'Azami 600 V DC; motor sürücüsü ve AMS içindeki düşük güçlü kontrol sinyalleri için 630 V DC.'},
+{q:'TSAC çıkışındaki çekiş sistemi (TS) gücü en fazla kaç kW olabilir?',o:['60 kW','80 kW','100 kW','120 kW'],c:1,r:'EV 2.2.1',x:'TSAC çıkışındaki TS gücü 80 kW’ı aşmamalıdır.'},
+{q:'Alçak gerilim sisteminde (LVS) iki bağlantı arasında izin verilen azami gerilim nedir?',o:['24 V DC','48 V DC','60 V DC veya 50 V AC RMS','120 V DC'],c:2,r:'T 11.1.2',x:'LVS’de iki bağlantı arasındaki gerilim 60 V DC veya 50 V AC RMS’yi geçemez.'},
+{q:'TSAL’in kırmızı ışığı hangi frekansta yanıp sönmelidir?',o:['0,5–1 Hz','2–5 Hz, %50 görev oranıyla','5–10 Hz','Sürekli yanar'],c:1,r:'EV 4.10.2',x:'Kırmızı ışık 2–5 Hz arasında, %50 görev oranıyla sürekli yanıp söner.'},
+{q:'TSAL kırmızı ışığı, DC-link kondansatörlerindeki gerilim hangi değeri aştığında yanmalıdır?',o:['30 V DC','60 V DC veya nominal TS geriliminin yarısı (hangisi düşükse)','Nominal TS geriliminin %95’i','400 V DC'],c:1,r:'EV 4.10.2',x:'60 V DC / 50 V AC RMS ya da nominal TS geriliminin yarısı; hangisi daha düşükse o eşik geçerlidir.'},
+{q:'TSAL’in yeşil ışığı ne zaman yanar?',o:['TS aktif olduğunda','Araç hazır-sürüş (R2D) modundayken','Tüm AIR’lar ve ön şarj rölesi açıkken ve araç tarafındaki gerilim 60 V DC’yi aşmıyorken','Akü şarj edilirken'],c:2,r:'EV 4.10.3',x:'Yeşil ışık, LVS aktifken tüm AIR’lar ve ön şarj rölesi açıksa ve TSAC içindeki AIR’ların araç tarafı 60 V DC’yi aşmıyorsa sürekli yanar.'},
+{q:'İkinci AIR kapanmadan önce araç tarafı, akü geriliminin en az yüzde kaçına ön şarj edilmelidir?',o:['%80','%90','%95','%99'],c:2,r:'EV 5.7.1',x:'Ön şarj devresi araç tarafını gerçek akü geriliminin en az %95’ine getirmelidir.'},
+{q:'IMD’nin tepki değeri en az ne olmalıdır?',o:['100 Ω/V','250 Ω/V','500 Ω/V','1000 Ω/V'],c:2,r:'EV 6.3.3',x:'IMD tepki değeri, azami TS gerilimine göre en az 500 Ω/V olmalıdır.'},
+{q:'Teknik kontrolde IMD testinde, 250 Ω/V hata direncinde TS en geç kaç saniyede kapanmalıdır?',o:['5 s','10 s','30 s','60 s'],c:2,r:'IN 4.1.2',x:'IMD, tepki değerinin %50 altındaki (250 Ω/V) hata direncinde TS’yi 30 s içinde kapatmalıdır.'},
+{q:'Azami TS gerilimi 600 V olan bir araçta yalıtım direnci hangi test gerilimiyle ölçülür?',o:['250 V','500 V','600 V','1000 V'],c:3,r:'IN 4.1.1',x:'500 V’un üzerindeki azami TS gerilimleri için test gerilimi 1000 V’tur; geçmek için en az 500 Ω/V gerekir.'},
+{q:'BSPD, sert frenleme sırasında motorlara en az ne kadar güç verilirken SDC’yi açmalıdır?',o:['1 kW','5 kW','10 kW','80 kW'],c:1,r:'T 11.6.1',x:'EV’lerde sert frenleme sırasında motorlara ≥5 kW güç verilirse BSPD SDC’yi açar.'},
+{q:'BSPD’nin SDC’yi açması için uyumsuzluk (implausibility) en az ne kadar sürmelidir?',o:['100 ms','250 ms','500 ms','1 s'],c:2,r:'T 11.6.2',x:'Uyumsuzluk 500 ms’den uzun sürerse SDC açılmalıdır.'},
+{q:'BSPD açma koşulu ortadan kalktıktan sonra kendini en erken ne zaman sıfırlayabilir?',o:['Hemen','1 s sonra','10 s sonra (ya da LVMS kapatılıp açılınca)','Sadece teknik kontrol görevlisi sıfırlayabilir'],c:2,r:'T 11.6.1',x:'SDC, LVMS kapatılıp açılana kadar açık kalır ya da koşul 10 s’den uzun süre ortadan kalktıysa BSPD kendini sıfırlayabilir.'},
+{q:'BSPD’de güç ölçümü için hangi sensör kullanılmalıdır?',o:['Yalnızca DC devre akım sensörü','Motor sürücüsünden gelen yazılım verisi','Tork sensörü','Gerilim bölücü'],c:0,r:'T 11.6.6',x:'Güç ölçümü için yalnızca DC devre akım sensörü kullanılabilir; eşik azami TS geriliminde ≤5 kW’a karşılık gelmelidir.'},
+{q:'APPS sensörleri arasında “uyumsuzluk” nasıl tanımlanır?',o:['Pedal yolunda 5 yüzde puandan fazla sapma','Pedal yolunda 10 yüzde puandan fazla sapma','Pedal yolunda 25 yüzde puandan fazla sapma','Sensörlerden birinin %0 göstermesi'],c:1,r:'T 11.8.9',x:'Kullanılan APPS’ler arasında 10 yüzde puandan fazla pedal yolu sapması (ya da T 11.9’a göre bir arıza) uyumsuzluktur.'},
+{q:'APPS uyumsuzluğu ne kadar sürerse motor gücü hemen tamamen kesilmelidir?',o:['50 ms','100 ms','500 ms','1 s'],c:1,r:'T 11.8.8',x:'Uyumsuzluk 100 ms’den uzun sürerse motorlara giden güç hemen tamamen kesilmelidir.'},
+{q:'Azami TS gerilimi 400–600 V DC olan araçta her TSMP hangi değerde akım sınırlama direnciyle korunmalıdır?',o:['5 kΩ','10 kΩ','15 kΩ','Direnç yerine sigorta kullanılır'],c:2,r:'EV 4.7.6',x:'400–600 V DC için 15 kΩ; TSMP’leri sigortalamak yasaktır.'},
+{q:'TSMP’ler için hangi bağlantı elemanı kullanılmalıdır?',o:['2 mm muz jak, 300 V CAT II','4 mm korumalı muz jak, 600 V CAT III veya üstü','BNC konnektör','Vidalı terminal'],c:1,r:'EV 4.7.3',x:'4 mm korumalı (shrouded) muz jak, en az 600 V CAT III.'},
+{q:'İki TSMP araçta nereye yerleştirilmelidir?',o:['Akü kutusunun (TSAC) içine','Ana şalterlerin (master switch) hemen yanına','Sürücü kokpitine','Motor sürücüsünün üstüne'],c:1,r:'EV 4.7.1',x:'İki TSMP, ana şalterlerin (master switches) hemen yanına konulmalıdır; yanlarında GND ölçüm noktası da bulunur.'},
+{q:'HVD yerden en az kaç mm yükseklikte olmalıdır?',o:['100 mm','200 mm','350 mm','500 mm'],c:2,r:'EV 4.8.1',x:'HVD yerden 350 mm’nin üzerinde olmalı ve kaporta sökülmeden çıkarılabilmelidir.'},
+{q:'Eğitimli bir kişi, yarışa hazır araçta HVD’yi en fazla kaç saniyede çıkarabilmelidir?',o:['5 s','10 s','30 s','60 s'],c:1,r:'EV 4.8.2',x:'HVD, yarışa hazır araçta 10 s içinde ve alet kullanmadan çıkarılabilmelidir.'},
+{q:'İletken bir parçanın “topraklı” sayılması için LVS toprağına direnci ne olmalıdır?',o:['1 A ile ölçüldüğünde 100 mΩ’un altında','1 Ω’un altında','10 Ω’un altında','1 kΩ’un altında'],c:0,r:'EV 3.1.3',x:'1 A akımla ölçülen direnç 100 mΩ’un altında olmalı; topraklama kablosu ana sigorta akımının en az %10’unu sürekli taşıyabilmelidir.'},
+{q:'TS kabloları, bağlantıları, röleleri ve yalıtımı en az hangi sıcaklık değerine uygun olmalıdır?',o:['60 °C','85 °C','105 °C','125 °C'],c:1,r:'EV 4.5.3',x:'Beklenen ortam sıcaklığına uygun, ama en az 85 °C.'},
+{q:'TSAC kapağı açıldıktan sonra her akü segmentini çıkarma süresi en fazla ne olmalıdır?',o:['5 dk','10 dk','15 dk','30 dk'],c:2,r:'EV 5.3.3',x:'Kapak açıldıktan sonra her segment 15 dakikadan kısa sürede çıkarılabilmelidir.'},
+{q:'Her TSAC en az kaç AIR ve kaç sigorta içermelidir?',o:['1 AIR, 1 sigorta','2 AIR, 1 sigorta','2 AIR, 2 sigorta','1 AIR, sigorta gerekmez'],c:1,r:'EV 5.4.1',x:'Her TSAC en az bir sigorta ve en az iki AIR içermelidir.'},
+{q:'SDC en az kaç kapatma (shutdown) butonu içerir?',o:['1','2','3','4'],c:2,r:'EV 6.1.2',x:'SDC en az iki ana şalter, üç kapatma butonu, BOTS, IMD, eylemsizlik anahtarı, BSPD, kilitler ve AMS’den oluşan seri bir devredir.'},
+{q:'Sürücü, tam oturur pozisyondan araçtan en fazla kaç saniyede çıkabilmelidir?',o:['3 s','5 s','10 s','15 s'],c:1,r:'T 4.11.1',x:'Tüm sürücüler, gerekli ekipmanla, araçtan yana doğru 5 s’den kısa sürede çıkabilmelidir.'},
+{q:'Fren lambası hangi renkte olmalıdır?',o:['Kırmızı','Turuncu','Beyaz','Sarı'],c:0,r:'T 6.3.2',x:'Fren lambası kırmızı olmalı ve arkadan açıkça görünmelidir.'},
+{q:'Şarj cihazındaki acil durdurma butonunun çapı en az kaç mm olmalıdır?',o:['20 mm','30 mm','40 mm','50 mm'],c:2,r:'EV 7.1.5',x:'Şarj cihazında kolay erişilen, en az 40 mm çapında basmalı acil durdurma butonu bulunmalıdır.'},
+{q:'EV’lerde itme çubuğuna (push bar) neler takılı olmalıdır?',o:['Yangın söndürücü','İki çift yüksek gerilim eldiveni ve 600 V CAT III multimetre','Yedek sigorta seti','Dizüstü bilgisayar'],c:1,r:'T 13.1.6',x:'İki çift HV yalıtım eldiveni ve 4 mm muz uçlu, en az 600 V CAT III multimetre itme çubuğunda bulunmalıdır.'},
+{q:'Yağmur testinde su ne kadar süre püskürtülür ve sonrasında ne kadar süre IMD tetiklenmemelidir?',o:['60 s + 60 s','120 s + 120 s','30 s + 30 s','300 s + 0 s'],c:1,r:'IN 9.2.7',x:'120 s su püskürtülürken ve sonrasındaki 120 s boyunca IMD tetiklenmemeli, TS aktif kalmalıdır.'},
+{q:'Her TSAC’a yapıştırılan “Always Energized” etiketindeki uyarı üçgeninin kenarı en az kaç mm olmalıdır?',o:['50 mm','75 mm','100 mm','150 mm'],c:2,r:'EV 5.5.22',x:'ISO 7010-W012 etiketi, en az 100 mm kenar uzunluğu ve “Always Energized” yazısıyla her TSAC’ta bulunmalıdır.'},
+{q:'Görevliler bir belgede düzeltme isterse, düzeltilmiş sürüm en geç ne zaman gönderilmelidir?',o:['24 saat','48 saat','72 saat','168 saat (7 gün)'],c:3,r:'A 5.3.1',x:'Düzeltilmiş belge, istekten sonraki 168 saat (7 gün) içinde gönderilmelidir.'},
+{q:'Bir belge son tarihten sonra teslim edilirse ne olur?',o:['Uyarı verilir','Her geç teslim için 10 ceza puanı','Her geç teslim için 50 ceza puanı','Takım hemen diskalifiye olur'],c:1,r:'A 5.4.1',x:'Her geç teslim için takımın toplam puanından 10 puan düşülür.'},
+{q:'Belgeler son tarihten ne kadar sonra hâlâ teslim edilmemişse takımın etkinlik kaydı silinir?',o:['12 saat','24 saat','48 saat','72 saat'],c:1,r:'A 5.4.2',x:'Son tarihten 24 saat sonra hâlâ teslim etmeyen takımlar etkinlikten çıkarılır.'}
+];
+
+// ===== R22: team features (shared checklist/PCB, tasks, calendar, comments, admin, BOM, quiz) =====
+const TEAM={chk:{},pcb:{},users:{},dl:{},cc:{},unsub:[],on:false,applying:false,lastC:{s:{},n:{}},lastP:{s:{},n:{},g:{}},ulist:null,pend:false,rq:0,notified:0,em:{},admTab:'pending',cmBtn:{},cmK:null};
+const TW={c:{},p:{}},TWN={c:{},p:{}},TAS={c:{},p:{}};
+let PMETA={};try{PMETA=JSON.parse(localStorage.getItem('fsg-pmeta')||'{}')||{}}catch(e){PMETA={}}
+const K2C={};chIds.forEach(c=>chRules[c].forEach(k=>K2C[k]=c));
+const tOn=()=>MEM.on&&!!MEM.fba&&!!MEM.user&&MEM.can();
+const DELV=()=>MEM.fba?MEM.fba.DEL():{__del:1};
+const clone=o=>JSON.parse(JSON.stringify(o||{}));
+function uname(uid){if(!uid)return '';const u=TEAM.users[uid];if(u)return ((u.ad||'')+' '+(u.soyad||'')).trim()||'İsimsiz üye';if(uid===MEM.uid())return ((PF.ad||'')+' '+(PF.soyad||'')).trim()||'Sen';return 'Eski üye'}
+function uinit(uid){const n=uname(uid).split(/\s+/);return ((n[0]||'')[0]||'').concat((n[1]||'')[0]||'').toLocaleUpperCase('tr')}
+function ago(ms){if(!ms)return '';const d=(Date.now()-ms)/1000;if(d<60)return 'az önce';if(d<3600)return Math.floor(d/60)+' dk önce';if(d<86400)return Math.floor(d/3600)+' sa önce';if(d<86400*30)return Math.floor(d/86400)+' gün önce';return new Date(ms).toLocaleDateString('tr-TR')}
+function fdate(s){if(!s)return '';const p=s.split('-').map(Number);return new Date(p[0],p[1]-1,p[2]).toLocaleDateString('tr-TR',{day:'numeric',month:'short',year:'numeric'})}
+function daysTo(s){if(!s)return null;const p=s.split('-').map(Number);const t=new Date(p[0],p[1]-1,p[2]),n=new Date();n.setHours(0,0,0,0);return Math.round((t-n)/86400000)}
+function dleft(dd){return dd===0?'bugün':dd>0?dd+' gün kaldı':(-dd)+' gün gecikti'}
+const rtext=id=>byId[id]?strip(byId[id].t).replace(/<[^>]+>/g,''):'';
+if(MEM.on){
+  CHK={};CHN={};PC={};PN={};PCBG={};PMETA={};
+  ['fsg-chk','fsg-chn','fsg-pcbc','fsg-pcbn','fsg-pcbg','fsg-pmeta'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+  ['ck-reset','pb-reset'].forEach(id=>{const b=document.getElementById(id);if(b){b.setAttribute('data-admin','');b.title='Ortak listeyi yalnızca yönetici sıfırlayabilir'}});
+}
+// ---------- sync ----------
+const _saveCHK=saveCHK,_saveCHN=saveCHN,_lsSetP=lsSet;
+saveCHK=function(){_saveCHK();if(tOn()&&!TEAM.applying)tDiff('c','s')};
+saveCHN=function(){_saveCHN();if(tOn()&&!TEAM.applying)tDiff('c','n')};
+lsSet=function(k,v){_lsSetP(k,v);if(!tOn()||TEAM.applying)return;if(k==='fsg-pcbc')tDiff('p','s');else if(k==='fsg-pcbn')tDiff('p','n');else if(k==='fsg-pcbg')tGroups()};
+function tDoc(kind,k){if(kind==='c')return ['teamchk/'+(K2C[k]||'X'),k];const i=k.indexOf('|');return ['teampcb/'+k.slice(0,i),k.slice(i+1)]}
+function tErr(err){memTip('Kaydedilemedi: '+memErr(err),false)}
+function tDiff(kind,f){
+  const cur=kind==='c'?(f==='s'?CHK:CHN):(f==='s'?PC:PN),L=kind==='c'?TEAM.lastC:TEAM.lastP,last=L[f]||{};
+  const F=MEM.fba,uid=MEM.uid(),by={},wk=f==='s'?'w':'wn';
+  new Set([...Object.keys(cur),...Object.keys(last)]).forEach(k=>{
+    if(JSON.stringify(cur[k])===JSON.stringify(last[k]))return;
+    const [d,key]=tDoc(kind,k),o=by[d]||(by[d]={[f]:{},[wk]:{}});
+    o[f][key]=(cur[k]!==undefined&&cur[k]!=='')?cur[k]:F.DEL();o[wk][key]={u:uid,a:F.TS()};
+  });
+  L[f]=clone(cur);
+  for(const d in by)F.fs.set(d,by[d],true).catch(tErr);
+}
+function tGroups(){const F=MEM.fba,last=TEAM.lastP.g||{};
+  Object.keys(PCBG).forEach(b=>{if(JSON.stringify(PCBG[b])!==JSON.stringify(last[b]))F.fs.set('teampcb/'+b,{g:PCBG[b]||[],mu:MEM.uid(),ma:F.TS()},true).catch(tErr)});
+  TEAM.lastP.g=clone(PCBG)}
+function tApplyC(){
+  const s={},n={},w={},wn={},a={};
+  for(const c in TEAM.chk){const d=TEAM.chk[c];Object.assign(s,d.s||{});Object.assign(n,d.n||{});Object.assign(w,d.w||{});Object.assign(wn,d.wn||{});Object.assign(a,d.as||{})}
+  TEAM.applying=true;try{CHK=s;CHN=n;_saveCHK();_saveCHN()}finally{TEAM.applying=false}
+  TEAM.lastC={s:clone(s),n:clone(n)};TW.c=w;TWN.c=wn;TAS.c=a;tNotify();tRender();
+}
+function tApplyP(){
+  const s={},n={},w={},wn={},a={},g={},pm={};
+  for(const b in TEAM.pcb){const d=TEAM.pcb[b];
+    ['s','n','w','wn','as'].forEach(f=>{const src=d[f]||{},dst={s:s,n:n,w:w,wn:wn,as:a}[f];for(const id in src)dst[b+'|'+id]=src[id]});
+    if(Array.isArray(d.g))g[b]=d.g;
+    pm[b]={rev:d.rev||'',st:d.st||'',lnk:d.lnk||{},bom:d.bom||{},mu:d.mu||'',ma:d.ma||0};}
+  TEAM.applying=true;try{PC=s;PN=n;PCBG=g;_lsSetP('fsg-pcbc',PC);_lsSetP('fsg-pcbn',PN);_lsSetP('fsg-pcbg',PCBG)}finally{TEAM.applying=false}
+  PMETA=pm;TEAM.lastP={s:clone(s),n:clone(n),g:clone(g)};TW.p=w;TWN.p=wn;TAS.p=a;tNotify();tRender();
+}
+function teamSync(){
+  const want=tOn();
+  if(want&&!TEAM.on){
+    TEAM.on=true;TEAM.notified=Date.now();const F=MEM.fba;
+    TEAM.unsub.push(F.fs.watchCol('teamchk',(docs,m,err)=>{if(err){memTip('Ortak checklist okunamadı: '+memErr(err),false);return}TEAM.chk={};docs.forEach(d=>TEAM.chk[d.id]=d.data);tApplyC()}));
+    TEAM.unsub.push(F.fs.watchCol('teampcb',(docs,m,err)=>{if(err)return;TEAM.pcb={};docs.forEach(d=>TEAM.pcb[d.id]=d.data);tApplyP()}));
+    TEAM.unsub.push(F.fs.watchCol('users',(docs,m,err)=>{if(err)return;TEAM.users={};docs.forEach(d=>TEAM.users[d.id]=d.data);TEAM.ulist=null;tRender()}));
+    TEAM.unsub.push(F.fs.watchDoc('meta/deadlines',(d,m,err)=>{if(err)return;TEAM.dl=(d&&d.d)||{};tRender()}));
+    TEAM.unsub.push(F.fs.watchDoc('meta/cc',(d,m,err)=>{if(err)return;TEAM.cc=(d&&d.c)||{};cmPaint()}));
+  }else if(!want&&TEAM.on){
+    TEAM.unsub.forEach(f=>{try{f()}catch(e){}});TEAM.unsub=[];TEAM.on=false;
+    TEAM.chk={};TEAM.pcb={};TEAM.users={};TEAM.dl={};TEAM.cc={};TEAM.ulist=null;TEAM.em={};
+    TEAM.applying=true;try{CHK={};CHN={};PC={};PN={};PCBG={}}finally{TEAM.applying=false}
+    PMETA={};TW.c={};TW.p={};TWN.c={};TWN.p={};TAS.c={};TAS.p={};cmPaint();
+  }
+  tRender();
+}
+function focusIn(el){const ae=document.activeElement;return el&&ae&&el.contains(ae)&&/TEXTAREA|INPUT|SELECT/.test(ae.tagName)}
+function tRender(){
+  if(TEAM.rq)return;
+  TEAM.rq=requestAnimationFrame(()=>{TEAM.rq=0;const v=curView();
+    if(v==='check'){if(focusIn(ckList)){TEAM.pend=true;ckHead()}else renderCheck(false)}
+    else if(v==='pcb'){const pm=document.getElementById('pb-meta'),pb=document.getElementById('pb-bom');if(focusIn(pbList)||focusIn(pm)||focusIn(pb)){TEAM.pend=true;pbRefresh();ordRender()}else renderPCB(false)}
+    else if(v==='team'){if(focusIn(document.getElementById('view-team')))TEAM.pend=true;else renderTeam()}
+    else if(v==='prof')admRender();
+    tBadge();
+  });
+}
+['ck-list','pb-list','pb-meta','pb-bom','view-team'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('focusout',()=>setTimeout(()=>{if(TEAM.pend&&!focusIn(el)){TEAM.pend=false;tRender()}},60))});
+// ---------- who/when + assignment on rows ----------
+function uOpts(sel){
+  if(!TEAM.ulist)TEAM.ulist=Object.keys(TEAM.users).filter(id=>{const u=TEAM.users[id];return u.status==='approved'||u.role==='admin'}).sort((a,b)=>uname(a).localeCompare(uname(b),'tr'));
+  return '<option value="">— Atanmadı</option>'+TEAM.ulist.map(id=>'<option value="'+id+'"'+(id===sel?' selected':'')+'>'+esc(uname(id))+'</option>').join('')+(sel&&!TEAM.ulist.includes(sel)?'<option value="'+esc(sel)+'" selected>'+esc(uname(sel))+'</option>':'');
+}
+function tDecor(html,kind,key){
+  if(!tOn())return html;
+  const w=TW[kind][key],wn=TWN[kind][key],a=TAS[kind][key];let x='';
+  if(w||wn||(a&&a.u)){
+    const dd=a&&a.d?daysTo(a.d):null;
+    x+='<div class="ckw">'+(w?'<span><i>'+esc(uinit(w.u))+'</i>'+esc(uname(w.u))+' · '+ago(w.a)+'</span>':'')+(wn&&(!w||wn.u!==w.u||Math.abs((wn.a||0)-(w.a||0))>60000)?'<span class="wn">Not: '+esc(uname(wn.u))+' · '+ago(wn.a)+'</span>':'')
+      +(a&&a.u?'<span class="wa'+(dd!==null&&dd<0?' late':'')+'">Sorumlu: <b>'+esc(uname(a.u))+'</b>'+(a.d?' · '+fdate(a.d)+' ('+dleft(dd)+')':'')+'</span>':'')+'</div>';
+  }
+  x+='<div class="ckas" data-ak="'+esc(key)+'" data-kind="'+kind+'"><label>Sorumlu<select data-edit data-as="u">'+uOpts(a&&a.u)+'</select></label><label>Son tarih<input type="date" data-edit data-as="d" value="'+esc(a&&a.d||'')+'"></label></div>';
+  return html.slice(0,-6)+x+'</div>';
+}
+const _ckRow=ckRow;ckRow=function(k){return tDecor(_ckRow(k),'c',k)};
+const _pRow=pRow;pRow=function(b,id){return tDecor(_pRow(b,id),'p',b+'|'+id)};
+function asChange(e){
+  const t=e.target;if(!t.matches||!t.matches('.ckas [data-as]')||!tOn())return;
+  const box=t.closest('.ckas'),kind=box.dataset.kind,[d,k2]=tDoc(kind,box.dataset.ak),u=box.querySelector('[data-as=u]').value,dt=box.querySelector('[data-as=d]').value,F=MEM.fba;
+  F.fs.set(d,{as:{[k2]:u?{u:u,d:dt||'',by:MEM.uid(),a:F.TS()}:F.DEL()}},true).catch(tErr);
+}
+ckList.addEventListener('change',asChange);pbList.addEventListener('change',asChange);
+// ---------- notifications ----------
+function tTasks(){
+  const L=[];
+  for(const k in TAS.c){const a=TAS.c[k];if(a&&a.u)L.push({kind:'c',key:k,id:k,u:a.u,d:a.d||'',by:a.by,a:a.a||0,s:CHK[k]||'',note:CHN[k]||''})}
+  for(const k in TAS.p){const a=TAS.p[k];if(!a||!a.u)continue;const i=k.indexOf('|');L.push({kind:'p',key:k,id:k.slice(i+1),b:k.slice(0,i),u:a.u,d:a.d||'',by:a.by,a:a.a||0,s:PC[k]||'',note:PN[k]||''})}
+  return L;
+}
+function tNotes(){
+  const N=[],me=MEM.uid(),seen=+lsGet('fsg-seen',0)||0;
+  if(!tOn())return N;
+  tTasks().filter(t=>t.u===me&&t.s!=='ok').forEach(t=>{const dd=daysTo(t.d);N.push({k:'as',fresh:t.a>seen&&t.by!==me,late:dd!==null&&dd<0,txt:(t.kind==='c'?t.id:t.b+' · '+t.id)+' sana atandı'+(t.d?' · son tarih '+fdate(t.d)+' ('+dleft(dd)+')':''),t:t})});
+  Object.keys(TEAM.dl).forEach(id=>{const d=TEAM.dl[id],dd=daysTo(d.date);if(d.done||dd===null||dd<0||dd>14)return;N.push({k:'dl',fresh:dd<=3,late:false,txt:(d.t||'Teslim')+(dd===0?' için bugün son gün':' teslimine '+dd+' gün kaldı')})});
+  if(MEM.admin){const p=Object.values(TEAM.users).filter(u=>u.role!=='admin'&&(u.status||'pending')==='pending').length;if(p)N.push({k:'adm',fresh:true,late:false,txt:p+' üyelik başvurusu onayını bekliyor'})}
+  return N;
+}
+function tBadge(){const n=tNotes().filter(x=>x.fresh||x.late).length,b=document.getElementById('tm-badge');if(b){b.textContent=n||'';b.classList.toggle('on',n>0)}}
+function tNotify(){
+  if(!tOn()||!('Notification' in window)||Notification.permission!=='granted')return;
+  const me=MEM.uid();let mx=TEAM.notified;
+  tTasks().forEach(t=>{if(t.u===me&&t.by!==me&&t.a>TEAM.notified){mx=Math.max(mx,t.a);const body=(t.kind==='c'?t.id:t.b+' · '+t.id)+' · '+rtext(t.id).slice(0,90);
+    const opt={body:body,icon:'icons/icon-192.png',tag:'as-'+t.key};
+    if(navigator.serviceWorker&&navigator.serviceWorker.controller)navigator.serviceWorker.ready.then(r=>r.showNotification('ITU Racing · Sana yeni görev atandı',opt)).catch(()=>{});
+    else{try{new Notification('ITU Racing · Sana yeni görev atandı',opt)}catch(e){}}}});
+  TEAM.notified=mx;
+}
+// ---------- PCB meta + BOM ----------
+const ST_PCB={tasarim:'Tasarım',uretim:'Üretimde',test:'Test',arac:'Araçta'};
+const SRC=['','Atek','Makersan','Stokta','Diğer'],OST={gerekli:'Gerekli',siparis:'Sipariş verildi',geldi:'Geldi',takildi:'Takıldı'};
+function lmerge(a,b){const o=Object.assign({},a);for(const k in b){const v=b[k];if(v&&v.__del)delete o[k];else if(v&&typeof v==='object'&&!Array.isArray(v))o[k]=lmerge(o[k]&&typeof o[k]==='object'?o[k]:{},v);else o[k]=v}return o}
+function pmSave(b,part){
+  if(tOn()){const F=MEM.fba;part.mu=MEM.uid();part.ma=F.TS();F.fs.set('teampcb/'+b,part,true).catch(tErr);return}
+  if(MEM.on)return;
+  PMETA[b]=lmerge(PMETA[b]||{},part);PMETA[b].ma=Date.now();try{localStorage.setItem('fsg-pmeta',JSON.stringify(PMETA))}catch(e){}
+  pmRender();bomRender();ordRender();pbTable();
+}
+function stBadge(st,rev){return '<span class="pst" data-st="'+(st||'')+'">'+(st?ST_PCB[st]:'—')+'</span>'+(rev?'<small class="prev">'+esc(rev)+'</small>':'')}
+const _pbTable=pbTable;pbTable=function(){_pbTable();const hr=pbTab.querySelector('thead tr');if(!hr)return;const th=document.createElement('th');th.textContent='Durum';th.style.cursor='default';hr.insertBefore(th,hr.children[1]);
+  pbTab.querySelectorAll('tbody tr[data-b]').forEach(tr=>{const m=PMETA[tr.dataset.b]||{},td=document.createElement('td');td.className='pstc';td.innerHTML=stBadge(m.st,m.rev);tr.insertBefore(td,tr.children[1])})};
+const _renderPCB=renderPCB;renderPCB=function(a){_renderPCB(a);pmRender();bomRender();ordRender()};
+const _pbSelect=pbSelect;pbSelect=function(b,s){_pbSelect(b,s);pmRender();bomRender()};
+function pmRender(){
+  const el=document.getElementById('pb-meta');if(!el)return;const m=PMETA[pSel]||{},links=Object.entries(m.lnk||{}).sort((a,b)=>(a[1].o||0)-(b[1].o||0));
+  el.innerHTML='<div class="pmhead"><b>Kart bilgileri · '+esc(pSel)+'</b><span>'+(m.ma?'Son güncelleme: '+(m.mu?esc(uname(m.mu))+' · ':'')+ago(m.ma):'Henüz bilgi girilmedi')+'</span></div>'
+   +'<div class="pmrow"><label>Revizyon<input data-edit data-pm="rev" maxlength="24" value="'+esc(m.rev||'')+'" placeholder="örn. Rev B"></label><label>Durum<select data-edit data-pm="st">'+['','tasarim','uretim','test','arac'].map(x=>'<option value="'+x+'"'+(x===(m.st||'')?' selected':'')+'>'+(x?ST_PCB[x]:'Belirtilmedi')+'</option>').join('')+'</select></label></div>'
+   +'<div class="pmlinks"><span class="pml">Dosyalar ve bağlantılar</span>'+(links.length?'<ul>'+links.map(([id,l])=>'<li><a href="'+esc(l.u)+'" target="_blank" rel="noopener noreferrer">'+esc(l.l||l.u)+'</a><button type="button" data-edit data-lrm="'+esc(id)+'" title="Bağlantıyı kaldır" aria-label="Bağlantıyı kaldır">×</button></li>').join('')+'</ul>':'<p class="pmempty">Şematik, Gerber, EasyEDA projesi, test raporu gibi bağlantıları buraya ekle.</p>')
+   +'<div class="pmadd"><input data-edit id="pm-ll" maxlength="60" placeholder="Etiket (örn. Şematik PDF)"><input data-edit id="pm-lu" type="url" inputmode="url" placeholder="https://…"><button type="button" class="btn" data-edit id="pm-la">Ekle</button></div><div class="pmmsg" id="pm-msg"></div></div>';
+}
+const pbMetaEl=document.getElementById('pb-meta'),pbBomEl=document.getElementById('pb-bom');
+pbMetaEl.addEventListener('change',e=>{const t=e.target.closest('[data-pm]');if(t)pmSave(pSel,{[t.dataset.pm]:t.value.trim()})});
+pbMetaEl.addEventListener('click',e=>{
+  const rm=e.target.closest('[data-lrm]');if(rm){pmSave(pSel,{lnk:{[rm.dataset.lrm]:DELV()}});return}
+  if(e.target.closest('#pm-la')){const l=document.getElementById('pm-ll').value.trim(),u=document.getElementById('pm-lu').value.trim(),msg=document.getElementById('pm-msg');
+    if(!/^https?:\/\/\S+$/i.test(u)){msg.textContent='Bağlantı http:// ya da https:// ile başlamalı.';return}
+    pmSave(pSel,{lnk:{['l'+Date.now().toString(36)]:{l:l||u.replace(/^https?:\/\//,'').slice(0,40),u:u,o:Date.now()}}});}
+});
+function bomRows(b){const m=PMETA[b]||{};return Object.entries(m.bom||{}).sort((x,y)=>(x[1].o||0)-(y[1].o||0))}
+function bomRender(){
+  const el=pbBomEl;if(!el)return;const rows=bomRows(pSel),cnt={};rows.forEach(([,r])=>{const o=r.ost||'gerekli';cnt[o]=(cnt[o]||0)+1});
+  el.innerHTML='<div class="bomsum"><b>'+esc(pSel)+'</b><span>'+rows.length+' kalem</span>'+Object.keys(OST).filter(k=>cnt[k]).map(k=>'<span class="ost" data-o="'+k+'">'+cnt[k]+' '+OST[k].toLocaleLowerCase('tr')+'</span>').join('')+'</div>'
+   +'<div class="bomw"><table class="bom"><thead><tr><th>Ref</th><th>Parça</th><th>Değer</th><th>Kılıf</th><th class="n">Adet</th><th>Tedarik</th><th>Durum</th><th>Not</th><th></th></tr></thead><tbody>'
+   +(rows.length?rows.map(([id,r])=>'<tr data-id="'+esc(id)+'" data-o="'+(r.ost||'gerekli')+'">'
+     +['ref','part','val','pkg'].map(f=>'<td><input data-edit data-f="'+f+'" value="'+esc(r[f]||'')+'" aria-label="'+f+'"></td>').join('')
+     +'<td class="n"><input data-edit data-f="qty" type="number" min="0" step="1" inputmode="numeric" value="'+esc(String(r.qty==null?'':r.qty))+'" aria-label="Adet"></td>'
+     +'<td><select data-edit data-f="src" aria-label="Tedarik">'+SRC.map(x=>'<option value="'+x+'"'+(x===(r.src||'')?' selected':'')+'>'+(x||'—')+'</option>').join('')+'</select></td>'
+     +'<td><select data-edit data-f="ost" aria-label="Durum">'+Object.keys(OST).map(x=>'<option value="'+x+'"'+(x===(r.ost||'gerekli')?' selected':'')+'>'+OST[x]+'</option>').join('')+'</select></td>'
+     +'<td><input data-edit data-f="note" value="'+esc(r.note||'')+'" aria-label="Not"></td><td><button type="button" class="bomx" data-edit data-brm title="Satırı sil" aria-label="Satırı sil">×</button></td></tr>').join('')
+     :'<tr class="bomempty"><td colspan="9">Bu kart için henüz parça eklenmedi.</td></tr>')
+   +'</tbody></table></div>'
+   +'<div class="bomact"><button type="button" class="btn pdf" data-edit id="bom-add">Satır ekle</button><button type="button" class="btn" data-edit id="bom-pb">Toplu ekle (yapıştır)</button><button type="button" class="btn" id="bom-csv">CSV indir</button><span class="pmmsg" id="bom-msg"></span></div>'
+   +'<div class="bompaste" id="bom-paste" hidden><p class="src">EasyEDA / KiCad BOM dosyasını ya da Excel satırlarını buraya yapıştır. Başlık satırı varsa (Designator, Name/Comment, Value, Footprint, Quantity) sütunlar kendiliğinden eşleşir; yoksa sıra: Ref, Parça, Değer, Kılıf, Adet.</p><textarea id="bom-pt" rows="6" data-edit aria-label="BOM yapıştır"></textarea><div class="bomact"><button type="button" class="btn pdf" data-edit id="bom-pgo">Listeye ekle</button><button type="button" class="btn" id="bom-pno">Vazgeç</button></div></div>';
+}
+function bomParse(t){
+  const L=t.split(/\r?\n/).map(x=>x.replace(/\s+$/,'')).filter(x=>x.trim());if(!L.length)return [];
+  const dl=L[0].includes('\t')?'\t':(L[0].split(';').length>L[0].split(',').length?';':',');
+  const sp=l=>{const o=[];let c='',q=false;for(const ch of l){if(ch==='"'){q=!q;continue}if(ch===dl&&!q){o.push(c.trim());c='';continue}c+=ch}o.push(c.trim());return o};
+  let rows=L.map(sp),map={ref:0,part:1,val:2,pkg:3,qty:4};
+  const h=rows[0].map(x=>x.toLowerCase()),fi=re=>h.findIndex(x=>re.test(x));
+  if(h.some(x=>/designator|reference|^ref|^name$|comment|footprint|quantity|qty|^value|adet|parça|kılıf/.test(x))){
+    map={ref:fi(/designator|reference|^ref/),part:fi(/^name$|comment|^part|parça|description|manufacturer part|mpn/),val:fi(/^value|değer/),pkg:fi(/footprint|package|kılıf/),qty:fi(/quantity|qty|adet/)};rows=rows.slice(1)}
+  return rows.map(r=>({ref:map.ref>=0?r[map.ref]||'':'',part:map.part>=0?r[map.part]||'':'',val:map.val>=0?r[map.val]||'':'',pkg:map.pkg>=0?r[map.pkg]||'':'',qty:map.qty>=0?(parseFloat(r[map.qty])||1):1})).filter(r=>r.ref||r.part||r.val).slice(0,500);
+}
+function csvOut(head,rows){const q=v=>{v=String(v==null?'':v);return /[",;\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};return '﻿'+[head].concat(rows).map(r=>r.map(q).join(';')).join('\r\n')}
+pbBomEl.addEventListener('change',e=>{const t=e.target.closest('[data-f]');if(!t)return;const tr=t.closest('tr[data-id]');if(!tr)return;let v=t.value;if(t.dataset.f==='qty')v=v===''?null:Math.max(0,parseFloat(v)||0);else v=v.trim();pmSave(pSel,{bom:{[tr.dataset.id]:{[t.dataset.f]:v}}})});
+pbBomEl.addEventListener('click',async e=>{
+  const t=e.target,msg=document.getElementById('bom-msg');
+  if(t.closest('#bom-add')){const id='p'+Date.now().toString(36);pmSave(pSel,{bom:{[id]:{ref:'',part:'',val:'',pkg:'',qty:1,src:'',ost:'gerekli',note:'',o:Date.now()}}});setTimeout(()=>{const i=pbBomEl.querySelector('tr[data-id="'+id+'"] input');if(i)i.focus()},120);return}
+  const x=t.closest('[data-brm]');if(x){if(!x.classList.contains('arm')){x.classList.add('arm');x.title='Silmek için tekrar tıkla';setTimeout(()=>x.classList.remove('arm'),3000);return}pmSave(pSel,{bom:{[x.closest('tr').dataset.id]:DELV()}});return}
+  if(t.closest('#bom-pb')){document.getElementById('bom-paste').hidden=false;document.getElementById('bom-pt').focus();return}
+  if(t.closest('#bom-pno')){document.getElementById('bom-paste').hidden=true;return}
+  if(t.closest('#bom-pgo')){const rows=bomParse(document.getElementById('bom-pt').value);if(!rows.length){msg.textContent='Yapıştırılan metinde parça bulunamadı.';return}
+    const now=Date.now(),part={};rows.forEach((r,i)=>{part['p'+(now+i).toString(36)+i]=Object.assign(r,{src:'',ost:'gerekli',note:'',o:now+i})});pmSave(pSel,{bom:part});msg.textContent=rows.length+' parça eklendi.';return}
+  if(t.closest('#bom-csv')){const rows=bomRows(pSel).map(([,r])=>[r.ref,r.part,r.val,r.pkg,r.qty,r.src,OST[r.ost||'gerekli'],r.note]);const blob=new Blob([csvOut(['Ref','Parça','Değer','Kılıf','Adet','Tedarik','Durum','Not'],rows)],{type:'text/csv'});const nm='ITU-Racing-BOM-'+pSel.replace(/[^A-Za-z0-9]+/g,'-')+'.csv';const r=await dlBlob(blob,nm);msg.textContent=r==='saved'?'CSV hazır: '+nm:r==='declined'?'İndirme iptal edildi.':'CSV kaydedilemedi.';}
+});
+function ordRender(){
+  const el=document.getElementById('pb-ord');if(!el)return;const L=[];
+  BOARDS.forEach(b=>bomRows(b[0]).forEach(([id,r])=>{const o=r.ost||'gerekli';if(o==='gerekli'||o==='siparis')L.push(Object.assign({b:b[0]},r))}));
+  if(!L.length){el.innerHTML='<p class="pmempty">Bekleyen parça yok. Kartların BOM listesinde “Gerekli” ya da “Sipariş verildi” durumundaki parçalar burada tedarikçiye göre toplanır.</p>';return}
+  const by={};L.forEach(r=>{const k=r.src||'Tedarik belirtilmedi';(by[k]=by[k]||[]).push(r)});
+  el.innerHTML=Object.keys(by).sort((a,b)=>a.localeCompare(b,'tr')).map(k=>'<div class="ordg"><div class="ordh"><b>'+esc(k)+'</b><span>'+by[k].length+' kalem · '+by[k].reduce((a,r)=>a+(+r.qty||0),0)+' adet</span></div><div class="bomw"><table class="bom ord"><thead><tr><th>Kart</th><th>Ref</th><th>Parça</th><th>Değer</th><th>Kılıf</th><th class="n">Adet</th><th>Durum</th></tr></thead><tbody>'
+    +by[k].map(r=>'<tr><td>'+esc(r.b)+'</td><td>'+esc(r.ref||'')+'</td><td>'+esc(r.part||'')+'</td><td>'+esc(r.val||'')+'</td><td>'+esc(r.pkg||'')+'</td><td class="n">'+esc(String(r.qty==null?'':r.qty))+'</td><td><span class="ost" data-o="'+(r.ost||'gerekli')+'">'+OST[r.ost||'gerekli']+'</span></td></tr>').join('')+'</tbody></table></div></div>').join('')
+    +'<div class="bomact"><button type="button" class="btn" id="ord-csv">Sipariş listesini CSV indir</button><span class="pmmsg" id="ord-msg"></span></div>';
+}
+document.getElementById('pb-ord').addEventListener('click',async e=>{if(!e.target.closest('#ord-csv'))return;const rows=[];BOARDS.forEach(b=>bomRows(b[0]).forEach(([,r])=>{const o=r.ost||'gerekli';if(o==='gerekli'||o==='siparis')rows.push([r.src||'',b[0],r.ref,r.part,r.val,r.pkg,r.qty,OST[o]])}));
+  rows.sort((a,b)=>a[0].localeCompare(b[0],'tr'));const r=await dlBlob(new Blob([csvOut(['Tedarik','Kart','Ref','Parça','Değer','Kılıf','Adet','Durum'],rows)],{type:'text/csv'}),'ITU-Racing-siparis-listesi.csv');document.getElementById('ord-msg').textContent=r==='saved'?'CSV hazır.':r==='declined'?'İndirme iptal edildi.':'CSV kaydedilemedi.'});
+// ---------- Team view ----------
+const DL_SEED=[['ESF – Electrical System Form','EV 9'],['SES – Structural Equivalency Spreadsheet','T 1.2.1'],['SESA – SES Approval','A 5.7'],['VSV – Vehicle Status Video','A 5.6'],['ESOQ','A 4.3.8'],['Business Plan','S 2'],['Cost Report','S 3.3'],['IAD – Impact Attenuator Data','T 3.18'],['ASF – Autonomous System Form','T 14.11']];
+const tmEl=id=>document.getElementById(id);
+function refA(id){return byId[id]?'<a class="ref ckid" href="#'+slug(id)+'" data-id="'+esc(id)+'">'+esc(id)+'</a>':esc(id||'')}
+function taskRow(t,who){
+  const dd=daysTo(t.d),late=dd!==null&&dd<0&&t.s!=='ok';
+  return '<div class="tk" data-s="'+t.s+'"><div class="tkm">'+(t.kind==='p'?'<button type="button" class="tkb" data-board="'+esc(t.b)+'">'+esc(t.b)+'</button>':'<span class="tkb c">Checklist</span>')+refA(t.id)+'<span class="tkst" data-s="'+t.s+'">'+(ST[t.s]||'Bakılmadı')+'</span></div>'
+   +'<div class="tkt">'+esc(rtext(t.id).slice(0,150))+(t.note?'<div class="tkn">Not: '+esc(t.note.slice(0,180))+'</div>':'')+'</div>'
+   +'<div class="tkd">'+(who?'<b>'+esc(uname(t.u))+'</b>':'')+(t.d?'<span class="'+(late?'late':'')+'">'+fdate(t.d)+' · '+dleft(dd)+'</span>':'<span>Son tarih yok</span>')+'<small>Atayan: '+esc(uname(t.by))+(t.a?' · '+ago(t.a):'')+'</small></div></div>';
+}
+function cdRender(){
+  const L=Object.entries(TEAM.dl).filter(([,d])=>!d.done&&d.date&&daysTo(d.date)>=0).sort((a,b)=>a[1].date.localeCompare(b[1].date)).slice(0,4);
+  tmEl('tm-cd').innerHTML=L.length?L.map(([,d])=>{const dd=daysTo(d.date);return '<div class="cd'+(dd<=7?' near':'')+'"><b>'+(dd===0?'Bugün':dd)+'</b><span>'+(dd===0?'son gün':'gün')+'</span><em>'+esc(d.t)+'</em><small>'+fdate(d.date)+(d.time?' · '+esc(d.time):'')+'</small></div>'}).join(''):'<div class="cd empty"><em>Yaklaşan teslim yok</em><small>'+(MEM.admin?'Aşağıdaki takvimden teslim tarihlerini gir.':'Yönetici teslim tarihlerini girdiğinde burada geri sayım görünür.')+'</small></div>';
+}
+function ntRender(){
+  const N=tNotes(),el=tmEl('tm-nt');
+  const perm=('Notification' in window)?Notification.permission:'unsupported';
+  el.innerHTML=(N.length?'<ul class="ntl">'+N.map(n=>'<li class="'+(n.fresh?'fresh ':'')+(n.late?'late':'')+'"><span class="ntk" data-k="'+n.k+'">'+({as:'Görev',dl:'Teslim',adm:'Yönetici'}[n.k])+'</span>'+esc(n.txt)+(n.k==='adm'?' <button type="button" class="pflink" data-goprof>Onay paneline git</button>':'')+(n.k==='as'&&n.t?' '+refA(n.t.id):'')+'</li>').join('')+'</ul>':'<p class="pmempty">Şu an bildirim yok.</p>')
+   +'<div class="bomact">'+(N.some(n=>n.fresh)?'<button type="button" class="btn" id="nt-seen">Okundu say</button>':'')+(perm==='default'?'<button type="button" class="btn" id="nt-perm">Bu cihazda bildirimleri aç</button>':'')+'<span class="pmmsg">'+(perm==='granted'?'Bildirimler açık: uygulama açıkken sana görev atandığında bildirim gelir.':perm==='denied'?'Bildirimler bu cihazda engellenmiş (tarayıcı ayarlarından açabilirsin).':'')+'</span></div>';
+}
+function myRender(){const me=MEM.uid(),L=tTasks().filter(t=>t.u===me).sort((a,b)=>((a.s==='ok')-(b.s==='ok'))||((a.d||'9')>(b.d||'9')?1:-1));tmEl('tm-my').innerHTML=L.length?L.map(t=>taskRow(t,false)).join(''):'<p class="pmempty">Sana atanmış görev yok.</p>'}
+function asRender(){
+  const f=TEAM.asF||'',L=tTasks().filter(t=>t.s!=='ok'&&(!f||t.u===f)).sort((a,b)=>(a.d||'9').localeCompare(b.d||'9'));
+  const who=[...new Set(tTasks().filter(t=>t.s!=='ok').map(t=>t.u))];
+  tmEl('tm-as').innerHTML='<div class="bomact"><label class="tmf">Kişi<select id="as-f"><option value="">Herkes</option>'+who.map(u=>'<option value="'+esc(u)+'"'+(u===f?' selected':'')+'>'+esc(uname(u))+'</option>').join('')+'</select></label><span class="pmmsg">'+L.length+' açık görev</span></div>'+(L.length?L.map(t=>taskRow(t,true)).join(''):'<p class="pmempty">Açık görev yok. Checklist ya da PCB Kontrol’de “Eksik” veya “Sorun var” işaretli bir maddeye sorumlu atayınca burada görünür.</p>');
+}
+function dlRender(){
+  const L=Object.entries(TEAM.dl).sort((a,b)=>(a[1].date||'9999').localeCompare(b[1].date||'9999')),adm=MEM.admin;
+  tmEl('tm-dl').innerHTML='<div class="bomw"><table class="bom dlt"><thead><tr><th>Belge / teslim</th><th>Kural</th><th>Tarih</th><th>Kalan</th><th>Not</th>'+(adm?'<th></th>':'')+'</tr></thead><tbody>'
+   +(L.length?L.map(([id,d])=>{const dd=daysTo(d.date);return '<tr data-id="'+esc(id)+'" class="'+(d.done?'done':'')+'"><td><b>'+esc(d.t||'')+'</b></td><td>'+refA(d.r)+'</td><td>'+(d.date?fdate(d.date)+(d.time?' · '+esc(d.time):''):'<span class="dim">Girilmedi</span>')+'</td><td>'+(d.done?'<span class="ost" data-o="takildi">Tamamlandı</span>':dd===null?'—':'<span class="'+(dd<0?'late':dd<=7?'near':'')+'">'+dleft(dd)+'</span>')+'</td><td>'+esc(d.note||'')+'</td>'
+     +(adm?'<td class="dla"><button type="button" class="btn" data-admin data-dlact="done">'+(d.done?'Geri al':'Tamamlandı')+'</button><button type="button" class="btn" data-admin data-dlact="edit">Düzenle</button><button type="button" class="btn bomx" data-admin data-dlact="del" title="Sil">×</button></td>':'')+'</tr>'}).join('')
+     :'<tr class="bomempty"><td colspan="'+(adm?6:5)+'">Henüz teslim eklenmedi.</td></tr>')+'</tbody></table></div>'
+   +(adm?'<form class="dlform" id="dl-form"><input type="hidden" name="did"><label>Belge / teslim<input name="t" maxlength="80" required placeholder="örn. ESF – Electrical System Form"></label><label>Tarih<input name="date" type="date"></label><label>Saat<input name="time" type="time"></label><label>Kural<input name="r" maxlength="20" placeholder="örn. EV 9"></label><label class="w">Not<input name="note" maxlength="140" placeholder="örn. Event Handbook’taki son tarih, CET"></label><div class="bomact"><button class="btn pdf" type="submit" data-admin>Kaydet</button><button class="btn" type="button" id="dl-new">Temizle</button>'+(L.length?'':'<button class="btn" type="button" data-admin id="dl-seed">Kurallardaki belgeleri ekle</button>')+'<span class="pmmsg" id="dl-msg"></span></div></form>':'<p class="src">Teslim tarihleri Event Handbook’ta yayımlanır; takvimi yönetici günceller.</p>');
+}
+function actRender(){
+  const A=[];for(const k in TW.c){const w=TW.c[k];if(w&&w.a)A.push({a:w.a,u:w.u,id:k,s:CHK[k]||''})}
+  for(const k in TW.p){const w=TW.p[k];if(!w||!w.a)continue;const i=k.indexOf('|');A.push({a:w.a,u:w.u,id:k.slice(i+1),b:k.slice(0,i),s:PC[k]||''})}
+  A.sort((x,y)=>y.a-x.a);
+  tmEl('tm-act').innerHTML=A.length?'<ul class="act">'+A.slice(0,20).map(x=>'<li><i>'+esc(uinit(x.u))+'</i><span><b>'+esc(uname(x.u))+'</b> '+(x.b?'<button type="button" class="tkb" data-board="'+esc(x.b)+'">'+esc(x.b)+'</button> ':'')+refA(x.id)+' → <span class="tkst" data-s="'+x.s+'">'+(x.s?ST[x.s]:'işaret kaldırıldı')+'</span></span><small>'+ago(x.a)+'</small></li>').join('')+'</ul>':'<p class="pmempty">Henüz hareket yok.</p>';
+}
+const BIRIMLER=['Elektrik','Elektronik','Kontrol-Yazılım','Aerodinamik','Taşıt Dinamiği','Powertrain','Şasi ve Kompozit','Finans-Organizasyon'];
+function rosRender(){
+  const us=Object.entries(TEAM.users).filter(([,u])=>u.status==='approved'||u.role==='admin'),by={};
+  us.forEach(([id,u])=>{const b=u.birim||'Birim belirtilmedi';(by[b]=by[b]||[]).push([id,u])});
+  const order=BIRIMLER.filter(b=>by[b]).concat(Object.keys(by).filter(b=>!BIRIMLER.includes(b)));
+  const na=us.filter(([,u])=>u.ekip==='Ana ekip').length,nd=us.filter(([,u])=>u.ekip==='Destek ekip').length;
+  tmEl('tm-ros').innerHTML='<p class="src">'+us.length+' onaylı üye · '+na+' ana ekip · '+nd+' destek ekip</p><div class="ros">'+order.map(b=>'<div class="rosg"><h3>'+esc(b)+' <small>'+by[b].length+'</small></h3><ul>'+by[b].sort((x,y)=>uname(x[0]).localeCompare(uname(y[0]),'tr')).map(([id,u])=>'<li><i>'+esc(uinit(id))+'</i><span>'+esc(uname(id))+(u.role==='admin'?' <em class="adm">Yönetici</em>':'')+'</span>'+(u.ekip?'<em class="ek" data-e="'+(u.ekip==='Destek ekip'?'d':'a')+'">'+esc(u.ekip)+'</em>':'')+'</li>').join('')+'</ul></div>').join('')+'</div>';
+}
+function renderTeam(){
+  qzRender();
+  if(!tOn())return;
+  cdRender();ntRender();myRender();dlRender();asRender();actRender();rosRender();tBadge();
+}
+const vTeam=document.getElementById('view-team');
+vTeam.addEventListener('click',async e=>{
+  const t=e.target,F=MEM.fba;
+  const bb=t.closest('[data-board]');if(bb){showView('pcb');pbSelect(bb.dataset.board,true);return}
+  if(t.closest('#nt-seen')){lsSet('fsg-seen',Date.now());renderTeam();return}
+  if(t.closest('#nt-perm')){try{await Notification.requestPermission()}catch(x){}ntRender();return}
+  const da=t.closest('[data-dlact]');if(da&&tOn()){const id=da.closest('tr').dataset.id,d=TEAM.dl[id]||{};
+    if(da.dataset.dlact==='done')F.fs.set('meta/deadlines',{d:{[id]:{done:!d.done}}},true).catch(tErr);
+    else if(da.dataset.dlact==='del'){if(!da.classList.contains('arm')){da.classList.add('arm');da.title='Silmek için tekrar tıkla';setTimeout(()=>da.classList.remove('arm'),3000);return}F.fs.set('meta/deadlines',{d:{[id]:F.DEL()}},true).catch(tErr)}
+    else{const f=tmEl('dl-form');f.did.value=id;f.t.value=d.t||'';f.date.value=d.date||'';f.time.value=d.time||'';f.r.value=d.r||'';f.note.value=d.note||'';f.t.focus();f.scrollIntoView({block:'center',behavior:RM.matches?'auto':'smooth'})}
+    return}
+  if(t.closest('#dl-new')){tmEl('dl-form').reset();tmEl('dl-form').did.value='';return}
+  if(t.closest('#dl-seed')&&tOn()){const o={};DL_SEED.forEach(([n,r],i)=>{o['d'+i+Date.now().toString(36)]={t:n,r:byId[r]?r:'',date:'',time:'',note:'',done:false}});F.fs.set('meta/deadlines',{d:o},true).catch(tErr);return}
+});
+vTeam.addEventListener('change',e=>{if(e.target.id==='as-f'){TEAM.asF=e.target.value;asRender()}});
+vTeam.addEventListener('submit',e=>{if(e.target.id!=='dl-form')return;e.preventDefault();if(!tOn()||!MEM.admin)return;const f=e.target,F=MEM.fba,t=f.t.value.trim(),r=f.r.value.trim().toUpperCase().replace(/\s+/g,' ');
+  if(!t){tmEl('dl-msg').textContent='Belge adını yaz.';return}
+  const id=f.did.value||('d'+Date.now().toString(36));
+  F.fs.set('meta/deadlines',{d:{[id]:{t:t,date:f.date.value,time:f.time.value,r:byId[r]?r:'',note:f.note.value.trim(),done:(TEAM.dl[id]&&TEAM.dl[id].done)||false}}},true).then(()=>{f.reset();f.did.value='';const m=tmEl('dl-msg');if(m)m.textContent='Kaydedildi.'}).catch(tErr)});
+// ---------- admin panel (profile) ----------
+function admRender(){
+  const el=document.getElementById('pf-adm');if(!el)return;
+  if(!MEM.admin||!tOn()){el.innerHTML='';return}
+  const me=MEM.uid(),grp={pending:[],approved:[],rejected:[]};
+  Object.entries(TEAM.users).forEach(([id,u])=>{const st=u.role==='admin'?'approved':(u.status||'pending');(grp[st]||grp.pending).push([id,u])});
+  Object.values(grp).forEach(a=>a.sort((x,y)=>(y[1].createdAt||0)-(x[1].createdAt||0)));
+  const tab=TEAM.admTab,L=grp[tab]||[];
+  el.innerHTML='<h3>Üye yönetimi</h3><div class="pftabs adt">'+[['pending','Bekleyen'],['approved','Onaylı'],['rejected','Reddedilen']].map(([k,l])=>'<button type="button" data-at="'+k+'" class="'+(k===tab?'on':'')+'">'+l+' <small>'+grp[k].length+'</small></button>').join('')+'</div>'
+   +(L.length?'<ul class="adl">'+L.map(([id,u])=>'<li data-uid="'+esc(id)+'"><i>'+esc(uinit(id))+'</i><div class="adm-i"><b>'+esc(uname(id))+(u.role==='admin'?' <em class="adm">Yönetici</em>':'')+(id===me?' <small>(sen)</small>':'')+'</b><span>'+esc([u.birim,u.ekip].filter(Boolean).join(' · ')||'Birim/ekip yok')+'</span><span class="em" data-em="'+esc(id)+'">'+esc(TEAM.em[id]||'…')+'</span><small>Kayıt: '+(u.createdAt?new Date(u.createdAt).toLocaleDateString('tr-TR'):'—')+'</small></div><div class="adm-a">'
+     +(tab==='pending'?'<button class="btn pdf" data-admin data-act="approve">Onayla</button><button class="btn" data-admin data-act="reject">Reddet</button>':'')
+     +(tab==='approved'&&id!==me?(u.role==='admin'?'<button class="btn" data-admin data-act="rmadmin">Yöneticilikten al</button>':'<button class="btn" data-admin data-act="mkadmin">Yönetici yap</button><button class="btn" data-admin data-act="unapprove">Onayı geri al</button>'):'')
+     +(tab==='rejected'?'<button class="btn pdf" data-admin data-act="approve">Onayla</button><button class="btn bomx" data-admin data-act="del" title="Kaydı sil">Kaydı sil</button>':'')
+     +'</div></li>').join('')+'</ul>':'<p class="pmempty">'+({pending:'Onay bekleyen başvuru yok.',approved:'Onaylı üye yok.',rejected:'Reddedilen başvuru yok.'}[tab])+'</p>')
+   +'<p class="src">Onaylanan üyeler ortak checklist ve PCB listesini düzenleyebilir, görev alabilir, yorum yazabilir. Yönetici yaptığın kişi de üye onaylayabilir ve takvimi düzenleyebilir.</p>';
+  L.forEach(([id])=>{if(TEAM.em[id])return;TEAM.em[id]='…';MEM.fba.fs.get('users/'+id+'/private/info').then(d=>{TEAM.em[id]=(d&&d.email)||'e-posta yok'}).catch(()=>{TEAM.em[id]='e-posta okunamadı'}).then(()=>{const s=el.querySelector('[data-em="'+id+'"]');if(s)s.textContent=TEAM.em[id]})});
+}
+const pfAdm=document.getElementById('pf-adm');
+pfAdm.addEventListener('click',e=>{
+  const at=e.target.closest('[data-at]');if(at){TEAM.admTab=at.dataset.at;admRender();return}
+  const b=e.target.closest('[data-act]');if(!b||!tOn()||!MEM.admin)return;
+  const id=b.closest('[data-uid]').dataset.uid,F=MEM.fba,me=MEM.uid(),act=b.dataset.act;
+  const P={approve:{status:'approved',approvedBy:me,approvedAt:F.TS()},reject:{status:'rejected'},unapprove:{status:'pending'},mkadmin:{role:'admin',status:'approved'},rmadmin:{role:'member'}}[act];
+  if(act==='del'){if(!b.classList.contains('arm')){b.classList.add('arm');b.textContent='Emin misin?';setTimeout(()=>{b.classList.remove('arm');b.textContent='Kaydı sil'},3000);return}F.fs.del('users/'+id).catch(tErr);return}
+  if(P)F.fs.set('users/'+id,P,true).catch(tErr);
+});
+const _pfOpen=pfOpen;pfOpen=function(){_pfOpen();admRender()};
+// ---------- rule comments ----------
+const cmp=document.getElementById('cmp'),cml=document.getElementById('cml'),cmf=document.getElementById('cmf');
+function cmInject(){
+  if(!MEM.on||TEAM.cmDone)return;TEAM.cmDone=true;
+  document.querySelectorAll('#list .bm[data-bm]').forEach(b=>{const k=b.dataset.bm;b.insertAdjacentHTML('afterend','<button class="cm" data-cm="'+esc(k)+'" title="Takım yorumları" aria-label="Takım yorumları"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h16v11.5H10l-6 4.5z"/></svg><span class="cmc"></span></button>');TEAM.cmBtn[k]=b.nextElementSibling});
+  cmPaint();
+}
+function cmPaint(){for(const k in TEAM.cmBtn){const n=TEAM.cc[k]||0,b=TEAM.cmBtn[k];b.classList.toggle('has',n>0);b.lastElementChild.textContent=n>0?n:''}}
+function cmClose(){cmp.classList.remove('open');TEAM.cmK=null}
+async function cmLoad(){
+  const k=TEAM.cmK;if(!k||!tOn())return;cml.innerHTML='<p class="pmempty">Yükleniyor…</p>';
+  try{const L=(await MEM.fba.fs.where('comments','r',k)).sort((a,b)=>(a.data.a||0)-(b.data.a||0));if(TEAM.cmK!==k)return;
+    const me=MEM.uid();
+    cml.innerHTML=L.length?L.map(c=>{const d=c.data;return '<div class="cmi" data-cid="'+esc(c.id)+'"><div class="cmm"><i>'+esc(uinit(d.u))+'</i><b>'+esc(TEAM.users[d.u]?uname(d.u):(d.nm||'Eski üye'))+'</b><small>'+ago(d.a)+'</small>'+(d.u===me||MEM.admin?'<button type="button" class="cmx" title="Sil" aria-label="Yorumu sil">×</button>':'')+'</div><p>'+esc(d.t).replace(/\n/g,'<br>')+'</p></div>'}).join(''):'<p class="pmempty">Bu madde için henüz yorum yok. Takımın yorumunu, FSG’ye sorulan soruyu ya da alınan kararı buraya yaz.</p>';
+    cml.scrollTop=cml.scrollHeight;
+  }catch(err){cml.innerHTML='<p class="pmempty">Yorumlar okunamadı: '+esc(memErr(err))+'</p>'}
+}
+function cmOpen(k){TEAM.cmK=k;cmp.querySelector('.cmh b').textContent=k;cmp.querySelector('.cmr').textContent=rtext(k).slice(0,180);cmp.classList.add('open');cmf.t.value='';cmLoad()}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.cm[data-cm]');if(b){e.preventDefault();e.stopPropagation();if(memBlocked('edit'))return;cmOpen(b.dataset.cm);return}
+  if(cmp.classList.contains('open')&&!e.target.closest('#cmp'))cmClose();
+},true);
+cmp.querySelector('.cmclose').onclick=cmClose;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&cmp.classList.contains('open'))cmClose()});
+cmf.addEventListener('submit',async e=>{e.preventDefault();const k=TEAM.cmK,t=cmf.t.value.trim();if(!k||!t||!tOn())return;const F=MEM.fba,me=MEM.uid();busy(cmf,true);
+  try{await F.fs.add('comments',{r:k,t:t.slice(0,2000),u:me,nm:uname(me),a:F.TS()});await F.fs.set('meta/cc',{c:{[k]:F.INC(1)}},true);cmf.t.value='';await cmLoad()}catch(err){memTip('Yorum gönderilemedi: '+memErr(err),false)}busy(cmf,false)});
+cml.addEventListener('click',async e=>{const x=e.target.closest('.cmx');if(!x)return;if(!x.classList.contains('arm')){x.classList.add('arm');x.title='Silmek için tekrar tıkla';setTimeout(()=>x.classList.remove('arm'),3000);return}
+  const id=x.closest('[data-cid]').dataset.cid,F=MEM.fba,k=TEAM.cmK;try{await F.fs.del('comments/'+id);await F.fs.set('meta/cc',{c:{[k]:F.INC(-1)}},true);cmLoad()}catch(err){memTip('Silinemedi: '+memErr(err),false)}});
+// ---------- quiz ----------
+const QS={on:false,list:[],i:0,score:0,wrong:[],done:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function qzBest(){const q=MEM.udoc&&MEM.udoc.quiz;if(q&&q.best!=null)return q;return lsGet('fsg-quiz',null)}
+function qzRender(){
+  const el=tmEl('tm-quiz');if(!el)return;
+  if(QS.on&&!QS.done){const Q=QS.list[QS.i];
+    el.innerHTML='<div class="qz"><div class="qzp"><span>Soru '+(QS.i+1)+' / '+QS.list.length+'</span><span>Doğru: '+QS.score+'</span><i style="width:'+(QS.i/QS.list.length*100)+'%"></i></div><h3>'+esc(Q.q)+'</h3><div class="qzo">'+Q.ord.map(j=>'<button type="button" data-qo="'+j+'">'+esc(Q.o[j])+'</button>').join('')+'</div><div class="qzx" id="qz-x" hidden></div><div class="bomact"><button type="button" class="btn" id="qz-stop">Sınavı bitir</button></div></div>';return}
+  if(QS.on&&QS.done){const n=QS.list.length,b=qzBest();
+    el.innerHTML='<div class="qz qzend"><div class="qzscore"><b>'+QS.score+'</b><span>/ '+n+'</span></div><p>'+(QS.score===n?'Tam puan! Kurallara gerçekten hâkimsin.':QS.score>=n*.7?'İyi iş. Yanlışlarına aşağıdan bakıp kuralları tekrar et.':'Tekrar zamanı. Aşağıdaki maddeleri okuyup yeniden dene.')+(b&&b.best!=null?' En iyi skorun: <b>'+b.best+'/'+n+'</b>.':'')+'</p>'
+     +(QS.wrong.length?'<h3>Yanlış cevapladıkların</h3><ul class="qzw">'+QS.wrong.map(Q=>'<li>'+esc(Q.q)+'<br><span>Doğrusu: <b>'+esc(Q.o[Q.c])+'</b> · '+refA(Q.r)+'</span></li>').join('')+'</ul>':'')
+     +'<div class="bomact"><button type="button" class="btn pdf" id="qz-go">Yeniden başla</button><button type="button" class="btn" id="qz-home">Kapat</button></div></div>';return}
+  const b=qzBest();
+  let lb='';
+  if(tOn()){const L=Object.entries(TEAM.users).filter(([,u])=>u.quiz&&u.quiz.best!=null&&(u.status==='approved'||u.role==='admin')).sort((x,y)=>(y[1].quiz.best-x[1].quiz.best)||((x[1].quiz.at||0)-(y[1].quiz.at||0))).slice(0,10);
+    lb='<h3>Skor tablosu</h3>'+(L.length?'<ol class="qzlb">'+L.map(([id,u])=>'<li><span>'+esc(uname(id))+(u.ekip?' <em class="ek" data-e="'+(u.ekip==='Destek ekip'?'d':'a')+'">'+esc(u.ekip)+'</em>':'')+'</span><b>'+u.quiz.best+'/10</b><small>'+(u.quiz.n||1)+' deneme</small></li>').join('')+'</ol>':'<p class="pmempty">Henüz kimse sınava girmedi.</p>')}
+  el.innerHTML='<div class="qzstart"><div><p>'+QZ.length+' soruluk havuzdan rastgele <b>10 soru</b>. Her cevaptan sonra doğrusu ve ilgili kural maddesi gösterilir; süre sınırı yok.</p><p class="src">Kurallara yeni başlayanlar, özellikle <b>destek ekip</b> üyeleri için hazırlandı.'+(b&&b.best!=null?' En iyi skorun: <b>'+b.best+'/10</b>.':'')+(MEM.on&&!MEM.user?' Skorunun kaydedilmesi için giriş yap.':'')+'</p></div><button type="button" class="btn pdf" id="qz-go">Sınava başla</button></div>'+lb;
+}
+function qzSave(){
+  const sc=QS.score,prev=qzBest()||{},best=Math.max(sc,prev.best==null?0:prev.best),n=(prev.n||0)+1;
+  if(MEM.on&&MEM.user&&MEM.fba){const F=MEM.fba;F.fs.set('users/'+MEM.uid(),{quiz:{best:best,last:sc,n:n,at:F.TS()}},true).catch(()=>{})}
+  try{localStorage.setItem('fsg-quiz',JSON.stringify({best:best,last:sc,n:n,at:Date.now()}))}catch(e){}
+}
+tmEl('tm-quiz').addEventListener('click',e=>{
+  const t=e.target;
+  if(t.closest('#qz-go')){QS.on=true;QS.done=false;QS.i=0;QS.score=0;QS.wrong=[];QS.list=shuffle(QZ).slice(0,10).map(Q=>Object.assign({ord:shuffle([0,1,2,3])},Q));qzRender();return}
+  if(t.closest('#qz-home')){QS.on=false;qzRender();return}
+  if(t.closest('#qz-stop')){QS.done=true;qzSave();qzRender();return}
+  if(t.closest('#qz-next')){QS.i++;if(QS.i>=QS.list.length){QS.done=true;qzSave()}qzRender();tmEl('tm-quiz').scrollIntoView({block:'start',behavior:RM.matches?'auto':'smooth'});return}
+  const o=t.closest('[data-qo]');if(o&&!o.disabled){const Q=QS.list[QS.i],j=+o.dataset.qo,ok=j===Q.c;if(ok)QS.score++;else QS.wrong.push(Q);
+    tmEl('tm-quiz').querySelectorAll('[data-qo]').forEach(b=>{b.disabled=true;const k=+b.dataset.qo;if(k===Q.c)b.classList.add('ok');else if(k===j)b.classList.add('bad')});
+    const x=document.getElementById('qz-x');x.hidden=false;x.innerHTML='<b class="'+(ok?'ok':'bad')+'">'+(ok?'Doğru!':'Yanlış.')+'</b> '+esc(Q.x)+' '+refA(Q.r)+'<div class="bomact"><button type="button" class="btn pdf" id="qz-next">'+(QS.i+1<QS.list.length?'Sonraki soru':'Sonucu gör')+'</button></div>';
+    tmEl('tm-quiz').querySelector('.qzp span:nth-child(2)').textContent='Doğru: '+QS.score;}
+});
+// ---------- wiring ----------
+const _moveInd=moveInd;moveInd=function(i){_moveInd(i);const t=document.querySelector('.tab.on');if(t){const c=t.parentElement;if(c.scrollWidth>c.clientWidth+2)c.scrollLeft=t.offsetLeft-(c.clientWidth-t.offsetWidth)/2}};
+MEM.hooks.push(()=>{teamSync();cmInject();if(curView()==='prof')admRender();if(curView()==='team')renderTeam();tBadge()});
+if(!MEM.on){document.body.classList.add('mem-off')}
+pmRender();bomRender();ordRender();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script>
 <script type="module" src="fb.js"></script>
