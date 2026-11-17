@@ -25,20 +25,30 @@
 <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1242x2208.png">
 <link rel="apple-touch-startup-image" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1080x2340.png">
 <style id="spl-css">
-#spl{position:fixed;inset:0;z-index:9999;background:#0e1216;display:grid;place-items:center;will-change:opacity,transform}
+#spl{position:fixed;inset:0;z-index:9999;background:#0e1216;display:grid;place-items:center}
 #spl.lt{background:#f3f5f6}
-#spl.go{animation:splOut .5s cubic-bezier(.7,0,.2,1) forwards}
 #spl .spl-in{display:flex;flex-direction:column;align-items:center;gap:18px}
-#spl img{width:min(46vw,220px);height:auto;opacity:0;transform:translateY(12px) scale(.9);will-change:transform,opacity;animation:splLogo .8s cubic-bezier(.2,.8,.2,1) .1s forwards}
-#spl i{display:block;height:3px;width:min(46vw,220px);background:#2fc4d1;transform:scaleX(0);transform-origin:left;will-change:transform;animation:splBar .7s cubic-bezier(.6,0,.2,1) .55s forwards;box-shadow:0 0 14px rgba(47,196,209,.55)}
+#spl img{width:min(46vw,220px);height:auto;opacity:.02;transform:translateY(12px) scale(.9)}
+#spl i{display:block;height:3px;width:min(46vw,220px);background:#2fc4d1;transform:scaleX(0);transform-origin:left;box-shadow:0 0 14px rgba(47,196,209,.55)}
 #spl.lt i{background:#1fb5c4;box-shadow:none}
-#spl span{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.32em;color:#93a0aa;opacity:0;will-change:opacity;animation:splTxt .5s ease 1s forwards}
+#spl span{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.32em;color:#93a0aa;opacity:0}
 #spl.lt span{color:#58626c}
+#spl.run img{animation:splLogo .8s cubic-bezier(.2,.8,.2,1) .05s forwards}
+#spl.run i{animation:splBar .7s cubic-bezier(.6,0,.2,1) .5s forwards}
+#spl.run span{animation:splTxt .5s ease .95s forwards}
+#spl.go{animation:splOut .45s cubic-bezier(.7,0,.2,1) forwards}
 @keyframes splLogo{to{opacity:1;transform:none}}
 @keyframes splBar{to{transform:scaleX(1)}}
 @keyframes splTxt{to{opacity:1}}
-@keyframes splOut{to{opacity:0;transform:translateY(-4%);pointer-events:none}}
-@media (prefers-reduced-motion:reduce){#spl img,#spl i,#spl span{animation-duration:.01s;animation-delay:0s}}
+@keyframes splOut{to{opacity:0;transform:translateY(-3%);pointer-events:none}}
+@keyframes splFade{to{opacity:1}}
+@keyframes splFadeOut{to{opacity:0;pointer-events:none}}
+@media (prefers-reduced-motion:reduce){
+ #spl img{transform:none}#spl i{transform:none;opacity:0}
+ #spl.run img{animation:splFade .7s ease .05s forwards}
+ #spl.run i{animation:splFade .5s ease .45s forwards}
+ #spl.run span{animation:splFade .5s ease .8s forwards}
+ #spl.go{animation:splFadeOut .4s ease forwards}}
 </style>
 <link rel="preload" as="image" href="logo.png">
 
@@ -1019,9 +1029,11 @@ table.lsum td.late{color:var(--bad);font-weight:700}
 <script>
 window.__splMode=function(){var d=new Date(),m=d.getHours()*60+d.getMinutes();if(m>=1410||m<300)return 'dark';var t=null;try{t=localStorage.getItem('fsg-theme')}catch(e){}if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';return t};
 window.__splApply=function(s){if(window.__splMode()==='light'){s.classList.add('lt');var i=s.querySelector('img');if(i)i.src='logo-dark.png'}};
-window.__splGo=function(s){s=s||document.getElementById('spl');if(!s||s.classList.contains('go'))return;var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,min=rm?300:2000,t0=s.__t0||0,el=t0?performance.now()-t0:0,w=Math.max(0,min-el);
- s.style.animationDelay=Math.round(w)+'ms';s.classList.add('go');s.addEventListener('animationend',function(e){if(e.animationName==='splOut'&&s.parentNode)s.remove()});setTimeout(function(){if(s.parentNode)s.remove()},w+1200)};
-window.__splStart=function(s){window.__splApply(s);requestAnimationFrame(function(){s.__t0=performance.now()});setTimeout(function(){window.__splGo(s)},7000)};
+/* entrance starts when the splash is really on screen; s.__ready fires when the entrance has finished */
+window.__splStart=function(s){window.__splApply(s);var st=false;function go(){if(st)return;st=true;s.classList.add('run');s.__t0=performance.now();setTimeout(function(){s.__ready=true;if(s.__onReady)s.__onReady()},1550)}
+ requestAnimationFrame(function(){requestAnimationFrame(go)});setTimeout(go,600)};
+window.__splIdle=function(f){var done=false;function g(){if(!done){done=true;f()}}setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(g,{timeout:1500});else g()},200);setTimeout(g,2000)};
+window.__splGo=function(s){if(!s||s.classList.contains('go')||!s.parentNode)return;s.classList.add('go');s.addEventListener('animationend',function(e){if(/^splOut|^splFadeOut/.test(e.animationName)&&s.parentNode)s.remove()});setTimeout(function(){if(s.parentNode)s.remove()},1200)};
 (function(){var s=document.getElementById('spl');var sa=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;var seen=false;try{seen=sessionStorage.getItem('fsg-spl')}catch(e){}
 if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(e){}window.__splStart(s)})();
 </script>
@@ -3209,12 +3221,12 @@ tmEl('tm-nt').addEventListener('click',e=>{if(e.target.closest('#push-on'))pushE
 window.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#pf-out')&&pushTok()){const F=MEM.fba,tok=pushTok();if(F&&MEM.user){F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[tok]:F.DEL()}},true).catch(()=>{});F.push.remove().catch(()=>{})}try{localStorage.removeItem('fsg-pushtok')}catch(x){}}},true);
 MEM.hooks.push(()=>{if(tOn())pushRefresh()});
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
-</script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl");if(sp)requestAnimationFrame(function(){setTimeout(function(){try{run()}finally{window.__splGo&&window.__splGo(sp)}},30)});else run()})()</script>
+</script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
 <script type="module" src="fb.js"></script>
 <script>(function(){
 var SA=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
 var hadCtl=!!(navigator.serviceWorker&&navigator.serviceWorker.controller),pend=false,hiddenAt=0,AWAY=10*60*1000;
-function splash(){if(document.getElementById('spl')||!window.__splStart)return;var d=document.createElement('div');d.id='spl';d.setAttribute('aria-hidden','true');d.innerHTML='<div class="spl-in"><img src="logo.png" alt=""><i></i><span>KURAL VE BİLGİ PORTALI</span></div>';document.body.appendChild(d);window.__splStart(d);setTimeout(function(){window.__splGo(d)},60)}
+function splash(){if(document.getElementById('spl')||!window.__splStart)return;var d=document.createElement('div');d.id='spl';d.setAttribute('aria-hidden','true');d.innerHTML='<div class="spl-in"><img src="logo.png" alt=""><i></i><span>KURAL VE BİLGİ PORTALI</span></div>';document.body.appendChild(d);d.__onReady=function(){window.__splIdle(function(){window.__splGo(d)})};window.__splStart(d)}
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').then(function(r){r.update().catch(function(){})}).catch(function(){})});
  navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl)return;pend=true});
