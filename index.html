@@ -24,6 +24,23 @@
 <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="icons/startup/s-750x1334.png">
 <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1242x2208.png">
 <link rel="apple-touch-startup-image" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1080x2340.png">
+<style id="spl-css">
+#spl{position:fixed;inset:0;z-index:9999;background:#0e1216;display:grid;place-items:center;will-change:opacity,transform}
+#spl.lt{background:#f3f5f6}
+#spl.go{animation:splOut .5s cubic-bezier(.7,0,.2,1) forwards}
+#spl .spl-in{display:flex;flex-direction:column;align-items:center;gap:18px}
+#spl img{width:min(46vw,220px);height:auto;opacity:0;transform:translateY(12px) scale(.9);will-change:transform,opacity;animation:splLogo .8s cubic-bezier(.2,.8,.2,1) .1s forwards}
+#spl i{display:block;height:3px;width:min(46vw,220px);background:#2fc4d1;transform:scaleX(0);transform-origin:left;will-change:transform;animation:splBar .7s cubic-bezier(.6,0,.2,1) .55s forwards;box-shadow:0 0 14px rgba(47,196,209,.55)}
+#spl.lt i{background:#1fb5c4;box-shadow:none}
+#spl span{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.32em;color:#93a0aa;opacity:0;will-change:opacity;animation:splTxt .5s ease 1s forwards}
+#spl.lt span{color:#58626c}
+@keyframes splLogo{to{opacity:1;transform:none}}
+@keyframes splBar{to{transform:scaleX(1)}}
+@keyframes splTxt{to{opacity:1}}
+@keyframes splOut{to{opacity:0;transform:translateY(-4%);pointer-events:none}}
+@media (prefers-reduced-motion:reduce){#spl img,#spl i,#spl span{animation-duration:.01s;animation-delay:0s}}
+</style>
+<link rel="preload" as="image" href="logo.png">
 
 <title>ITU RACING Kural ve Bilgi Portalı by Berk Ay</title>
 <script>
@@ -998,26 +1015,16 @@ table.lsum td.late{color:var(--bad);font-weight:700}
 </style>
 </head>
 <body class="m-both">
-<div id="spl" aria-hidden="true"><div class="spl-in"><img src="logo.png" alt=""><i></i><span>KURAL VE BİLGİ PORTALI</span></div></div>
-<style>
-#spl{position:fixed;inset:0;z-index:9999;background:#0e1216;display:grid;place-items:center;will-change:opacity,transform;transition:opacity .45s ease,transform .55s cubic-bezier(.7,0,.2,1)}
-#spl.out{opacity:0;transform:translateY(-4%);pointer-events:none}
-#spl .spl-in{display:flex;flex-direction:column;align-items:center;gap:18px}
-#spl img{width:min(46vw,220px);height:auto;opacity:0;transform:translateY(12px) scale(.9);animation:splLogo .8s cubic-bezier(.2,.8,.2,1) .1s forwards;will-change:transform,opacity}
-#spl i{display:block;height:3px;width:min(46vw,220px);background:#2fc4d1;transform:scaleX(0);transform-origin:left;will-change:transform;animation:splBar .7s cubic-bezier(.6,0,.2,1) .55s forwards;box-shadow:0 0 14px rgba(47,196,209,.55)}
-#spl span{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.32em;color:#93a0aa;opacity:0;animation:splTxt .5s ease 1s forwards}
-#spl.lt{background:#f3f5f6}#spl.lt span{color:#58626c}#spl.lt i{background:#1fb5c4;box-shadow:none}
-@keyframes splLogo{to{opacity:1;transform:none}}
-@keyframes splBar{to{transform:scaleX(1)}}
-@keyframes splTxt{to{opacity:1}}
-@media (prefers-reduced-motion:reduce){#spl img,#spl i,#spl span{animation-duration:.01s;animation-delay:0s}}
-</style>
-<script>window.__splMode=function(){var d=new Date(),m=d.getHours()*60+d.getMinutes();if(m>=1410||m<300)return 'dark';var t=null;try{t=localStorage.getItem('fsg-theme')}catch(e){}if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';return t};
-window.__splApply=function(s){if(window.__splMode()==='light'){s.classList.add('lt');var i=s.querySelector('img');if(i)i.src='logo-dark.png'}};(function(){var s=document.getElementById('spl');window.__splApply(s);var sa=window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone;var seen=false;try{seen=sessionStorage.getItem('fsg-spl')}catch(e){}
-if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(e){}
-var t0=0,done=false,rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,min=rm?300:1900;requestAnimationFrame(function(){t0=Date.now()});
-function hide(){if(done)return;if(!t0){setTimeout(hide,50);return}done=true;var w=Math.max(0,min-(Date.now()-t0));setTimeout(function(){s.classList.add('out');setTimeout(function(){s.remove()},600)},w)}
-if(document.readyState==='complete')hide();else addEventListener('load',hide);setTimeout(function(){if(!done){t0=t0||Date.now();hide()}},5000)})();</script>
+<div id="spl" aria-hidden="true"><div class="spl-in"><img src="logo.png" alt="" decoding="sync"><i></i><span>KURAL VE BİLGİ PORTALI</span></div></div>
+<script>
+window.__splMode=function(){var d=new Date(),m=d.getHours()*60+d.getMinutes();if(m>=1410||m<300)return 'dark';var t=null;try{t=localStorage.getItem('fsg-theme')}catch(e){}if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';return t};
+window.__splApply=function(s){if(window.__splMode()==='light'){s.classList.add('lt');var i=s.querySelector('img');if(i)i.src='logo-dark.png'}};
+window.__splGo=function(s){s=s||document.getElementById('spl');if(!s||s.classList.contains('go'))return;var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,min=rm?300:2000,t0=s.__t0||0,el=t0?performance.now()-t0:0,w=Math.max(0,min-el);
+ s.style.animationDelay=Math.round(w)+'ms';s.classList.add('go');s.addEventListener('animationend',function(e){if(e.animationName==='splOut'&&s.parentNode)s.remove()});setTimeout(function(){if(s.parentNode)s.remove()},w+1200)};
+window.__splStart=function(s){window.__splApply(s);requestAnimationFrame(function(){s.__t0=performance.now()});setTimeout(function(){window.__splGo(s)},7000)};
+(function(){var s=document.getElementById('spl');var sa=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;var seen=false;try{seen=sessionStorage.getItem('fsg-spl')}catch(e){}
+if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(e){}window.__splStart(s)})();
+</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <linearGradient id="gMotor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9c1c9"/><stop offset=".45" stop-color="#7f8993"/><stop offset="1" stop-color="#454c54"/></linearGradient>
@@ -3202,13 +3209,12 @@ tmEl('tm-nt').addEventListener('click',e=>{if(e.target.closest('#push-on'))pushE
 window.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#pf-out')&&pushTok()){const F=MEM.fba,tok=pushTok();if(F&&MEM.user){F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[tok]:F.DEL()}},true).catch(()=>{});F.push.remove().catch(()=>{})}try{localStorage.removeItem('fsg-pushtok')}catch(x){}}},true);
 MEM.hooks.push(()=>{if(tOn())pushRefresh()});
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
-</script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}if(document.getElementById("spl"))requestAnimationFrame(function(){setTimeout(run,30)});else run()})()</script>
+</script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl");if(sp)requestAnimationFrame(function(){setTimeout(function(){try{run()}finally{window.__splGo&&window.__splGo(sp)}},30)});else run()})()</script>
 <script type="module" src="fb.js"></script>
 <script>(function(){
 var SA=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
 var hadCtl=!!(navigator.serviceWorker&&navigator.serviceWorker.controller),pend=false,hiddenAt=0,AWAY=10*60*1000;
-function splash(){if(document.getElementById('spl'))return;var d=document.createElement('div');d.id='spl';d.setAttribute('aria-hidden','true');d.innerHTML='<div class="spl-in"><img src="logo.png" alt=""><i></i><span>KURAL VE BİLGİ PORTALI</span></div>';if(window.__splApply)window.__splApply(d);document.body.appendChild(d);
- var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;setTimeout(function(){d.classList.add('out');setTimeout(function(){d.remove()},600)},rm?300:1800)}
+function splash(){if(document.getElementById('spl')||!window.__splStart)return;var d=document.createElement('div');d.id='spl';d.setAttribute('aria-hidden','true');d.innerHTML='<div class="spl-in"><img src="logo.png" alt=""><i></i><span>KURAL VE BİLGİ PORTALI</span></div>';document.body.appendChild(d);window.__splStart(d);setTimeout(function(){window.__splGo(d)},60)}
 if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
  addEventListener('load',function(){navigator.serviceWorker.register('sw.js').then(function(r){r.update().catch(function(){})}).catch(function(){})});
  navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl)return;pend=true});
