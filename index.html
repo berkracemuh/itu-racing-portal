@@ -12,6 +12,18 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="ITU Racing">
 <script>window.FSG_MEMBER=1</script>
+<link rel="apple-touch-startup-image" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1320x2868.png">
+<link rel="apple-touch-startup-image" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1206x2622.png">
+<link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1290x2796.png">
+<link rel="apple-touch-startup-image" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1179x2556.png">
+<link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1284x2778.png">
+<link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1170x2532.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1242x2688.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="icons/startup/s-828x1792.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="icons/startup/s-750x1334.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1242x2208.png">
+<link rel="apple-touch-startup-image" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1080x2340.png">
 
 <title>ITU RACING Kural ve Bilgi Portalı by Berk Ay</title>
 <script>
@@ -3190,6 +3202,22 @@ MEM.hooks.push(()=>{if(tOn())pushRefresh()});
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script>
 <script type="module" src="fb.js"></script>
-<script>if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+<script>(function(){
+var SA=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+var hadCtl=!!(navigator.serviceWorker&&navigator.serviceWorker.controller),pend=false,hiddenAt=0,AWAY=10*60*1000;
+function splash(){if(document.getElementById('spl'))return;var d=document.createElement('div');d.id='spl';d.setAttribute('aria-hidden','true');d.innerHTML='<div class="spl-in"><img src="logo.png" alt=""><i></i><span>KURAL VE BİLGİ PORTALI</span></div>';document.body.appendChild(d);
+ var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;setTimeout(function(){d.classList.add('out');setTimeout(function(){d.remove()},600)},rm?300:1800)}
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
+ addEventListener('load',function(){navigator.serviceWorker.register('sw.js').then(function(r){r.update().catch(function(){})}).catch(function(){})});
+ navigator.serviceWorker.addEventListener('controllerchange',function(){if(!hadCtl)return;if(document.hidden||document.getElementById('spl'))location.reload();else pend=true});
+}
+document.addEventListener('visibilitychange',function(){
+ if(document.hidden){hiddenAt=Date.now();return}
+ if(!hiddenAt||Date.now()-hiddenAt<AWAY)return;
+ if(navigator.serviceWorker)navigator.serviceWorker.getRegistration().then(function(r){if(r)r.update().catch(function(){})});
+ if(pend){location.reload();return}
+ if(SA)splash();
+});
+})();</script>
 </body>
 </html>
