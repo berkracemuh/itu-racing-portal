@@ -25,7 +25,7 @@
 <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1242x2208.png">
 <link rel="apple-touch-startup-image" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1080x2340.png">
 <style id="spl-css">
-#spl{position:fixed;inset:0;z-index:9999;background:rgba(14,18,22,.992);display:grid;place-items:center}
+#spl{position:fixed;inset:0;z-index:9999;background:rgba(14,18,22,.992);display:grid;place-items:center;will-change:opacity,transform}
 #spl.lt{background:rgba(243,245,246,.992)}
 #spl .spl-in{display:flex;flex-direction:column;align-items:center;gap:18px}
 #spl img{width:min(46vw,220px);height:auto;opacity:.02;transform:translateY(12px) scale(.9)}
@@ -33,21 +33,21 @@
 #spl.lt i{background:#1fb5c4;box-shadow:none}
 #spl span{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.32em;color:#93a0aa;opacity:0}
 #spl.lt span{color:#58626c}
-#spl.run img{animation:splLogo .6s cubic-bezier(.2,.8,.2,1) .05s forwards}
-#spl.run i{animation:splBar .5s cubic-bezier(.6,0,.2,1) .35s forwards}
-#spl.run span{animation:splTxt .4s ease .65s forwards}
-#spl.go{animation:splOut .35s cubic-bezier(.4,0,.2,1) forwards}
+#spl.run img{animation:splLogo .45s cubic-bezier(.2,.8,.2,1) forwards}
+#spl.run i{animation:splBar .4s cubic-bezier(.6,0,.2,1) .2s forwards}
+#spl.run span{animation:splTxt .3s ease .4s forwards}
+#spl.go{animation:splOut .45s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes splLogo{to{opacity:1;transform:none}}
 @keyframes splBar{to{transform:scaleX(1)}}
 @keyframes splTxt{to{opacity:1}}
-@keyframes splOut{to{opacity:0;transform:translateY(-3%);pointer-events:none}}
+@keyframes splOut{0%{opacity:1;transform:none}100%{opacity:0;transform:scale(1.04);pointer-events:none}}
 @keyframes splFade{to{opacity:1}}
 @keyframes splFadeOut{to{opacity:0;pointer-events:none}}
 @media (prefers-reduced-motion:reduce){
  #spl img{transform:none}#spl i{transform:none;opacity:0}
- #spl.run img{animation:splFade .5s ease .05s forwards}
- #spl.run i{animation:splFade .4s ease .3s forwards}
- #spl.run span{animation:splFade .4s ease .55s forwards}
+ #spl.run img{animation:splFade .4s ease forwards}
+ #spl.run i{animation:splFade .3s ease .2s forwards}
+ #spl.run span{animation:splFade .3s ease .35s forwards}
  #spl.go{animation:splFadeOut .4s ease forwards}}
 </style>
 <link rel="preload" as="image" href="logo.png">
@@ -1035,8 +1035,8 @@ window.__splApply=function(s){if(window.__splMode()==='light'){s.classList.add('
 /* entrance starts when the splash is really on screen; s.__ready fires when the entrance has finished */
 window.__splStart=function(s){window.__splApply(s);var st=false;function go(){if(st)return;st=true;s.classList.add('run');s.__t0=performance.now();setTimeout(function(){s.__ready=true;if(s.__onReady)s.__onReady()},120)}
  requestAnimationFrame(function(){requestAnimationFrame(go)});setTimeout(go,600)};
-window.__splIdle=function(f){var done=false;function g(){if(!done){done=true;f()}}setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(g,{timeout:600});else g()},60);setTimeout(g,900)};
-window.__splGo=function(s){if(!s||s.classList.contains('go')||!s.parentNode)return;var w=s.__t0?Math.max(0,1150-(performance.now()-s.__t0)):0;s.style.animationDelay=Math.round(w)+'ms';s.classList.add('go');s.addEventListener('animationend',function(e){if(/^splOut|^splFadeOut/.test(e.animationName)&&s.parentNode)s.remove()});setTimeout(function(){if(s.parentNode)s.remove()},w+1000)};
+window.__splIdle=function(f){var fired=false,last=0,ok=0,t0=performance.now();function g(){if(!fired){fired=true;f()}}function tick(t){if(last&&t-last<34)ok++;else ok=0;last=t;if(ok>=3||performance.now()-t0>1600)g();else requestAnimationFrame(tick)}setTimeout(function(){requestAnimationFrame(tick)},30);setTimeout(g,2200)};
+window.__splGo=function(s){if(!s||s.classList.contains('go')||!s.parentNode)return;var w=s.__t0?Math.max(0,750-(performance.now()-s.__t0)):0;s.style.animationDelay=Math.round(w)+'ms';s.classList.add('go');function done(){if(s.parentNode){s.remove();try{dispatchEvent(new Event('spl-done'))}catch(x){}}}s.addEventListener('animationend',function(e){if(/^splOut|^splFadeOut/.test(e.animationName))done()});setTimeout(done,w+1200)};
 (function(){var s=document.getElementById('spl');var sa=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;var seen=false;try{seen=sessionStorage.getItem('fsg-spl')}catch(e){}
 if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(e){}window.__splStart(s)})();
 </script>
@@ -2577,7 +2577,8 @@ function memStart(){
 if(MEM.on){
   document.querySelectorAll('#view-check .lead,#view-pcb .lead').forEach(l=>{l.innerHTML=l.innerHTML.replace('İşaretlerin bu tarayıcıda saklanır','İşaretler takımın ortak listesine kaydedilir; kimin neyi ne zaman işaretlediği görünür').replace('İşaretlerin ve notların bu tarayıcıda saklanır.','İşaretler ve notlar takımın ortak listesine kaydedilir.')});
   memBody();accPaint();
-  addEventListener('fba-ready',memStart);memStart();
+  const memBoot=()=>{if(memBoot.d)return;memBoot.d=1;addEventListener('fba-ready',memStart);memStart()};
+  if(document.getElementById('spl')){addEventListener('spl-done',memBoot,{once:true});setTimeout(memBoot,4000)}else memBoot();
   setTimeout(()=>{if(MEM.phase==='pending'&&!MEM.fba){MEM.phase='down';memEmit()}},12000);
 }
 
