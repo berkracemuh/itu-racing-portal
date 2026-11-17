@@ -25,18 +25,18 @@
 <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1242x2208.png">
 <link rel="apple-touch-startup-image" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="icons/startup/s-1080x2340.png">
 <style id="spl-css">
-#spl{position:fixed;inset:0;z-index:9999;background:#0e1216;display:grid;place-items:center}
-#spl.lt{background:#f3f5f6}
+#spl{position:fixed;inset:0;z-index:9999;background:rgba(14,18,22,.992);display:grid;place-items:center}
+#spl.lt{background:rgba(243,245,246,.992)}
 #spl .spl-in{display:flex;flex-direction:column;align-items:center;gap:18px}
 #spl img{width:min(46vw,220px);height:auto;opacity:.02;transform:translateY(12px) scale(.9)}
 #spl i{display:block;height:3px;width:min(46vw,220px);background:#2fc4d1;transform:scaleX(0);transform-origin:left;box-shadow:0 0 14px rgba(47,196,209,.55)}
 #spl.lt i{background:#1fb5c4;box-shadow:none}
 #spl span{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.32em;color:#93a0aa;opacity:0}
 #spl.lt span{color:#58626c}
-#spl.run img{animation:splLogo .8s cubic-bezier(.2,.8,.2,1) .05s forwards}
-#spl.run i{animation:splBar .7s cubic-bezier(.6,0,.2,1) .5s forwards}
-#spl.run span{animation:splTxt .5s ease .95s forwards}
-#spl.go{animation:splOut .45s cubic-bezier(.7,0,.2,1) forwards}
+#spl.run img{animation:splLogo .6s cubic-bezier(.2,.8,.2,1) .05s forwards}
+#spl.run i{animation:splBar .5s cubic-bezier(.6,0,.2,1) .35s forwards}
+#spl.run span{animation:splTxt .4s ease .65s forwards}
+#spl.go{animation:splOut .35s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes splLogo{to{opacity:1;transform:none}}
 @keyframes splBar{to{transform:scaleX(1)}}
 @keyframes splTxt{to{opacity:1}}
@@ -45,9 +45,9 @@
 @keyframes splFadeOut{to{opacity:0;pointer-events:none}}
 @media (prefers-reduced-motion:reduce){
  #spl img{transform:none}#spl i{transform:none;opacity:0}
- #spl.run img{animation:splFade .7s ease .05s forwards}
- #spl.run i{animation:splFade .5s ease .45s forwards}
- #spl.run span{animation:splFade .5s ease .8s forwards}
+ #spl.run img{animation:splFade .5s ease .05s forwards}
+ #spl.run i{animation:splFade .4s ease .3s forwards}
+ #spl.run span{animation:splFade .4s ease .55s forwards}
  #spl.go{animation:splFadeOut .4s ease forwards}}
 </style>
 <link rel="preload" as="image" href="logo.png">
@@ -1022,6 +1022,9 @@ table.lsum td.late{color:var(--bad);font-weight:700}
 .pushbox{margin-top:12px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--brand);font-size:.9em;line-height:1.55}
 .pushbox .bomact{margin-top:8px}
 #push-msg:empty{display:none}#push-msg{margin-top:6px;color:var(--bad)}
+/* ===== R25: render only rows near the viewport (big speed-up on load) ===== */
+#list>.row{content-visibility:auto;contain-intrinsic-size:auto 150px}
+@media print{#list>.row{content-visibility:visible}}
 </style>
 </head>
 <body class="m-both">
@@ -1030,10 +1033,10 @@ table.lsum td.late{color:var(--bad);font-weight:700}
 window.__splMode=function(){var d=new Date(),m=d.getHours()*60+d.getMinutes();if(m>=1410||m<300)return 'dark';var t=null;try{t=localStorage.getItem('fsg-theme')}catch(e){}if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';return t};
 window.__splApply=function(s){if(window.__splMode()==='light'){s.classList.add('lt');var i=s.querySelector('img');if(i)i.src='logo-dark.png'}};
 /* entrance starts when the splash is really on screen; s.__ready fires when the entrance has finished */
-window.__splStart=function(s){window.__splApply(s);var st=false;function go(){if(st)return;st=true;s.classList.add('run');s.__t0=performance.now();setTimeout(function(){s.__ready=true;if(s.__onReady)s.__onReady()},1550)}
+window.__splStart=function(s){window.__splApply(s);var st=false;function go(){if(st)return;st=true;s.classList.add('run');s.__t0=performance.now();setTimeout(function(){s.__ready=true;if(s.__onReady)s.__onReady()},120)}
  requestAnimationFrame(function(){requestAnimationFrame(go)});setTimeout(go,600)};
-window.__splIdle=function(f){var done=false;function g(){if(!done){done=true;f()}}setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(g,{timeout:1500});else g()},200);setTimeout(g,2000)};
-window.__splGo=function(s){if(!s||s.classList.contains('go')||!s.parentNode)return;s.classList.add('go');s.addEventListener('animationend',function(e){if(/^splOut|^splFadeOut/.test(e.animationName)&&s.parentNode)s.remove()});setTimeout(function(){if(s.parentNode)s.remove()},1200)};
+window.__splIdle=function(f){var done=false;function g(){if(!done){done=true;f()}}setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(g,{timeout:600});else g()},60);setTimeout(g,900)};
+window.__splGo=function(s){if(!s||s.classList.contains('go')||!s.parentNode)return;var w=s.__t0?Math.max(0,1150-(performance.now()-s.__t0)):0;s.style.animationDelay=Math.round(w)+'ms';s.classList.add('go');s.addEventListener('animationend',function(e){if(/^splOut|^splFadeOut/.test(e.animationName)&&s.parentNode)s.remove()});setTimeout(function(){if(s.parentNode)s.remove()},w+1000)};
 (function(){var s=document.getElementById('spl');var sa=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;var seen=false;try{seen=sessionStorage.getItem('fsg-spl')}catch(e){}
 if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(e){}window.__splStart(s)})();
 </script>
