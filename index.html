@@ -1242,6 +1242,109 @@ header .tab:focus:not(:focus-visible){outline:none}
 .rpst{flex:1;min-width:0}
 .rpsl small{font:500 11px var(--mono);color:var(--muted)}
 .rpsl label:has(input:not(:checked)) .rpst{color:var(--muted);text-decoration:line-through}
+/* ===== R32: geçişler ===== */
+@keyframes ovIn{from{opacity:0}to{opacity:1}}
+@keyframes ovOut{from{opacity:1}to{opacity:0}}
+@keyframes boxIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes boxOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(10px) scale(.98)}}
+@keyframes dIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes dOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-4px)}}
+#rpd,#pdq,#phe{animation:none}
+#rpd.ui-in,#pdq.ui-in,#phe.ui-in{animation:ovIn .22s ease}
+#rpd.ui-in .rpbox,#pdq.ui-in .rpbox,#phe.ui-in .rpbox{animation:boxIn .28s cubic-bezier(.2,.8,.2,1)}
+#rpd.ui-out,#pdq.ui-out,#phe.ui-out{animation:ovOut .19s ease forwards}
+#rpd.ui-out .rpbox,#pdq.ui-out .rpbox,#phe.ui-out .rpbox{animation:boxOut .19s ease forwards}
+#insp.ui-out{animation:ovOut .19s ease forwards}
+#insp.ui-out .in-card,#insp.ui-out .in-foot{animation:boxOut .19s ease forwards}
+.dcform.ui-in{animation:dIn .22s ease}.dcform.ui-out{animation:dOut .18s ease forwards}
+#lb{display:flex!important;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility 0s linear .22s}
+#lb[style*="flex"]{opacity:1;visibility:visible;transition:opacity .22s ease}
+#lb img{transform:scale(.97);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+#lb[style*="flex"] img{transform:none}
+details:not(nav details)[open]>:not(summary){animation:dIn .22s ease}
+nav details[open]>:not(summary){animation:none}
+#abbr:not(.abc)>.row:not(.h0),#abbr.abs>.row:not(.h0){animation:dIn .24s ease}
+@media (prefers-reduced-motion:reduce){#rpd.ui-in,#rpd.ui-out,#pdq.ui-in,#pdq.ui-out,#phe.ui-in,#phe.ui-out,#insp.ui-out,.dcform.ui-in,.dcform.ui-out,#rpd .rpbox,#pdq .rpbox,#phe .rpbox,details[open]>*,#abbr>.row{animation:none!important}#lb,#lb img{transition:none}}
+/* PDF not / soru penceresi / foto düzenleyici ortak */
+#pdq,#phe{position:fixed;inset:0;z-index:72;background:rgba(8,11,14,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+#pdq[hidden],#phe[hidden]{display:none}
+.pdqbox{width:min(480px,100%)}
+.pdql{display:block;font-weight:650;font-size:14px;margin-bottom:6px}.pdql em,.rpnote em{font-style:normal;font-weight:400;color:var(--muted)}
+#pdq-n,.rpnote input{width:100%;padding:9px 11px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:14.5px;resize:vertical}
+#pdq-n:focus,.rpnote input:focus{border-color:var(--brand);outline:0}
+.pdqh{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+.rpnote{display:flex;flex-direction:column;gap:6px;margin-top:14px;font-size:14px;font-weight:650}
+.phebox{width:min(460px,100%)}
+.phbody{display:flex;flex-direction:column;align-items:center}
+.phst{position:relative;width:min(360px,100%);aspect-ratio:1;touch-action:none}
+.phst canvas{width:100%;height:100%;display:block;cursor:grab;background:#0e1216}
+.phst canvas:active{cursor:grabbing}
+.pheh{margin:10px 0 6px;font-size:12.5px;color:var(--muted);text-align:center}
+.phctl{display:flex;align-items:center;gap:8px;width:min(360px,100%)}
+.phctl input[type=range]{flex:1;accent-color:var(--brand)}
+.phctl .btn{min-width:40px;font-size:16px;padding:6px 10px}
+.phctl [data-rs]{font-size:13px}
+/* Kısaltmalar düğmesi daha okunaklı */
+.abt{font-size:14px;padding:10px 14px;gap:12px}
+.abt small{font-size:13px;color:#b9c6ce}
+.abt i{width:8px;height:8px}
+/* Madde numaraları daha büyük */
+body{--cols:110px minmax(0,1fr) minmax(0,1fr) minmax(0,.72fr)}
+body.m-tr,body.m-en{--cols:110px minmax(0,1fr) minmax(0,.72fr)}
+body.no-ex{--cols:110px minmax(0,1fr) minmax(0,1fr)}
+body.no-ex.m-tr,body.no-ex.m-en{--cols:110px minmax(0,1fr)}
+.row .id{font-size:14px;font-weight:700;letter-spacing:.01em}
+.ck{grid-template-columns:108px minmax(0,1fr) auto}
+.ck .ckid{font-size:14px;font-weight:700}
+@media (max-width:760px){.ck{grid-template-columns:1fr}}
+/* Kaldığın yer */
+#resume{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:44;display:flex;align-items:stretch;max-width:min(620px,calc(100vw - 24px));background:var(--carbon);color:#fff;border:1px solid var(--carbon-line);border-left:3px solid var(--brand);box-shadow:0 16px 34px -14px rgba(0,0,0,.6)}
+#resume[hidden]{display:none}
+#resume.ui-in{animation:rsIn .3s cubic-bezier(.2,.8,.2,1)}#resume.ui-out{animation:rsOut .2s ease forwards}
+@keyframes rsIn{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes rsOut{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,10px)}}
+.rsk{display:flex;align-items:center;padding:0 12px;font:600 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--carbon-id);border-right:1px solid var(--carbon-line);white-space:nowrap}
+.rsgo{display:flex;align-items:center;gap:10px;min-width:0;padding:10px 14px;border:0;background:transparent;color:#fff;font:inherit;cursor:pointer;text-align:left}
+.rsgo b{font:700 14px var(--mono);color:var(--carbon-id);white-space:nowrap}
+.rsgo span{font-size:13px;color:#b9c6ce;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.rsgo i{font-style:normal;font-weight:650;font-size:13px;white-space:nowrap}
+.rsgo:hover i{color:var(--carbon-id)}
+.rsx{border:0;border-left:1px solid var(--carbon-line);background:transparent;color:#8fa0aa;font-size:20px;padding:0 14px;cursor:pointer}.rsx:hover{color:#fff}
+@media (max-width:600px){#resume{bottom:76px}.rsgo span,.rsk{display:none}}
+/* Profil kartları */
+.pffb,.pffbadm,.pfpdf{grid-column:1/-1}
+.pfcard h3 small{font:500 11px var(--mono);color:var(--muted);text-transform:none;letter-spacing:0;margin-left:6px}
+.fbi{color:var(--muted);font-size:.92em;margin:.2em 0 .8em}
+.fbform textarea{width:100%;padding:10px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:15px;resize:vertical;margin:10px 0}
+.fbform textarea:focus{border-color:var(--brand);outline:0}
+.fbcat{flex-wrap:wrap}
+.fbact{display:flex;align-items:center;gap:12px}.fbmsg{font-size:13px;color:var(--muted)}
+.fbmine h4{margin:18px 0 8px;font:600 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fbl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.fbl>li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;padding:10px 12px;border:1px solid var(--line);background:var(--bg)}
+.fbl small{color:var(--muted);font-size:12px}.fbl p{margin:3px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.fbc{padding:6px 10px;background:var(--accent-soft);border-left:3px solid var(--brand);font-size:.92em}
+.fbs{font:600 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;border:1px solid var(--line);white-space:nowrap}
+.fbs[data-s=yeni]{border-color:var(--brand);color:var(--accent)}.fbs[data-s=inceleniyor]{border-color:var(--miss);color:var(--miss)}.fbs[data-s=tamam]{background:var(--ok);border-color:var(--ok);color:#04252a}.fbs[data-s=red]{color:var(--muted)}
+.fbn{font:600 11px var(--mono);color:var(--accent);margin-left:6px}
+.fbad{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.fbad select,.fbad input{padding:6px 8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:13px}.fbad input{flex:1;min-width:160px}.fbad .btn{padding:5px 10px;font-size:13px}.fbdel.arm{border-color:var(--bad);color:var(--bad)}
+.ppl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ppl li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line);background:var(--bg)}
+.ppl li.ppe{color:var(--muted);font-size:.92em;border-style:dashed;background:transparent}
+.ppn{display:flex;flex-direction:column;min-width:0}.ppn b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ppn small{font:500 11.5px var(--mono);color:var(--muted)}
+.ppb{display:flex;gap:6px;flex:0 0 auto}.ppb .btn{padding:5px 10px;font-size:13px}.ppx{font-size:16px!important;line-height:1}
+#pf-btn[data-fbn]:not([data-fbn=""])::after{content:attr(data-fbn);position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;padding:0 4px;background:var(--brand);color:#04252a;font:700 10px/16px var(--mono);text-align:center}
+#pf-btn{position:relative}
+/* Alt bölme menüsü */
+.ct-nav{margin-top:28px}
+.ct-nav small{display:block;font:600 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8fa0aa;margin-bottom:10px}
+.ctl{display:grid;grid-template-columns:repeat(2,max-content);gap:4px 26px}
+.ctl a{color:#dfe7ea;text-decoration:none;font-size:14.5px;font-weight:550;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;width:fit-content}
+.ctl a:hover{color:var(--carbon-id);border-bottom-color:var(--carbon-id)}
+body:not(.baba-ok) .ct-baba{display:none}
+.ct-fb{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:10px 14px;border:1px solid var(--brand);background:transparent;color:#fff;font:inherit;font-size:14px;font-weight:650;cursor:pointer;transition:background .15s,color .15s}
+.ct-fb svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+.ct-fb:hover{background:var(--brand);color:#04252a}
 </style>
 </head>
 <body class="m-both">
@@ -1602,6 +1705,9 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
       <button class="btn pfdanger" id="pf-clear" type="button">Profil bilgilerini bu cihazdan sil</button>
     </div>
     <div class="pfcard pfadm" id="pf-adm"></div>
+    <div class="pfcard pffbadm" id="pf-fbadm" hidden></div>
+    <div class="pfcard pffb" id="pf-fb"></div>
+    <div class="pfcard pfpdf"><h3>Son PDF’lerim <small>bu cihazda</small></h3><p class="fbi">İndirdiğin son 6 PDF burada saklanır; internet yokken de açabilirsin.</p><ul class="ppl" id="pf-pdfs"></ul></div>
   </div>
   </div>
 </section>
@@ -1641,6 +1747,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   <div class="rpl"><span>Dil</span></div>
   <div class="seg rpseg" id="rp-lang" role="group" aria-label="Dil"><button type="button" data-l="both" class="on">EN + TR</button><button type="button" data-l="tr">Yalnız TR</button><button type="button" data-l="en">Yalnız EN</button></div>
   <div class="rpo"><label><input type="checkbox" id="rp-img" checked> Şekil ve tabloları ekle</label><label><input type="checkbox" id="rp-ex"> Açıklamaları ekle</label><label><input type="checkbox" id="rp-ab"> Kısaltmalar listesini ekle</label></div>
+  <label class="rpnote"><span>PDF’in başına not <em>(isteğe bağlı)</em></span><input id="rp-note" maxlength="240" placeholder="ör. Teknik muayene öncesi kontrol, 3. tur"></label>
  </div>
  <div class="rpf"><span class="rpsum" id="rp-sum"></span><div class="rpbtn"><button type="button" class="btn" id="rp-cancel">Vazgeç</button><button type="button" class="btn pdf" id="rp-go">PDF oluştur</button></div></div>
  <div class="rpp"><span id="rp-bar"><i></i></span><span class="rpmsg" id="rp-msg" role="status"></span></div>
@@ -3568,12 +3675,12 @@ function ckSetEk(n){ckEk=ekFind(n)?n:'';try{localStorage.setItem('fsg-ckek',ckEk
  function step(d){const j=S.i+d;if(j<0||j>=S.list.length)return;S.i=j;paint(d)}
  async function wake(on){try{if(on&&'wakeLock' in navigator&&!S.lock){S.lock=await navigator.wakeLock.request('screen');S.lock.addEventListener('release',()=>{S.lock=null})}else if(!on&&S.lock){await S.lock.release();S.lock=null}}catch(_){}}
  function net(){const off=navigator.onLine===false;Q('#in-net').hidden=!off}
- function open(){S.ek=ckEk||'';Q('#in-ek').value=S.ek;Q('#in-ch').value=S.ch;build(false);ov.hidden=false;document.body.classList.add('insp-on');try{history.pushState({insp:1},'',location.href)}catch(_){}net();paint(0);wake(true);setTimeout(()=>Q('#in-close').focus(),30)}
- function close(){ov.hidden=true;document.body.classList.remove('insp-on');wake(false);if(curView()==='check')renderCheck(false);const b=document.getElementById('ck-insp');if(b)b.focus()}
+ function open(){S.ek=ckEk||'';Q('#in-ek').value=S.ek;Q('#in-ch').value=S.ch;build(false);uiOpen(ov);document.body.classList.add('insp-on');try{history.pushState({insp:1},'',location.href)}catch(_){}net();paint(0);wake(true);setTimeout(()=>Q('#in-close').focus(),30)}
+ function close(){uiClose(ov);document.body.classList.remove('insp-on');wake(false);if(curView()==='check')renderCheck(false);const b=document.getElementById('ck-insp');if(b)b.focus()}
  document.getElementById('ck-insp').addEventListener('click',open);
  function reqClose(){if(history.state&&history.state.insp){try{history.back();return}catch(_){}}close()}
  Q('#in-close').addEventListener('click',reqClose);
- addEventListener('popstate',()=>{if(!ov.hidden)close()});addEventListener('hashchange',()=>{if(!ov.hidden)close()});
+ addEventListener('popstate',()=>{if(!ov.hidden&&!ov.classList.contains('ui-out'))close()});addEventListener('hashchange',()=>{if(!ov.hidden&&!ov.classList.contains('ui-out'))close()});
  Q('#in-ch').addEventListener('change',ev=>{S.ch=ev.target.value;build(false);paint(0)});
  Q('#in-ek').addEventListener('change',ev=>{S.ek=ev.target.value;build(false);paint(0)});
  Q('#in-un').addEventListener('click',ev=>{S.un=!S.un;ev.currentTarget.setAttribute('aria-pressed',S.un);build(true);paint(0)});
@@ -3612,7 +3719,7 @@ function ckSetEk(n){ckEk=ekFind(n)?n:'';try{localStorage.setItem('fsg-ckek',ckEk
  const form=box.querySelector('#dc-form'),list=box.querySelector('#dc-list'),addB=box.querySelector('#dc-add'),msg=box.querySelector('#dc-msg');
  const tsOf=x=>typeof x.a==='number'?x.a:Date.now();
  function nextV(tp){const n=D.docs.filter(x=>x.tp===tp).length;return 'v'+(n+1)}
- function showForm(on){D.open=on;form.hidden=!on;addB.setAttribute('aria-expanded',on);if(on){form.reset();form.v.value=nextV(form.tp.value);msg.textContent='';form.url.focus()}}
+ function showForm(on){D.open=on;if(on)uiOpen(form);else uiClose(form);addB.setAttribute('aria-expanded',on);if(on){form.reset();form.v.value=nextV(form.tp.value);msg.textContent='';form.url.focus()}}
  addB.addEventListener('click',()=>showForm(!D.open));box.querySelector('#dc-cancel').addEventListener('click',()=>showForm(false));
  form.tp.addEventListener('change',()=>{form.v.value=nextV(form.tp.value)});
  form.addEventListener('submit',async ev=>{ev.preventDefault();if(memBlocked('edit'))return;
@@ -3662,7 +3769,7 @@ function pdfWho(){try{if(typeof MEM!=='undefined'&&MEM.on&&!MEM.user)return '';c
 async function pdfBuild(blocks,opt){
  opt=opt||{};
  const FT=await pdfFonts();const logo=await pdfLogo();
- const PW=595.28,PH=841.89,ML=50,MR=50,CW=PW-ML-MR,TOP=80,BOT=PH-58;
+ const PW=595.28,PH=841.89,ML=50,MR=50,CW=PW-ML-MR,TOP=92,BOT=PH-58;
  const C={ink:'#14181b',mut:'#5b6670',line:'#d5dbe0',brand:'#1fb5c4',acc:'#0b7f8b',ok:'#1fb5c4',miss:'#e0a300',bad:'#d64550',carbon:'#0e1216',soft:'#eaf6f8',bg:'#f2f5f6',white:'#ffffff',dim:'#8d9aa4'};
  const used={R:new Set(),B:new Set(),M:new Set()};
  const rgb=h=>{h=h.replace('#','');return [0,2,4].map(i=>(parseInt(h.substr(i,2),16)/255).toFixed(3)).join(' ')};
@@ -3670,6 +3777,7 @@ async function pdfBuild(blocks,opt){
  function glyphs(str,f){const out=[];for(let ch of String(str)){if(PDF_SUB[ch]!==undefined)ch=PDF_SUB[ch];if(!ch)continue;for(const c of ch){let g=FT[f].cm.get(c.codePointAt(0));if(g===undefined)g=FT[f].cm.get(63)||0;out.push(g)}}return out}
  function tw(str,f,sz,sp){const F=FT[f],G=glyphs(str,f);let w=0;for(const g of G)w+=F.w[g]||0;return w*sz/F.upm+(sp?sp*Math.max(0,G.length-1):0)}
  const pages=[],outl=[],images=[];let pg=null,y=TOP;
+ const note=(opt.note!==undefined?opt.note:PDFNOTE)||'';
  const docTitle=opt.title||((blocks.find(b=>b.t==='h1')||{}).text||'Rapor');
  function np(){pg={ops:[],n:pages.length+1,body:false};pages.push(pg);y=TOP}
  const room=h=>{if(!pg||y+h>BOT)np()};
@@ -3717,16 +3825,18 @@ async function pdfBuild(blocks,opt){
   if(b.t==='kick'){room(16);text(ML,y+8,String(b.text).toLocaleUpperCase('tr'),'M',7.5,C.acc,'l',1.1);y+=16}
   else if(b.t==='h1'){if(!blocks.some(x=>x.t==='kick')&&y===TOP){text(ML,y+8,'İTÜ RACING · '+String(opt.kick||'RAPOR').toLocaleUpperCase('tr'),'M',7.5,C.acc,'l',1.1);y+=16}
    const L=flow([{t:b.text,f:'B',c:C.ink}],22,CW);L.forEach(l=>{room(28);drawLine(l,ML,y+22,22);y+=28});y+=2}
-  else if(b.t==='sub'){para([{t:b.text,f:'R',c:C.mut}],ML,CW,9.5,13.5);y+=6;hline(ML,PW-MR,y,C.ink,1);y+=14}
+  else if(b.t==='sub'){para([{t:b.text,f:'R',c:C.mut}],ML,CW,9.5,13.5);y+=6;
+   if(note&&!pg.noted){pg.noted=1;const L=flow([{t:note,f:'R',c:C.ink}],9.5,CW-70);const h=L.length*13.5+12;rect(ML,y,CW,h,C.soft);rect(ML,y,3,h,C.brand);text(ML+12,y+15,'NOT','M',8,C.acc,'l',1);L.forEach((l,i)=>drawLine(l,ML+58,y+15+i*13.5,9.5));y+=h+10}
+   hline(ML,PW-MR,y,C.ink,1);y+=14}
   else if(b.t==='chap'){if(pg.body)np();else if(y>TOP+4)y+=6;outl.push({t:b.id+' · '+b.text,lv:0,p:pg.n,y:y});room(70);
    rect(ML,y,4,52,C.brand);text(ML+16,y+13,'BÖLÜM','M',7,C.acc,'l',1.4);text(ML+16,y+42,b.id,'M',22,C.acc);text(ML+16+tw(b.id,'M',22)+14,y+40,b.text,'B',15,C.ink);
    if(b.en)text(PW-MR,y+13,b.en,'R',7.5,C.mut,'r');hline(ML,PW-MR,y+60,C.ink,1.2);y+=78;pg.body=true}
   else if(b.t==='h2'){room(46);y+=10;if(b.outline!==false)outl.push({t:b.text,lv:b.lv||0,p:pg.n,y:y});rect(ML,y+1,3.5,15,C.brand);text(ML+11,y+13,b.text,'B',13,C.ink);y+=21;hline(ML,PW-MR,y,C.ink,.8);y+=10}
-  else if(b.t==='h3'){room(36);y+=8;outl.push({t:b.id+' '+b.text,lv:1,p:pg.n,y:y});text(ML,y+11,b.id,'M',9,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],10.5,CW-62);L.forEach(l=>{room(15);drawLine(l,ML+62,y+11,10.5);y+=15});y+=2;hline(ML,PW-MR,y,C.line,.5);y+=7}
-  else if(b.t==='h4'){room(30);y+=4;text(ML,y+10,b.id,'M',8.5,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],9.5,CW-62);L.forEach(l=>{room(13.5);drawLine(l,ML+62,y+10,9.5);y+=13.5});y+=4}
+  else if(b.t==='h3'){room(36);y+=8;outl.push({t:b.id+' '+b.text,lv:1,p:pg.n,y:y});text(ML,y+12,b.id,'M',11,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],11,CW-76);L.forEach(l=>{room(16);drawLine(l,ML+76,y+12,11);y+=16});y+=2;hline(ML,PW-MR,y,C.line,.5);y+=7}
+  else if(b.t==='h4'){room(30);y+=4;text(ML,y+11,b.id,'M',10,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],10,CW-76);L.forEach(l=>{room(14.5);drawLine(l,ML+76,y+11,10);y+=14.5});y+=4}
   else if(b.t==='p'){para(richTxt(b.text,b.color||C.ink,b.bold?'B':'R'),ML,CW,9.5,13.5);y+=5}
   else if(b.t==='rule'){
-   const x=ML+62,w=CW-62,y0=y;room(16);text(ML,y+9.5,b.id,'M',8.5,C.acc);
+   const x=ML+76,w=CW-76,y0=y;room(16);text(ML,y+10,b.id,'M',10,C.acc);
    if(b.tr){body(b.tr,x,w,9.5,13.4,C.ink)}
    if(b.en){if(b.tr){y+=1;room(12);text(x,y+7,'EN','M',6.5,C.dim,'l',1);y+=10}body(b.en,x,w,b.tr?8.6:9.5,b.tr?12.2:13.4,b.tr?C.mut:C.ink)}
    (b.imgs||[]).forEach(im=>addImg(im,x,w));
@@ -3737,10 +3847,10 @@ async function pdfBuild(blocks,opt){
     text(PW-MR,y+10,r.n.ok+' / '+r.n.miss+' / '+r.n.bad+' / '+r.n.none,'M',8,C.mut,'r');hline(ML,PW-MR,y+17,C.line,.5);y+=21});y+=6}
   else if(b.t==='table'){const cols=b.cols.map(c=>Object.assign({},c,{w:c.w*S}));room(40);rect(ML,y,CW,17,C.bg);let x=ML;cols.forEach(c=>{text(c.al==='r'?x+c.w-6:x+6,y+11.5,c.h,'M',6.5,C.mut,c.al==='r'?'r':'l',.5);x+=c.w});y+=17;
    b.rows.forEach(r=>{room(17);x=ML;r.forEach((v,i)=>{const c=cols[i],f=i===0?'B':'R';let t=String(v);while(tw(t,f,8.5)>c.w-12&&t.length>2)t=t.slice(0,-2);if(t!==String(v))t=t.trim()+'…';text(c.al==='r'?x+c.w-6:x+6,y+11.5,t,f,8.5,C.ink,c.al==='r'?'r':'l');x+=c.w});hline(ML,PW-MR,y+17,C.line,.5);y+=17});y+=8}
-  else if(b.t==='item'){const idw=62,lab=b.tag==='bad'?'SORUN VAR':b.tag==='miss'?'EKSİK':'',pw=lab?58:0,col=C[b.tag==='bad'?'bad':b.tag==='miss'?'miss':'ok'];
+  else if(b.t==='item'){const idw=76,lab=b.tag==='bad'?'SORUN VAR':b.tag==='miss'?'EKSİK':'',pw=lab?58:0,col=C[b.tag==='bad'?'bad':b.tag==='miss'?'miss':'ok'];
    const L=flow(richTxt(b.text,C.ink),9.5,CW-idw-pw-10),NL=b.note?flow([{t:'Not: ',f:'B',c:C.mut},{t:b.note,f:'R',c:C.mut}],8.8,CW-idw-18):[];
    const h=L.length*13.4+(NL.length?NL.length*12.4+14:0)+12;if(y+h>BOT&&h<BOT-TOP)np();const y0=y;
-   rect(ML,y0,2.6,h-5,col);text(ML+9,y0+10,b.id,'M',8.5,C.acc);
+   rect(ML,y0,2.6,h-5,col);text(ML+9,y0+10.5,b.id,'M',10,C.acc);
    if(lab){rect(PW-MR-pw,y0,pw,13,col);text(PW-MR-pw/2,y0+9.3,lab,'B',7,b.tag==='bad'?'#ffffff':'#1b1400','c')}
    L.forEach((l,i)=>drawLine(l,ML+idw,y0+10+i*13.4,9.5));
    if(NL.length){const ny=y0+L.length*13.4+4,nh=NL.length*12.4+7;rect(ML+idw,ny,CW-idw,nh,C.soft);rect(ML+idw,ny,2,nh,C.brand);NL.forEach((l,i)=>drawLine(l,ML+idw+8,ny+11+i*12.4,8.8))}
@@ -3749,14 +3859,14 @@ async function pdfBuild(blocks,opt){
  }
  // header + footer on every page
  const N=pages.length,date=trDate(),who=opt.who!==undefined?opt.who:pdfWho();
- const lw=logo?26*logo.w/logo.h:0;
+ const lw=logo?32*logo.w/logo.h:0;
  pages.forEach(p=>{const keep=p.ops;p.ops=[];pg=p;
-  if(logo)op('q '+n2(lw)+' 0 0 26 '+n2(ML)+' '+n2(PH-42)+' cm /LG Do Q');
-  const tx=ML+(logo?lw+12:0);if(logo)rect(tx-6,19,.7,20,C.line);
-  text(tx+2,28,'Kural ve Bilgi Portalı','B',11,C.ink);text(tx+2,40,'İTÜ RACING · FSG RULES 2027','M',6,C.mut,'l',.9);
-  text(PW-MR,who?27:33,String(docTitle).toLocaleUpperCase('tr'),'M',7,C.acc,'r',.9);
-  if(who)text(PW-MR,40,'Hazırlayan: '+who,'R',7.5,C.ink,'r');
-  hline(ML,PW-MR,52,C.brand,1.6);
+  if(logo)op('q '+n2(lw)+' 0 0 32 '+n2(ML)+' '+n2(PH-50)+' cm /LG Do Q');
+  const tx=ML+(logo?lw+14:0);if(logo)rect(tx-7,20,.8,28,C.line);
+  text(tx+2,34,'Kural ve Bilgi Portalı','B',16,C.ink);text(tx+2,47,'İTÜ RACING · FSG FORMULA STUDENT RULES 2027','M',6.5,C.acc,'l',.9);
+  text(PW-MR,who?32:38,String(docTitle).toLocaleUpperCase('tr'),'M',7.5,C.acc,'r',.9);
+  if(who){const wl='Çıktıyı alan: ';text(PW-MR,45,who,'B',8.5,C.ink,'r');text(PW-MR-tw(who,'B',8.5),45,wl,'R',8.5,C.mut,'r')}
+  hline(ML,PW-MR,62,C.brand,2);
   p.ops=p.ops.concat(keep);
   hline(ML,PW-MR,PH-36,C.line,.6);
   text(ML,PH-24,'İTÜ Racing · FSG Formula Student Rules 2027 v1.0 · gayriresmî çeviri','R',7,C.mut);
@@ -3825,8 +3935,8 @@ async function pdfBuild(blocks,opt){
  Q('#rp-lang').addEventListener('click',ev=>{const b=ev.target.closest('[data-l]');if(!b)return;lang=b.dataset.l;Q('#rp-lang').querySelectorAll('[data-l]').forEach(x=>x.classList.toggle('on',x===b))});
  let last=null,busy=false;
  function open(ev){last=ev&&ev.currentTarget;const m=localStorage.getItem('fsg-mode')||'both';lang=['both','tr','en'].includes(m)?m:'both';Q('#rp-lang').querySelectorAll('[data-l]').forEach(x=>x.classList.toggle('on',x.dataset.l===lang));
-  dlg.hidden=false;document.body.classList.add('rpd-on');Q('#rp-msg').textContent='';Q('#rp-bar i').style.width='0';renderSec();sum();setTimeout(()=>Q('#rp-go').focus(),30)}
- function close(){if(busy)return;dlg.hidden=true;document.body.classList.remove('rpd-on');if(last)try{last.focus()}catch(_){}}
+  uiOpen(dlg);document.body.classList.add('rpd-on');Q('#rp-msg').textContent='';Q('#rp-bar i').style.width='0';renderSec();sum();setTimeout(()=>Q('#rp-go').focus(),30)}
+ function close(){if(busy)return;uiClose(dlg);document.body.classList.remove('rpd-on');if(last)try{last.focus()}catch(_){}}
  document.querySelectorAll('.rp-btn').forEach(b=>b.addEventListener('click',open));
  Q('#rp-x').addEventListener('click',close);Q('#rp-cancel').addEventListener('click',close);
  dlg.addEventListener('click',ev=>{if(ev.target===dlg)close()});
@@ -3834,7 +3944,7 @@ async function pdfBuild(blocks,opt){
  const prog=(t,f)=>{Q('#rp-msg').textContent=t;if(f!=null)Q('#rp-bar i').style.width=Math.round(f*100)+'%'};
  Q('#rp-go').addEventListener('click',async()=>{
   const chs=sel();if(!chs.length||busy)return;busy=true;const btn=Q('#rp-go');btn.disabled=true;btn.classList.add('busy');
-  const wImg=Q('#rp-img').checked,wEx=Q('#rp-ex').checked,wAb=Q('#rp-ab').checked;
+  const note=(Q('#rp-note')||{}).value||'';const wImg=Q('#rp-img').checked,wEx=Q('#rp-ex').checked,wAb=Q('#rp-ab').checked;
   try{
    prog('Yazı tipleri yükleniyor…',.05);await pdfFonts();
    const inc=i=>{for(let k=i;k>=0;k--){if(items[k].l===1)return !EX.has(items[k].i);if(items[k].l===0)return true}return true};
@@ -3852,7 +3962,7 @@ async function pdfBuild(blocks,opt){
      else if(it.l===3){const im=wImg?it.m.map(f=>imgs[f]).filter(Boolean):[];
       B.push({t:'rule',id:it.i,tr:lang!=='en'?it.t:'',en:lang!=='tr'?it.e:'',imgs:im,ex:wEx?it.x:''})}}});
    await new Promise(r=>setTimeout(r,20));
-   const blob=await pdfBuild(B,{title:'Kural kitapçığı · '+chs.join(' ')});
+   const blob=await pdfBuild(B,{title:'Kural kitapçığı · '+chs.join(' '),note:note.trim()});
    prog('Kaydediliyor…',.95);
    const nm='ITU-Racing-FSG-2027-'+chs.join('-')+'.pdf';const r=await dlBlob(blob,nm);prog(dlMsg(r,nm,blob),1)}
   catch(err){prog('PDF oluşturulamadı: '+(err&&err.message||err),0)}
@@ -3869,6 +3979,153 @@ async function pdfBuild(blocks,opt){
  h.setAttribute('role','button');h.tabIndex=0;h.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();set(!open,true)}});
  const g0=go;go=function(id){if(id==='abbr'&&!open)set(true,false);return g0.apply(this,arguments)};
  const q=document.getElementById('q');if(q)q.addEventListener('input',()=>setTimeout(()=>sec.classList.toggle('abs',!!q.value.trim()),0));
+})();
+// ===== R32: geçişler, PDF notu, son PDF'ler, kaldığın yer, fotoğraf düzenleyici, Gravatar, talep/öneri, alt bölme menüsü =====
+function uiOpen(el){if(!el)return;clearTimeout(el._uiT);el.hidden=false;el.classList.remove('ui-out');void el.offsetWidth;el.classList.add('ui-in')}
+function uiClose(el,cb){if(!el||el.hidden||el.classList.contains('ui-out'))return;el.classList.remove('ui-in');el.classList.add('ui-out');clearTimeout(el._uiT);el._uiT=setTimeout(()=>{el.hidden=true;el.classList.remove('ui-out');cb&&cb()},(RM&&RM.matches)?0:190)}
+let PDFNOTE='';
+const esq=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// ---- PDF notu soran küçük pencere (Checklist / PCB) ----
+function pdfAsk(title){return new Promise(res=>{
+ let d=document.getElementById('pdq');
+ if(!d){d=document.createElement('div');d.id='pdq';d.hidden=true;d.innerHTML='<div class="rpbox pdqbox" role="dialog" aria-modal="true" aria-labelledby="pdq-t"><div class="rph"><div><small>İTÜ Racing · PDF</small><b id="pdq-t"></b></div><button type="button" class="rpx" data-x aria-label="Kapat">×</button></div><div class="rpb"><label class="pdql" for="pdq-n">PDF’in başına not ekle <em>(isteğe bağlı)</em></label><textarea id="pdq-n" rows="3" maxlength="240" placeholder="ör. Teknik muayene öncesi kontrol, 3. tur"></textarea><p class="pdqh">Not, PDF’in ilk sayfasında başlığın altında görünür.</p></div><div class="rpf"><span class="rpsum"></span><div class="rpbtn"><button type="button" class="btn" data-x>Vazgeç</button><button type="button" class="btn pdf" data-ok>PDF oluştur</button></div></div></div>';document.body.appendChild(d)}
+ d.querySelector('#pdq-t').textContent=title;const ta=d.querySelector('#pdq-n');
+ const fin=v=>{d.removeEventListener('click',onc);document.removeEventListener('keydown',onk);uiClose(d);document.body.classList.remove('rpd-on');res(v)};
+ const onc=e=>{if(e.target===d||e.target.closest('[data-x]'))fin(null);else if(e.target.closest('[data-ok]'))fin({note:ta.value.trim()})};
+ const onk=e=>{if(e.key==='Escape')fin(null);else if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))fin({note:ta.value.trim()})};
+ d.addEventListener('click',onc);document.addEventListener('keydown',onk);document.body.classList.add('rpd-on');uiOpen(d);setTimeout(()=>ta.focus(),60)})}
+(function(){
+ const ck=document.getElementById('ck-pdf');if(ck&&ck.onclick){const o=ck.onclick;ck.onclick=async function(){const r=await pdfAsk('Checklist raporu');if(!r)return;PDFNOTE=r.note;try{await o.call(this)}finally{PDFNOTE=''}}}
+ if(typeof pbPdf==='function'){const o=pbPdf;pbPdf=async function(all,btn){const r=await pdfAsk(all?'PCB kontrol raporu':'PCB raporu · '+pSel);if(!r)return;PDFNOTE=r.note;try{return await o.call(this,all,btn)}finally{PDFNOTE=''}}}
+})();
+// ---- Son PDF'ler (bu cihazda, internetsiz açılır) ----
+const PDB={db:null,p:null};
+function pdbOpen(){if(PDB.p)return PDB.p;PDB.p=new Promise((res,rej)=>{try{const r=indexedDB.open('itur-pdf',1);r.onupgradeneeded=()=>r.result.createObjectStore('pdfs',{keyPath:'id',autoIncrement:true});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}});PDB.p.catch(()=>{PDB.p=null});return PDB.p}
+function pdbTx(mode,fn){return pdbOpen().then(db=>new Promise((res,rej)=>{const t=db.transaction('pdfs',mode),s=t.objectStore('pdfs');let out;Promise.resolve(fn(s,v=>out=v)).catch(rej);t.oncomplete=()=>res(out);t.onerror=()=>rej(t.error)}))}
+function pdbList(){return pdbTx('readonly',(s,set)=>{const r=s.getAll();r.onsuccess=()=>set((r.result||[]).sort((a,b)=>b.at-a.at))})}
+async function pdbSave(blob,name){try{await pdbTx('readwrite',s=>{s.add({name:name,size:blob.size,at:Date.now(),blob:blob})});const L=await pdbList();if(L.length>6)await pdbTx('readwrite',s=>{L.slice(6).forEach(x=>s.delete(x.id))});pdbRender()}catch(e){}}
+async function pdbRender(){const el=document.getElementById('pf-pdfs');if(!el)return;let L=[];try{L=await pdbList()}catch(e){el.closest('.pfcard').hidden=true;return}
+ el.innerHTML=L.length?L.map(x=>'<li><span class="ppn"><b>'+esq(x.name)+'</b><small>'+new Date(x.at).toLocaleString('tr-TR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' · '+Math.max(1,Math.round(x.size/1024))+' KB</small></span><span class="ppb"><button type="button" class="btn" data-po="'+x.id+'">Aç</button><button type="button" class="btn" data-pd="'+x.id+'">İndir</button><button type="button" class="btn ppx" data-px="'+x.id+'" aria-label="Sil">×</button></span></li>').join(''):'<li class="ppe">Henüz PDF indirilmedi.</li>'}
+(function(){
+ const o=dlBlob;dlBlob=async function(blob,name){const r=await o.apply(this,arguments);if(blob&&blob.type==='application/pdf'&&r==='saved')pdbSave(blob,name);return r};
+ document.addEventListener('click',async e=>{const b=e.target.closest('[data-po],[data-pd],[data-px]');if(!b||!b.closest('#pf-pdfs'))return;const id=+(b.dataset.po||b.dataset.pd||b.dataset.px);
+  if(b.dataset.px){try{await pdbTx('readwrite',s=>{s.delete(id)})}catch(_){}pdbRender();return}
+  let x=null;try{x=(await pdbList()).find(v=>v.id===id)}catch(_){}if(!x)return;
+  if(b.dataset.pd){dlAnchor(x.blob,x.name);return}
+  const u=URL.createObjectURL(x.blob),w=window.open(u,'_blank');if(!w)dlAnchor(x.blob,x.name);setTimeout(()=>URL.revokeObjectURL(u),60000)});
+ setTimeout(pdbRender,400);
+})();
+// ---- Kurallarda kaldığın yer ----
+(function(){
+ const S2I={};items.forEach(it=>S2I[slug(it.i)]=it.i);
+ let last=null;try{last=JSON.parse(localStorage.getItem('fsg-last')||'null')}catch(_){}
+ const startHash=location.hash.slice(1);
+ let t=0;
+ function cur(){if(document.body.classList.contains('v-alt'))return null;const st=document.getElementById('stick'),lst=document.getElementById('list');if(!st||!lst)return null;const y=st.getBoundingClientRect().bottom+14,r=lst.getBoundingClientRect();
+  const el=document.elementFromPoint(Math.max(r.left+30,Math.min(r.left+r.width/2,innerWidth-40)),y);const row=el&&el.closest&&el.closest('.row[id]');return row&&S2I[row.id]?S2I[row.id]:null}
+ addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>{if(scrollY<500)return;const id=cur();if(id){try{localStorage.setItem('fsg-last',JSON.stringify({id:id,at:Date.now()}))}catch(_){}}},500)},{passive:true});
+ if(!last||!byId[last.id]||(startHash&&startHash!=='top'))return;
+ const c=document.createElement('div');c.id='resume';c.hidden=true;c.setAttribute('role','status');
+ c.innerHTML='<span class="rsk">Kaldığın yer</span><button type="button" class="rsgo"><b>'+esq(last.id)+'</b><span>'+esq(cleanTxt(byId[last.id].t||'').slice(0,60))+'</span><i>Devam et →</i></button><button type="button" class="rsx" aria-label="Kapat">×</button>';
+ document.body.appendChild(c);
+ const hide=()=>uiClose(c,()=>c.remove());
+ c.querySelector('.rsgo').onclick=()=>{hide();showView('rules',{keepHash:true});setTimeout(()=>go(last.id,true,true),60)};
+ c.querySelector('.rsx').onclick=hide;
+ setTimeout(()=>{if(curView()==='rules'&&scrollY<300)uiOpen(c)},1400);
+ addEventListener('scroll',()=>{if(!c.hidden&&scrollY>900)hide()},{passive:true});
+ addEventListener('hashchange',()=>{if(!c.hidden&&curView()!=='rules')hide()});
+ setTimeout(()=>{if(c.isConnected&&!c.hidden)hide()},20000);
+})();
+// ---- Profil fotoğrafı düzenleyici (kırp · yakınlaştır · döndür) ----
+function photoEditor(img){return new Promise(res=>{
+ let d=document.getElementById('phe');
+ if(!d){d=document.createElement('div');d.id='phe';d.hidden=true;d.innerHTML='<div class="rpbox phebox" role="dialog" aria-modal="true" aria-labelledby="phe-t"><div class="rph"><div><small>Profil</small><b id="phe-t">Fotoğrafı ayarla</b></div><button type="button" class="rpx" data-x aria-label="Kapat">×</button></div><div class="rpb phbody"><div class="phst"><canvas width="560" height="560"></canvas><span class="phring"></span></div><p class="pheh">Sürükleyerek konumla, tekerlek ya da iki parmakla yakınlaştır.</p><div class="phctl"><button type="button" class="btn" data-rl title="Sola döndür" aria-label="Sola döndür">⟲</button><input type="range" min="1" max="4" step="0.01" value="1" aria-label="Yakınlaştır"><button type="button" class="btn" data-rr title="Sağa döndür" aria-label="Sağa döndür">⟳</button><button type="button" class="btn" data-rs>Sıfırla</button></div></div><div class="rpf"><span class="rpsum">256 × 256 px olarak kaydedilir</span><div class="rpbtn"><button type="button" class="btn" data-x>Vazgeç</button><button type="button" class="btn pdf" data-ok>Kaydet</button></div></div></div>';document.body.appendChild(d)}
+ const cv=d.querySelector('canvas'),g=cv.getContext('2d'),rg=d.querySelector('input[type=range]'),W=cv.width,R=W*0.44;
+ const S={z:1,rot:0,x:0,y:0};
+ const base=()=>{const sw=S.rot%180?img.naturalHeight:img.naturalWidth,sh=S.rot%180?img.naturalWidth:img.naturalHeight;return (2*R)/Math.min(sw,sh)};
+ function clamp(){const k=base()*S.z,sw=(S.rot%180?img.naturalHeight:img.naturalWidth)*k,sh=(S.rot%180?img.naturalWidth:img.naturalHeight)*k,mx=Math.max(0,sw/2-R),my=Math.max(0,sh/2-R);S.x=Math.max(-mx,Math.min(mx,S.x));S.y=Math.max(-my,Math.min(my,S.y))}
+ function drawTo(ctx,size,cx,cy,scale){const k=base()*S.z*scale;ctx.save();ctx.translate(cx+S.x*scale,cy+S.y*scale);ctx.rotate(S.rot*Math.PI/180);ctx.drawImage(img,-img.naturalWidth*k/2,-img.naturalHeight*k/2,img.naturalWidth*k,img.naturalHeight*k);ctx.restore()}
+ function paint(){clamp();g.fillStyle='#0e1216';g.fillRect(0,0,W,W);drawTo(g,W,W/2,W/2,1);g.save();g.fillStyle='rgba(8,11,14,.62)';g.beginPath();g.rect(0,0,W,W);g.arc(W/2,W/2,R,0,Math.PI*2,true);g.fill('evenodd');g.restore();g.strokeStyle='#1fb5c4';g.lineWidth=3;g.beginPath();g.arc(W/2,W/2,R,0,Math.PI*2);g.stroke()}
+ paint();rg.value=1;
+ const pts=new Map();let pd=0,pz=1;
+ const pos=e=>{const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*W/r.height]};
+ const onDown=e=>{cv.setPointerCapture(e.pointerId);pts.set(e.pointerId,pos(e));if(pts.size===2){const [a,b]=[...pts.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1]);pz=S.z}};
+ const onMove=e=>{if(!pts.has(e.pointerId))return;const p=pos(e),o=pts.get(e.pointerId);pts.set(e.pointerId,p);if(pts.size===2){const [a,b]=[...pts.values()];const dd=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd>0){S.z=Math.max(1,Math.min(4,pz*dd/pd));rg.value=S.z}}else{S.x+=p[0]-o[0];S.y+=p[1]-o[1]}paint()};
+ const onUp=e=>{pts.delete(e.pointerId);if(pts.size<2)pd=0};
+ const onWheel=e=>{e.preventDefault();S.z=Math.max(1,Math.min(4,S.z*(e.deltaY<0?1.08:1/1.08)));rg.value=S.z;paint()};
+ const onRange=()=>{S.z=+rg.value;paint()};
+ const onClick=e=>{if(e.target===d||e.target.closest('[data-x]'))fin(null);else if(e.target.closest('[data-rl]')){S.rot=(S.rot+270)%360;[S.x,S.y]=[S.y,-S.x];paint()}else if(e.target.closest('[data-rr]')){S.rot=(S.rot+90)%360;[S.x,S.y]=[-S.y,S.x];paint()}else if(e.target.closest('[data-rs]')){S.z=1;S.rot=0;S.x=0;S.y=0;rg.value=1;paint()}
+  else if(e.target.closest('[data-ok]')){const O=256,c=document.createElement('canvas');c.width=c.height=O;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,O,O);x.imageSmoothingQuality='high';drawTo(x,O,O/2,O/2,O/(2*R));fin(c.toDataURL('image/jpeg',.88))}};
+ const onKey=e=>{if(e.key==='Escape')fin(null)};
+ function fin(v){cv.removeEventListener('pointerdown',onDown);cv.removeEventListener('pointermove',onMove);cv.removeEventListener('pointerup',onUp);cv.removeEventListener('pointercancel',onUp);cv.removeEventListener('wheel',onWheel);rg.removeEventListener('input',onRange);d.removeEventListener('click',onClick);document.removeEventListener('keydown',onKey);document.body.classList.remove('rpd-on');uiClose(d);res(v)}
+ cv.addEventListener('pointerdown',onDown);cv.addEventListener('pointermove',onMove);cv.addEventListener('pointerup',onUp);cv.addEventListener('pointercancel',onUp);cv.addEventListener('wheel',onWheel,{passive:false});rg.addEventListener('input',onRange);d.addEventListener('click',onClick);document.addEventListener('keydown',onKey);
+ document.body.classList.add('rpd-on');uiOpen(d)})}
+(function(){
+ const inp=document.getElementById('pf-file');if(!inp)return;
+ inp.onchange=async function(){const f=this.files&&this.files[0];this.value='';if(!f)return;
+  if(!/^image\//.test(f.type)){pfNote('Lütfen bir resim dosyası seç.',false);return}
+  const url=URL.createObjectURL(f);
+  try{const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('Resim açılamadı'));i.src=url});
+   const out=await photoEditor(im);if(!out)return;
+   const prev=PF.photo;PF.photo=out;
+   if(!savePF()){PF.photo=prev;pfNote('Fotoğraf kaydedilemedi: tarayıcı depolaması kapalı ya da dolu.',false);return}
+   pfPaint();pfNote('Fotoğraf güncellendi.',true)}
+  catch(err){pfNote('Fotoğraf işlenemedi: '+(err&&err.message||err),false)}
+  finally{URL.revokeObjectURL(url)}};
+})();
+// ---- E-posta hesabının profil resmi (Gravatar) ----
+(function(){
+ let busy=false;
+ async function tryGravatar(){if(busy||typeof MEM==='undefined'||!MEM.on||!MEM.user||!MEM.user.email||!MEM.udoc||PF.photo)return;const key='fsg-gv-'+MEM.user.email.trim().toLowerCase();try{if(localStorage.getItem(key))return}catch(_){}busy=true;
+  try{const em=MEM.user.email.trim().toLowerCase(),h=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(em)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+   const url='https://gravatar.com/avatar/'+h+'?s=256&d=404';
+   const ok=await new Promise(r=>{const i=new Image();i.onload=()=>r(i.naturalWidth>0);i.onerror=()=>r(false);i.src=url;setTimeout(()=>r(false),6000)});
+   try{localStorage.setItem(key,'1')}catch(_){}if(ok&&!PF.photo){PF.photo=url;savePF();pfPaint();pfNote('E-posta hesabına bağlı profil resmi eklendi (Gravatar). İstersen değiştirebilirsin.',true)}}
+  catch(e){}finally{busy=false}}
+ if(typeof memProfileFromDocs==='function'){const o=memProfileFromDocs;memProfileFromDocs=function(){const r=o.apply(this,arguments);setTimeout(tryGravatar,800);return r}}
+})();
+// ---- Talep ve öneri ----
+(function(){
+ const box=document.getElementById('pf-fb'),adm=document.getElementById('pf-fbadm');if(!box)return;
+ const CAT={oneri:'Öneri',hata:'Hata bildirimi',ozellik:'Yeni özellik isteği',diger:'Diğer'},STT={yeni:'Yeni',inceleniyor:'İnceleniyor',tamam:'Tamamlandı',red:'Uygulanmayacak'};
+ const st={mine:[],all:[],unsub:null,err:''};
+ const when=ms=>ms?new Date(ms).toLocaleDateString('tr-TR',{day:'numeric',month:'short',year:'numeric'}):'';
+ function render(){
+  const on=typeof MEM!=='undefined'&&MEM.on;
+  if(!on){box.innerHTML='<h3>Talep ve öneri</h3><p class="fbi">Siteye dair önerini, gördüğün hatayı ya da istediğin yeni özelliği yaz; yöneticiler görür.</p><p class="fbi">Göndermek için uygulama sürümünde giriş yap: <a href="https://berkracemuh.github.io/itu-racing-portal/#profil" target="_blank" rel="noopener noreferrer">berkracemuh.github.io/itu-racing-portal</a></p>';return}
+  if(!MEM.user){box.innerHTML='<h3>Talep ve öneri</h3><p class="fbi">Öneri göndermek için giriş yap.</p>';return}
+  if(!box.querySelector('#fb-form')){box.innerHTML='<h3>Talep ve öneri</h3><p class="fbi">Siteye dair önerini, gördüğün hatayı ya da istediğin yeni özelliği yaz. Yöneticiler profillerinde görür ve durumunu buradan takip edebilirsin.</p><form id="fb-form" class="fbform" autocomplete="off"><div class="seg fbcat" role="group" aria-label="Tür">'+Object.keys(CAT).map((k,i)=>'<button type="button" data-cat="'+k+'"'+(i===0?' class="on"':'')+'>'+CAT[k]+'</button>').join('')+'</div><textarea name="t" rows="4" maxlength="2000" placeholder="ör. Checklist’te bölümleri ekiplere göre renklendirebilir miyiz?" required></textarea><div class="fbact"><button type="submit" class="btn pdf">Gönder</button><span class="fbmsg" role="status"></span></div></form><div class="fbmine"></div>'}
+  const m=box.querySelector('.fbmine');m.innerHTML=st.mine.length?'<h4>Gönderdiklerin</h4><ul class="fbl">'+st.mine.map(x=>'<li><span class="fbs" data-s="'+esq(x.st||'yeni')+'">'+(STT[x.st]||'Yeni')+'</span><div><small>'+esq(CAT[x.cat]||'Öneri')+' · '+when(x.a)+'</small><p>'+esq(x.t)+'</p>'+(x.cev?'<p class="fbc"><b>Yanıt:</b> '+esq(x.cev)+'</p>':'')+'</div></li>').join('')+'</ul>':''}
+ function renderAdm(){if(!adm)return;const on=typeof MEM!=='undefined'&&MEM.on&&MEM.admin;adm.hidden=!on;if(!on)return;
+  const n=st.all.filter(x=>(x.st||'yeni')==='yeni').length;
+  adm.innerHTML='<h3>Talep ve öneriler <span class="fbn">'+(n?n+' yeni':'')+'</span></h3>'+(st.err?'<p class="fbi">'+esq(st.err)+'</p>':st.all.length?'<ul class="fbl fba">'+st.all.map(x=>'<li data-fb="'+esq(x.id)+'"><span class="fbs" data-s="'+esq(x.st||'yeni')+'">'+(STT[x.st]||'Yeni')+'</span><div><small><b>'+esq(x.nm||'Üye')+'</b> · '+esq(CAT[x.cat]||'Öneri')+' · '+when(x.a)+'</small><p>'+esq(x.t)+'</p><div class="fbad"><select data-fbst aria-label="Durum">'+Object.keys(STT).map(k=>'<option value="'+k+'"'+((x.st||'yeni')===k?' selected':'')+'>'+STT[k]+'</option>').join('')+'</select><input data-fbcev maxlength="500" placeholder="Kısa yanıt (üye görür)" value="'+esq(x.cev||'')+'"><button type="button" class="btn" data-fbsave>Kaydet</button><button type="button" class="btn fbdel" data-fbdel>Sil</button></div></div></li>').join('')+'</ul>':'<p class="fbi">Henüz talep ya da öneri yok.</p>')}
+ async function loadMine(){if(!MEM.user||!MEM.fba)return;try{const L=await MEM.fba.fs.where('feedback','u',MEM.uid());st.mine=L.map(d=>Object.assign({id:d.id},d.data)).sort((a,b)=>(b.a||0)-(a.a||0))}catch(e){st.mine=[]}render()}
+ function sync(){const isAdm=typeof MEM!=='undefined'&&MEM.on&&MEM.admin&&MEM.fba;
+  if(isAdm&&!st.unsub){st.unsub=MEM.fba.fs.watchCol('feedback',(docs,m,err)=>{if(err){st.err=String(err.code||'').includes('permission')?'Talep ve öneriler için Firebase kurallarına “feedback” bölümünün eklenmesi gerekiyor.':'Okunamadı.';renderAdm();return}st.err='';st.all=docs.map(d=>Object.assign({id:d.id},d.data)).sort((a,b)=>(b.a||0)-(a.a||0));renderAdm();fbBadge()})}
+  else if(!isAdm&&st.unsub){try{st.unsub()}catch(_){}st.unsub=null;st.all=[]}
+  render();renderAdm();if(typeof MEM!=='undefined'&&MEM.user)loadMine()}
+ function fbBadge(){const n=st.all.filter(x=>(x.st||'yeni')==='yeni').length,b=document.getElementById('pf-btn')||document.querySelector('.pf-btn');if(b)b.dataset.fbn=n||''}
+ box.addEventListener('click',e=>{const c=e.target.closest('[data-cat]');if(!c)return;box.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('on',x===c))});
+ box.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,msg=f.querySelector('.fbmsg'),t=f.t.value.trim();if(t.length<5){msg.textContent='Biraz daha ayrıntı yaz.';return}
+  const cat=(f.querySelector('[data-cat].on')||{}).dataset;const F=MEM.fba,me=MEM.uid();const nm=((PF.ad||'')+' '+(PF.soyad||'')).trim()||'Üye';
+  const b=f.querySelector('button[type=submit]');b.disabled=true;msg.textContent='Gönderiliyor…';
+  try{await F.fs.add('feedback',{t:t.slice(0,2000),cat:(cat&&cat.cat)||'oneri',u:me,nm:nm,st:'yeni',a:F.TS()});f.t.value='';msg.textContent='Teşekkürler, iletildi.';loadMine()}
+  catch(err){msg.textContent=String(err&&err.code||'').includes('permission')?'Gönderilemedi: Firebase kurallarına “feedback” bölümü eklenmemiş olabilir.':'Gönderilemedi: '+(typeof memErr==='function'?memErr(err):err)}
+  b.disabled=false});
+ if(adm)adm.addEventListener('click',async e=>{const li=e.target.closest('[data-fb]');if(!li)return;const id=li.dataset.fb,F=MEM.fba;
+  if(e.target.closest('[data-fbsave]')){try{await F.fs.set('feedback/'+id,{st:li.querySelector('[data-fbst]').value,cev:li.querySelector('[data-fbcev]').value.trim().slice(0,500)},true)}catch(err){tErr(err)}}
+  else if(e.target.closest('[data-fbdel]')){const x=e.target.closest('[data-fbdel]');if(!x.classList.contains('arm')){x.classList.add('arm');x.textContent='Emin misin?';setTimeout(()=>{if(x.isConnected){x.classList.remove('arm');x.textContent='Sil'}},3500);return}try{await F.fs.del('feedback/'+id)}catch(err){tErr(err)}}});
+ if(typeof MEM!=='undefined'&&MEM.hooks)MEM.hooks.push(sync);sync();
+ window.fbOpen=()=>{showView('prof');setTimeout(()=>{box.scrollIntoView({behavior:RM&&RM.matches?'auto':'smooth',block:'start'});const ta=box.querySelector('textarea');if(ta)setTimeout(()=>ta.focus({preventScroll:true}),400)},120)};
+})();
+// ---- Alt bölme: menü bağlantıları ----
+(function(){
+ const ct=document.querySelector('#contact .ct-left');if(!ct)return;
+ const nv=document.createElement('div');nv.className='ct-nav';nv.setAttribute('role','navigation');nv.setAttribute('aria-label','Sayfalar');
+ const L=tabBtns.map(t=>({v:t.dataset.v,l:t.childNodes[0].textContent.trim()}));
+ nv.innerHTML='<small>Sayfalar</small><div class="ctl">'+L.map(x=>'<a href="#" data-ctv="'+x.v+'"'+(x.v==='baba'?' class="ct-baba"':'')+'>'+esq(x.l)+'</a>').join('')+'<a href="#" data-ctv="prof">Profil</a></div><button type="button" class="ct-fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Talep ve öneri gönder</button>';
+ ct.appendChild(nv);
+ nv.addEventListener('click',e=>{const a=e.target.closest('[data-ctv]');if(a){e.preventDefault();showView(a.dataset.ctv);scrollTo(0,0);return}if(e.target.closest('.ct-fb'))fbOpen()});
 })();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
