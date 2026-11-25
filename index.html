@@ -1173,6 +1173,43 @@ html[data-theme=dark] .in-tg[aria-pressed=true]{background:var(--brand);color:#0
 @media (max-width:700px){.dcbar{flex-direction:column}.dcform{grid-template-columns:1fr}.dcu,.dcn,.dcact{grid-column:auto}.dcg{grid-template-columns:1fr}}
 .in-st button{padding:0 4px;line-height:1.15}
 .dcform[hidden]{display:none}.dcform label{min-width:0}.dcform input,.dcform select{width:100%;min-width:0;max-width:100%}
+/* ===== R30: filigran, IST27, kural PDF penceresi ===== */
+#wm img{width:min(46%,560px)}
+:root[data-theme="dark"]{--wm-op:.024}
+.veh.next .pic{opacity:1}
+.veh.next .pic.ph{background:#0e1216}
+.rp-btn{display:inline-flex;align-items:center;gap:5px}
+.rp-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:square}
+body.rpd-on{overflow:hidden}
+#rpd{position:fixed;inset:0;z-index:70;background:rgba(8,11,14,.55);display:flex;align-items:center;justify-content:center;padding:16px;animation:inIn .18s ease}
+#rpd[hidden]{display:none}
+.rpbox{width:min(720px,100%);max-height:calc(100vh - 32px);display:flex;flex-direction:column;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-top:3px solid var(--brand);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.rph{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:var(--carbon);color:#fff}
+.rph small{display:block;font:600 10px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--carbon-id)}
+.rph b{font-size:17px;font-weight:700}
+.rpx{width:36px;height:36px;border:1px solid #2a333c;background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.rpx:hover{border-color:var(--carbon-id)}
+.rpb{padding:14px 18px;overflow:auto}
+.rpl{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 8px;font:600 10.5px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.rplink{border:0;background:none;color:var(--accent);font:600 12.5px var(--mono);cursor:pointer;text-transform:none;letter-spacing:0;padding:0}
+.rpg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-bottom:14px}
+.rpc{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);background:var(--panel);cursor:pointer;transition:border-color .15s,background .15s}
+.rpc:hover{border-color:var(--brand)}
+.rpc:has(input:checked){border-color:var(--brand);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--brand)}
+.rpc input{margin:3px 0 0;accent-color:var(--brand)}
+.rpk{font:700 13px/1.4 var(--mono);color:var(--accent);min-width:24px}
+.rpn{display:flex;flex-direction:column;min-width:0}.rpn b{font-size:13.5px;font-weight:650;line-height:1.3}.rpn small{font-size:11.5px;color:var(--muted);line-height:1.35}
+.rpseg{margin-bottom:14px}
+.rpo{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px}
+.rpo label{display:flex;gap:7px;align-items:center;cursor:pointer}.rpo input{accent-color:var(--brand)}
+.rpf{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--line);background:var(--panel)}
+.rpsum{font:500 12.5px var(--mono);color:var(--muted)}
+.rpbtn{display:flex;gap:8px}
+.rpp{display:flex;flex-direction:column;gap:6px;padding:0 18px 12px;background:var(--panel)}
+.rpp #rp-bar{display:block;height:3px;background:var(--line)}.rpp #rp-bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .25s}
+.rpmsg{font-size:13px;color:var(--muted);min-height:1em}
+@media (max-width:560px){.rpg{grid-template-columns:1fr}.rpf{flex-direction:column;align-items:stretch}.rpbtn .btn{flex:1}}
+.veh.next .pic.ph{background:#0c0f13}.veh.next .pic.ph img{object-fit:contain}
 </style>
 </head>
 <body class="m-both">
@@ -1246,7 +1283,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   <div class="notice">
     <b>Gayriresmî çeviri.</b> Kaynak: <i>Formula Student Rules 2027, Version 1.0</i> (FSG). Bağlayıcı metin her zaman İngilizcesidir; Türkçe bölüm okumayı kolaylaştırmak için hazırlanmıştır ve hata içerebilir. Tablo, formül ve şekiller orijinal PDF'ten görüntü olarak soldaki sütundadır; Türkçeleri yanında yazıyla verilmiştir. Madde numaralarına (örn. <a class="ref" href="#T-3-2-1" data-id="T 3.2.1">T 3.2.1</a>) tıklayarak ilgili maddeye gidebilirsiniz. Sürüm değişiklikleri listesi (Changelog) dahil değildir.
   </div>
-  <div id="stick"><div id="sh"><div class="colhead"><div class="lab0"></div><div class="c-en"><span class="lab">English</span><div class="tools"><button class="btn ex-btn on" aria-label="Açıklama sütunu" title="Açıklama sütununu göster / gizle">Açıklama</button><span class="sel"><select class="lang" aria-label="Görünüm: dil seçimi" title="Görünüm"><option value="both">EN | TR</option><option value="tr">Yalnız TR</option><option value="en">Yalnız EN</option></select></span></div></div><div class="c-tr"><span class="lab">Türkçe</span><div class="tools"><button class="btn ex-btn on" aria-label="Açıklama sütunu" title="Açıklama sütununu göster / gizle">Açıklama</button><span class="sel"><select class="lang" aria-label="Görünüm: dil seçimi" title="Görünüm"><option value="both">EN | TR</option><option value="tr">Yalnız TR</option><option value="en">Yalnız EN</option></select></span></div></div><div class="c-ex"><span class="lab">Açıklama</span><div class="tools"><span class="sel"><select class="lang" aria-label="Görünüm: dil seçimi" title="Görünüm"><option value="both">EN | TR</option><option value="tr">Yalnız TR</option><option value="en">Yalnız EN</option></select></span><button class="btn ex-btn x on" aria-label="Açıklama sütununu gizle" title="Açıklama sütununu gizle">×</button></div></div></div></div><div id="ctx" aria-hidden="true"></div></div>
+  <div id="stick"><div id="sh"><div class="colhead"><div class="lab0"></div><div class="c-en"><span class="lab">English</span><div class="tools"><button class="btn rp-btn" type="button" title="Kuralları PDF olarak indir" aria-label="Kuralları PDF olarak indir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>PDF</button><button class="btn ex-btn on" aria-label="Açıklama sütunu" title="Açıklama sütununu göster / gizle">Açıklama</button><span class="sel"><select class="lang" aria-label="Görünüm: dil seçimi" title="Görünüm"><option value="both">EN | TR</option><option value="tr">Yalnız TR</option><option value="en">Yalnız EN</option></select></span></div></div><div class="c-tr"><span class="lab">Türkçe</span><div class="tools"><button class="btn rp-btn" type="button" title="Kuralları PDF olarak indir" aria-label="Kuralları PDF olarak indir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>PDF</button><button class="btn ex-btn on" aria-label="Açıklama sütunu" title="Açıklama sütununu göster / gizle">Açıklama</button><span class="sel"><select class="lang" aria-label="Görünüm: dil seçimi" title="Görünüm"><option value="both">EN | TR</option><option value="tr">Yalnız TR</option><option value="en">Yalnız EN</option></select></span></div></div><div class="c-ex"><span class="lab">Açıklama</span><div class="tools"><span class="sel"><select class="lang" aria-label="Görünüm: dil seçimi" title="Görünüm"><option value="both">EN | TR</option><option value="tr">Yalnız TR</option><option value="en">Yalnız EN</option></select></span><button class="btn rp-btn" type="button" title="Kuralları PDF olarak indir" aria-label="Kuralları PDF olarak indir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>PDF</button><button class="btn ex-btn x on" aria-label="Açıklama sütununu gizle" title="Açıklama sütununu gizle">×</button></div></div></div></div><div id="ctx" aria-hidden="true"></div></div>
   <div id="list"></div>
   <div id="empty">Sonuç bulunamadı.</div>
 </main>
@@ -1403,7 +1440,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
 <article class="veh "><div class="pic ph"><img src="car_ist24.jpg" data-full="car_ist24_full.jpg" alt="IST24 aracı" loading="lazy"><b>IST24</b></div><div class="body"><span class="yr">2024</span><h2>IST24</h2><div class="tags"><span>Elektrikli</span><span>İlk teknik kontrol geçişi</span><span>İlk Endurance bitişi</span></div><ul><li>12 Temmuz 2024’te İTÜ Ayazağa Kampüsü Süleyman Demirel Kültür Merkezi’nde tanıtıldı.</li><li>Türkiye’de bir ilk olarak anılan “split” süspansiyon sistemi; batarya yönetim sistemi (BMS) takım tarafından tasarlandı.</li><li>Alt sistemler öğrenci projeleri olarak geliştirildi; 15 proje TÜBİTAK 2209-A desteği aldı.</li><li>2024 sezonunda Formula Student East (Macaristan) ve Formula Student ATA’da (İtalya) yarıştı. Macaristan’da iş planı sunumunda 10. oldu.</li><li>İtalya’da takım tarihinde ilk kez elektrikli kategoride tüm teknik kontrolleri geçti; Autocross ve Endurance’a katıldı, Endurance’ı ilk kez tamamladı ve iş planında yine ilk 10’a girdi.</li></ul></div></article>
 <article class="veh "><div class="pic ph"><img src="car_ist25.jpg" data-full="car_ist25_full.jpg" alt="IST25 aracı" loading="lazy"><b>IST25</b></div><div class="body"><span class="yr">2025</span><h2>IST25</h2><div class="tags"><span>Elektrikli</span><span>Türkiye şampiyonu</span></div><ul><li>Formula Student ATA’da (İtalya) tüm teknik kontrolleri geçti, tüm dinamik disiplinlerde yarıştı, tüm statik disiplinlerde ilk 10’a girdi ve takımın o güne dek en yüksek puanını aldı (resmî sonuçlarda genel 11.).</li><li>İlk kez düzenlenen Formula Student Türkiye’de (22–26 Ekim 2025, TOSFED Körfez Pisti) elektrikli kategoride genel birinci oldu; mühendislik tasarımı, maliyet ve üretim, iş planı sunumu, autocross ve endurance’ta da birinci oldu.</li><li>Türkiye’nin en iyi elektrikli Formula Student takımı unvanını aldı.</li></ul></div></article>
 <article class="veh last"><div class="pic ph fit" style="--ct:#99827c;--cb:#887169"><img src="car_ist26.jpg" data-full="car_ist26_full.jpg" alt="IST26 aracı" loading="lazy"><b>IST26</b></div><div class="body"><span class="yr">2026</span><h2>IST26 · “IST26 powered by Electrip | Zes”</h2><div class="tags"><span>Elektrikli</span><span>En son tamamlanan araç</span><span>Formula ATA 2026</span></div><ul><li>İsim sponsoru Zes: araç “IST26 powered by Electrip | Zes” adıyla piste çıktı.</li><li>15 farklı alt sistemde TÜBİTAK onayı alındı.</li><li>Aerodinamik iyileştirmelerle bir önceki araca göre %32 daha fazla yere basma kuvveti hedeflendi.</li><li>Simülasyonlara göre 0’dan 100 km/s hıza 2,4 saniyede ulaşabiliyor.</li><li>Formula Student ATA 2026’da (Varano de’ Melegari, İtalya; Eylül 2026) elektrikli sınıfta yarıştı.</li></ul><div class="res"><h4><span>Formula SAE Italy 2026 · Sınıf 1EV</span><span>Resmî sonuçlar · araç no. 133</span></h4><div class="kp"><div><small>Genel</small><b>23.</b><em>30 takım içinde</em></div><div><small>İş planı</small><b>11.</b><em>BPP · 57,837 puan</em></div><div><small>Tasarım</small><b>105,634</b><em>puan</em></div><div><small>Maliyet</small><b>70,993</b><em>puan</em></div><div><small>Toplam</small><b>184,464</b><em>50 ceza düşülmüş</em></div></div><p>Statik disiplinlerin toplamı 234,464 puandır; resmî tabloda 50 puan ceza düşülmüştür ve dinamik disiplinlerde puan kaydı yoktur. Kaynak: Formula ATA <a href="https://www.formula-ata.it/wp-content/uploads/2026/09/Overall_official_class1E_260906_h1930.pdf" target="_blank" rel="noopener">genel sıralama</a> · <a href="https://www.formula-ata.it/wp-content/uploads/2026/09/BPPEvent_official_class1E-_260904_h2100.pdf" target="_blank" rel="noopener">BPP sonuçları</a>.</p></div></div></article>
-<article class="veh next"><div class="pic"><svg viewBox="0 0 220 84" aria-hidden="true"><g fill="currentColor"><rect x="8" y="12" width="34" height="5" rx="2"/><rect x="14" y="8" width="3" height="16"/><rect x="33" y="8" width="3" height="16"/><rect x="22" y="17" width="3" height="22"/><path d="M34 54 L58 46 L98 40 L132 38 L158 46 L196 52 L196 58 L34 58 Z"/><path d="M96 40 C100 24 112 20 122 22 L130 38 Z" opacity=".75"/><rect x="190" y="60" width="26" height="4" rx="2"/></g><path d="M101 38 C104 28 112 25 120 27" fill="none" stroke="#1b1f27" stroke-width="3" stroke-linecap="round"/><g><circle cx="56" cy="62" r="18" fill="#1b1f27"/><circle cx="56" cy="62" r="8" fill="#cfd6dd"/><circle cx="164" cy="62" r="18" fill="#1b1f27"/><circle cx="164" cy="62" r="8" fill="#cfd6dd"/></g></svg><b>IST27</b></div><div class="body"><span class="yr">2027 sezonu</span><h2>IST27</h2><div class="tags"><span>Elektrikli</span><span>Yapım aşamasında</span></div><div class="ldt">IST27 yükleniyor</div><ul><li>Bu sene takımın yeni aracı IST27 geliştiriliyor; tasarım ve üretim çalışmaları sürüyor.</li><li>2027 sezonu yarışları için hazırlanıyor; sezon kuralları bu portaldaki Kurallar sekmesinde.</li></ul></div></article>
+<article class="veh next"><div class="pic ph"><img src="ist27.svg" data-full="ist27.svg" alt="IST27 temsilî çizimi" loading="lazy"><b>IST27</b></div><div class="body"><span class="yr">2027 sezonu</span><h2>IST27</h2><div class="tags"><span>Elektrikli</span><span>Yapım aşamasında</span></div><div class="ldt">IST27 yükleniyor</div><ul><li>Bu sene takımın yeni aracı IST27 geliştiriliyor; tasarım ve üretim çalışmaları sürüyor.</li><li>2027 sezonu yarışları için hazırlanıyor; sezon kuralları bu portaldaki Kurallar sekmesinde.</li></ul></div></article>
   </div>
   <p class="src"><b>Kaynaklar:</b>
     <a href="https://ogrencifaaliyetleri.itu.edu.tr/team/itu-racing-formula-student-takimi/44" target="_blank" rel="noopener">İTÜ Öğrenci Faaliyetleri — ITU Racing</a> ·
@@ -1564,6 +1601,18 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   <figure><img data-src="baba.jpg" alt="Yarış Mühendisi"><figcaption>Yarış Mühendisi</figcaption><div class="who"><b>Berk Ay</b> - İTÜ Elektrik Elektronik Fakültesi</div></figure>
   </div>
 </section>
+<div id="rpd" hidden><div class="rpbox" role="dialog" aria-modal="true" aria-labelledby="rp-t">
+ <div class="rph"><div><small>İTÜ Racing · Kural kitapçığı</small><b id="rp-t">Kuralları PDF olarak indir</b></div><button type="button" class="rpx" id="rp-x" aria-label="Kapat">×</button></div>
+ <div class="rpb">
+  <div class="rpl"><span>Bölümler</span><button type="button" class="rplink" id="rp-all">Tümünü seç / temizle</button></div>
+  <div class="rpg" id="rp-ch"></div>
+  <div class="rpl"><span>Dil</span></div>
+  <div class="seg rpseg" id="rp-lang" role="group" aria-label="Dil"><button type="button" data-l="both" class="on">EN + TR</button><button type="button" data-l="tr">Yalnız TR</button><button type="button" data-l="en">Yalnız EN</button></div>
+  <div class="rpo"><label><input type="checkbox" id="rp-img" checked> Şekil ve tabloları ekle</label><label><input type="checkbox" id="rp-ex"> Açıklamaları ekle</label><label><input type="checkbox" id="rp-ab"> Kısaltmalar listesini ekle</label></div>
+ </div>
+ <div class="rpf"><span class="rpsum" id="rp-sum"></span><div class="rpbtn"><button type="button" class="btn" id="rp-cancel">Vazgeç</button><button type="button" class="btn pdf" id="rp-go">PDF oluştur</button></div></div>
+ <div class="rpp"><span id="rp-bar"><i></i></span><span class="rpmsg" id="rp-msg" role="status"></span></div>
+</div></div>
 <div id="insp" role="dialog" aria-modal="true" aria-label="Muayene modu" hidden>
  <div class="in-top"><div class="in-tt"><small>Yarış günü</small><b>Muayene modu</b></div><span class="in-net" id="in-net" hidden>Çevrimdışı · işaretler cihazda, bağlanınca eşitlenir</span><div class="in-prog" id="in-prog"><b>0 / 0</b><span id="in-bar"><i></i></span></div><button type="button" class="in-close" id="in-close" aria-label="Kapat">×</button></div>
  <div class="in-flt"><select id="in-ch" aria-label="Bölüm"></select><select id="in-ek" aria-label="Ekip"></select><button type="button" class="in-tg" id="in-un" aria-pressed="false">Sadece bakılmamış</button><button type="button" class="in-tg" id="in-en" aria-pressed="false">İngilizce</button></div>
@@ -2218,7 +2267,7 @@ function dlMsg(r,name,blob){
   if(r==='busy')return 'Önceki indirme onayı hâlâ açık; biraz sonra tekrar dene.';
   return 'PDF kaydedilemedi ('+r.replace('error:','')+').'
 }
-async function pdfBuild(blocks){
+async function pdfBuildOld(blocks){
   try{if(document.fonts&&document.fonts.ready)await document.fonts.ready}catch(e){}
   const PW=1240,PH=1754,SC=1.5,M=92,CW=PW-2*M;
   const F='"Segoe UI","Inter","Helvetica Neue",Helvetica,Arial,sans-serif',MONO='Consolas,"SF Mono",Menlo,monospace';
@@ -2329,13 +2378,13 @@ function chkPdfBlocks(){
 }
 document.getElementById('ck-pdf').onclick=async function(){
   const btn=this;btn.classList.add('busy');ckMsg.textContent='PDF hazırlanıyor…';
-  try{const blob=await pdfBuild(chkPdfBlocks());const r=await dlBlob(blob,'ITU-Racing-checklist-raporu.pdf');ckMsg.textContent=dlMsg(r,'ITU-Racing-checklist-raporu.pdf',blob)}
+  try{const blob=await pdfBuild(chkPdfBlocks(),{title:'Checklist raporu',kick:'Kontrol listesi'});const r=await dlBlob(blob,'ITU-Racing-checklist-raporu.pdf');ckMsg.textContent=dlMsg(r,'ITU-Racing-checklist-raporu.pdf',blob)}
   catch(err){ckMsg.textContent='PDF oluşturulamadı: '+(err&&err.message||err)}
   btn.classList.remove('busy');
 };
 
 // ===== R19: PCB view =====
-const BOARDS=[['LV BMS',78.25,112.3],['Voltage Indicator',68,45],['VCU',50,50],['TSAL Inverter Side',66.48,68.02],['TSAL Battery Side',49.89,24.1],['Telemetry',59.95,52.73],['STLink_Debugger',48.45,28],['Segment',125,60],['Precharge',30.6,65.3],['LV Mainboard',132.8,100.35],['IMU',41.58,44.42],['Latch',42,35],['HV Mainboard',229.11,103.35],['Handcart',120,67.5],['GPS',46.35,68.83],['Dashboard Distribution',180.34,88.01],['Buck Converter',48,28.83],['BSPD',60,55],['BMS Master',42,42.01],['BMS Controller',50.33,49.92],['BMS Carrier',156.25,73.25]];
+const BOARDS=[['LV BMS',78.25,112.3],['Voltage Indicator',68,45],['VCU',50,50],['TSAL Inverter Side',66.48,68.02],['TSAL Battery Side',49.89,24.1],['Telemetry',59.95,52.73],['STLink_Debugger',48.45,28],['Segment',125,60],['Precharge',30.6,65.3],['LV Mainboard',132.8,100.35],['Latch',42,35],['HV Mainboard',229.11,103.35],['Handcart',120,67.5],['Dashboard Distribution',180.34,88.01],['Buck Converter',48,28.83],['BSPD',60,55],['BMS Master',42,42.01],['BMS Controller',50.33,49.92],['BMS Carrier',156.25,73.25],['INS-GNSS',0,0]];
 const rg=(p,a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(p+i);return o};
 const PGR={
   ts:{a:'TS',n:'TS / LV ayrımı ve yalıtım',d:'Kartta yüksek gerilim (TS) bölgesi varsa',ids:['EV 4.1.2','EV 4.3.4','EV 4.3.5','EV 4.3.6','EV 4.3.7','EV 4.5.15','EV 5.5.16','IN 4.2.1','IN 3.2.1']},
@@ -2351,13 +2400,14 @@ const PGR={
 };
 const PORD=['ts','gen','scs','bspd','tsal','vi','tsmp','pre','ams','imd'];
 Object.keys(PGR).forEach(g=>{PGR[g].ids=PGR[g].ids.filter(id=>byId[id])});
-const PDEF={'LV BMS':['gen'],'Voltage Indicator':['ts','vi','gen'],'VCU':['gen','scs'],'TSAL Inverter Side':['ts','tsal','gen'],'TSAL Battery Side':['ts','tsal','gen'],'Telemetry':['gen'],'STLink_Debugger':['gen'],'Segment':['ts','ams','gen'],'Precharge':['ts','pre'],'LV Mainboard':['gen','scs'],'IMU':['gen'],'Latch':['gen','scs'],'HV Mainboard':['ts','pre','tsmp','scs','gen'],'Handcart':['ts','gen'],'GPS':['gen'],'Dashboard Distribution':['gen','scs'],'Buck Converter':['gen'],'BSPD':['bspd','scs','gen'],'BMS Master':['ams','scs','gen'],'BMS Controller':['ams','gen'],'BMS Carrier':['ts','ams','gen']};
+const PDEF={'INS-GNSS':['gen'],'LV BMS':['gen'],'Voltage Indicator':['ts','vi','gen'],'VCU':['gen','scs'],'TSAL Inverter Side':['ts','tsal','gen'],'TSAL Battery Side':['ts','tsal','gen'],'Telemetry':['gen'],'STLink_Debugger':['gen'],'Segment':['ts','ams','gen'],'Precharge':['ts','pre'],'LV Mainboard':['gen','scs'],'Latch':['gen','scs'],'HV Mainboard':['ts','pre','tsmp','scs','gen'],'Handcart':['ts','gen'],'Dashboard Distribution':['gen','scs'],'Buck Converter':['gen'],'BSPD':['bspd','scs','gen'],'BMS Master':['ams','scs','gen'],'BMS Controller':['ams','gen'],'BMS Carrier':['ts','ams','gen']};
 const PHINT={'EV 4.3.6':'600 V sınıfı için (300–600 V): hava mesafesi ≥ 3,0 mm, yüzey mesafesi ≥ 20 mm (konformal kaplamayla ≥ 4,0 mm). Yukarıdaki mesafe hesabıyla kontrol et.','EV 4.3.4':'TS ve LV aynı TS muhafazasındaysa bariyer ya da en az 20 mm mesafe gerekir.'};
 function lsGet(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 let PCBG=lsGet('fsg-pcbg',{}),PC=lsGet('fsg-pcbc',{}),PN=lsGet('fsg-pcbn',{}),pSel=lsGet('fsg-pcbsel','HV Mainboard'),pSort={k:'name',d:1},pQ='',pStat='all';
 if(!BOARDS.some(b=>b[0]===pSel))pSel='HV Mainboard';
 const fm=(x,d)=>x.toLocaleString('tr-TR',{maximumFractionDigits:d===undefined?2:d});
+const fd=(x,d)=>x?fm(x,d):'—';const dimT=b=>b[1]?fm(b[1])+' × '+fm(b[2])+' mm':'ölçü girilmedi';
 const pkey=(b,id)=>b+'|'+id;
 const pgroups=b=>PCBG[b]||PDEF[b]||['gen'];
 function prules(b){const seen=new Set(),o=[];PORD.filter(g=>pgroups(b).includes(g)).forEach(g=>PGR[g].ids.forEach(id=>{if(!seen.has(id)){seen.add(id);o.push([g,id])}}));return o}
@@ -2379,10 +2429,10 @@ function pbTable(){
   const th=(key,l,cls)=>'<th data-s="'+key+'" class="'+(cls||'')+(pSort.k===key?' on':'')+'" data-d="'+(pSort.d>0?'↑':'↓')+'">'+l+'</th>';
   pbTab.innerHTML='<thead><tr>'+th('name','Kart')+th('h','Yatay (mm)','n')+th('v','Dikey (mm)','n')+th('a','Alan (cm²)','n')+'<th style="cursor:default">Kural grupları</th><th style="cursor:default">Kontrol</th></tr></thead><tbody>'+
     rows.map(r=>{const n=pcnt(r.name),t=n.n||1,g=pgroups(r.name);
-      return '<tr data-b="'+esc(r.name)+'" class="'+(r.name===pSel?'pbcur':'')+'"><td>'+esc(r.name)+'</td><td class="n">'+fm(r.h)+'</td><td class="n">'+fm(r.v)+'</td><td class="n">'+fm(r.a,1)+'</td><td><div class="gs">'+(g.includes('ts')?'<span class="tsb">TS</span>':'')+PORD.filter(x=>g.includes(x)&&x!=='ts').map(x=>'<i>'+PGR[x].a+'</i>').join('')+'</div></td><td class="pg"><div class="mini"><span style="width:'+(n.ok/t*100)+'%;background:var(--ok)"></span><span style="width:'+(n.miss/t*100)+'%;background:var(--miss)"></span><span style="width:'+(n.bad/t*100)+'%;background:var(--bad)"></span></div><small>'+n.ok+'/'+n.n+' tamam'+(n.bad?' · '+n.bad+' sorun':'')+(n.miss?' · '+n.miss+' eksik':'')+'</small></td></tr>'}).join('')+'</tbody>';
+      return '<tr data-b="'+esc(r.name)+'" class="'+(r.name===pSel?'pbcur':'')+'"><td>'+esc(r.name)+'</td><td class="n">'+fd(r.h)+'</td><td class="n">'+fd(r.v)+'</td><td class="n">'+fd(r.a,1)+'</td><td><div class="gs">'+(g.includes('ts')?'<span class="tsb">TS</span>':'')+PORD.filter(x=>g.includes(x)&&x!=='ts').map(x=>'<i>'+PGR[x].a+'</i>').join('')+'</div></td><td class="pg"><div class="mini"><span style="width:'+(n.ok/t*100)+'%;background:var(--ok)"></span><span style="width:'+(n.miss/t*100)+'%;background:var(--miss)"></span><span style="width:'+(n.bad/t*100)+'%;background:var(--bad)"></span></div><small>'+n.ok+'/'+n.n+' tamam'+(n.bad?' · '+n.bad+' sorun':'')+(n.miss?' · '+n.miss+' eksik':'')+'</small></td></tr>'}).join('')+'</tbody>';
 }
 function pbMapR(){
-  pbMap.innerHTML=BOARDS.slice().sort((a,b)=>b[1]*b[2]-a[1]*a[2]).map(b=>'<button class="pb'+(b[0]===pSel?' pbcur':'')+'" data-b="'+esc(b[0])+'" data-st="'+pst(b[0])+'" style="--w:'+b[1]+';--h:'+b[2]+'" title="'+esc(b[0])+' · '+fm(b[1])+' × '+fm(b[2])+' mm">'+esc(b[0])+'<small>'+fm(b[1],1)+' × '+fm(b[2],1)+'</small></button>').join('');
+  pbMap.innerHTML=BOARDS.slice().sort((a,b)=>b[1]*b[2]-a[1]*a[2]).map(b=>'<button class="pb'+(b[0]===pSel?' pbcur':'')+'" data-b="'+esc(b[0])+'" data-st="'+pst(b[0])+'" style="--w:'+(b[1]||45)+';--h:'+(b[2]||45)+'" title="'+esc(b[0])+' · '+dimT(b)+'">'+esc(b[0])+'<small>'+(b[1]?fm(b[1],1)+' × '+fm(b[2],1):'ölçü yok')+'</small></button>').join('');
 }
 function pRow(b,id){
   const it=byId[id],s=PC[pkey(b,id)]||'',k=pkey(b,id);
@@ -2392,7 +2442,7 @@ function pRow(b,id){
 let pbAT=0;
 function pbHead(){
   const b=BOARDS.find(x=>x[0]===pSel);pbSel.value=pSel;
-  document.getElementById('pb-dim').textContent=fm(b[1])+' × '+fm(b[2])+' mm · '+fm(b[1]*b[2]/100,1)+' cm²';
+  document.getElementById('pb-dim').textContent=b[1]?fm(b[1])+' × '+fm(b[2])+' mm · '+fm(b[1]*b[2]/100,1)+' cm²':'Ölçü henüz girilmedi';
   pbGs.innerHTML=PORD.map(g=>'<button data-g="'+g+'" class="'+(pgroups(pSel).includes(g)?'on':'')+'" title="'+esc(PGR[g].d)+'">'+esc(PGR[g].n)+'<i>'+PGR[g].ids.length+'</i></button>').join('');
   const n=pcnt(pSel),t=n.n||1,pc=x=>(x/t*100).toFixed(2)+'%';
   pbSum2.innerHTML='<div class="nums"><span><i style="background:var(--ok)"></i><b>'+n.ok+'</b>Tamam</span><span><i style="background:var(--miss)"></i><b>'+n.miss+'</b>Eksik</span><span><i style="background:var(--bad)"></i><b>'+n.bad+'</b>Sorun var</span><span><i style="background:var(--line)"></i><b>'+n.none+'</b>Bakılmadı</span><span style="margin-left:auto;color:var(--muted)">'+esc(pSel)+' · '+n.n+' madde</span></div><div class="ckbar"><span style="width:'+pc(n.ok)+';background:var(--ok)"></span><span style="width:'+pc(n.miss)+';background:var(--miss)"></span><span style="width:'+pc(n.bad)+';background:var(--bad)"></span></div>';
@@ -2464,7 +2514,7 @@ function pcbBlocks(all){
   const list=all?BOARDS.map(b=>b[0]):[pSel];
   if(all){
     bl.push({t:'h2',text:'Kartlar'});
-    bl.push({t:'table',cols:[{h:'KART',w:300},{h:'ÖLÇÜ (mm)',w:200},{h:'TAMAM',w:110,al:'r'},{h:'EKSİK',w:110,al:'r'},{h:'SORUN',w:110,al:'r'},{h:'TOPLAM',w:1240-184-830}],rows:BOARDS.map(b=>{const n=pcnt(b[0]);return [b[0],fm(b[1])+' × '+fm(b[2]),n.ok,n.miss,n.bad,n.n]})});
+    bl.push({t:'table',cols:[{h:'KART',w:300},{h:'ÖLÇÜ (mm)',w:200},{h:'TAMAM',w:110,al:'r'},{h:'EKSİK',w:110,al:'r'},{h:'SORUN',w:110,al:'r'},{h:'TOPLAM',w:1240-184-830}],rows:BOARDS.map(b=>{const n=pcnt(b[0]);return [b[0],b[1]?fm(b[1])+' × '+fm(b[2]):'—',n.ok,n.miss,n.bad,n.n]})});
   }
   bl.push({t:'p',text:'Mesafe şartı (EV 4.3.6, Tablo 3; 300–600 V): hava mesafesi ≥ 3,0 mm, yüzey mesafesi ≥ 20 mm, konformal kaplamayla ≥ 4,0 mm.',color:'#5b6670'});
   let any=false;
@@ -2474,7 +2524,7 @@ function pcbBlocks(all){
     if(all&&!marked)return;
     any=true;
     bl.push({t:'h2',text:b});
-    bl.push({t:'p',text:fm(dim[1])+' × '+fm(dim[2])+' mm · Gruplar: '+pgroups(b).map(g=>PGR[g].n).join(', ')+' · '+n.ok+' tamam, '+n.miss+' eksik, '+n.bad+' sorun, '+n.none+' bakılmadı.',color:'#5b6670'});
+    bl.push({t:'p',text:dimT(dim)+' · Gruplar: '+pgroups(b).map(g=>PGR[g].n).join(', ')+' · '+n.ok+' tamam, '+n.miss+' eksik, '+n.bad+' sorun, '+n.none+' bakılmadı.',color:'#5b6670'});
     const rs=prules(b);
     ['bad','miss'].forEach(st=>rs.filter(([g,id])=>PC[pkey(b,id)]===st).forEach(([g,id])=>bl.push({t:'item',id,tag:st,text:ruleTxt(id),note:PN[pkey(b,id)]})));
     if(!n.bad&&!n.miss)bl.push({t:'p',text:marked?'Eksik veya sorunlu madde yok.':'Bu kart için henüz madde işaretlenmedi.'});
@@ -2484,7 +2534,7 @@ function pcbBlocks(all){
 }
 async function pbPdf(all,btn){
   btn.classList.add('busy');pbMsg.textContent='PDF hazırlanıyor…';
-  try{const blob=await pdfBuild(pcbBlocks(all));const nm=all?'ITU-Racing-PCB-raporu.pdf':'ITU-Racing-PCB-'+pSel.replace(/[^A-Za-z0-9]+/g,'-')+'.pdf';const r=await dlBlob(blob,nm);pbMsg.textContent=dlMsg(r,nm,blob)}
+  try{const blob=await pdfBuild(pcbBlocks(all),{title:all?'PCB kontrol raporu':'PCB · '+pSel,kick:'Elektronik · PCB kontrol'});const nm=all?'ITU-Racing-PCB-raporu.pdf':'ITU-Racing-PCB-'+pSel.replace(/[^A-Za-z0-9]+/g,'-')+'.pdf';const r=await dlBlob(blob,nm);pbMsg.textContent=dlMsg(r,nm,blob)}
   catch(err){pbMsg.textContent='PDF oluşturulamadı: '+(err&&err.message||err)}
   btn.classList.remove('busy');
 }
@@ -3558,6 +3608,210 @@ function ckSetEk(n){ckEk=ekFind(n)?n:'';try{localStorage.setItem('fsg-ckek',ckEk
   if(want&&!D.on){D.on=true;D.err='';D.unsub=MEM.fba.fs.watchCol('docs',(docs,m,err)=>{if(err){D.err=String(err.code||'').includes('permission')?'Teslim arşivi için Firebase kurallarına “docs” bölümünün eklenmesi gerekiyor (yöneticiye sor).':'Arşiv okunamadı: '+memErr(err);render();return}D.err='';D.docs=docs.map(d=>Object.assign({id:d.id},d.data));render();if(D.open&&!form.v.value)form.v.value=nextV(form.tp.value)});render()}
   else if(!want&&D.on){try{D.unsub&&D.unsub()}catch(_){}D.on=false;D.docs=[];D.unsub=null;showForm(false);render()}}
  MEM.hooks.push(sync);sync();
+})();
+// ===== R30: vektörel PDF motoru — İTÜ Racing şablonu (Inter gömülü, seçilebilir metin, yer imleri) =====
+let PDFF=null;
+function pdfFonts(){
+ if(PDFF)return PDFF;
+ PDFF=fetch('pdffont.json').then(r=>{if(!r.ok)throw new Error('yazı tipi dosyası alınamadı');return r.json()}).then(J=>{
+  const F={};for(const k in J){const f=J[k],bin=atob(f.b64),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
+   const cm=new Map();for(const c in f.cmap)cm.set(+c,f.cmap[c]);const rev=new Map();cm.forEach((g,c)=>{if(!rev.has(g))rev.set(g,c)});
+   F[k]={key:k,name:f.name,bytes:u,upm:f.upm,cm:cm,rev:rev,w:f.w,asc:f.asc,desc:f.desc,cap:f.cap,bbox:f.bbox}}
+  return F}).catch(e=>{PDFF=null;throw e});
+ return PDFF}
+const PDF_SUB={'­':'','⋅':'·','∙':'·','▪':'▪','𝜋':'π','✔':'✓','‑':'-','‐':'-',' ':' ',' ':' ','​':'','﻿':''};
+let PDF_LOGO=null;
+function pdfLogo(){if(PDF_LOGO)return PDF_LOGO;PDF_LOGO=new Promise(res=>{const im=new Image();im.onload=()=>{try{const h=150,w=Math.round(im.naturalWidth*h/im.naturalHeight),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#0e1216';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);c.toBlob(b=>b?b.arrayBuffer().then(a=>res({jpg:new Uint8Array(a),w:w,h:h})):res(null),'image/jpeg',.92)}catch(e){res(null)}};im.onerror=()=>res(null);im.src='logo.png'});PDF_LOGO.then(v=>{if(!v)PDF_LOGO=null});return PDF_LOGO}
+function pdfImg(src){return new Promise(res=>{const im=new Image();im.onload=()=>{try{const sc=Math.min(1,1600/im.naturalWidth),w=Math.max(1,Math.round(im.naturalWidth*sc)),h=Math.max(1,Math.round(im.naturalHeight*sc)),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);c.toBlob(b=>b?b.arrayBuffer().then(a=>{c.width=1;res({jpg:new Uint8Array(a),w:w,h:h})}):res(null),'image/jpeg',.88)}catch(e){res(null)}};im.onerror=()=>res(null);im.src=src})}
+async function pdfZ(u8){try{if(typeof CompressionStream==='undefined')return null;const cs=new CompressionStream('deflate');const wr=cs.writable.getWriter();wr.write(u8);wr.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer())}catch(e){return null}}
+function pdfU16(s){let h='FEFF';for(const ch of String(s)){const c=ch.codePointAt(0);if(c>0xffff){const v=c-0x10000;h+=(0xd800+(v>>10)).toString(16).padStart(4,'0')+(0xdc00+(v&1023)).toString(16).padStart(4,'0')}else h+=c.toString(16).padStart(4,'0')}return '<'+h.toUpperCase()+'>'}
+
+async function pdfBuild(blocks,opt){
+ opt=opt||{};
+ const FT=await pdfFonts();const logo=await pdfLogo();
+ const PW=595.28,PH=841.89,ML=50,MR=50,CW=PW-ML-MR,TOP=80,BOT=PH-58;
+ const C={ink:'#14181b',mut:'#5b6670',line:'#d5dbe0',brand:'#1fb5c4',acc:'#0b7f8b',ok:'#1fb5c4',miss:'#e0a300',bad:'#d64550',carbon:'#0e1216',soft:'#eaf6f8',bg:'#f2f5f6',white:'#ffffff',dim:'#8d9aa4'};
+ const used={R:new Set(),B:new Set(),M:new Set()};
+ const rgb=h=>{h=h.replace('#','');return [0,2,4].map(i=>(parseInt(h.substr(i,2),16)/255).toFixed(3)).join(' ')};
+ const n2=v=>(Math.round(v*100)/100).toString();
+ function glyphs(str,f){const out=[];for(let ch of String(str)){if(PDF_SUB[ch]!==undefined)ch=PDF_SUB[ch];if(!ch)continue;for(const c of ch){let g=FT[f].cm.get(c.codePointAt(0));if(g===undefined)g=FT[f].cm.get(63)||0;out.push(g)}}return out}
+ function tw(str,f,sz,sp){const F=FT[f],G=glyphs(str,f);let w=0;for(const g of G)w+=F.w[g]||0;return w*sz/F.upm+(sp?sp*Math.max(0,G.length-1):0)}
+ const pages=[],outl=[],images=[];let pg=null,y=TOP;
+ const docTitle=opt.title||((blocks.find(b=>b.t==='h1')||{}).text||'Rapor');
+ function np(){pg={ops:[],n:pages.length+1};pages.push(pg);y=TOP}
+ const room=h=>{if(!pg||y+h>BOT)np()};
+ const op=s=>pg.ops.push(s);
+ function rect(x,yy,w,h,col){op(rgb(col)+' rg '+n2(x)+' '+n2(PH-yy-h)+' '+n2(w)+' '+n2(h)+' re f')}
+ function hline(x1,x2,yy,col,lw){op(rgb(col)+' RG '+n2(lw||.6)+' w '+n2(x1)+' '+n2(PH-yy)+' m '+n2(x2)+' '+n2(PH-yy)+' l S')}
+ function box(x,yy,w,h,col,lw){op(rgb(col)+' RG '+n2(lw||.6)+' w '+n2(x)+' '+n2(PH-yy-h)+' '+n2(w)+' '+n2(h)+' re S')}
+ function text(x,yy,str,f,sz,col,al,sp){if(str==null||str==='')return;const G=glyphs(str,f);if(!G.length)return;G.forEach(g=>used[f].add(g));let w=0;if(al&&al!=='l')w=tw(str,f,sz,sp);const xx=al==='r'?x-w:al==='c'?x-w/2:x;
+  op('BT /'+f+' '+n2(sz)+' Tf '+(sp?n2(sp):'0')+' Tc '+rgb(col)+' rg '+n2(xx)+' '+n2(PH-yy)+' Td <'+G.map(g=>g.toString(16).padStart(4,'0')).join('')+'> Tj ET')}
+ // rich text flow: segs [{t,f,c}] -> lines of runs
+ function flow(segs,sz,maxW){const words=[];segs.forEach(s=>{String(s.t).split(/(\s+)/).forEach(p=>{if(p==='')return;words.push({t:p,f:s.f||'R',c:s.c||C.ink,sp:/^\s+$/.test(p)})})});
+  const lines=[];let cur=[],cw=0;const push=()=>{while(cur.length&&cur[cur.length-1].sp)cur.pop();lines.push(cur);cur=[];cw=0};
+  words.forEach(w=>{
+   if(w.sp){if(cur.length&&!cur[cur.length-1].sp){const sw=tw(' ',w.f,sz);cur.push({t:' ',f:w.f,c:w.c,sp:1,w:sw});cw+=sw}return}
+   const ww=tw(w.t,w.f,sz);
+   if(ww>maxW){if(cur.length)push();let s=w.t;while(s){let k=s.length;while(k>1&&tw(s.slice(0,k),w.f,sz)>maxW)k--;const part=s.slice(0,k),pw=tw(part,w.f,sz);s=s.slice(k);cur.push({t:part,f:w.f,c:w.c,w:pw});cw+=pw;if(s)push()}return}
+   if(cur.length&&cw+ww>maxW)push();
+   cur.push({t:w.t,f:w.f,c:w.c,w:ww});cw+=ww});
+  if(cur.length)push();return lines.length?lines:[[]]}
+ function drawLine(runs,x,yy,sz){let xx=x,i=0;while(i<runs.length){const r=runs[i];let t=r.t,w=r.w,j=i+1;while(j<runs.length&&runs[j].f===r.f&&runs[j].c===r.c){t+=runs[j].t;w+=runs[j].w;j++}text(xx,yy,t,r.f,sz,r.c);xx+=w;i=j}}
+ function para(segs,x,w,sz,lh,o){o=o||{};const L=flow(segs,sz,w);L.forEach(l=>{room(lh);drawLine(l,x,y+sz,sz);y+=lh});return L.length}
+ function richTxt(s,col,base){base=base||'R';const out=[];const re=/\[((?:YALNIZCA [^\]]+)|EV ONLY|CV ONLY|DC ONLY|HY ONLY|Manual Mode ONLY|Autonomous Mode ONLY)\]/g;let m,last=0;s=String(s||'');
+  while((m=re.exec(s))){if(m.index>last)out.push({t:s.slice(last,m.index),f:base,c:col});out.push({t:m[1],f:'M',c:C.acc});last=m.index+m[0].length}
+  if(last<s.length)out.push({t:s.slice(last),f:base,c:col});return out}
+ // rule body: paragraphs, ▪ lists, | tables
+ function body(txt,x,w,sz,lh,col){
+  const lines=String(txt||'').split('\n');let i=0;
+  while(i<lines.length){const L=lines[i];if(!L.trim()){i++;continue}
+   if(/^\s*\|/.test(L)){const rows=[];while(i<lines.length&&/^\s*\|/.test(lines[i])){rows.push(lines[i].trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim()));i++}table2(rows,x,w,sz-1);continue}
+   if(/^\s*▪/.test(L)){while(i<lines.length&&/^\s*▪/.test(lines[i])){const t=lines[i].replace(/^\s*▪\s*/,'');const Ls=flow(richTxt(t,col),sz,w-12);Ls.forEach((l,k)=>{room(lh);if(k===0)rect(x+2,y+sz*.42,3,3,C.brand);drawLine(l,x+12,y+sz,sz);y+=lh});i++}y+=2;continue}
+   const p=[];while(i<lines.length&&lines[i].trim()&&!/^\s*(\||▪)/.test(lines[i])){p.push(lines[i]);i++}
+   para(richTxt(p.join(' '),col),x,w,sz,lh);y+=3}
+ }
+ function table2(rows,x,w,sz){const nc=Math.max(...rows.map(r=>r.length));if(!nc)return;
+  const len=Array(nc).fill(4);rows.forEach(r=>r.forEach((c,k)=>{len[k]=Math.max(len[k],Math.min(40,c.length))}));const tot=len.reduce((a,b)=>a+b,0);const cw=len.map(l=>w*l/tot);
+  const lh=sz*1.3;y+=2;
+  rows.forEach((r,ri)=>{const cells=cw.map((cwk,k)=>flow([{t:r[k]||'',f:ri===0?'B':'R',c:C.ink}],sz,cwk-8));const h=Math.max(...cells.map(c=>c.length))*lh+6;room(h);
+   if(ri===0)rect(x,y,w,h,C.bg);let xx=x;cells.forEach((c,k)=>{c.forEach((l,j)=>drawLine(l,xx+4,y+3+sz+j*lh,sz));xx+=cw[k]});
+   box(x,y,w,h,C.line,.5);xx=x;cw.slice(0,-1).forEach(c=>{xx+=c;op(rgb(C.line)+' RG .5 w '+n2(xx)+' '+n2(PH-y)+' m '+n2(xx)+' '+n2(PH-y-h)+' l S')});y+=h});y+=6}
+ function addImg(im,x,maxW){if(!im)return;let w=Math.min(maxW,im.w*.5),h=im.h*w/im.w;const maxH=BOT-TOP-10;if(h>maxH){h=maxH;w=im.w*h/im.h}room(h+6);const id='I'+(images.length+1);images.push({id:id,im:im});op('q '+n2(w)+' 0 0 '+n2(h)+' '+n2(x)+' '+n2(PH-y-h)+' cm /'+id+' Do Q');box(x,y,w,h,C.line,.4);y+=h+8}
+ const S=CW/1056;// eski px tablolarından ölçek
+ np();
+ for(const b of blocks){
+  if(b.t==='kick'){room(16);text(ML,y+8,String(b.text).toLocaleUpperCase('tr'),'M',7.5,C.acc,'l',1.1);y+=16}
+  else if(b.t==='h1'){if(!blocks.some(x=>x.t==='kick')&&y===TOP){text(ML,y+8,'İTÜ RACING · '+String(opt.kick||'RAPOR').toLocaleUpperCase('tr'),'M',7.5,C.acc,'l',1.1);y+=16}
+   const L=flow([{t:b.text,f:'B',c:C.ink}],22,CW);L.forEach(l=>{room(28);drawLine(l,ML,y+22,22);y+=28});y+=2}
+  else if(b.t==='sub'){para([{t:b.text,f:'R',c:C.mut}],ML,CW,9.5,13.5);y+=6;hline(ML,PW-MR,y,C.ink,1);y+=14}
+  else if(b.t==='chap'){if(y>TOP+4)np();outl.push({t:b.id+' · '+b.text,lv:0,p:pg.n,y:y});
+   rect(ML,y,CW,62,C.carbon);rect(ML,y+62,CW,2.5,C.brand);text(ML+16,y+20,'BÖLÜM','M',7,C.brand,'l',1.4);text(ML+16,y+46,b.id,'M',22,C.white);text(ML+16+tw(b.id,'M',22)+14,y+44,b.text,'B',15,C.white);
+   if(b.en)text(PW-MR-14,y+20,b.en,'R',7.5,C.dim,'r');y+=82}
+  else if(b.t==='h2'){room(46);y+=10;if(b.outline!==false)outl.push({t:b.text,lv:b.lv||0,p:pg.n,y:y});rect(ML,y+1,3.5,15,C.brand);text(ML+11,y+13,b.text,'B',13,C.ink);y+=21;hline(ML,PW-MR,y,C.ink,.8);y+=10}
+  else if(b.t==='h3'){room(36);y+=8;outl.push({t:b.id+' '+b.text,lv:1,p:pg.n,y:y});text(ML,y+11,b.id,'M',9,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],10.5,CW-62);L.forEach(l=>{room(15);drawLine(l,ML+62,y+11,10.5);y+=15});y+=2;hline(ML,PW-MR,y,C.line,.5);y+=7}
+  else if(b.t==='h4'){room(30);y+=4;text(ML,y+10,b.id,'M',8.5,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],9.5,CW-62);L.forEach(l=>{room(13.5);drawLine(l,ML+62,y+10,9.5);y+=13.5});y+=4}
+  else if(b.t==='p'){para(richTxt(b.text,b.color||C.ink,b.bold?'B':'R'),ML,CW,9.5,13.5);y+=5}
+  else if(b.t==='rule'){
+   const x=ML+62,w=CW-62,y0=y;room(16);text(ML,y+9.5,b.id,'M',8.5,C.acc);
+   if(b.tr){body(b.tr,x,w,9.5,13.4,C.ink)}
+   if(b.en){if(b.tr){y+=1;room(12);text(x,y+7,'EN','M',6.5,C.dim,'l',1);y+=10}body(b.en,x,w,b.tr?8.6:9.5,b.tr?12.2:13.4,b.tr?C.mut:C.ink)}
+   (b.imgs||[]).forEach(im=>addImg(im,x,w));
+   if(b.ex){const L=flow([{t:b.ex,f:'R',c:C.mut}],8.6,w-16);const h=L.length*12.2+10;if(y+h>BOT)np();rect(x,y,w,h,C.soft);rect(x,y,2.5,h,C.brand);let yy=y+5;L.forEach(l=>{drawLine(l,x+10,yy+8.6,8.6);yy+=12.2});y+=h+4}
+   y+=5;room(4);hline(x,PW-MR,y-2,'#e8ecef',.4);y+=3}
+  else if(b.t==='bars'){room(24);text(ML,y+8,'BÖLÜM','M',6.5,C.mut,'l',.6);text(ML+190,y+8,'DURUM','M',6.5,C.mut,'l',.6);text(PW-MR,y+8,'TAMAM / EKSİK / SORUN / BAKILMADI','M',6.5,C.mut,'r',.4);y+=14;
+   b.rows.forEach(r=>{room(22);const t=r.total||1,bx=ML+190,bw=CW-190-140;text(ML,y+10,r.name,'B',9,C.ink);rect(bx,y+4,bw,6,'#e4e8eb');let xx=bx;[['ok',r.n.ok],['miss',r.n.miss],['bad',r.n.bad]].forEach(([k,v])=>{const ww=bw*v/t;if(ww>0)rect(xx,y+4,ww,6,C[k]);xx+=ww});
+    text(PW-MR,y+10,r.n.ok+' / '+r.n.miss+' / '+r.n.bad+' / '+r.n.none,'M',8,C.mut,'r');hline(ML,PW-MR,y+17,C.line,.5);y+=21});y+=6}
+  else if(b.t==='table'){const cols=b.cols.map(c=>Object.assign({},c,{w:c.w*S}));room(40);rect(ML,y,CW,17,C.bg);let x=ML;cols.forEach(c=>{text(c.al==='r'?x+c.w-6:x+6,y+11.5,c.h,'M',6.5,C.mut,c.al==='r'?'r':'l',.5);x+=c.w});y+=17;
+   b.rows.forEach(r=>{room(17);x=ML;r.forEach((v,i)=>{const c=cols[i],f=i===0?'B':'R';let t=String(v);while(tw(t,f,8.5)>c.w-12&&t.length>2)t=t.slice(0,-2);if(t!==String(v))t=t.trim()+'…';text(c.al==='r'?x+c.w-6:x+6,y+11.5,t,f,8.5,C.ink,c.al==='r'?'r':'l');x+=c.w});hline(ML,PW-MR,y+17,C.line,.5);y+=17});y+=8}
+  else if(b.t==='item'){const idw=62,lab=b.tag==='bad'?'SORUN VAR':b.tag==='miss'?'EKSİK':'',pw=lab?58:0,col=C[b.tag==='bad'?'bad':b.tag==='miss'?'miss':'ok'];
+   const L=flow(richTxt(b.text,C.ink),9.5,CW-idw-pw-10),NL=b.note?flow([{t:'Not: ',f:'B',c:C.mut},{t:b.note,f:'R',c:C.mut}],8.8,CW-idw-18):[];
+   const h=L.length*13.4+(NL.length?NL.length*12.4+14:0)+12;if(y+h>BOT&&h<BOT-TOP)np();const y0=y;
+   rect(ML,y0,2.6,h-5,col);text(ML+9,y0+10,b.id,'M',8.5,C.acc);
+   if(lab){rect(PW-MR-pw,y0,pw,13,col);text(PW-MR-pw/2,y0+9.3,lab,'B',7,b.tag==='bad'?'#ffffff':'#1b1400','c')}
+   L.forEach((l,i)=>drawLine(l,ML+idw,y0+10+i*13.4,9.5));
+   if(NL.length){const ny=y0+L.length*13.4+4,nh=NL.length*12.4+7;rect(ML+idw,ny,CW-idw,nh,C.soft);rect(ML+idw,ny,2,nh,C.brand);NL.forEach((l,i)=>drawLine(l,ML+idw+8,ny+11+i*12.4,8.8))}
+   hline(ML,PW-MR,y0+h-1,C.line,.5);y=y0+h+3}
+  else if(b.t==='space'){y+=b.h||8}
+ }
+ // header + footer on every page
+ const N=pages.length,date=trDate();
+ const lw=logo?26*logo.w/logo.h:0;
+ pages.forEach(p=>{const keep=p.ops;p.ops=[];pg=p;
+  rect(0,0,PW,46,C.carbon);rect(0,46,PW,2,C.brand);
+  if(logo)op('q '+n2(lw)+' 0 0 26 '+n2(ML)+' '+n2(PH-36)+' cm /LG Do Q');
+  const tx=ML+(logo?lw+12:0);if(logo)rect(tx-6,13,.7,20,'#3a4650');
+  text(tx+2,22,'Kural ve Bilgi Portalı','B',11,C.white);text(tx+2,34,'İTÜ RACING · FSG RULES 2027','M',6,C.dim,'l',.9);
+  text(PW-MR,27,String(docTitle).toLocaleUpperCase('tr'),'M',7,C.brand,'r',.9);
+  p.ops=p.ops.concat(keep);
+  hline(ML,PW-MR,PH-36,C.line,.6);
+  text(ML,PH-24,'İTÜ Racing · FSG Formula Student Rules 2027 v1.0 · gayriresmî çeviri','R',7,C.mut);
+  text(PW-MR,PH-24,date+'   ·   Sayfa '+p.n+' / '+N,'R',7,C.mut,'r')});
+ // ---- assemble PDF ----
+ const te=new TextEncoder(),parts=[];let off=0;const offs=[0];let nid=0;
+ const put=u=>{parts.push(u);off+=u.length},str=t=>put(te.encode(t));
+ const ids=()=>++nid;const objs=[];
+ const def=(id,body,stream)=>objs.push({id,body,stream});
+ const cat=ids(),pagesId=ids(),info=ids();
+ const fontRef={};
+ for(const k of ['R','B','M']){if(!used[k].size)continue;const F=FT[k],t0=ids(),cid=ids(),fd=ids(),ff=ids(),tu=ids();fontRef[k]=t0;
+  const tag='ITUR'+k+'A+'+F.name,sc=1000/F.upm,gl=[...used[k]].sort((a,b)=>a-b);
+  def(t0,'<< /Type /Font /Subtype /Type0 /BaseFont /'+tag+' /Encoding /Identity-H /DescendantFonts ['+cid+' 0 R] /ToUnicode '+tu+' 0 R >>');
+  def(cid,'<< /Type /Font /Subtype /CIDFontType2 /BaseFont /'+tag+' /CIDSystemInfo << /Registry (Adobe) /Ordering (Identity) /Supplement 0 >> /FontDescriptor '+fd+' 0 R /DW 600 /W ['+gl.map(g=>g+' ['+Math.round((F.w[g]||0)*sc)+']').join(' ')+'] /CIDToGIDMap /Identity >>');
+  def(fd,'<< /Type /FontDescriptor /FontName /'+tag+' /Flags '+(k==='M'?33:32)+' /FontBBox ['+F.bbox.map(v=>Math.round(v*sc)).join(' ')+'] /ItalicAngle 0 /Ascent '+Math.round(F.asc*sc)+' /Descent '+Math.round(F.desc*sc)+' /CapHeight '+Math.round(F.cap*sc)+' /StemV 80 /FontFile2 '+ff+' 0 R >>');
+  def(ff,{bytes:F.bytes,extra:'/Length1 '+F.bytes.length},true);
+  let cm='/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n1 begincodespacerange\n<0000> <FFFF>\nendcodespacerange\n';
+  const pairs=gl.filter(g=>F.rev.has(g)).map(g=>{const c=F.rev.get(g);let u;if(c>0xffff){const v=c-0x10000;u=(0xd800+(v>>10)).toString(16).padStart(4,'0')+(0xdc00+(v&1023)).toString(16).padStart(4,'0')}else u=c.toString(16).padStart(4,'0');return '<'+g.toString(16).padStart(4,'0')+'> <'+u+'>'});
+  for(let i=0;i<pairs.length;i+=100){const ch=pairs.slice(i,i+100);cm+=ch.length+' beginbfchar\n'+ch.join('\n')+'\nendbfchar\n'}
+  cm+='endcmap\nCMapName currentdict /CMap defineresource pop\nend\nend';def(tu,{bytes:te.encode(cm)},true)}
+ const xo={};if(logo){const id=ids();xo.LG=id;def(id,{bytes:logo.jpg,extra:'/Type /XObject /Subtype /Image /Width '+logo.w+' /Height '+logo.h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode',raw:true},true)}
+ images.forEach(o=>{const id=ids();xo[o.id]=id;def(id,{bytes:o.im.jpg,extra:'/Type /XObject /Subtype /Image /Width '+o.im.w+' /Height '+o.im.h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode',raw:true},true)});
+ const res='<< /Font << '+Object.keys(fontRef).map(k=>'/'+k+' '+fontRef[k]+' 0 R').join(' ')+' >> /XObject << '+Object.keys(xo).map(k=>'/'+k+' '+xo[k]+' 0 R').join(' ')+' >> >>';
+ const pageIds=[];
+ pages.forEach(p=>{const pid=ids(),cid=ids();pageIds.push(pid);def(cid,{bytes:te.encode(p.ops.join('\n'))},true);def(pid,'<< /Type /Page /Parent '+pagesId+' 0 R /MediaBox [0 0 595.28 841.89] /Resources '+res+' /Contents '+cid+' 0 R >>')});
+ def(pagesId,'<< /Type /Pages /Kids ['+pageIds.map(i=>i+' 0 R').join(' ')+'] /Count '+N+' >>');
+ let olId=0;
+ if(outl.length){olId=ids();const top=[];outl.forEach(o=>{o.id=ids();o.kids=[];if(o.lv===0||!top.length)top.push(o);else top[top.length-1].kids.push(o)});
+  const dest=o=>'['+pageIds[o.p-1]+' 0 R /XYZ 0 '+n2(PH-o.y+14)+' 0]';
+  const link=(arr,parent)=>arr.forEach((o,i)=>{let s='<< /Title '+pdfU16(o.t)+' /Parent '+parent+' 0 R /Dest '+dest(o);if(i>0)s+=' /Prev '+arr[i-1].id+' 0 R';if(i<arr.length-1)s+=' /Next '+arr[i+1].id+' 0 R';
+   if(o.kids.length){s+=' /First '+o.kids[0].id+' 0 R /Last '+o.kids[o.kids.length-1].id+' 0 R /Count -'+o.kids.length;link(o.kids,o.id)}def(o.id,s+' >>')});
+  link(top,olId);def(olId,'<< /Type /Outlines /First '+top[0].id+' 0 R /Last '+top[top.length-1].id+' 0 R /Count '+top.length+' >>')}
+ def(cat,'<< /Type /Catalog /Pages '+pagesId+' 0 R'+(olId?' /Outlines '+olId+' 0 R /PageMode /UseOutlines':'')+' /Lang (tr-TR) >>');
+ def(info,'<< /Title '+pdfU16(docTitle)+' /Author '+pdfU16('İTÜ Racing')+' /Creator '+pdfU16('İTÜ Racing Kural ve Bilgi Portalı')+' /Producer (ITU Racing PDF) >>');
+ for(const o of objs){if(o.stream&&!o.body.raw){const z=await pdfZ(o.body.bytes);if(z){o.body.z=z}}}
+ str('%PDF-1.6\n%âãÏÓ\n');
+ objs.sort((a,b)=>a.id-b.id).forEach(o=>{offs[o.id]=off;str(o.id+' 0 obj\n');
+  if(o.stream){const d=o.body.z||o.body.bytes;str('<< '+(o.body.extra||'')+(o.body.z?' /Filter /FlateDecode':'')+' /Length '+d.length+' >>\nstream\n');put(d);str('\nendstream\n')}else str(o.body+'\n');str('endobj\n')});
+ const xr=off;str('xref\n0 '+(nid+1)+'\n0000000000 65535 f \n');for(let i=1;i<=nid;i++)str(String(offs[i]||0).padStart(10,'0')+' 00000 n \n');
+ str('trailer\n<< /Size '+(nid+1)+' /Root '+cat+' 0 R /Info '+info+' 0 R >>\nstartxref\n'+xr+'\n%%EOF');
+ return new Blob(parts,{type:'application/pdf'});
+}
+// ===== R30: kural kitapçığından bölüm seçerek PDF indirme =====
+(function(){
+ const dlg=document.getElementById('rpd');if(!dlg)return;
+ const e=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const Q=s=>dlg.querySelector(s);
+ const cnt=c=>chRules[c].length;
+ Q('#rp-ch').innerHTML=chIds.map(c=>{const it=items[idx[c]];return '<label class="rpc"><input type="checkbox" value="'+e(c)+'"'+(c==='EV'||c==='T'?' checked':'')+'><span class="rpk">'+e(c)+'</span><span class="rpn"><b>'+e(it.t||CH_NAME[c]||c)+'</b><small>'+e(it.e||'')+' · '+cnt(c)+' madde</small></span></label>'}).join('');
+ const sel=()=>[...Q('#rp-ch').querySelectorAll('input:checked')].map(i=>i.value);
+ let lang='both';
+ function sum(){const s=sel(),n=s.reduce((a,c)=>a+cnt(c),0),im=s.reduce((a,c)=>{const [x,y]=chRange[c];let k=0;for(let i=x;i<y;i++)k+=items[i].m.length;return a+k},0);
+  Q('#rp-sum').textContent=s.length?s.length+' bölüm · '+n+' madde'+(Q('#rp-img').checked&&im?' · '+im+' şekil/tablo':''):'Bölüm seçilmedi';Q('#rp-go').disabled=!s.length}
+ Q('#rp-ch').addEventListener('change',sum);Q('#rp-img').addEventListener('change',sum);
+ Q('#rp-all').addEventListener('click',()=>{const b=Q('#rp-ch').querySelectorAll('input'),all=[...b].every(i=>i.checked);b.forEach(i=>i.checked=!all);sum()});
+ Q('#rp-lang').addEventListener('click',ev=>{const b=ev.target.closest('[data-l]');if(!b)return;lang=b.dataset.l;Q('#rp-lang').querySelectorAll('[data-l]').forEach(x=>x.classList.toggle('on',x===b))});
+ let last=null,busy=false;
+ function open(ev){last=ev&&ev.currentTarget;const m=localStorage.getItem('fsg-mode')||'both';lang=['both','tr','en'].includes(m)?m:'both';Q('#rp-lang').querySelectorAll('[data-l]').forEach(x=>x.classList.toggle('on',x.dataset.l===lang));
+  dlg.hidden=false;document.body.classList.add('rpd-on');Q('#rp-msg').textContent='';Q('#rp-bar i').style.width='0';sum();setTimeout(()=>Q('#rp-go').focus(),30)}
+ function close(){if(busy)return;dlg.hidden=true;document.body.classList.remove('rpd-on');if(last)try{last.focus()}catch(_){}}
+ document.querySelectorAll('.rp-btn').forEach(b=>b.addEventListener('click',open));
+ Q('#rp-x').addEventListener('click',close);Q('#rp-cancel').addEventListener('click',close);
+ dlg.addEventListener('click',ev=>{if(ev.target===dlg)close()});
+ document.addEventListener('keydown',ev=>{if(!dlg.hidden&&ev.key==='Escape')close()});
+ const prog=(t,f)=>{Q('#rp-msg').textContent=t;if(f!=null)Q('#rp-bar i').style.width=Math.round(f*100)+'%'};
+ Q('#rp-go').addEventListener('click',async()=>{
+  const chs=sel();if(!chs.length||busy)return;busy=true;const btn=Q('#rp-go');btn.disabled=true;btn.classList.add('busy');
+  const wImg=Q('#rp-img').checked,wEx=Q('#rp-ex').checked,wAb=Q('#rp-ab').checked;
+  try{
+   prog('Yazı tipleri yükleniyor…',.05);await pdfFonts();
+   const imgs={};if(wImg){const L=[];chs.forEach(c=>{const [a,b]=chRange[c];for(let i=a;i<b;i++)items[i].m.forEach(f=>L.push(f))});
+    let k=0;const run=async()=>{while(L.length){const f=L.shift();imgs[f]=await pdfImg(f);k++;prog('Şekil ve tablolar hazırlanıyor ('+k+'/'+(k+L.length)+')…',.05+.55*k/(k+L.length))}};await Promise.all([run(),run(),run(),run()])}
+   prog('Sayfalar oluşturuluyor…',.65);
+   const LN={both:'İngilizce + Türkçe',tr:'Türkçe',en:'İngilizce (orijinal)'}[lang];
+   const B=[{t:'kick',text:'İTÜ Racing · Kural kitapçığı'},{t:'h1',text:'FSG Formula Student Rules 2027'},{t:'sub',text:'Bölümler: '+chs.join(', ')+' · Dil: '+LN+(wEx?' · açıklamalı':'')+' · '+trDate()+'. Türkçe metin gayriresmî çeviridir; bağlayıcı olan İngilizce orijinaldir.'}];
+   if(wAb&&D.abbr&&D.abbr.length){B.push({t:'h2',text:'Kısaltmalar'});B.push({t:'table',cols:[{h:'KISALTMA',w:170},{h:'ENGLISH',w:443},{h:'TÜRKÇE',w:443}],rows:D.abbr.map(a=>[a[0],a[1],a[2]])})}
+   chs.forEach(c=>{const [a,b]=chRange[c],h=items[a];
+    B.push({t:'chap',id:c,text:lang==='en'?(h.e||c):(h.t||CH_NAME[c]||c),en:lang==='both'?(h.e||''):''});
+    for(let i=a+1;i<b;i++){const it=items[i],tt=lang==='en'?(it.e||it.t):(it.t||it.e);
+     if(it.l===1)B.push({t:'h3',id:it.i,text:tt});
+     else if(it.l===2)B.push({t:'h4',id:it.i,text:tt});
+     else if(it.l===3){const im=wImg?it.m.map(f=>imgs[f]).filter(Boolean):[];
+      B.push({t:'rule',id:it.i,tr:lang!=='en'?it.t:'',en:lang!=='tr'?it.e:'',imgs:im,ex:wEx?it.x:''})}}});
+   await new Promise(r=>setTimeout(r,20));
+   const blob=await pdfBuild(B,{title:'Kural kitapçığı · '+chs.join(' ')});
+   prog('Kaydediliyor…',.95);
+   const nm='ITU-Racing-FSG-2027-'+chs.join('-')+'.pdf';const r=await dlBlob(blob,nm);prog(dlMsg(r,nm,blob),1)}
+  catch(err){prog('PDF oluşturulamadı: '+(err&&err.message||err),0)}
+  busy=false;btn.disabled=false;btn.classList.remove('busy')});
 })();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
