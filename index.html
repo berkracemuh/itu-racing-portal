@@ -1058,7 +1058,7 @@ nav::-webkit-scrollbar-thumb:hover{background:var(--brand)}
 body:not(.baba-ok) .tab[data-v=baba],body:not(.baba-ok) #view-baba{display:none!important}
 .ekg{display:grid;grid-template-columns:repeat(3,minmax(0,auto));gap:14px 22px;justify-content:start;margin:.5em 0 0}
 .ekd>small{display:block;font:600 10.5px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 7px;padding-left:9px;border-left:3px solid var(--brand)}
-.ekc{display:flex;flex-wrap:wrap;gap:6px}
+.ekx{display:flex;flex-wrap:wrap;gap:6px}
 .ekb{font:inherit;font-size:.86em;font-weight:550;padding:6px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
 .ekb:hover{border-color:var(--brand);color:var(--accent)}
 .ekb[aria-expanded=true]{background:var(--carbon);border-color:var(--carbon);color:#fff;box-shadow:inset 0 -2px 0 var(--carbon-id)}
@@ -1084,6 +1084,95 @@ body:not(.baba-ok) .tab[data-v=baba],body:not(.baba-ok) #view-baba{display:none!
 .ekb{line-height:1.25;min-height:0;height:auto;font-size:14px}
 html[data-theme=dark] .ekb[aria-expanded=true]{background:var(--brand);border-color:var(--brand);color:#04252a;box-shadow:none}
 #ekw .ekb{padding:7px 13px}
+/* ===== R29: ekip↔kural, checklist ekip filtresi, muayene modu, teslim arşivi ===== */
+.ekr{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.ekr>small{font:600 10.5px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);flex:0 0 100%}
+.ekr>div{display:flex;flex-wrap:wrap;gap:6px 10px;flex:1 1 auto}
+.ekr a.ref{font:600 12.5px/1.6 var(--mono)}
+.ekr .ekgo{margin-left:auto}
+#ck-ek{padding:8px 10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:13.5px;max-width:190px}
+#ck-ek:focus{border-color:var(--brand)}
+.ckinsp{display:inline-flex;align-items:center;gap:7px;border-color:var(--brand)!important;color:var(--accent)}
+.ckinsp svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:square}
+.ckinsp:hover{background:var(--accent-soft)}
+#ck-chips button.nil{opacity:.38}
+body.insp-on{overflow:hidden}
+#insp{position:fixed;inset:0;z-index:60;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);animation:inIn .22s ease}
+#insp[hidden]{display:none}
+@keyframes inIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.in-top{display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--carbon);color:#fff;border-bottom:2px solid var(--carbon-id)}
+.in-tt small{display:block;font:600 10px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--carbon-id)}
+.in-tt b{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.in-net{font:600 11px/1.3 var(--mono);color:#ffd166;border:1px solid #ffd16655;padding:4px 8px}
+.in-prog{margin-left:auto;display:flex;align-items:center;gap:10px;font-variant-numeric:tabular-nums}
+.in-prog b{font:600 14px var(--mono)}
+.in-prog span{display:block;width:120px;height:6px;background:#2a333c}
+.in-prog i{display:block;height:100%;width:0;background:var(--carbon-id);transition:width .3s}
+.in-close{width:40px;height:40px;border:1px solid #2a333c;background:transparent;color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.in-close:hover{border-color:var(--carbon-id)}
+.in-flt{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+.in-flt select{padding:9px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;max-width:46vw}
+.in-tg{padding:9px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.in-tg[aria-pressed=true]{background:var(--carbon);color:#fff;border-color:var(--carbon);box-shadow:inset 0 -2px 0 var(--carbon-id)}
+html[data-theme=dark] .in-tg[aria-pressed=true]{background:var(--brand);color:#04252a;border-color:var(--brand);box-shadow:none}
+.in-card{flex:1 1 auto;overflow:auto;-webkit-overflow-scrolling:touch;padding:22px 20px 18px;max-width:880px;width:100%;margin:0 auto;border-left:4px solid transparent;transition:border-color .2s}
+.in-card[data-s=ok]{border-left-color:var(--ok)}.in-card[data-s=miss]{border-left-color:var(--miss)}.in-card[data-s=bad]{border-left-color:var(--bad)}
+.in-card.in-r{animation:inR .22s ease}.in-card.in-l{animation:inL .22s ease}
+@keyframes inR{from{opacity:.2;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes inL{from{opacity:.2;transform:translateX(-18px)}to{opacity:1;transform:none}}
+.in-card.in-flash{animation:inF .5s ease}
+@keyframes inF{0%{background:var(--accent-soft)}100%{background:transparent}}
+.in-crumb{display:flex;flex-direction:column;gap:2px;margin-bottom:12px;font-size:13px;color:var(--muted)}
+.in-crumb b{font:600 12px var(--mono);color:var(--accent);margin-right:4px}
+.in-id{font:700 26px/1.1 var(--mono);color:var(--accent);margin-bottom:10px}
+.in-tx{font-size:20px;line-height:1.55}
+.in-tx p{margin:0 0 .6em}
+.in-en{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:16px;color:var(--muted)}
+.in-x{margin-top:12px;padding:10px 12px;background:var(--accent-soft);border-left:3px solid var(--brand);font-size:15px}
+.in-note{display:block;width:100%;margin-top:14px;padding:10px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:16px;resize:vertical}
+.in-note:focus{border-color:var(--brand);outline:0}
+.in-empty{display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;text-align:center;min-height:40vh;color:var(--muted)}
+.in-empty b{color:var(--ink);font-size:19px}
+.in-foot{display:flex;gap:10px;align-items:stretch;padding:12px 16px 6px;border-top:1px solid var(--line);background:var(--panel);max-width:880px;width:100%;margin:0 auto}
+.in-nav{flex:0 0 58px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:30px;line-height:1;cursor:pointer}
+.in-nav:disabled{opacity:.3;cursor:default}
+.in-st{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.in-st button{min-height:62px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:17px;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.in-st button[data-s=ok]:hover,.in-st button[data-s=ok].on{border-color:var(--ok)}.in-st button[data-s=ok].on{background:var(--ok);color:#fff}
+.in-st button[data-s=miss]:hover,.in-st button[data-s=miss].on{border-color:var(--miss)}.in-st button[data-s=miss].on{background:var(--miss);color:#1b1300}
+.in-st button[data-s=bad]:hover,.in-st button[data-s=bad].on{border-color:var(--bad)}.in-st button[data-s=bad].on{background:var(--bad);color:#fff}
+.in-st button:disabled{opacity:.35;cursor:default}
+.in-sub{display:flex;justify-content:space-between;gap:10px;padding:4px 16px 10px;font:500 12px var(--mono);color:var(--muted);background:var(--panel);max-width:880px;width:100%;margin:0 auto}
+@media (max-width:700px){.in-keys{display:none}.in-tt small{display:none}.in-prog span{width:60px}.in-tx{font-size:18px}.in-id{font-size:22px}.in-card{padding:16px 14px}.in-nav{flex-basis:46px}.in-st button{font-size:15px;min-height:58px}.in-net{position:absolute;top:58px;left:0;right:0;text-align:center;background:#1a1405;border:0}}
+@media (prefers-reduced-motion:reduce){#insp,.in-card.in-r,.in-card.in-l,.in-card.in-flash{animation:none}}
+.dcbar{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.dci{margin:0;color:var(--muted);font-size:.92em;max-width:640px}
+.dcform{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1.4fr) minmax(0,.5fr);gap:10px 12px;padding:14px;border:1px solid var(--line);border-left:3px solid var(--brand);background:var(--panel);margin-bottom:14px}
+.dcform label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:600}
+.dcform input,.dcform select{padding:8px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;font-weight:400}
+.dcu,.dcn{grid-column:span 3}.dcact{grid-column:span 3;display:flex;gap:8px;align-items:center}
+.dcmsg{font-size:13px;color:var(--bad)}
+.dcsum{font-size:13px;color:var(--muted);margin-bottom:10px}.dcsum b{color:var(--ink);font-variant-numeric:tabular-nums}
+.dcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.dcc{border:1px solid var(--line);background:var(--panel);padding:12px 14px}
+.dcc.empty{background:transparent;border-style:dashed}
+.dcc .dch{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.dct{font:700 13px/1.2 var(--mono);letter-spacing:.06em;color:var(--accent)}
+.dcfull{font-size:12.5px;color:var(--muted);flex:1}
+.dcno{margin:0;font-size:13px;color:var(--muted)}
+.dcr{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line)}
+.dcr.top{border-top:0;padding-top:2px}
+.dcm{display:flex;flex-direction:column;gap:2px;min-width:0}
+.dcm b{font-weight:650;overflow-wrap:anywhere}
+.dcver{align-self:flex-start;font:600 11px/1 var(--mono);padding:3px 6px;background:var(--carbon);color:var(--carbon-id)}
+.dcr:not(.top) .dcver{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.dcnote{font-size:13px}.dcm small{color:var(--muted);font-size:12px}
+.dcb{display:flex;gap:6px;flex:0 0 auto}.dcb .btn{padding:5px 10px;font-size:13px;text-decoration:none!important}
+.dcdel.arm{border-color:var(--bad);color:var(--bad)}
+.dcc details summary{cursor:pointer;font-size:12.5px;color:var(--muted);padding:6px 0 2px}
+@media (max-width:700px){.dcbar{flex-direction:column}.dcform{grid-template-columns:1fr}.dcu,.dcn,.dcact{grid-column:auto}.dcg{grid-template-columns:1fr}}
+.in-st button{padding:0 4px;line-height:1.15}
+.dcform[hidden]{display:none}.dcform label{min-width:0}.dcform input,.dcform select{width:100%;min-width:0;max-width:100%}
 </style>
 </head>
 <body class="m-both">
@@ -1334,7 +1423,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   <p class="lead">Kural maddelerini tek tek işaretle: <b>Tamam</b>, <b>Eksik</b> ya da <b>Sorun var</b>. İşaretlerin bu tarayıcıda saklanır; “Raporu kopyala” ile eksik ve sorunlu maddeleri metin olarak alabilirsin.</p>
   <div class="ckch" id="ck-chips"></div>
   <div class="cksum" id="ck-sum"></div>
-  <div class="ckctl"><div class="seg" id="ck-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><input type="text" id="ck-q" placeholder="Bu bölümde ara…" autocomplete="off" aria-label="Checklist içinde ara"><button class="btn" id="ck-en">İngilizce göster</button><button class="btn" id="ck-rep-b">Raporu kopyala</button><button class="btn pdf" id="ck-pdf">PDF indir</button><button class="btn" id="ck-reset">Bölümü sıfırla</button></div>
+  <div class="ckctl"><div class="seg" id="ck-stat" role="group" aria-label="Durum filtresi"><button data-f="all" class="on">Tümü</button><button data-f="none">Bakılmadı</button><button data-f="ok">Tamam</button><button data-f="miss">Eksik</button><button data-f="bad">Sorun var</button></div><input type="text" id="ck-q" placeholder="Bu bölümde ara…" autocomplete="off" aria-label="Checklist içinde ara"><select id="ck-ek" aria-label="Ekip filtresi"></select><button class="btn ckinsp" id="ck-insp" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z M8 9l2.5 2.5L16 7 M8 15h8"/></svg>Muayene modu</button><button class="btn" id="ck-en">İngilizce göster</button><button class="btn" id="ck-rep-b">Raporu kopyala</button><button class="btn pdf" id="ck-pdf">PDF indir</button><button class="btn" id="ck-reset">Bölümü sıfırla</button></div>
   <div class="memban"><span class="mbt"></span><button type="button" class="btn pdf" data-goprof>Giriş yap / Kayıt ol</button></div><div class="ckmsg" id="ck-msg"></div>
   <textarea id="ck-rep" readonly aria-label="Rapor"></textarea>
   <div id="ck-list"></div>
@@ -1459,6 +1548,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
     <h2>Bildirimler</h2><div id="tm-nt"></div>
     <h2>Görevlerim</h2><div id="tm-my"></div>
     <h2>Teslim takvimi</h2><div id="tm-dl"></div>
+    <h2>Teslim arşivi</h2><div id="tm-docs"></div>
     <div id="tm-leadw" hidden><h2>Ekibimin görevleri</h2><div id="tm-lead"></div></div>
     <h2>Açık görevler</h2><div id="tm-as"></div>
     <h2>Son hareketler</h2><div id="tm-act"></div>
@@ -1474,6 +1564,13 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   <figure><img data-src="baba.jpg" alt="Yarış Mühendisi"><figcaption>Yarış Mühendisi</figcaption><div class="who"><b>Berk Ay</b> - İTÜ Elektrik Elektronik Fakültesi</div></figure>
   </div>
 </section>
+<div id="insp" role="dialog" aria-modal="true" aria-label="Muayene modu" hidden>
+ <div class="in-top"><div class="in-tt"><small>Yarış günü</small><b>Muayene modu</b></div><span class="in-net" id="in-net" hidden>Çevrimdışı · işaretler cihazda, bağlanınca eşitlenir</span><div class="in-prog" id="in-prog"><b>0 / 0</b><span id="in-bar"><i></i></span></div><button type="button" class="in-close" id="in-close" aria-label="Kapat">×</button></div>
+ <div class="in-flt"><select id="in-ch" aria-label="Bölüm"></select><select id="in-ek" aria-label="Ekip"></select><button type="button" class="in-tg" id="in-un" aria-pressed="false">Sadece bakılmamış</button><button type="button" class="in-tg" id="in-en" aria-pressed="false">İngilizce</button></div>
+ <div class="in-card" id="in-card"></div>
+ <div class="in-foot"><button type="button" class="in-nav" id="in-prev" aria-label="Önceki madde">‹</button><div class="in-st"><button type="button" data-s="ok" data-edit>Tamam</button><button type="button" data-s="miss" data-edit>Eksik</button><button type="button" data-s="bad" data-edit>Sorun var</button></div><button type="button" class="in-nav" id="in-next" aria-label="Sonraki madde">›</button></div>
+ <div class="in-sub"><span id="in-pos">0 / 0</span><span class="in-keys">← → gezin · 1 2 3 işaretle · kaydır</span></div>
+</div>
 <div id="fab">
 <button id="bm-open" title="Yer imleri" aria-label="Yer imleri"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg><span class="bmc" data-n="0"></span></button>
 <div class="fs-stack"><button class="fs-plus" title="Yazıyı büyüt" aria-label="Yazıyı büyüt">A+</button><button class="fs-minus" title="Yazıyı küçült" aria-label="Yazıyı küçült">A−</button></div>
@@ -1927,9 +2024,9 @@ function saveCHK(){try{localStorage.setItem('fsg-chk',JSON.stringify(CHK))}catch
 const chIds=items.filter(it=>it.l===0).map(it=>it.i);
 const chRange={},chRules={};
 chIds.forEach((c,k)=>{const st=idx[c],en=k+1<chIds.length?idx[chIds[k+1]]:items.length;chRange[c]=[st,en];chRules[c]=[];for(let n=st;n<en;n++)if(items[n].l===3)chRules[c].push(items[n].i)});
-let ckCur=chIds.indexOf('EV')>=0?'EV':chIds[0],ckStat='all',ckQ='',ckEn=false,ckBuilt=false;
+let ckCur=chIds.indexOf('EV')>=0?'EV':chIds[0],ckStat='all',ckQ='',ckEn=false,ckBuilt=false,ckEk='';
 const ckChips=document.getElementById('ck-chips'),ckSum=document.getElementById('ck-sum'),ckList=document.getElementById('ck-list'),ckMsg=document.getElementById('ck-msg'),ckRep=document.getElementById('ck-rep');
-function ckCounts(c){const o={ok:0,miss:0,bad:0,none:0};chRules[c].forEach(k=>{const s=CHK[k];if(s&&o[s]!==undefined)o[s]++;else o.none++});return o}
+function ckCounts(c){const o={ok:0,miss:0,bad:0,none:0};ckR(c).forEach(k=>{const s=CHK[k];if(s&&o[s]!==undefined)o[s]++;else o.none++});return o}
 let ckBuilt2=false,bars=null,ckNums=null;
 function ckHead(){
   if(!ckBuilt2){
@@ -1937,9 +2034,9 @@ function ckHead(){
     ckSum.innerHTML='<div class="nums"></div><div class="ckbar"><span style="background:var(--ok)"></span><span style="background:var(--miss)"></span><span style="background:var(--bad)"></span></div>';
     bars=ckSum.querySelectorAll('.ckbar span');ckNums=ckSum.querySelector('.nums');ckBuilt2=true;
   }
-  ckChips.querySelectorAll('button').forEach(b=>{const c=b.dataset.c;b.classList.toggle('on',c===ckCur);b.querySelector('i').textContent=ckCounts(c).ok+' / '+chRules[c].length+' tamam'});
-  const n=ckCounts(ckCur),t=chRules[ckCur].length||1,pc=x=>(x/t*100).toFixed(2)+'%';
-  ckNums.innerHTML='<span><i style="background:var(--ok)"></i><b>'+n.ok+'</b>Tamam</span><span><i style="background:var(--miss)"></i><b>'+n.miss+'</b>Eksik</span><span><i style="background:var(--bad)"></i><b>'+n.bad+'</b>Sorun var</span><span><i style="background:var(--line)"></i><b>'+n.none+'</b>Bakılmadı</span><span style="margin-left:auto;color:var(--muted)">'+esc(CH_NAME[ckCur]||ckCur)+' · '+chRules[ckCur].length+' madde</span>';
+  ckChips.querySelectorAll('button').forEach(b=>{const c=b.dataset.c;b.classList.toggle('on',c===ckCur);b.querySelector('i').textContent=ckCounts(c).ok+' / '+ckR(c).length+' tamam';b.classList.toggle('nil',!!ckEk&&!ckR(c).length)});
+  const n=ckCounts(ckCur),t=ckR(ckCur).length||1,pc=x=>(x/t*100).toFixed(2)+'%';
+  ckNums.innerHTML='<span><i style="background:var(--ok)"></i><b>'+n.ok+'</b>Tamam</span><span><i style="background:var(--miss)"></i><b>'+n.miss+'</b>Eksik</span><span><i style="background:var(--bad)"></i><b>'+n.bad+'</b>Sorun var</span><span><i style="background:var(--line)"></i><b>'+n.none+'</b>Bakılmadı</span><span style="margin-left:auto;color:var(--muted)">'+esc(CH_NAME[ckCur]||ckCur)+' · '+ckR(ckCur).length+' madde'+(ckEk?' · '+esc(ckEk):'')+'</span>';
   bars[0].style.width=pc(n.ok);bars[1].style.width=pc(n.miss);bars[2].style.width=pc(n.bad);
   document.querySelectorAll('#ck-stat button').forEach(b=>{b.classList.toggle('on',b.dataset.f===ckStat)});
 }
@@ -1957,6 +2054,7 @@ function ckBody(anim){
     if(it.l<3){pend=pend.filter(p=>items[p].l<it.l);pend.push(n);continue}
     const s=CHK[it.i]||'';
     if(ckStat!=='all'&&(ckStat==='none'?!!s:s!==ckStat))continue;
+    if(ckEk&&!ekIn(it.i,ckEk))continue;
     if(ws.length&&!ws.every(w=>hay[n].includes(w)))continue;
     pend.forEach(p=>{if(items[p].l>0)out+='<div class="ckh"><b>'+esc(items[p].i)+'</b><span>'+esc(items[p].t)+'</span></div>'});
     pend=[];out+=ckRow(it.i);cnt++;
@@ -3286,36 +3384,67 @@ MEM.hooks.push(()=>{if(tOn())pushRefresh()});
  function upd(){q=0;const y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;document.body.classList.toggle('scrolled',y>4);
   const on=curView()==='rules'&&h>innerHeight;bar.classList.toggle('on',on);if(on)bar.style.transform='scaleX('+Math.min(1,Math.max(0,y/h)).toFixed(4)+')'}
  addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',()=>{if(!q)q=requestAnimationFrame(upd)});addEventListener('hashchange',()=>setTimeout(upd,60));setTimeout(upd,300)})();
-// ===== R28: alt ekipler (clickable) + Baba access gate =====
+// ===== R28/R29: alt ekipler + ekip↔kural eşlemesi + Baba erişimi =====
+function ekData(){if(ekData.c)return ekData.c;ekData.c=[
+ ['Elektrik-Elektronik-Kontrol Yazılım',[
+  ['Elektrik','Yüksek gerilim (TS) sisteminden sorumludur.',['Akümülatör (batarya) paketi ve hücre modülleri','AIR, ön şarj (precharge) ve deşarj devreleri','HV kablolama, konnektörler ve izolasyon','Motor sürücüsü (inverter) ve motor bağlantısı','Şarj sistemi ve TS güvenliği'],
+   ['EV 1','EV 2.2','EV 3','EV 4','EV 5','EV 6.2','EV 6.3','EV 7','EV 8','EV 9','IN 3','IN 4','IN 9']],
+  ['Elektronik','Araçtaki tüm elektronik kartlardan ve alçak gerilim (LV) sisteminden sorumludur.',['PCB tasarımı ve üretimi','BMS, BSPD, kapatma devresi (SDC) ve TS gerilim göstergesi','LV batarya, dağıtım ve buck kartları','Sensör arayüzleri ve kablo demeti','CAN haberleşme donanımı'],
+   ['T 11','EV 4.6','EV 4.7','EV 4.10','EV 4.12','EV 5.8','EV 6','IN 4']],
+  ['Kontrol-Yazılım','Aracın kontrol ve gömülü yazılımından sorumludur.',['Araç kontrol ünitesi (VCU) yazılımı','Tork kontrolü ve APPS güvenilirlik kontrolleri','Traksiyon kontrolü ve sürüş stratejisi','Veri toplama, telemetri ve gösterge (dash) yazılımı','Simülasyon ve test araçları'],
+   ['T 11.8','T 11.9','EV 2.2','EV 4.11','T 14','T 15','IN 6','D 8']]]],
+ ['Mekanik',[
+  ['Aerodinamik','Aracın aerodinamik paketinden sorumludur.',['Ön/arka kanat, difüzör ve yan paneller','Gövde tasarımı','CFD analizleri','Pist ve test doğrulaması'],
+   ['T 2.3','T 2.4','T 8']],
+  ['Taşıt Dinamiği','Aracın yol tutuşu ve sürüş davranışından sorumludur.',['Süspansiyon geometrisi, yay ve amortisör','Direksiyon sistemi','Fren sistemi','Lastik ve jant seçimi','Araç ayarı (setup) ve dinamik testler'],
+   ['T 2.2','T 2.5','T 2.6','T 2.7','T 2.8','T 2.9','T 6','IN 7','IN 11']],
+  ['Powertrain','Motor torkunun tekerleklere aktarılmasından sorumludur.',['Redüktör / şanzıman ve diferansiyel','Aks ve mafsallar','Motor ve inverter montajı','Soğutma devresi (radyatör, pompa, hatlar)'],
+   ['T 7','EV 2.1']],
+  ['Şasi ve Kompozit','Aracın taşıyıcı yapısından ve kompozit parçalarından sorumludur.',['Şasi / monokok tasarımı ve üretimi','Darbe emici (impact attenuator) ve roll hoop’lar','Sürücü ergonomisi ve koltuk','Karbon fiber kalıp ve parça üretimi'],
+   ['T 3','T 4','T 5','T 13.1','IN 5']]]],
+ ['Finans-Organizasyon',[
+  ['Finans','Takımın bütçesinden, sponsorluklarından ve statik disiplinlerin finansal kısmından sorumludur.',['Sponsorluk anlaşmaları ve sponsor ilişkileri','Bütçe planlama ve harcama takibi','İş planı sunumu (BPP) ve finansal özet','Maliyet raporu (CRD) ve malzeme listesi (CCBOM)'],
+   ['S 2','S 3']],
+  ['Organizasyon','Takımın organizasyonel işlerinden ve yarışma süreçlerinden sorumludur.',['Yarışma kayıtları ve belge teslim takibi','Ulaşım, konaklama ve yarış lojistiği','Sosyal medya, tanıtım ve etkinlikler','Takım içi duyuru ve koordinasyon'],
+   ['A','S 1','T 12']]]]];
+ return ekData.c}
+function ekFind(n){for(const [d,l] of ekData())for(const x of l)if(x[0]===n)return {d:d,n:x[0],t:x[1],li:x[2],r:x[3]};return null}
+function ekIn(k,n){const e=ekFind(n);if(!e)return true;return e.r.some(p=>k===p||k.startsWith(p+(p.indexOf(' ')<0?' ':'.')))}
+function ckR(c){return ckEk?chRules[c].filter(k=>ekIn(k,ckEk)):chRules[c]}
+function ckSetEk(n){ckEk=ekFind(n)?n:'';try{localStorage.setItem('fsg-ckek',ckEk)}catch(_){}
+ const s=document.getElementById('ck-ek');if(s)s.value=ckEk;
+ if(ckEk&&!ckR(ckCur).length){const c=chIds.find(c=>ckR(c).length);if(c)ckCur=c}
+ if(typeof ckBuilt!=='undefined'&&ckBuilt)renderCheck(true)}
 (function(){
- const EK=[
-  ['Elektrik-Elektronik-Kontrol Yazılım',[
-   ['Elektrik','Yüksek gerilim (TS) sisteminden sorumludur.',['Akümülatör (batarya) paketi ve hücre modülleri','AIR, ön şarj (precharge) ve deşarj devreleri','HV kablolama, konnektörler ve izolasyon','Motor sürücüsü (inverter) ve motor bağlantısı','Şarj sistemi ve TS güvenliği']],
-   ['Elektronik','Araçtaki tüm elektronik kartlardan ve alçak gerilim (LV) sisteminden sorumludur.',['PCB tasarımı ve üretimi','BMS, BSPD, kapatma devresi (SDC) ve TS gerilim göstergesi','LV batarya, dağıtım ve buck kartları','Sensör arayüzleri ve kablo demeti','CAN haberleşme donanımı']],
-   ['Kontrol-Yazılım','Aracın kontrol ve gömülü yazılımından sorumludur.',['Araç kontrol ünitesi (VCU) yazılımı','Tork kontrolü ve APPS güvenilirlik kontrolleri','Traksiyon kontrolü ve sürüş stratejisi','Veri toplama, telemetri ve gösterge (dash) yazılımı','Simülasyon ve test araçları']]]],
-  ['Mekanik',[
-   ['Aerodinamik','Aracın aerodinamik paketinden sorumludur.',['Ön/arka kanat, difüzör ve yan paneller','Gövde tasarımı','CFD analizleri','Pist ve test doğrulaması']],
-   ['Taşıt Dinamiği','Aracın yol tutuşu ve sürüş davranışından sorumludur.',['Süspansiyon geometrisi, yay ve amortisör','Direksiyon sistemi','Fren sistemi','Lastik ve jant seçimi','Araç ayarı (setup) ve dinamik testler']],
-   ['Powertrain','Motor torkunun tekerleklere aktarılmasından sorumludur.',['Redüktör / şanzıman ve diferansiyel','Aks ve mafsallar','Motor ve inverter montajı','Soğutma devresi (radyatör, pompa, hatlar)']],
-   ['Şasi ve Kompozit','Aracın taşıyıcı yapısından ve kompozit parçalarından sorumludur.',['Şasi / monokok tasarımı ve üretimi','Darbe emici (impact attenuator) ve roll hoop’lar','Sürücü ergonomisi ve koltuk','Karbon fiber kalıp ve parça üretimi']]]],
-  ['Finans-Organizasyon',[
-   ['Organizasyon','Takımın finansal ve organizasyonel işlerinden sorumludur.',['Sponsorluk ve bütçe yönetimi','İş planı sunumu ve maliyet raporu hazırlığı','Yarışma kayıtları ve lojistik','Sosyal medya, tanıtım ve etkinlikler']]]]];
+ const e=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ // checklist ekip filter
+ const sel=document.getElementById('ck-ek');
+ if(sel){sel.innerHTML='<option value="">Tüm ekipler</option>'+ekData().map(([d,l])=>'<optgroup label="'+e(d)+'">'+l.map(x=>'<option>'+e(x[0])+'</option>').join('')+'</optgroup>').join('');
+  try{const v=localStorage.getItem('fsg-ckek')||'';if(ekFind(v)){ckEk=v;sel.value=v}}catch(_){}
+  sel.addEventListener('change',()=>ckSetEk(sel.value))}
+ // alt ekipler (Araç ve Takım Hakkında)
  const box=document.getElementById('ekw');
  if(box){
-  const e=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  let i=0;box.innerHTML='<div class="ekg">'+EK.map(([d,l])=>'<div class="ekd"><small>'+e(d)+'</small><div class="ekc">'+l.map(x=>'<button type="button" class="ekb" data-i="'+(i++)+'" aria-expanded="false" aria-controls="ekp">'+e(x[0])+'</button>').join('')+'</div></div>').join('')+'</div><div id="ekp" class="ekp" aria-live="polite"><p class="ekh">Görev açıklamasını görmek için bir ekibe tıkla.</p></div>';
-  const flat=[];EK.forEach(([d,l])=>l.forEach(x=>flat.push([d].concat(x))));
+  const hint='<p class="ekh">Görev açıklamasını görmek için bir ekibe tıkla.</p>';
+  box.innerHTML='<div class="ekg">'+ekData().map(([d,l])=>'<div class="ekd"><small>'+e(d)+'</small><div class="ekx">'+l.map(x=>'<button type="button" class="ekb" data-ek="'+e(x[0])+'" aria-expanded="false" aria-controls="ekp">'+e(x[0])+'</button>').join('')+'</div></div>').join('')+'</div><div id="ekp" class="ekp" aria-live="polite">'+hint+'</div>';
   const pan=box.querySelector('#ekp');
-  box.addEventListener('click',ev=>{const b=ev.target.closest('.ekb');if(!b)return;const on=b.getAttribute('aria-expanded')!=='true';
+  box.addEventListener('click',ev=>{
+   const go=ev.target.closest('[data-ekck]');if(go){ckSetEk(go.dataset.ekck);showView('check');scrollTo(0,0);return}
+   const b=ev.target.closest('.ekb');if(!b)return;const on=b.getAttribute('aria-expanded')!=='true';
    box.querySelectorAll('.ekb').forEach(x=>x.setAttribute('aria-expanded','false'));
-   if(!on){pan.innerHTML='<p class="ekh">Görev açıklamasını görmek için bir ekibe tıkla.</p>';pan.classList.remove('on');return}
-   b.setAttribute('aria-expanded','true');const [d,n,t,li]=flat[+b.dataset.i];
-   pan.innerHTML='<div class="ekt"><small>'+e(d)+' departmanı</small><h4>'+e(n)+'</h4></div><p>'+e(t)+'</p><ul>'+li.map(x=>'<li>'+e(x)+'</li>').join('')+'</ul>';
+   if(!on){pan.innerHTML=hint;pan.classList.remove('on');return}
+   b.setAttribute('aria-expanded','true');const k=ekFind(b.dataset.ek);
+   const n=chIds.reduce((s,c)=>s+chRules[c].filter(x=>ekIn(x,k.n)).length,0);
+   pan.innerHTML='<div class="ekt"><small>'+e(k.d)+' departmanı</small><h4>'+e(k.n)+'</h4></div><p>'+e(k.t)+'</p><ul>'+k.li.map(x=>'<li>'+e(x)+'</li>').join('')+'</ul>'
+    +'<div class="ekr"><small>İlgili kural bölümleri</small><div>'+k.r.filter(id=>byId[id]).map(id=>'<a class="ref" href="#'+slug(id)+'" data-id="'+e(id)+'" title="'+e(byId[id].t||'')+'">'+e(id)+'</a>').join('')+'</div>'
+    +'<button type="button" class="btn ekgo" data-ekck="'+e(k.n)+'">Checklist’te bu ekibin '+n+' maddesini aç →</button></div>';
    pan.classList.remove('on');void pan.offsetWidth;pan.classList.add('on')});
  }
- // --- Baba: only approved EEK department members / leaders (and admin) ---
+ // --- Baba: onaylı EEK ana ekip üyeleri + EEK liderleri (kaptan ve destek ekip hariç) ---
  const EEK_B=['Elektrik','Elektronik','Kontrol-Yazılım'],EEK_U=['dl-eek','el-elektrik','el-elektronik','el-kontrol'];
- window.babaOK=()=>{if(typeof MEM==='undefined'||!MEM.on||!MEM.user||!MEM.can())return false;if(MEM.admin)return true;const d=MEM.udoc||{};return EEK_B.includes(d.birim)||EEK_U.includes(d.unvan)};
+ window.babaOK=()=>{if(typeof MEM==='undefined'||!MEM.on||!MEM.user||!MEM.can())return false;const d=MEM.udoc||{};
+  if(d.unvan==='kaptan')return false;if(MEM.admin||EEK_U.includes(d.unvan))return true;
+  return EEK_B.includes(d.birim)&&d.ekip!=='Destek ekip'};
  let want=location.hash==='#baba';
  const img=document.querySelector('#view-baba img[data-src]');
  window.babaGate=function(){const ok=babaOK();document.body.classList.toggle('baba-ok',ok);
@@ -3326,6 +3455,109 @@ MEM.hooks.push(()=>{if(tOn())pushRefresh()});
  if(typeof memBody==='function'){const mb=memBody;memBody=function(){const r=mb.apply(this,arguments);try{babaGate()}catch(_){}return r}}
  if(typeof memProfileFromDocs==='function'){const mp=memProfileFromDocs;memProfileFromDocs=function(){const r=mp.apply(this,arguments);try{babaGate()}catch(_){}return r}}
  babaGate();
+})();
+// ===== R29: Muayene modu (yarış günü) =====
+(function(){
+ const ov=document.getElementById('insp');if(!ov)return;
+ const e=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const par=[];{const st=[];items.forEach((it,n)=>{if(it.l<3){st.length=it.l;st[it.l]=n}else par[n]=st.slice(1).filter(x=>x!=null)})}
+ const Q=s=>ov.querySelector(s);
+ const S={ch:chIds.indexOf('IN')>=0?'IN':ckCur,ek:'',un:false,en:false,list:[],i:0,lock:null};
+ Q('#in-ch').innerHTML=chIds.map(c=>'<option value="'+e(c)+'">'+e(c)+' · '+e(CH_NAME[c]||c)+'</option>').join('');
+ Q('#in-ek').innerHTML='<option value="">Tüm ekipler</option>'+ekData().map(([d,l])=>'<optgroup label="'+e(d)+'">'+l.map(x=>'<option>'+e(x[0])+'</option>').join('')+'</optgroup>').join('');
+ function build(keep){const [a,b]=chRange[S.ch],cur=S.list[S.i];S.list=[];
+  for(let n=a;n<b;n++){const it=items[n];if(it.l!==3)continue;if(S.ek&&!ekIn(it.i,S.ek))continue;if(S.un&&CHK[it.i])continue;S.list.push(n)}
+  S.i=keep&&cur!=null&&S.list.indexOf(cur)>=0?S.list.indexOf(cur):0}
+ function counts(){const [a,b]=chRange[S.ch];let t=0,d=0;for(let n=a;n<b;n++){const it=items[n];if(it.l!==3||(S.ek&&!ekIn(it.i,S.ek)))continue;t++;if(CHK[it.i])d++}return [d,t]}
+ function paint(dir){
+  const [d,t]=counts();Q('#in-prog b').textContent=d+' / '+t;Q('#in-bar i').style.width=(t?d/t*100:0)+'%';
+  const card=Q('#in-card');
+  if(!S.list.length){card.innerHTML='<div class="in-empty"><b>'+(S.un&&t?'Bu bölümde bakılmamış madde kalmadı.':'Bu filtreyle madde yok.')+'</b><span>'+(S.un&&t?'Tümünü görmek için “Sadece bakılmamış”ı kapat.':'Başka bir bölüm ya da ekip seç.')+'</span></div>';Q('#in-pos').textContent='0 / 0';ov.querySelectorAll('.in-st button').forEach(b=>{b.disabled=true;b.classList.remove('on')});return}
+  const n=S.list[S.i],it=items[n],s=CHK[it.i]||'';
+  const crumbs=(par[n]||[]).map(p=>'<span><b>'+e(items[p].i)+'</b> '+e(items[p].t)+'</span>').join('');
+  card.innerHTML='<div class="in-crumb">'+crumbs+'</div><div class="in-id">'+e(it.i)+'</div><div class="in-tx">'+(it.m&&it.m.length?'<p><i>Bu madde tablo/şekil içerir; ayrıntı için Kurallar sekmesine bak.</i></p>':'')+fmt(it.t)+'</div>'
+   +(S.en&&!(it.m&&it.m.length)?'<div class="in-en">'+fmt(it.e)+'</div>':'')+(it.x?'<div class="in-x">'+e(it.x)+'</div>':'')
+   +'<textarea class="in-note" rows="2" data-edit data-nk="'+e(it.i)+'" placeholder="Not: ne eksik, kim ilgileniyor…" aria-label="Not">'+e(CHN[it.i]||'')+'</textarea>';
+  card.dataset.s=s;Q('#in-pos').textContent=(S.i+1)+' / '+S.list.length;
+  ov.querySelectorAll('.in-st button').forEach(b=>{b.disabled=false;b.classList.toggle('on',b.dataset.s===s)});
+  Q('#in-prev').disabled=S.i<=0;Q('#in-next').disabled=S.i>=S.list.length-1;
+  if(dir&&!(RM&&RM.matches)){card.classList.remove('in-l','in-r');void card.offsetWidth;card.classList.add(dir>0?'in-r':'in-l')}
+  card.scrollTop=0}
+ function step(d){const j=S.i+d;if(j<0||j>=S.list.length)return;S.i=j;paint(d)}
+ async function wake(on){try{if(on&&'wakeLock' in navigator&&!S.lock){S.lock=await navigator.wakeLock.request('screen');S.lock.addEventListener('release',()=>{S.lock=null})}else if(!on&&S.lock){await S.lock.release();S.lock=null}}catch(_){}}
+ function net(){const off=navigator.onLine===false;Q('#in-net').hidden=!off}
+ function open(){S.ek=ckEk||'';Q('#in-ek').value=S.ek;Q('#in-ch').value=S.ch;build(false);ov.hidden=false;document.body.classList.add('insp-on');try{history.pushState({insp:1},'',location.href)}catch(_){}net();paint(0);wake(true);setTimeout(()=>Q('#in-close').focus(),30)}
+ function close(){ov.hidden=true;document.body.classList.remove('insp-on');wake(false);if(curView()==='check')renderCheck(false);const b=document.getElementById('ck-insp');if(b)b.focus()}
+ document.getElementById('ck-insp').addEventListener('click',open);
+ function reqClose(){if(history.state&&history.state.insp){try{history.back();return}catch(_){}}close()}
+ Q('#in-close').addEventListener('click',reqClose);
+ addEventListener('popstate',()=>{if(!ov.hidden)close()});addEventListener('hashchange',()=>{if(!ov.hidden)close()});
+ Q('#in-ch').addEventListener('change',ev=>{S.ch=ev.target.value;build(false);paint(0)});
+ Q('#in-ek').addEventListener('change',ev=>{S.ek=ev.target.value;build(false);paint(0)});
+ Q('#in-un').addEventListener('click',ev=>{S.un=!S.un;ev.currentTarget.setAttribute('aria-pressed',S.un);build(true);paint(0)});
+ Q('#in-en').addEventListener('click',ev=>{S.en=!S.en;ev.currentTarget.setAttribute('aria-pressed',S.en);paint(0)});
+ Q('#in-prev').addEventListener('click',()=>step(-1));Q('#in-next').addEventListener('click',()=>step(1));
+ function mark(s){if(!S.list.length)return;const k=items[S.list[S.i]].i;if(CHK[k]===s)delete CHK[k];else CHK[k]=s;saveCHK();
+  const cur=CHK[k]||'';paint(0);const c=Q('#in-card');c.classList.remove('in-flash');void c.offsetWidth;if(cur)c.classList.add('in-flash');
+  if(cur==='ok'){setTimeout(()=>{if(S.un){const i=S.i;build(false);S.i=Math.max(0,Math.min(i,S.list.length-1));paint(1)}else step(1)},320)}
+  else if(cur){const t=Q('.in-note');if(t&&!t.value)setTimeout(()=>t.focus(),60)}}
+ ov.querySelector('.in-st').addEventListener('click',ev=>{const b=ev.target.closest('button[data-s]');if(b&&!b.disabled)mark(b.dataset.s)});
+ ov.addEventListener('input',ev=>{const t=ev.target.closest('.in-note');if(!t)return;const k=t.dataset.nk,v=t.value;if(v.trim())CHN[k]=v;else delete CHN[k];saveCHN()});
+ document.addEventListener('keydown',ev=>{if(ov.hidden)return;const tg=ev.target;const typing=tg&&(tg.tagName==='TEXTAREA'||tg.tagName==='INPUT'||tg.tagName==='SELECT');
+  if(ev.key==='Escape'){if(typing)tg.blur();else reqClose();ev.preventDefault();return}if(typing)return;
+  if(ev.key==='ArrowRight'){step(1);ev.preventDefault()}else if(ev.key==='ArrowLeft'){step(-1);ev.preventDefault()}
+  else if(ev.key==='1'||ev.key==='2'||ev.key==='3'){const b=ov.querySelectorAll('.in-st button')[+ev.key-1];if(b&&!b.disabled)b.click()}});
+ let sx=0,sy=0;const cd=Q('#in-card');
+ cd.addEventListener('touchstart',ev=>{const t=ev.touches[0];sx=t.clientX;sy=t.clientY},{passive:true});
+ cd.addEventListener('touchend',ev=>{const t=ev.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)step(dx<0?1:-1)},{passive:true});
+ addEventListener('online',net);addEventListener('offline',net);
+ document.addEventListener('visibilitychange',()=>{if(!ov.hidden&&document.visibilityState==='visible')wake(true)});
+ const ch0=ckHead;ckHead=function(){const r=ch0.apply(this,arguments);if(!ov.hidden&&!(document.activeElement&&document.activeElement.classList.contains('in-note')))paint(0);return r};
+})();
+// ===== R29: Teslim arşivi (uygulama, onaylı üyeler) =====
+(function(){
+ const box=document.getElementById('tm-docs');if(!box)return;
+ const e=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const DT=[['esf','ESF','Electrical System Form','EV 9'],['ses','SES','Structural Equivalency Spreadsheet','A 5.7'],['iad','IAD','Impact Attenuator Data','T 3.18'],['vsv','VSV','Vehicle Status Video','A 5.6'],
+  ['efs','BPP özeti','Executive & Financial Summary','S 2.3'],['crd','CRD','Cost Report Documents','S 3.3'],['ccbom','CCBOM','Costed Carbonized Bill of Material','S 3.4'],['tvsd','TVSD','Technical Vehicle System Documentation','S 4.2'],['diger','Diğer','Diğer belgeler','']];
+ const DTM={};DT.forEach(d=>DTM[d[0]]=d);
+ const D={on:false,unsub:null,docs:[],err:'',open:false};
+ box.innerHTML='<div class="dcbar"><p class="dci">Yarışmaya gönderilen belgelerin bağlantıları, sürümleri ve kimin eklediği. Dosyayı Drive/OneDrive’a yükleyip paylaşım bağlantısını buraya ekle.</p><button type="button" class="btn pdf" id="dc-add" data-edit aria-expanded="false">+ Belge ekle</button></div>'
+  +'<form id="dc-form" class="dcform" hidden autocomplete="off"><label><span>Belge</span><select name="tp" required>'+DT.map(d=>'<option value="'+d[0]+'">'+e(d[1])+(d[0]!=='diger'?' — '+e(d[2]):'')+'</option>').join('')+'</select></label>'
+  +'<label><span>Başlık</span><input name="t" maxlength="120" placeholder="ör. ESF – son düzeltmelerle"></label><label class="dcv"><span>Sürüm</span><input name="v" maxlength="20" placeholder="v1"></label>'
+  +'<label class="dcu"><span>Bağlantı</span><input name="url" type="url" required maxlength="600" placeholder="https://…"></label><label class="dcn"><span>Not</span><input name="n" maxlength="300" placeholder="ör. FSG portalına yüklendi, onay bekleniyor"></label>'
+  +'<div class="dcact"><button type="submit" class="btn pdf">Kaydet</button><button type="button" class="btn" id="dc-cancel">Vazgeç</button><span class="dcmsg" id="dc-msg" role="status"></span></div></form><div id="dc-list"></div>';
+ const form=box.querySelector('#dc-form'),list=box.querySelector('#dc-list'),addB=box.querySelector('#dc-add'),msg=box.querySelector('#dc-msg');
+ const tsOf=x=>typeof x.a==='number'?x.a:Date.now();
+ function nextV(tp){const n=D.docs.filter(x=>x.tp===tp).length;return 'v'+(n+1)}
+ function showForm(on){D.open=on;form.hidden=!on;addB.setAttribute('aria-expanded',on);if(on){form.reset();form.v.value=nextV(form.tp.value);msg.textContent='';form.url.focus()}}
+ addB.addEventListener('click',()=>showForm(!D.open));box.querySelector('#dc-cancel').addEventListener('click',()=>showForm(false));
+ form.tp.addEventListener('change',()=>{form.v.value=nextV(form.tp.value)});
+ form.addEventListener('submit',async ev=>{ev.preventDefault();if(memBlocked('edit'))return;
+  const tp=form.tp.value,url=form.url.value.trim(),t=form.t.value.trim();
+  if(!/^https:\/\/[^\s]+\.[^\s]+/.test(url)){msg.textContent='Bağlantı https:// ile başlamalı.';return}
+  if(tp==='diger'&&!t){msg.textContent='“Diğer” belgeler için başlık yaz.';return}
+  const F=MEM.fba,me=MEM.uid();
+  try{await F.fs.add('docs',{tp:tp,t:t.slice(0,120),url:url.slice(0,600),v:(form.v.value.trim()||nextV(tp)).slice(0,20),n:form.n.value.trim().slice(0,300),u:me,nm:uname(me),a:F.TS()});showForm(false)}
+  catch(err){msg.textContent=String(err&&err.code||'').includes('permission')?'İzin yok: Firebase kurallarına “docs” bölümü eklenmemiş olabilir.':'Kaydedilemedi: '+memErr(err)}});
+ list.addEventListener('click',async ev=>{const x=ev.target.closest('[data-dcdel]');if(!x)return;
+  if(!x.classList.contains('arm')){x.classList.add('arm');x.textContent='Emin misin?';setTimeout(()=>{if(x.isConnected){x.classList.remove('arm');x.textContent='Sil'}},3500);return}
+  try{await MEM.fba.fs.del('docs/'+x.dataset.dcdel)}catch(err){tErr(err)}});
+ function render(){
+  if(!D.on){list.innerHTML='';return}
+  if(D.err){list.innerHTML='<p class="pmempty">'+e(D.err)+'</p>';return}
+  const by={};D.docs.forEach(x=>{(by[x.tp]=by[x.tp]||[]).push(x)});
+  Object.values(by).forEach(a=>a.sort((p,q)=>tsOf(q)-tsOf(p)));
+  const me=MEM.uid(),adm=MEM.admin;
+  const row=(x,top)=>'<div class="dcr'+(top?' top':'')+'"><div class="dcm"><span class="dcver">'+e(x.v||'—')+'</span><b>'+e(x.t||DTM[x.tp]&&DTM[x.tp][2]||'Belge')+'</b>'+(x.n?'<span class="dcnote">'+e(x.n)+'</span>':'')+'<small>'+e(x.nm||uname(x.u))+' · '+ago(tsOf(x))+'</small></div><div class="dcb"><a class="btn" href="'+e(/^https:\/\//.test(x.url||'')?x.url:'#')+'" target="_blank" rel="noopener noreferrer">Aç ↗</a>'+(x.u===me||adm?'<button type="button" class="btn dcdel" data-dcdel="'+e(x.id)+'">Sil</button>':'')+'</div></div>';
+  const done=DT.filter(d=>d[0]!=='diger'&&by[d[0]]).length,tot=DT.length-1;
+  list.innerHTML='<div class="dcsum"><b>'+done+' / '+tot+'</b> zorunlu belge türü için en az bir sürüm var</div><div class="dcg">'+DT.map(d=>{const a=by[d[0]]||[];if(d[0]==='diger'&&!a.length)return '';
+   return '<section class="dcc'+(a.length?'':' empty')+'"><div class="dch"><span class="dct">'+e(d[1])+'</span><span class="dcfull">'+e(d[2])+'</span>'+(d[3]&&byId[d[3]]?refA(d[3]):'')+'</div>'
+    +(a.length?row(a[0],true)+(a.length>1?'<details><summary>Önceki sürümler ('+(a.length-1)+')</summary>'+a.slice(1).map(x=>row(x,false)).join('')+'</details>':''):'<p class="dcno">Henüz eklenmedi.</p>')+'</section>'}).join('')+'</div>'}
+ function sync(){const want=typeof tOn==='function'&&tOn();
+  if(want&&!D.on){D.on=true;D.err='';D.unsub=MEM.fba.fs.watchCol('docs',(docs,m,err)=>{if(err){D.err=String(err.code||'').includes('permission')?'Teslim arşivi için Firebase kurallarına “docs” bölümünün eklenmesi gerekiyor (yöneticiye sor).':'Arşiv okunamadı: '+memErr(err);render();return}D.err='';D.docs=docs.map(d=>Object.assign({id:d.id},d.data));render();if(D.open&&!form.v.value)form.v.value=nextV(form.tp.value)});render()}
+  else if(!want&&D.on){try{D.unsub&&D.unsub()}catch(_){}D.on=false;D.docs=[];D.unsub=null;showForm(false);render()}}
+ MEM.hooks.push(sync);sync();
 })();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
