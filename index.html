@@ -1025,6 +1025,35 @@ table.lsum td.late{color:var(--bad);font-weight:700}
 /* ===== R25: render only rows near the viewport (big speed-up on load) ===== */
 #list>.row{content-visibility:auto;contain-intrinsic-size:auto 150px}
 @media print{#list>.row{content-visibility:visible}}
+/* ===== R26: fix — view menu must stay reachable on phones in every language mode ===== */
+@media (max-width:900px){.colhead .c-tr .tools{display:flex!important}}
+/* ===== R27: design polish (same language: angular, carbon + turquoise, mono labels) ===== */
+::selection{background:color-mix(in srgb,var(--carbon-id) 38%,transparent);color:inherit}
+:where(a,button,select,input,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--carbon-id);outline-offset:2px}
+header{transition:box-shadow .25s ease}
+body.scrolled header{box-shadow:0 10px 28px -18px rgba(0,0,0,.7)}
+#rdp{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--carbon-id);transform-origin:0 50%;transform:scaleX(0);pointer-events:none;opacity:0;transition:opacity .2s}
+body:not(.v-alt) #rdp.on{opacity:1}
+table.t,.cards .stat,.cd b,.qzscore b,table.bom,.pbt,.lsum{font-variant-numeric:tabular-nums}
+table.t tbody tr:nth-child(even)>td{background:color-mix(in srgb,var(--ink) 2.5%,transparent)}
+table.t tbody tr{transition:background-color .15s}
+table.t tbody tr:hover>td{background:var(--accent-soft)}
+table.t.kv td:first-child{box-shadow:inset 3px 0 0 transparent;transition:box-shadow .15s}
+table.t.kv tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--brand)}
+.cards .stat,.veh,.cd:not(.empty),.orgdep,.rosg,.pfcard{transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+@media (hover:hover){
+ .cards .stat:hover,.orgdep:hover,.rosg:hover{border-color:var(--brand);box-shadow:0 10px 24px -18px rgba(0,0,0,.55);transform:translateY(-2px)}
+ .veh:hover{border-color:var(--brand);box-shadow:0 14px 30px -22px rgba(0,0,0,.6)}
+ .veh .pic{overflow:hidden}.veh .pic img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}.veh:hover .pic img{transform:scale(1.035)}
+}
+:is(#view-car,#view-ev,#view-team,#view-prof,#view-check,#view-pcb,#view-baba,.note,.lead,.tm-off) a:not(.ref):not(.btn):not([class*=tkb]){color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+:is(#view-car,#view-ev,#view-team,#view-prof,#view-check,#view-pcb,#view-baba,.tm-off) a:not(.ref):not(.btn):hover{text-decoration-thickness:2px}
+nav,#bml,#cml,#hsl,#fpanel,.bomw{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--muted) 55%,transparent) transparent}
+nav::-webkit-scrollbar,#cml::-webkit-scrollbar,#hsl::-webkit-scrollbar{width:8px}
+nav::-webkit-scrollbar-thumb,#cml::-webkit-scrollbar-thumb,#hsl::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--muted) 45%,transparent);border:2px solid var(--panel)}
+nav::-webkit-scrollbar-thumb:hover{background:var(--brand)}
+@media (prefers-reduced-motion:reduce){.cards .stat,.veh,.orgdep,.rosg,.veh .pic img{transition:none!important;transform:none!important}}
+@media print{#rdp{display:none}}
 </style>
 </head>
 <body class="m-both">
@@ -1088,7 +1117,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   </div>
   <div class="hr-right"><button id="fbtn" class="fbtn rules-only" aria-label="Filtrele" title="Bölüme / yer imine göre filtrele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg></button><input id="q" class="rules-only" type="search" placeholder="Ara: kelime veya madde no" autocomplete="off" aria-label="Ara"><span id="count" class="rules-only"></span><button class="theme-btn" role="switch" aria-label="Koyu temaya geç" title="Koyu temaya geç"><span class="ti sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><span class="ti moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button><button id="pf-btn" class="pf-btn" aria-label="Profil" title="Profil"><span class="pf-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6"/><path d="M4.5 20.5c.9-3.9 3.9-6 7.5-6s6.6 2.1 7.5 6"/></svg></span></button></div>
 </div>
-
+<div id="rdp" aria-hidden="true"></div>
 </header>
 <div id="fpanel" role="dialog" aria-label="Filtre"></div><div id="memtoast" role="status"><span></span><button type="button" class="btn pdf" data-goprof>Profil</button></div><div id="tip" role="tooltip"></div>
 <div id="wm" aria-hidden="true"><img src="wm.svg" alt=""></div>
@@ -3224,6 +3253,12 @@ const _ntRender=ntRender;ntRender=function(){
 tmEl('tm-nt').addEventListener('click',e=>{if(e.target.closest('#push-on'))pushEnable();else if(e.target.closest('#push-off'))pushDisable()});
 window.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#pf-out')&&pushTok()){const F=MEM.fba,tok=pushTok();if(F&&MEM.user){F.fs.set('users/'+MEM.uid()+'/private/state',{push:{[tok]:F.DEL()}},true).catch(()=>{});F.push.remove().catch(()=>{})}try{localStorage.removeItem('fsg-pushtok')}catch(x){}}},true);
 MEM.hooks.push(()=>{if(tOn())pushRefresh()});
+
+// ===== R27: reading progress + header shadow =====
+(function(){const bar=document.getElementById('rdp');let q=0;
+ function upd(){q=0;const y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;document.body.classList.toggle('scrolled',y>4);
+  const on=curView()==='rules'&&h>innerHeight;bar.classList.toggle('on',on);if(on)bar.style.transform='scaleX('+Math.min(1,Math.max(0,y/h)).toFixed(4)+')'}
+ addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(upd)},{passive:true});addEventListener('resize',()=>{if(!q)q=requestAnimationFrame(upd)});addEventListener('hashchange',()=>setTimeout(upd,60));setTimeout(upd,300)})();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
 <script type="module" src="fb.js"></script>
