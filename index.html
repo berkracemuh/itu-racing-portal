@@ -1210,6 +1210,38 @@ body.rpd-on{overflow:hidden}
 .rpmsg{font-size:13px;color:var(--muted);min-height:1em}
 @media (max-width:560px){.rpg{grid-template-columns:1fr}.rpf{flex-direction:column;align-items:stretch}.rpbtn .btn{flex:1}}
 .veh.next .pic.ph{background:#0c0f13}.veh.next .pic.ph img{object-fit:contain}
+/* ===== R31 ===== */
+#view-car h2,#view-pcb h2{z-index:4}
+header .tab:focus-visible{outline:2px solid var(--carbon-id);outline-offset:-3px}
+header .tab:focus:not(:focus-visible){outline:none}
+#abbr.abc:not(.abs)>.row:not(.h0){display:none}
+#r-abbr{cursor:pointer;user-select:none}
+#r-abbr:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.abt{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--carbon-line);background:transparent;color:var(--carbon-ink);font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 10px;cursor:pointer;white-space:nowrap}
+.abt small{font-size:10.5px;color:#8fa0aa;text-transform:none;letter-spacing:0}
+.abt i{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.abt[aria-expanded=true] i{transform:rotate(-135deg) translate(-2px,-1px)}
+#r-abbr:hover .abt{border-color:var(--carbon-id);color:#fff}
+#r-abbr{position:relative}
+#r-abbr>.abt{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:1}
+@media (max-width:900px){#r-abbr>.abt{right:10px;top:16px;transform:none;padding:7px 8px}#r-abbr>.abt small{display:none}}
+#rp-sec{margin:-4px 0 14px}
+#rp-sec .rpl small{font:400 11.5px var(--sans,inherit);color:var(--muted);text-transform:none;letter-spacing:0}
+.rps{border:1px solid var(--line);background:var(--panel);margin-bottom:6px}
+.rps summary{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;list-style:none}
+.rps summary::-webkit-details-marker{display:none}
+.rps summary::after{content:"";margin-left:auto;width:6px;height:6px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+.rps[open] summary::after{transform:rotate(-135deg)}
+.rps summary b{font-size:13.5px;font-weight:650}
+.rps summary em{font:500 11.5px var(--mono);font-style:normal;color:var(--muted);margin-left:auto}
+.rpsl{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px 14px;padding:4px 12px 10px;border-top:1px solid var(--line)}
+.rpsa{grid-column:1/-1;display:flex;gap:14px;padding:4px 0}
+.rpsl label{display:flex;align-items:baseline;gap:8px;padding:4px 0;font-size:13px;cursor:pointer}
+.rpsl input{accent-color:var(--brand);transform:translateY(1px)}
+.rpsl .rpk{min-width:44px;font-size:12px}
+.rpst{flex:1;min-width:0}
+.rpsl small{font:500 11px var(--mono);color:var(--muted)}
+.rpsl label:has(input:not(:checked)) .rpst{color:var(--muted);text-decoration:line-through}
 </style>
 </head>
 <body class="m-both">
@@ -3621,11 +3653,12 @@ function pdfFonts(){
  return PDFF}
 const PDF_SUB={'­':'','⋅':'·','∙':'·','▪':'▪','𝜋':'π','✔':'✓','‑':'-','‐':'-',' ':' ',' ':' ','​':'','﻿':''};
 let PDF_LOGO=null;
-function pdfLogo(){if(PDF_LOGO)return PDF_LOGO;PDF_LOGO=new Promise(res=>{const im=new Image();im.onload=()=>{try{const h=150,w=Math.round(im.naturalWidth*h/im.naturalHeight),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#0e1216';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);c.toBlob(b=>b?b.arrayBuffer().then(a=>res({jpg:new Uint8Array(a),w:w,h:h})):res(null),'image/jpeg',.92)}catch(e){res(null)}};im.onerror=()=>res(null);im.src='logo.png'});PDF_LOGO.then(v=>{if(!v)PDF_LOGO=null});return PDF_LOGO}
+function pdfLogo(){if(PDF_LOGO)return PDF_LOGO;PDF_LOGO=new Promise(res=>{const im=new Image();im.onload=()=>{try{const h=150,w=Math.round(im.naturalWidth*h/im.naturalHeight),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#ffffff';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);c.toBlob(b=>b?b.arrayBuffer().then(a=>res({jpg:new Uint8Array(a),w:w,h:h})):res(null),'image/jpeg',.92)}catch(e){res(null)}};im.onerror=()=>res(null);im.src='logo-dark.png'});PDF_LOGO.then(v=>{if(!v)PDF_LOGO=null});return PDF_LOGO}
 function pdfImg(src){return new Promise(res=>{const im=new Image();im.onload=()=>{try{const sc=Math.min(1,1600/im.naturalWidth),w=Math.max(1,Math.round(im.naturalWidth*sc)),h=Math.max(1,Math.round(im.naturalHeight*sc)),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);c.toBlob(b=>b?b.arrayBuffer().then(a=>{c.width=1;res({jpg:new Uint8Array(a),w:w,h:h})}):res(null),'image/jpeg',.88)}catch(e){res(null)}};im.onerror=()=>res(null);im.src=src})}
 async function pdfZ(u8){try{if(typeof CompressionStream==='undefined')return null;const cs=new CompressionStream('deflate');const wr=cs.writable.getWriter();wr.write(u8);wr.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer())}catch(e){return null}}
 function pdfU16(s){let h='FEFF';for(const ch of String(s)){const c=ch.codePointAt(0);if(c>0xffff){const v=c-0x10000;h+=(0xd800+(v>>10)).toString(16).padStart(4,'0')+(0xdc00+(v&1023)).toString(16).padStart(4,'0')}else h+=c.toString(16).padStart(4,'0')}return '<'+h.toUpperCase()+'>'}
 
+function pdfWho(){try{if(typeof MEM!=='undefined'&&MEM.on&&!MEM.user)return '';const n=((PF&&PF.ad)||'')+' '+((PF&&PF.soyad)||'');return n.trim()}catch(e){return ''}}
 async function pdfBuild(blocks,opt){
  opt=opt||{};
  const FT=await pdfFonts();const logo=await pdfLogo();
@@ -3638,7 +3671,7 @@ async function pdfBuild(blocks,opt){
  function tw(str,f,sz,sp){const F=FT[f],G=glyphs(str,f);let w=0;for(const g of G)w+=F.w[g]||0;return w*sz/F.upm+(sp?sp*Math.max(0,G.length-1):0)}
  const pages=[],outl=[],images=[];let pg=null,y=TOP;
  const docTitle=opt.title||((blocks.find(b=>b.t==='h1')||{}).text||'Rapor');
- function np(){pg={ops:[],n:pages.length+1};pages.push(pg);y=TOP}
+ function np(){pg={ops:[],n:pages.length+1,body:false};pages.push(pg);y=TOP}
  const room=h=>{if(!pg||y+h>BOT)np()};
  const op=s=>pg.ops.push(s);
  function rect(x,yy,w,h,col){op(rgb(col)+' rg '+n2(x)+' '+n2(PH-yy-h)+' '+n2(w)+' '+n2(h)+' re f')}
@@ -3680,13 +3713,14 @@ async function pdfBuild(blocks,opt){
  const S=CW/1056;// eski px tablolarından ölçek
  np();
  for(const b of blocks){
+  if(!['kick','h1','sub','chap'].includes(b.t))pg.body=true;
   if(b.t==='kick'){room(16);text(ML,y+8,String(b.text).toLocaleUpperCase('tr'),'M',7.5,C.acc,'l',1.1);y+=16}
   else if(b.t==='h1'){if(!blocks.some(x=>x.t==='kick')&&y===TOP){text(ML,y+8,'İTÜ RACING · '+String(opt.kick||'RAPOR').toLocaleUpperCase('tr'),'M',7.5,C.acc,'l',1.1);y+=16}
    const L=flow([{t:b.text,f:'B',c:C.ink}],22,CW);L.forEach(l=>{room(28);drawLine(l,ML,y+22,22);y+=28});y+=2}
   else if(b.t==='sub'){para([{t:b.text,f:'R',c:C.mut}],ML,CW,9.5,13.5);y+=6;hline(ML,PW-MR,y,C.ink,1);y+=14}
-  else if(b.t==='chap'){if(y>TOP+4)np();outl.push({t:b.id+' · '+b.text,lv:0,p:pg.n,y:y});
-   rect(ML,y,CW,62,C.carbon);rect(ML,y+62,CW,2.5,C.brand);text(ML+16,y+20,'BÖLÜM','M',7,C.brand,'l',1.4);text(ML+16,y+46,b.id,'M',22,C.white);text(ML+16+tw(b.id,'M',22)+14,y+44,b.text,'B',15,C.white);
-   if(b.en)text(PW-MR-14,y+20,b.en,'R',7.5,C.dim,'r');y+=82}
+  else if(b.t==='chap'){if(pg.body)np();else if(y>TOP+4)y+=6;outl.push({t:b.id+' · '+b.text,lv:0,p:pg.n,y:y});room(70);
+   rect(ML,y,4,52,C.brand);text(ML+16,y+13,'BÖLÜM','M',7,C.acc,'l',1.4);text(ML+16,y+42,b.id,'M',22,C.acc);text(ML+16+tw(b.id,'M',22)+14,y+40,b.text,'B',15,C.ink);
+   if(b.en)text(PW-MR,y+13,b.en,'R',7.5,C.mut,'r');hline(ML,PW-MR,y+60,C.ink,1.2);y+=78;pg.body=true}
   else if(b.t==='h2'){room(46);y+=10;if(b.outline!==false)outl.push({t:b.text,lv:b.lv||0,p:pg.n,y:y});rect(ML,y+1,3.5,15,C.brand);text(ML+11,y+13,b.text,'B',13,C.ink);y+=21;hline(ML,PW-MR,y,C.ink,.8);y+=10}
   else if(b.t==='h3'){room(36);y+=8;outl.push({t:b.id+' '+b.text,lv:1,p:pg.n,y:y});text(ML,y+11,b.id,'M',9,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],10.5,CW-62);L.forEach(l=>{room(15);drawLine(l,ML+62,y+11,10.5);y+=15});y+=2;hline(ML,PW-MR,y,C.line,.5);y+=7}
   else if(b.t==='h4'){room(30);y+=4;text(ML,y+10,b.id,'M',8.5,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],9.5,CW-62);L.forEach(l=>{room(13.5);drawLine(l,ML+62,y+10,9.5);y+=13.5});y+=4}
@@ -3714,14 +3748,15 @@ async function pdfBuild(blocks,opt){
   else if(b.t==='space'){y+=b.h||8}
  }
  // header + footer on every page
- const N=pages.length,date=trDate();
+ const N=pages.length,date=trDate(),who=opt.who!==undefined?opt.who:pdfWho();
  const lw=logo?26*logo.w/logo.h:0;
  pages.forEach(p=>{const keep=p.ops;p.ops=[];pg=p;
-  rect(0,0,PW,46,C.carbon);rect(0,46,PW,2,C.brand);
-  if(logo)op('q '+n2(lw)+' 0 0 26 '+n2(ML)+' '+n2(PH-36)+' cm /LG Do Q');
-  const tx=ML+(logo?lw+12:0);if(logo)rect(tx-6,13,.7,20,'#3a4650');
-  text(tx+2,22,'Kural ve Bilgi Portalı','B',11,C.white);text(tx+2,34,'İTÜ RACING · FSG RULES 2027','M',6,C.dim,'l',.9);
-  text(PW-MR,27,String(docTitle).toLocaleUpperCase('tr'),'M',7,C.brand,'r',.9);
+  if(logo)op('q '+n2(lw)+' 0 0 26 '+n2(ML)+' '+n2(PH-42)+' cm /LG Do Q');
+  const tx=ML+(logo?lw+12:0);if(logo)rect(tx-6,19,.7,20,C.line);
+  text(tx+2,28,'Kural ve Bilgi Portalı','B',11,C.ink);text(tx+2,40,'İTÜ RACING · FSG RULES 2027','M',6,C.mut,'l',.9);
+  text(PW-MR,who?27:33,String(docTitle).toLocaleUpperCase('tr'),'M',7,C.acc,'r',.9);
+  if(who)text(PW-MR,40,'Hazırlayan: '+who,'R',7.5,C.ink,'r');
+  hline(ML,PW-MR,52,C.brand,1.6);
   p.ops=p.ops.concat(keep);
   hline(ML,PW-MR,PH-36,C.line,.6);
   text(ML,PH-24,'İTÜ Racing · FSG Formula Student Rules 2027 v1.0 · gayriresmî çeviri','R',7,C.mut);
@@ -3772,16 +3807,25 @@ async function pdfBuild(blocks,opt){
  const Q=s=>dlg.querySelector(s);
  const cnt=c=>chRules[c].length;
  Q('#rp-ch').innerHTML=chIds.map(c=>{const it=items[idx[c]];return '<label class="rpc"><input type="checkbox" value="'+e(c)+'"'+(c==='EV'||c==='T'?' checked':'')+'><span class="rpk">'+e(c)+'</span><span class="rpn"><b>'+e(it.t||CH_NAME[c]||c)+'</b><small>'+e(it.e||'')+' · '+cnt(c)+' madde</small></span></label>'}).join('');
- const sel=()=>[...Q('#rp-ch').querySelectorAll('input:checked')].map(i=>i.value);
+ const EX=new Set();
+ const SECS={};chIds.forEach(c=>{const [a,b]=chRange[c],L=[];let cur=null;for(let i=a+1;i<b;i++){const it=items[i];if(it.l===1){cur={id:it.i,t:it.t||it.e,n:0,im:0};L.push(cur)}else if(cur){if(it.l===3)cur.n++;cur.im+=it.m.length}}SECS[c]=L});
+ const secBox=document.createElement('div');secBox.id='rp-sec';Q('#rp-ch').after(secBox);
+ const sel=()=>[...Q('#rp-ch').querySelectorAll('input:checked')].map(i=>i.value).filter(c=>!SECS[c].length||SECS[c].some(x=>!EX.has(x.id)));
+ function renderSec(){const chs=[...Q('#rp-ch').querySelectorAll('input:checked')].map(i=>i.value).filter(c=>SECS[c].length);const open=new Set([...secBox.querySelectorAll('details[open]')].map(d=>d.dataset.c));
+  secBox.innerHTML=chs.length?'<div class="rpl"><span>Alt başlıklar</span><small>İstemediğin alt başlığın işaretini kaldır</small></div>'+chs.map(c=>{const L=SECS[c],on=L.filter(x=>!EX.has(x.id)).length;
+   return '<details class="rps" data-c="'+e(c)+'"'+(open.has(c)?' open':'')+'><summary><span class="rpk">'+e(c)+'</span><b>'+e(items[idx[c]].t||c)+'</b><em>'+on+' / '+L.length+' alt başlık</em></summary><div class="rpsl"><div class="rpsa"><button type="button" class="rplink" data-sa="'+e(c)+'">Tümü</button><button type="button" class="rplink" data-sn="'+e(c)+'">Hiçbiri</button></div>'
+    +L.map(x=>'<label><input type="checkbox" data-sec="'+e(x.id)+'"'+(EX.has(x.id)?'':' checked')+'><span class="rpk">'+e(x.id)+'</span><span class="rpst">'+e(x.t)+'</span><small>'+x.n+'</small></label>').join('')+'</div></details>'}).join(''):''}
+ secBox.addEventListener('change',ev=>{const i=ev.target.closest('[data-sec]');if(!i)return;if(i.checked)EX.delete(i.dataset.sec);else EX.add(i.dataset.sec);renderSec();sum()});
+ secBox.addEventListener('click',ev=>{const a=ev.target.closest('[data-sa],[data-sn]');if(!a)return;const c=a.dataset.sa||a.dataset.sn;SECS[c].forEach(x=>a.dataset.sa?EX.delete(x.id):EX.add(x.id));renderSec();sum()});
  let lang='both';
- function sum(){const s=sel(),n=s.reduce((a,c)=>a+cnt(c),0),im=s.reduce((a,c)=>{const [x,y]=chRange[c];let k=0;for(let i=x;i<y;i++)k+=items[i].m.length;return a+k},0);
+ function sum(){const s=sel(),n=s.reduce((a,c)=>a+SECS[c].filter(x=>!EX.has(x.id)).reduce((q,x)=>q+x.n,0),0),im=s.reduce((a,c)=>a+SECS[c].filter(x=>!EX.has(x.id)).reduce((q,x)=>q+x.im,0),0);
   Q('#rp-sum').textContent=s.length?s.length+' bölüm · '+n+' madde'+(Q('#rp-img').checked&&im?' · '+im+' şekil/tablo':''):'Bölüm seçilmedi';Q('#rp-go').disabled=!s.length}
- Q('#rp-ch').addEventListener('change',sum);Q('#rp-img').addEventListener('change',sum);
- Q('#rp-all').addEventListener('click',()=>{const b=Q('#rp-ch').querySelectorAll('input'),all=[...b].every(i=>i.checked);b.forEach(i=>i.checked=!all);sum()});
+ Q('#rp-ch').addEventListener('change',()=>{renderSec();sum()});Q('#rp-img').addEventListener('change',sum);
+ Q('#rp-all').addEventListener('click',()=>{const b=Q('#rp-ch').querySelectorAll('input'),all=[...b].every(i=>i.checked);b.forEach(i=>i.checked=!all);renderSec();sum()});
  Q('#rp-lang').addEventListener('click',ev=>{const b=ev.target.closest('[data-l]');if(!b)return;lang=b.dataset.l;Q('#rp-lang').querySelectorAll('[data-l]').forEach(x=>x.classList.toggle('on',x===b))});
  let last=null,busy=false;
  function open(ev){last=ev&&ev.currentTarget;const m=localStorage.getItem('fsg-mode')||'both';lang=['both','tr','en'].includes(m)?m:'both';Q('#rp-lang').querySelectorAll('[data-l]').forEach(x=>x.classList.toggle('on',x.dataset.l===lang));
-  dlg.hidden=false;document.body.classList.add('rpd-on');Q('#rp-msg').textContent='';Q('#rp-bar i').style.width='0';sum();setTimeout(()=>Q('#rp-go').focus(),30)}
+  dlg.hidden=false;document.body.classList.add('rpd-on');Q('#rp-msg').textContent='';Q('#rp-bar i').style.width='0';renderSec();sum();setTimeout(()=>Q('#rp-go').focus(),30)}
  function close(){if(busy)return;dlg.hidden=true;document.body.classList.remove('rpd-on');if(last)try{last.focus()}catch(_){}}
  document.querySelectorAll('.rp-btn').forEach(b=>b.addEventListener('click',open));
  Q('#rp-x').addEventListener('click',close);Q('#rp-cancel').addEventListener('click',close);
@@ -3793,15 +3837,16 @@ async function pdfBuild(blocks,opt){
   const wImg=Q('#rp-img').checked,wEx=Q('#rp-ex').checked,wAb=Q('#rp-ab').checked;
   try{
    prog('Yazı tipleri yükleniyor…',.05);await pdfFonts();
-   const imgs={};if(wImg){const L=[];chs.forEach(c=>{const [a,b]=chRange[c];for(let i=a;i<b;i++)items[i].m.forEach(f=>L.push(f))});
+   const inc=i=>{for(let k=i;k>=0;k--){if(items[k].l===1)return !EX.has(items[k].i);if(items[k].l===0)return true}return true};
+   const imgs={};if(wImg){const L=[];chs.forEach(c=>{const [a,b]=chRange[c];for(let i=a;i<b;i++)if(inc(i))items[i].m.forEach(f=>L.push(f))});
     let k=0;const run=async()=>{while(L.length){const f=L.shift();imgs[f]=await pdfImg(f);k++;prog('Şekil ve tablolar hazırlanıyor ('+k+'/'+(k+L.length)+')…',.05+.55*k/(k+L.length))}};await Promise.all([run(),run(),run(),run()])}
    prog('Sayfalar oluşturuluyor…',.65);
    const LN={both:'İngilizce + Türkçe',tr:'Türkçe',en:'İngilizce (orijinal)'}[lang];
-   const B=[{t:'kick',text:'İTÜ Racing · Kural kitapçığı'},{t:'h1',text:'FSG Formula Student Rules 2027'},{t:'sub',text:'Bölümler: '+chs.join(', ')+' · Dil: '+LN+(wEx?' · açıklamalı':'')+' · '+trDate()+'. Türkçe metin gayriresmî çeviridir; bağlayıcı olan İngilizce orijinaldir.'}];
+   const B=[{t:'kick',text:'İTÜ Racing · Kural kitapçığı'},{t:'h1',text:'FSG Formula Student Rules 2027'},{t:'sub',text:'Bölümler: '+chs.join(', ')+(EX.size&&chs.some(c=>SECS[c].some(x=>EX.has(x.id)))?' (çıkarılan alt başlıklar: '+chs.flatMap(c=>SECS[c].filter(x=>EX.has(x.id)).map(x=>x.id)).join(', ')+')':'')+' · Dil: '+LN+(wEx?' · açıklamalı':'')+' · '+trDate()+'. Türkçe metin gayriresmî çeviridir; bağlayıcı olan İngilizce orijinaldir.'}];
    if(wAb&&D.abbr&&D.abbr.length){B.push({t:'h2',text:'Kısaltmalar'});B.push({t:'table',cols:[{h:'KISALTMA',w:170},{h:'ENGLISH',w:443},{h:'TÜRKÇE',w:443}],rows:D.abbr.map(a=>[a[0],a[1],a[2]])})}
    chs.forEach(c=>{const [a,b]=chRange[c],h=items[a];
     B.push({t:'chap',id:c,text:lang==='en'?(h.e||c):(h.t||CH_NAME[c]||c),en:lang==='both'?(h.e||''):''});
-    for(let i=a+1;i<b;i++){const it=items[i],tt=lang==='en'?(it.e||it.t):(it.t||it.e);
+    let skip=false;for(let i=a+1;i<b;i++){const it=items[i];if(it.l===1)skip=EX.has(it.i);if(skip)continue;const tt=lang==='en'?(it.e||it.t):(it.t||it.e);
      if(it.l===1)B.push({t:'h3',id:it.i,text:tt});
      else if(it.l===2)B.push({t:'h4',id:it.i,text:tt});
      else if(it.l===3){const im=wImg?it.m.map(f=>imgs[f]).filter(Boolean):[];
@@ -3812,6 +3857,18 @@ async function pdfBuild(blocks,opt){
    const nm='ITU-Racing-FSG-2027-'+chs.join('-')+'.pdf';const r=await dlBlob(blob,nm);prog(dlMsg(r,nm,blob),1)}
   catch(err){prog('PDF oluşturulamadı: '+(err&&err.message||err),0)}
   busy=false;btn.disabled=false;btn.classList.remove('busy')});
+})();
+// ===== R31: Kısaltmalar açılır/kapanır =====
+(function(){
+ const sec=document.getElementById('abbr'),h=document.getElementById('r-abbr');if(!sec||!h)return;
+ let open=false;try{open=localStorage.getItem('fsg-abbr')==='1'}catch(_){}
+ const t=document.createElement('button');t.type='button';t.className='abt';t.setAttribute('aria-controls','abbr');h.appendChild(t);
+ function set(v,save){open=v;sec.classList.toggle('abc',!v);t.setAttribute('aria-expanded',v);t.innerHTML='<span>'+(v?'Gizle':'Göster')+'</span><small>'+D.abbr.length+' kısaltma</small><i></i>';if(save)try{localStorage.setItem('fsg-abbr',v?'1':'0')}catch(_){}}
+ set(open,false);
+ h.addEventListener('click',ev=>{if(ev.target.closest('.bm,a,abbr'))return;set(!open,true)});
+ h.setAttribute('role','button');h.tabIndex=0;h.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();set(!open,true)}});
+ const g0=go;go=function(id){if(id==='abbr'&&!open)set(true,false);return g0.apply(this,arguments)};
+ const q=document.getElementById('q');if(q)q.addEventListener('input',()=>setTimeout(()=>sec.classList.toggle('abs',!!q.value.trim()),0));
 })();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
