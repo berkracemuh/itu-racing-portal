@@ -1345,6 +1345,34 @@ body:not(.baba-ok) .ct-baba{display:none}
 .ct-fb{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:10px 14px;border:1px solid var(--brand);background:transparent;color:#fff;font:inherit;font-size:14px;font-weight:650;cursor:pointer;transition:background .15s,color .15s}
 .ct-fb svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
 .ct-fb:hover{background:var(--brand);color:#04252a}
+/* ===== R33: vurgu + not, profil ipucu ===== */
+.row .hlb{display:block;margin-top:4px;width:24px;height:24px;padding:0;border:0;background:transparent;color:var(--muted);opacity:.28;cursor:pointer;transition:opacity .15s,color .15s}
+.row .hlb svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.row:hover .hlb{opacity:.8}.row .hlb:hover{opacity:1;color:var(--accent)}
+.row .hlb.on{opacity:1;color:var(--accent)}
+.row[data-hl]{box-shadow:inset 4px 0 0 var(--hlc)}
+.row[data-hl]>.en,.row[data-hl]>.tr{background:color-mix(in srgb,var(--hlc) 9%,transparent)}
+.row[data-hl=y]{--hlc:#e0b23a}.row[data-hl=t]{--hlc:#1fb5c4}.row[data-hl=r]{--hlc:#d64550}.row[data-hl=g]{--hlc:#3fb27f}
+.row[data-hl] .hlb{color:var(--hlc)}
+.hln{grid-column:1/-1;display:flex;gap:10px;align-items:baseline;margin:0 0 10px 16px;padding:8px 12px;border-left:3px solid var(--hlc,var(--brand));background:color-mix(in srgb,var(--hlc,var(--brand)) 16%,var(--bg));color:var(--ink);font-size:.9em;cursor:pointer;white-space:pre-wrap;overflow-wrap:anywhere}
+.hln b{font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex:0 0 auto}
+#hlp{position:fixed;z-index:65;width:min(300px,calc(100vw - 20px));background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--brand);box-shadow:0 16px 36px -14px rgba(0,0,0,.55);padding:10px 12px 12px}
+#hlp[hidden]{display:none}
+#hlp.ui-in{animation:boxIn .2s cubic-bezier(.2,.8,.2,1)}#hlp.ui-out{animation:boxOut .16s ease forwards}
+.hlh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.hlh b{font:700 14px var(--mono);color:var(--accent)}
+.hlx{border:0;background:none;color:var(--muted);font-size:20px;line-height:1;cursor:pointer}.hlx:hover{color:var(--ink)}
+.hlcs{display:flex;gap:8px;margin-bottom:8px}
+.hlcs button{width:28px;height:28px;border:2px solid transparent;background:var(--c);cursor:pointer;outline-offset:2px;transition:transform .12s}
+.hlcs button:hover{transform:scale(1.08)}.hlcs button.on{border-color:var(--ink);box-shadow:inset 0 0 0 2px var(--panel)}
+#hlp textarea{width:100%;padding:8px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;resize:vertical}
+#hlp textarea:focus{border-color:var(--brand);outline:0}
+.hlf{display:flex;justify-content:space-between;align-items:center;margin-top:8px}.hlf span{font-size:11.5px;color:var(--muted)}.hlf .btn{padding:5px 10px;font-size:13px}
+@media print{.hlb{display:none}}
+.pftip{position:fixed;z-index:80;display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding:8px 12px;background:var(--carbon);border:1px solid var(--carbon-line);border-top:2px solid var(--brand);box-shadow:0 12px 26px -12px rgba(0,0,0,.6);pointer-events:none;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;text-align:right}
+.pftip.on{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease .1s,transform .18s ease .1s,visibility 0s}
+.pftip small{font:600 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--carbon-id)}
+.pftip b{font-size:13.5px;line-height:1.25;font-weight:600;color:#fff;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.pftip{transition:none}}
 </style>
 </head>
 <body class="m-both">
@@ -1746,7 +1774,7 @@ if(!sa&&seen){s.remove();return}try{sessionStorage.setItem('fsg-spl','1')}catch(
   <div class="rpg" id="rp-ch"></div>
   <div class="rpl"><span>Dil</span></div>
   <div class="seg rpseg" id="rp-lang" role="group" aria-label="Dil"><button type="button" data-l="both" class="on">EN + TR</button><button type="button" data-l="tr">Yalnız TR</button><button type="button" data-l="en">Yalnız EN</button></div>
-  <div class="rpo"><label><input type="checkbox" id="rp-img" checked> Şekil ve tabloları ekle</label><label><input type="checkbox" id="rp-ex"> Açıklamaları ekle</label><label><input type="checkbox" id="rp-ab"> Kısaltmalar listesini ekle</label></div>
+  <div class="rpo"><label><input type="checkbox" id="rp-img" checked> Şekil ve tabloları ekle</label><label><input type="checkbox" id="rp-ex"> Açıklamaları ekle</label><label><input type="checkbox" id="rp-ab"> Kısaltmalar listesini ekle</label><label><input type="checkbox" id="rp-hl" checked> Vurgularımı ve notlarımı ekle</label></div>
   <label class="rpnote"><span>PDF’in başına not <em>(isteğe bağlı)</em></span><input id="rp-note" maxlength="240" placeholder="ör. Teknik muayene öncesi kontrol, 3. tur"></label>
  </div>
  <div class="rpf"><span class="rpsum" id="rp-sum"></span><div class="rpbtn"><button type="button" class="btn" id="rp-cancel">Vazgeç</button><button type="button" class="btn pdf" id="rp-go">PDF oluştur</button></div></div>
@@ -3836,11 +3864,13 @@ async function pdfBuild(blocks,opt){
   else if(b.t==='h4'){room(30);y+=4;text(ML,y+11,b.id,'M',10,C.acc);const L=flow([{t:b.text,f:'B',c:C.ink}],10,CW-76);L.forEach(l=>{room(14.5);drawLine(l,ML+76,y+11,10);y+=14.5});y+=4}
   else if(b.t==='p'){para(richTxt(b.text,b.color||C.ink,b.bold?'B':'R'),ML,CW,9.5,13.5);y+=5}
   else if(b.t==='rule'){
-   const x=ML+76,w=CW-76,y0=y;room(16);text(ML,y+10,b.id,'M',10,C.acc);
+   const x=ML+76,w=CW-76;room(16);const y0=y,p0=pg;text(ML,y+10,b.id,'M',10,C.acc);
    if(b.tr){body(b.tr,x,w,9.5,13.4,C.ink)}
    if(b.en){if(b.tr){y+=1;room(12);text(x,y+7,'EN','M',6.5,C.dim,'l',1);y+=10}body(b.en,x,w,b.tr?8.6:9.5,b.tr?12.2:13.4,b.tr?C.mut:C.ink)}
    (b.imgs||[]).forEach(im=>addImg(im,x,w));
    if(b.ex){const L=flow([{t:b.ex,f:'R',c:C.mut}],8.6,w-16);const h=L.length*12.2+10;if(y+h>BOT)np();rect(x,y,w,h,C.soft);rect(x,y,2.5,h,C.brand);let yy=y+5;L.forEach(l=>{drawLine(l,x+10,yy+8.6,8.6);yy+=12.2});y+=h+4}
+   if(b.hl&&b.hl.n){const L=flow([{t:'Notum: ',f:'B',c:C.ink},{t:b.hl.n,f:'R',c:C.ink}],8.8,w-16);const h=L.length*12.4+10;if(y+h>BOT)np();rect(x,y,w,h,'#fbf6e6');rect(x,y,2.5,h,b.hl.c);let yy=y+5;L.forEach(l=>{drawLine(l,x+10,yy+8.8,8.8);yy+=12.4});y+=h+4}
+   if(b.hl){const yy0=pg===p0?y0:TOP;const keep=pg.ops;pg.ops=[];rect(ML-8,yy0,2.6,Math.max(12,y-yy0-2),b.hl.c);pg.ops=pg.ops.concat(keep)}
    y+=5;room(4);hline(x,PW-MR,y-2,'#e8ecef',.4);y+=3}
   else if(b.t==='bars'){room(24);text(ML,y+8,'BÖLÜM','M',6.5,C.mut,'l',.6);text(ML+190,y+8,'DURUM','M',6.5,C.mut,'l',.6);text(PW-MR,y+8,'TAMAM / EKSİK / SORUN / BAKILMADI','M',6.5,C.mut,'r',.4);y+=14;
    b.rows.forEach(r=>{room(22);const t=r.total||1,bx=ML+190,bw=CW-190-140;text(ML,y+10,r.name,'B',9,C.ink);rect(bx,y+4,bw,6,'#e4e8eb');let xx=bx;[['ok',r.n.ok],['miss',r.n.miss],['bad',r.n.bad]].forEach(([k,v])=>{const ww=bw*v/t;if(ww>0)rect(xx,y+4,ww,6,C[k]);xx+=ww});
@@ -3864,8 +3894,11 @@ async function pdfBuild(blocks,opt){
   if(logo)op('q '+n2(lw)+' 0 0 32 '+n2(ML)+' '+n2(PH-50)+' cm /LG Do Q');
   const tx=ML+(logo?lw+14:0);if(logo)rect(tx-7,20,.8,28,C.line);
   text(tx+2,34,'Kural ve Bilgi Portalı','B',16,C.ink);text(tx+2,47,'İTÜ RACING · FSG FORMULA STUDENT RULES 2027','M',6.5,C.acc,'l',.9);
-  text(PW-MR,who?32:38,String(docTitle).toLocaleUpperCase('tr'),'M',7.5,C.acc,'r',.9);
-  if(who){const wl='Çıktıyı alan: ';text(PW-MR,45,who,'B',8.5,C.ink,'r');text(PW-MR-tw(who,'B',8.5),45,wl,'R',8.5,C.mut,'r')}
+  {const mw=PW-MR-(tx+2+tw('Kural ve Bilgi Portalı','B',16)+24);const fit=(s,f,fs,sp,min)=>{let t=s;while(fs>min&&tw(t,f,fs,sp)>mw)fs-=.25;while(tw(t,f,fs,sp)>mw&&t.length>4)t=t.slice(0,-2).trim()+'…';return [t,fs]};
+   const sub=opt.sub||'';const ys=sub?(who?[22,33,46]:[28,40]):(who?[32,45]:[38]);
+   let [tt,fs]=fit(String(docTitle).toLocaleUpperCase('tr'),'M',7.5,.8,6.5);text(PW-MR,ys[0],tt,'M',fs,C.acc,'r',.8);
+   if(sub){let [st,f2]=fit(sub,'R',8,0,6.5);text(PW-MR,ys[1],st,'R',f2,C.ink,'r')}
+   if(who){const yw=ys[ys.length-1],wl='Çıktıyı alan: ';text(PW-MR,yw,who,'B',8.5,C.ink,'r');text(PW-MR-tw(who,'B',8.5),yw,wl,'R',8.5,C.mut,'r')}}
   hline(ML,PW-MR,62,C.brand,2);
   p.ops=p.ops.concat(keep);
   hline(ML,PW-MR,PH-36,C.line,.6);
@@ -3944,7 +3977,7 @@ async function pdfBuild(blocks,opt){
  const prog=(t,f)=>{Q('#rp-msg').textContent=t;if(f!=null)Q('#rp-bar i').style.width=Math.round(f*100)+'%'};
  Q('#rp-go').addEventListener('click',async()=>{
   const chs=sel();if(!chs.length||busy)return;busy=true;const btn=Q('#rp-go');btn.disabled=true;btn.classList.add('busy');
-  const note=(Q('#rp-note')||{}).value||'';const wImg=Q('#rp-img').checked,wEx=Q('#rp-ex').checked,wAb=Q('#rp-ab').checked;
+  const note=(Q('#rp-note')||{}).value||'';const wHl=!!(Q('#rp-hl')&&Q('#rp-hl').checked&&typeof HLM!=='undefined'),wImg=Q('#rp-img').checked,wEx=Q('#rp-ex').checked,wAb=Q('#rp-ab').checked;
   try{
    prog('Yazı tipleri yükleniyor…',.05);await pdfFonts();
    const inc=i=>{for(let k=i;k>=0;k--){if(items[k].l===1)return !EX.has(items[k].i);if(items[k].l===0)return true}return true};
@@ -3960,9 +3993,9 @@ async function pdfBuild(blocks,opt){
      if(it.l===1)B.push({t:'h3',id:it.i,text:tt});
      else if(it.l===2)B.push({t:'h4',id:it.i,text:tt});
      else if(it.l===3){const im=wImg?it.m.map(f=>imgs[f]).filter(Boolean):[];
-      B.push({t:'rule',id:it.i,tr:lang!=='en'?it.t:'',en:lang!=='tr'?it.e:'',imgs:im,ex:wEx?it.x:''})}}});
+      const hl=wHl&&HLM[it.i]?HLM[it.i]:null;B.push({t:'rule',id:it.i,tr:lang!=='en'?it.t:'',en:lang!=='tr'?it.e:'',imgs:im,ex:wEx?it.x:'',hl:hl?{c:(HLCOL[hl.c]||HLCOL.y)[1],n:hl.n||''}:null})}}});
    await new Promise(r=>setTimeout(r,20));
-   const blob=await pdfBuild(B,{title:'Kural kitapçığı · '+chs.join(' '),note:note.trim()});
+   const blob=await pdfBuild(B,{title:'Kural kitapçığı',sub:chs.length===chIds.length?'Tüm bölümler':chs.map(c=>c+' ('+(CH_NAME[c]||c)+')').join(' · '),note:note.trim()});
    prog('Kaydediliyor…',.95);
    const nm='ITU-Racing-FSG-2027-'+chs.join('-')+'.pdf';const r=await dlBlob(blob,nm);prog(dlMsg(r,nm,blob),1)}
   catch(err){prog('PDF oluşturulamadı: '+(err&&err.message||err),0)}
@@ -4039,23 +4072,25 @@ async function pdbRender(){const el=document.getElementById('pf-pdfs');if(!el)re
 // ---- Profil fotoğrafı düzenleyici (kırp · yakınlaştır · döndür) ----
 function photoEditor(img){return new Promise(res=>{
  let d=document.getElementById('phe');
- if(!d){d=document.createElement('div');d.id='phe';d.hidden=true;d.innerHTML='<div class="rpbox phebox" role="dialog" aria-modal="true" aria-labelledby="phe-t"><div class="rph"><div><small>Profil</small><b id="phe-t">Fotoğrafı ayarla</b></div><button type="button" class="rpx" data-x aria-label="Kapat">×</button></div><div class="rpb phbody"><div class="phst"><canvas width="560" height="560"></canvas><span class="phring"></span></div><p class="pheh">Sürükleyerek konumla, tekerlek ya da iki parmakla yakınlaştır.</p><div class="phctl"><button type="button" class="btn" data-rl title="Sola döndür" aria-label="Sola döndür">⟲</button><input type="range" min="1" max="4" step="0.01" value="1" aria-label="Yakınlaştır"><button type="button" class="btn" data-rr title="Sağa döndür" aria-label="Sağa döndür">⟳</button><button type="button" class="btn" data-rs>Sıfırla</button></div></div><div class="rpf"><span class="rpsum">256 × 256 px olarak kaydedilir</span><div class="rpbtn"><button type="button" class="btn" data-x>Vazgeç</button><button type="button" class="btn pdf" data-ok>Kaydet</button></div></div></div>';document.body.appendChild(d)}
+ if(!d){d=document.createElement('div');d.id='phe';d.hidden=true;d.innerHTML='<div class="rpbox phebox" role="dialog" aria-modal="true" aria-labelledby="phe-t"><div class="rph"><div><small>Profil</small><b id="phe-t">Fotoğrafı ayarla</b></div><button type="button" class="rpx" data-x aria-label="Kapat">×</button></div><div class="rpb phbody"><div class="phst"><canvas width="560" height="560"></canvas><span class="phring"></span></div><p class="pheh">Sürükleyerek konumla, tekerlek ya da iki parmakla yakınlaştır / uzaklaştır. Fotoğrafın dışında kalan alan bulanık doldurulur.</p><div class="phctl"><button type="button" class="btn" data-rl title="Sola döndür" aria-label="Sola döndür">⟲</button><input type="range" min="0.45" max="4" step="0.01" value="1" aria-label="Yakınlaştır"><button type="button" class="btn" data-rr title="Sağa döndür" aria-label="Sağa döndür">⟳</button><button type="button" class="btn" data-rs>Sıfırla</button></div></div><div class="rpf"><span class="rpsum">256 × 256 px olarak kaydedilir</span><div class="rpbtn"><button type="button" class="btn" data-x>Vazgeç</button><button type="button" class="btn pdf" data-ok>Kaydet</button></div></div></div>';document.body.appendChild(d)}
  const cv=d.querySelector('canvas'),g=cv.getContext('2d'),rg=d.querySelector('input[type=range]'),W=cv.width,R=W*0.44;
  const S={z:1,rot:0,x:0,y:0};
  const base=()=>{const sw=S.rot%180?img.naturalHeight:img.naturalWidth,sh=S.rot%180?img.naturalWidth:img.naturalHeight;return (2*R)/Math.min(sw,sh)};
- function clamp(){const k=base()*S.z,sw=(S.rot%180?img.naturalHeight:img.naturalWidth)*k,sh=(S.rot%180?img.naturalWidth:img.naturalHeight)*k,mx=Math.max(0,sw/2-R),my=Math.max(0,sh/2-R);S.x=Math.max(-mx,Math.min(mx,S.x));S.y=Math.max(-my,Math.min(my,S.y))}
+ const ZMIN=.45;let blur=null;function mkBlur(){const c=document.createElement('canvas'),s=24,ar=img.naturalWidth/img.naturalHeight;c.width=ar>=1?s:Math.max(4,Math.round(s*ar));c.height=ar>=1?Math.max(4,Math.round(s/ar)):s;c.getContext('2d').drawImage(img,0,0,c.width,c.height);return c}
+ function bg(ctx,size){if(!blur)blur=mkBlur();ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.translate(size/2,size/2);ctx.rotate(S.rot*Math.PI/180);const k=Math.max(size/blur.width,size/blur.height)*1.5;ctx.globalAlpha=1;ctx.drawImage(blur,-blur.width*k/2,-blur.height*k/2,blur.width*k,blur.height*k);ctx.fillStyle='rgba(14,18,22,.18)';ctx.fillRect(-size,-size,size*2,size*2);ctx.restore()}
+ function clamp(){const k=base()*S.z,sw=(S.rot%180?img.naturalHeight:img.naturalWidth)*k,sh=(S.rot%180?img.naturalWidth:img.naturalHeight)*k,mx=Math.abs(sw/2-R),my=Math.abs(sh/2-R);S.x=Math.max(-mx,Math.min(mx,S.x));S.y=Math.max(-my,Math.min(my,S.y))}
  function drawTo(ctx,size,cx,cy,scale){const k=base()*S.z*scale;ctx.save();ctx.translate(cx+S.x*scale,cy+S.y*scale);ctx.rotate(S.rot*Math.PI/180);ctx.drawImage(img,-img.naturalWidth*k/2,-img.naturalHeight*k/2,img.naturalWidth*k,img.naturalHeight*k);ctx.restore()}
- function paint(){clamp();g.fillStyle='#0e1216';g.fillRect(0,0,W,W);drawTo(g,W,W/2,W/2,1);g.save();g.fillStyle='rgba(8,11,14,.62)';g.beginPath();g.rect(0,0,W,W);g.arc(W/2,W/2,R,0,Math.PI*2,true);g.fill('evenodd');g.restore();g.strokeStyle='#1fb5c4';g.lineWidth=3;g.beginPath();g.arc(W/2,W/2,R,0,Math.PI*2);g.stroke()}
+ function paint(){clamp();g.fillStyle='#0e1216';g.fillRect(0,0,W,W);bg(g,W);drawTo(g,W,W/2,W/2,1);g.save();g.fillStyle='rgba(8,11,14,.62)';g.beginPath();g.rect(0,0,W,W);g.arc(W/2,W/2,R,0,Math.PI*2,true);g.fill('evenodd');g.restore();g.strokeStyle='#1fb5c4';g.lineWidth=3;g.beginPath();g.arc(W/2,W/2,R,0,Math.PI*2);g.stroke()}
  paint();rg.value=1;
  const pts=new Map();let pd=0,pz=1;
  const pos=e=>{const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*W/r.height]};
  const onDown=e=>{cv.setPointerCapture(e.pointerId);pts.set(e.pointerId,pos(e));if(pts.size===2){const [a,b]=[...pts.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1]);pz=S.z}};
- const onMove=e=>{if(!pts.has(e.pointerId))return;const p=pos(e),o=pts.get(e.pointerId);pts.set(e.pointerId,p);if(pts.size===2){const [a,b]=[...pts.values()];const dd=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd>0){S.z=Math.max(1,Math.min(4,pz*dd/pd));rg.value=S.z}}else{S.x+=p[0]-o[0];S.y+=p[1]-o[1]}paint()};
+ const onMove=e=>{if(!pts.has(e.pointerId))return;const p=pos(e),o=pts.get(e.pointerId);pts.set(e.pointerId,p);if(pts.size===2){const [a,b]=[...pts.values()];const dd=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd>0){S.z=Math.max(ZMIN,Math.min(4,pz*dd/pd));rg.value=S.z}}else{S.x+=p[0]-o[0];S.y+=p[1]-o[1]}paint()};
  const onUp=e=>{pts.delete(e.pointerId);if(pts.size<2)pd=0};
- const onWheel=e=>{e.preventDefault();S.z=Math.max(1,Math.min(4,S.z*(e.deltaY<0?1.08:1/1.08)));rg.value=S.z;paint()};
+ const onWheel=e=>{e.preventDefault();S.z=Math.max(ZMIN,Math.min(4,S.z*(e.deltaY<0?1.08:1/1.08)));rg.value=S.z;paint()};
  const onRange=()=>{S.z=+rg.value;paint()};
  const onClick=e=>{if(e.target===d||e.target.closest('[data-x]'))fin(null);else if(e.target.closest('[data-rl]')){S.rot=(S.rot+270)%360;[S.x,S.y]=[S.y,-S.x];paint()}else if(e.target.closest('[data-rr]')){S.rot=(S.rot+90)%360;[S.x,S.y]=[-S.y,S.x];paint()}else if(e.target.closest('[data-rs]')){S.z=1;S.rot=0;S.x=0;S.y=0;rg.value=1;paint()}
-  else if(e.target.closest('[data-ok]')){const O=256,c=document.createElement('canvas');c.width=c.height=O;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,O,O);x.imageSmoothingQuality='high';drawTo(x,O,O/2,O/2,O/(2*R));fin(c.toDataURL('image/jpeg',.88))}};
+  else if(e.target.closest('[data-ok]')){const O=256,c=document.createElement('canvas');c.width=c.height=O;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,O,O);x.imageSmoothingQuality='high';x.save();x.scale(O/(2*R),O/(2*R));x.translate(-(W/2-R),-(W/2-R));bg(x,W);x.restore();drawTo(x,O,O/2,O/2,O/(2*R));fin(c.toDataURL('image/jpeg',.88))}};
  const onKey=e=>{if(e.key==='Escape')fin(null)};
  function fin(v){cv.removeEventListener('pointerdown',onDown);cv.removeEventListener('pointermove',onMove);cv.removeEventListener('pointerup',onUp);cv.removeEventListener('pointercancel',onUp);cv.removeEventListener('wheel',onWheel);rg.removeEventListener('input',onRange);d.removeEventListener('click',onClick);document.removeEventListener('keydown',onKey);document.body.classList.remove('rpd-on');uiClose(d);res(v)}
  cv.addEventListener('pointerdown',onDown);cv.addEventListener('pointermove',onMove);cv.addEventListener('pointerup',onUp);cv.addEventListener('pointercancel',onUp);cv.addEventListener('wheel',onWheel,{passive:false});rg.addEventListener('input',onRange);d.addEventListener('click',onClick);document.addEventListener('keydown',onKey);
@@ -4113,7 +4148,7 @@ function photoEditor(img){return new Promise(res=>{
   catch(err){msg.textContent=String(err&&err.code||'').includes('permission')?'Gönderilemedi: Firebase kurallarına “feedback” bölümü eklenmemiş olabilir.':'Gönderilemedi: '+(typeof memErr==='function'?memErr(err):err)}
   b.disabled=false});
  if(adm)adm.addEventListener('click',async e=>{const li=e.target.closest('[data-fb]');if(!li)return;const id=li.dataset.fb,F=MEM.fba;
-  if(e.target.closest('[data-fbsave]')){try{await F.fs.set('feedback/'+id,{st:li.querySelector('[data-fbst]').value,cev:li.querySelector('[data-fbcev]').value.trim().slice(0,500)},true)}catch(err){tErr(err)}}
+  if(e.target.closest('[data-fbsave]')){try{await F.fs.set('feedback/'+id,{st:li.querySelector('[data-fbst]').value,cev:li.querySelector('[data-fbcev]').value.trim().slice(0,500),pn:false,ua:F.TS()},true)}catch(err){tErr(err)}}
   else if(e.target.closest('[data-fbdel]')){const x=e.target.closest('[data-fbdel]');if(!x.classList.contains('arm')){x.classList.add('arm');x.textContent='Emin misin?';setTimeout(()=>{if(x.isConnected){x.classList.remove('arm');x.textContent='Sil'}},3500);return}try{await F.fs.del('feedback/'+id)}catch(err){tErr(err)}}});
  if(typeof MEM!=='undefined'&&MEM.hooks)MEM.hooks.push(sync);sync();
  window.fbOpen=()=>{showView('prof');setTimeout(()=>{box.scrollIntoView({behavior:RM&&RM.matches?'auto':'smooth',block:'start'});const ta=box.querySelector('textarea');if(ta)setTimeout(()=>ta.focus({preventScroll:true}),400)},120)};
@@ -4126,6 +4161,49 @@ function photoEditor(img){return new Promise(res=>{
  nv.innerHTML='<small>Sayfalar</small><div class="ctl">'+L.map(x=>'<a href="#" data-ctv="'+x.v+'"'+(x.v==='baba'?' class="ct-baba"':'')+'>'+esq(x.l)+'</a>').join('')+'<a href="#" data-ctv="prof">Profil</a></div><button type="button" class="ct-fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Talep ve öneri gönder</button>';
  ct.appendChild(nv);
  nv.addEventListener('click',e=>{const a=e.target.closest('[data-ctv]');if(a){e.preventDefault();showView(a.dataset.ctv);scrollTo(0,0);return}if(e.target.closest('.ct-fb'))fbOpen()});
+})();
+// ===== R33: kural vurgulama + kişisel not, profil ipucu =====
+const HLCOL={y:['Sarı','#f2c94c'],t:['Turkuaz','#1fb5c4'],r:['Kırmızı','#d64550'],g:['Yeşil','#3fb27f']};
+let HLM={};try{HLM=JSON.parse(localStorage.getItem('fsg-hl')||'{}')||{}}catch(e){HLM={}}
+function hlSave(){try{localStorage.setItem('fsg-hl',JSON.stringify(HLM))}catch(e){}}
+function hlPaint(id){const row=document.getElementById(slug(id));if(!row)return;const h=HLM[id];
+ if(h&&h.c)row.dataset.hl=h.c;else delete row.dataset.hl;
+ const b=row.querySelector('.hlb');if(b)b.classList.toggle('on',!!h);
+ let n=row.querySelector(':scope>.hln');
+ if(h&&h.n){if(!n){n=document.createElement('div');n.className='hln';row.appendChild(n)}n.innerHTML='<b>Notum</b><span></span>';n.querySelector('span').textContent=h.n;n.dataset.hlid=id}else if(n)n.remove()}
+(function(){
+ const S={id:null};
+ SYNC['fsg-hl']='hl';MEM_WIPE.push('fsg-hl');
+ const ico='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h5l10-10-5-5L4 15z M13 6l5 5"/></svg>';
+ document.querySelectorAll('#list .row:not([class*=" h"]) .id .bm').forEach(bm=>{const b=document.createElement('button');b.type='button';b.className='hlb';b.setAttribute('aria-label','Vurgula / not ekle');b.innerHTML=ico;bm.after(b)});
+ Object.keys(HLM).forEach(hlPaint);
+ const p=document.createElement('div');p.id='hlp';p.hidden=true;p.setAttribute('role','dialog');p.setAttribute('aria-label','Vurgu ve not');
+ p.innerHTML='<div class="hlh"><b></b><button type="button" class="hlx" aria-label="Kapat">×</button></div><div class="hlcs" role="group" aria-label="Renk">'+Object.keys(HLCOL).map(k=>'<button type="button" data-c="'+k+'" style="--c:'+HLCOL[k][1]+'" aria-label="'+HLCOL[k][0]+'" title="'+HLCOL[k][0]+'"></button>').join('')+'</div><textarea rows="3" maxlength="600" placeholder="Bu maddeye özel notun (yalnız sen görürsün)"></textarea><div class="hlf"><button type="button" class="btn hlrm">Kaldır</button><span>PDF’e de eklenebilir</span></div>';
+ document.body.appendChild(p);const ta=p.querySelector('textarea');
+ function place(btn){const r=btn.getBoundingClientRect(),w=p.offsetWidth||280,h=p.offsetHeight||200;let x=r.left,y=r.bottom+8;if(x+w>innerWidth-10)x=innerWidth-w-10;if(y+h>innerHeight-10)y=Math.max(10,r.top-h-8);p.style.left=Math.max(10,x)+'px';p.style.top=y+'px'}
+ function open(id,btn){S.id=id;const h=HLM[id]||{};p.querySelector('.hlh b').textContent=id;ta.value=h.n||'';p.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x.dataset.c===h.c));uiOpen(p);place(btn);setTimeout(()=>ta.focus({preventScroll:true}),40)}
+ function close(){if(p.hidden)return;uiClose(p);S.id=null}
+ function upd(c,n){const id=S.id;if(!id)return;const h=Object.assign({},HLM[id]||{});if(c!==undefined)h.c=c;if(n!==undefined)h.n=n.trim()?n:'';if(!h.c&&h.n)h.c='y';if(!h.c&&!h.n)delete HLM[id];else HLM[id]={c:h.c,n:h.n||''};hlSave();hlPaint(id)}
+ document.addEventListener('click',e=>{
+  const b=e.target.closest('#list .hlb,#list .hln');
+  if(b){e.preventDefault();e.stopPropagation();if(typeof memBlocked==='function'&&memBlocked('personal'))return;const row=b.closest('.row'),id=Object.keys(byId).find(k=>slug(k)===row.id);if(!id)return;if(!p.hidden&&S.id===id){close();return}open(id,b);return}
+  if(!p.hidden&&!e.target.closest('#hlp'))close()},true);
+ p.addEventListener('click',e=>{const c=e.target.closest('[data-c]');if(c){const cur=(HLM[S.id]||{}).c;upd(cur===c.dataset.c&&!(HLM[S.id]||{}).n?'':c.dataset.c);p.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x.dataset.c===(HLM[S.id]||{}).c));return}
+  if(e.target.closest('.hlrm')){const id=S.id;delete HLM[id];hlSave();hlPaint(id);close();return}if(e.target.closest('.hlx'))close()});
+ let t=0;ta.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>{upd(undefined,ta.value);p.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x.dataset.c===(HLM[S.id]||{}).c))},250)});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!p.hidden)close()});
+ addEventListener('scroll',()=>{if(!p.hidden)close()},{passive:true});
+ const ma=memApply;memApply=function(st){const r=ma.apply(this,arguments);if(st&&'hl' in st){const old=Object.keys(HLM);HLM=st.hl&&typeof st.hl==='object'?st.hl:{};MEM.applying=true;try{hlSave()}finally{MEM.applying=false}new Set(old.concat(Object.keys(HLM))).forEach(hlPaint)}return r};
+})();
+// ---- profil düğmesi ipucu ----
+(function(){
+ const b=document.getElementById('pf-btn');if(!b)return;b.removeAttribute('title');
+ const t=document.createElement('div');t.className='pftip';t.setAttribute('aria-hidden','true');document.body.appendChild(t);
+ const show=()=>{const r=b.getBoundingClientRect();t.style.top=(r.bottom+10)+'px';t.style.right=Math.max(8,innerWidth-r.right)+'px';t.classList.add('on')},hide=()=>t.classList.remove('on');
+ b.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)show()});b.addEventListener('mouseleave',hide);b.addEventListener('focus',()=>{if(b.matches(':focus-visible'))show()});b.addEventListener('blur',hide);b.addEventListener('click',hide);addEventListener('scroll',hide,{passive:true});
+ function upd(){b.removeAttribute('title');const n=((PF.ad||'')+' '+(PF.soyad||'')).trim();const g=typeof MEM!=='undefined'&&MEM.on&&!MEM.user;t.innerHTML='<small>Profil</small><b></b>';t.querySelector('b').textContent=g?'Giriş yapılmadı':(n||'Adını ekle');b.setAttribute('aria-label','Profil'+(n&&!g?': '+n:''))}
+ const o=pfPaint;pfPaint=function(){const r=o.apply(this,arguments);try{upd()}catch(_){}return r};upd();
+ new MutationObserver(()=>{if(b.hasAttribute('title'))upd()}).observe(b,{attributes:true,attributeFilter:['title']});
 })();
 setTimeout(()=>{fromHash();spy();jumpBtns()},50);
 </script><script>(function(){function run(){var s=document.createElement("script");s.textContent=document.getElementById("main-js").textContent;document.body.appendChild(s)}var sp=document.getElementById("spl"),ran=false;function main(){if(ran)return;ran=true;try{run()}finally{if(sp)window.__splIdle(function(){window.__splGo(sp)})}}if(sp){if(sp.__ready)main();else sp.__onReady=main;setTimeout(main,9000)}else run()})()</script>
