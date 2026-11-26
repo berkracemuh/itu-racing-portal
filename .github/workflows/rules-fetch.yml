@@ -27,7 +27,7 @@ jobs:
           openssl enc -aes-256-cbc -pbkdf2 -salt -in rules.txt -out r.enc -pass file:k.bin
           openssl pkeyutl -encrypt -pubin -inkey pub.pem -in k.bin -out k.enc
           echo "::notice title=k::$(base64 -w0 k.enc)"
-          i=0; base64 -w0 r.enc | fold -w 3800 | while read -r L; do echo "::notice title=r$i::$L"; i=$((i+1)); done
+          i=0; base64 -w0 r.enc | fold -w 3800 | while read -r L || [ -n "$L" ]; do echo "::notice title=r$i::$L"; i=$((i+1)); done
           rm -f rules.txt k.bin
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
