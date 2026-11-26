@@ -68,6 +68,12 @@ if(TEST){
     const names=pend.map(u=>((u.ad||'')+' '+(u.soyad||'')).trim()||'İsimsiz').join(', ');
     admins.forEach(a=>push(a.id,{title:pend.length===1?'Yeni üyelik başvurusu':pend.length+' yeni üyelik başvurusu',body:names+' onayını bekliyor.',url:SITE+'#profil',tag:'pend'}));
   }
+  // 4) talep/öneri yanıtlandı ya da durumu değişti -> gönderen üye
+  if(DAYTIME){
+    const STT={yeni:'Yeni',inceleniyor:'İnceleniyor',tamam:'Tamamlandı',red:'Uygulanmayacak'};
+    const fb=await db.collection('feedback').where('pn','==',false).get().catch(()=>null);
+    if(fb)for(const d of fb.docs){const x=d.data();if(x.u){push(x.u,{title:'Talebin güncellendi · '+(STT[x.st]||'Yeni'),body:(x.cev?'Yanıt: '+x.cev:String(x.t||'').slice(0,90)),url:SITE+'#profil',tag:'fb-'+d.id})}await d.ref.update({pn:true}).catch(()=>{})}
+  }
 }
 
 // send
