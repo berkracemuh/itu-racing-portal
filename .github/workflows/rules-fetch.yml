@@ -23,7 +23,7 @@ jobs:
           JS
           node r.mjs
           echo "" | base64 -d > pub.pem
-          openssl rand -out k.bin 32
+          openssl rand -hex 32 > k.bin
           openssl enc -aes-256-cbc -pbkdf2 -salt -in rules.txt -out r.enc -pass file:k.bin
           openssl pkeyutl -encrypt -pubin -inkey pub.pem -in k.bin -out k.enc
           echo "::notice title=k::$(base64 -w0 k.enc)"
